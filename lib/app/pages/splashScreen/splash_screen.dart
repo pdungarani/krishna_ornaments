@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:flutter/material.dart';
 
@@ -6,11 +7,9 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: ColorsValue.whiteColor,
-      body: Center(
-        child: Text(
-            "test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test "),
+    return GetBuilder<SplashController>(
+      builder: (controller) => Scaffold(
+        backgroundColor: ColorsValue.primaryColor,
       ),
     );
   }

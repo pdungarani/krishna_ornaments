@@ -21,10 +21,6 @@ void main() async {
 Future<void> initServices() async {
   await Hive.initFlutter();
 
-  // Hive.registerAdapter(DownloadTaskModelAdapter());
-
-  // await Hive.openBox<DownloadTaskModel>('download_task_model');
-
   Get.put(
     Repository(
       Get.put(

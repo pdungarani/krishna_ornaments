@@ -1,7 +1,5 @@
 // coverage:ignore-file
 
-
-
 import 'package:krishna_ornaments/app/navigators/navigators.dart';
 import 'package:get/get.dart';
 
@@ -9,5 +7,6 @@ import 'package:get/get.dart';
 ///
 /// Will be ignored for test since all are static values and would not change.
 abstract class RouteManagement {
-  static void goToLoginView() => Get.offAllNamed<void>(Routes.logingScreen);
+  static void goToLoginView() => Get.offAllNamed<void>(Routes.loginScreen);
+  static void goToForgotView() => Get.offAllNamed<void>(Routes.forgotScreen);
 }
