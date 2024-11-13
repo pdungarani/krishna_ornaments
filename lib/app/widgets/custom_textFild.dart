@@ -139,7 +139,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               ),
               borderRadius: BorderRadius.circular(Dimens.six),
             ),
-            fillColor: widget.fillColor ?? Colors.transparent,
+            fillColor: widget.fillColor ?? ColorsValue.colorEEEAEA,
             filled: true,
             hintStyle: widget.hintTextStyle ?? Styles.color9C9C9C40016,
             errorStyle: Styles.txtRedBold12,

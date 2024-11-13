@@ -11,13 +11,6 @@ class ForgetPasswordView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<LoginController>(
       builder: (controller) => Scaffold(
-        // bottomNavigationBar: Align(
-        //   alignment: Alignment.bottomCenter,
-        //   child: CustomButton(
-        //     text: 'Recover Password',
-        //     onTap: () {},
-        //   ),
-        // ),
         backgroundColor: ColorsValue.primaryColor,
         body: SafeArea(
           child: Column(
@@ -32,29 +25,43 @@ class ForgetPasswordView extends StatelessWidget {
                 ),
               ),
               Dimens.boxHeight40,
-              Padding(
-                padding: Dimens.edgeInsets20_0_20_0,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      StringConstants.forgot_password,
-                      style: Styles.primaryBold28,
-                    ),
-                    Dimens.boxHeight12,
-                    Text(
-                      "Enter your email and we'll send you your old password",
-                      style: Styles.black40016,
-                    ),
-                    Dimens.boxHeight40,
-                    const CustomTextFormField(
-                      text: 'Email',
-                      hintText: "Enter Your Email",
-                      fillColor: ColorsValue.colorEEEAEA,
-                    ),
-                  ],
+              Expanded(
+                child: Padding(
+                  padding: Dimens.edgeInsets20_0_20_0,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        StringConstants.forgot_password,
+                        style: Styles.primaryBold28,
+                      ),
+                      Dimens.boxHeight12,
+                      Text(
+                        "Enter your email and we'll send you your old password",
+                        style: Styles.black40016,
+                      ),
+                      Dimens.boxHeight40,
+                      const CustomTextFormField(
+                        text: 'Email',
+                        hintText: "Enter Your Email",
+                        fillColor: ColorsValue.colorEEEAEA,
+                      ),
+                      const Spacer(),
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.bottomCenter,
+                          child: CustomButton(
+                            height: Dimens.fourtyFive,
+                            text: 'Recover Password',
+                            onTap: () {},
+                          ),
+                        ),
+                      ),
+                      Dimens.boxHeight10,
+                    ],
+                  ),
                 ),
-              )
+              ),
             ],
           ),
         ),

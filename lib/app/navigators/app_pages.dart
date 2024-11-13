@@ -38,5 +38,12 @@ class AppPages {
       binding: LoginBinding(),
       transition: Transition.fadeIn,
     ),
+    GetPage<SignupScreen>(
+      name: _Paths.signUpScreen,
+      transitionDuration: transitionDuration,
+      page: SignupScreen.new,
+      binding: LoginBinding(),
+      transition: Transition.fadeIn,
+    ),
   ];
 }
