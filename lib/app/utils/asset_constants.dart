@@ -1,9 +1,5 @@
-// coverage:ignore-file
-
-/// An asset constant class which will hold all the
-/// assets path which are used in the application.
-///
-/// Will be ignored for test since all are static values and would not change.
 abstract class AssetConstants {
   static const String loader = 'assets/images/loader.json';
+  static const String loginMainView = 'assets/icons/loginMainView.svg';
+  static const String forgotMainView = 'assets/icons/forgot_view.svg';
 }

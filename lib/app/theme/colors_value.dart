@@ -213,7 +213,7 @@ abstract class ColorsValue {
 
   /// Hex Values
   ///
-  static const int primaryColorHex = 0x20C0E8;
+  static const int primaryColorHex = 0xffFFF8F1;
   static int secondaryColorHex = 0xff9BA0A8;
   static const int blackColorHex = 0xff000000;
   static const int greyColorHex = 0xFFF8F8F8;
@@ -276,5 +276,12 @@ abstract class ColorsValue {
   static const int reddishOrangeColorHex = 0x1AFF4C00;
 
   /// Tirth kevadiya
-
+  static const lightYellow = Color(0xffE7AC2D);
+  static const textfildBorder = Color(0xffE2E8F0);
+  static const redColor = Color(0xffcf000f);
+  static const color4E4B66 = Color(0xff4E4B66);
+  static const color94A3B8 = Color(0xFF94A3B8);
+  static const color212121 = Color(0xff212121);
+  static const colorEEEAEA = Color(0xffEEEAEA);
+  static const color9C9C9C = Color(0xff9C9C9C);
 }

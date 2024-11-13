@@ -24,10 +24,24 @@ class AppPages {
       binding: SplashBinding(),
       transition: Transition.fadeIn,
     ),
-    GetPage<Logingscreen>(
-      name: _Paths.logingScreen,
+    GetPage<LoginScreen>(
+      name: _Paths.loginScreen,
       transitionDuration: transitionDuration,
-      page: Logingscreen.new,
+      page: LoginScreen.new,
+      binding: LoginBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage<ForgetPasswordView>(
+      name: _Paths.forgotScreen,
+      transitionDuration: transitionDuration,
+      page: ForgetPasswordView.new,
+      binding: LoginBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage<SignupScreen>(
+      name: _Paths.signUpScreen,
+      transitionDuration: transitionDuration,
+      page: SignupScreen.new,
       binding: LoginBinding(),
       transition: Transition.fadeIn,
     ),

@@ -4,11 +4,15 @@ part of 'app_pages.dart';
 /// A chunks of routes and the path names which will be used to create
 /// routes in [AppPages].
 abstract class Routes {
-  static const logingScreen = _Paths.logingScreen;
+  static const loginScreen = _Paths.loginScreen;
   static const splashScreen = _Paths.splashScreen;
+  static const forgotScreen = _Paths.forgotScreen;
+  static const signUpScreen = _Paths.signUpScreen;
 }
 
 abstract class _Paths {
   static const splashScreen = '/splashScreen';
-  static const logingScreen = '/logingScreen';
+  static const loginScreen = '/loginScreen';
+  static const forgotScreen = '/forgotScreen';
+  static const signUpScreen = '/signUpScreen';
 }
