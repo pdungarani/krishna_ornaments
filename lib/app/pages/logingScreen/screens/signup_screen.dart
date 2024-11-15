@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/widgets/custom_button.dart';
+import 'package:krishna_ornaments/app/widgets/custom_international_textformfield.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -25,11 +26,11 @@ class _SignupScreenState extends State<SignupScreen> {
             TextSpan(
               children: [
                 TextSpan(
-                  text: 'Forgot your log in details? ',
+                  text: 'Already Have An Account? ',
                   style: Styles.black50012,
                 ),
                 TextSpan(
-                  text: 'Get help logging in. ',
+                  text: 'Log In',
                   style: Styles.lightYellow40012,
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
@@ -79,10 +80,10 @@ class _SignupScreenState extends State<SignupScreen> {
                       },
                     ),
                     Dimens.boxHeight14,
-                    CustomTextFormField(
+                    CustomInternationalPhoneFild(
                       text: 'Mobile Number',
                       hintText: 'Enter mobile number',
-                      controller: controller.mobileNumberController,
+                      textEditingController: controller.mobileNumberController,
                       validation: (value) {
                         if (value!.isEmpty) {
                           return 'Please enter mobile number';
@@ -96,8 +97,12 @@ class _SignupScreenState extends State<SignupScreen> {
                       hintText: 'Enter Your Email',
                       controller: controller.emailController,
                       validation: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please enter right email';
+                        if (value!.isNotEmpty) {
+                          if (validateEmail(value) != null) {
+                            return 'Please enter valid email';
+                          }
+                        } else {
+                          return 'Please enter valid email';
                         }
                         return null;
                       },

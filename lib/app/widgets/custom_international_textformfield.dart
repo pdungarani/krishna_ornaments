@@ -1,0 +1,101 @@
+import 'package:flutter/material.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:krishna_ornaments/app/app.dart';
+
+class CustomInternationalPhoneFild extends StatelessWidget {
+  const CustomInternationalPhoneFild({
+    Key? key,
+    required this.text,
+    this.validation,
+    this.initialvalue,
+    this.onInputChanged,
+    this.oninitialValidation,
+    this.textEditingController,
+    required this.hintText,
+  }) : super(key: key);
+  final String text;
+  final String hintText;
+  final String? Function(String?)? validation;
+  final PhoneNumber? initialvalue;
+  final Function(PhoneNumber)? onInputChanged;
+  final Function(bool)? oninitialValidation;
+  final TextEditingController? textEditingController;
+
+  @override
+  Widget build(BuildContext context) => Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(text, style: Styles.black50014),
+          Dimens.boxHeight4,
+          InternationalPhoneNumberInput(
+            isEnabled: true,
+            onInputChanged: onInputChanged,
+            textStyle: Styles.black50014,
+            onInputValidated: oninitialValidation,
+            initialValue: initialvalue,
+            selectorConfig: const SelectorConfig(
+              selectorType: PhoneInputSelectorType.DROPDOWN,
+              setSelectorButtonAsPrefixIcon: true,
+            ),
+            ignoreBlank: false,
+            autoValidateMode: AutovalidateMode.onUserInteraction,
+            selectorTextStyle: const TextStyle(color: ColorsValue.color2E363F),
+            textFieldController: textEditingController,
+            formatInput: false,
+            keyboardType: const TextInputType.numberWithOptions(
+                signed: false, decimal: true),
+            inputBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide:
+                  const BorderSide(color: ColorsValue.textfildBorder, width: 2),
+            ),
+            inputDecoration: InputDecoration(
+              contentPadding: Dimens.edgeInsets15,
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(
+                    color: ColorsValue.textfildBorder, width: 2),
+              ),
+              disabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(
+                    color: ColorsValue.textfildBorder, width: 2),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(
+                    color: ColorsValue.textfildBorder, width: 2),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  width: Dimens.two,
+                  style: BorderStyle.solid,
+                  color: ColorsValue.redColor.withOpacity(0.5),
+                ),
+                borderRadius: BorderRadius.circular(Dimens.twelve),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  width: Dimens.two,
+                  style: BorderStyle.solid,
+                  color: ColorsValue.redColor.withOpacity(0.5),
+                ),
+                borderRadius: BorderRadius.circular(Dimens.twelve),
+              ),
+              hintText: hintText,
+              hintStyle: Styles.greyAAA40014,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(
+                    color: ColorsValue.textfildBorder, width: 2),
+              ),
+              filled: true,
+              fillColor: ColorsValue.colorEEEAEA,
+              errorStyle: Styles.txtRedBold12,
+            ),
+            validator: validation,
+          ),
+        ],
+      );
+}

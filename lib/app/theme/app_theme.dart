@@ -89,8 +89,9 @@ ThemeData themeData(BuildContext context) => ThemeData(
           ),
         ),
       ),
-      textSelectionTheme:
-          const TextSelectionThemeData(cursorColor: Color(0xFFEA6F00)),
+      textSelectionTheme: const TextSelectionThemeData(
+        cursorColor: ColorsValue.blackColor,
+      ),
       tabBarTheme: const TabBarTheme(
         labelColor: Colors.black,
       ),

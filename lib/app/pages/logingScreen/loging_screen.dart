@@ -45,7 +45,13 @@ class LoginScreen extends StatelessWidget {
                           fillColor: ColorsValue.colorEEEAEA,
                           controller: controller.emailController,
                           validation: (value) {
-                            if (value!.isNotEmpty) validateEmail(value);
+                            if (value!.isNotEmpty) {
+                              if (validateEmail(value) != null) {
+                                return 'Please enter valid email';
+                              }
+                            } else {
+                              return 'Please enter valid email';
+                            }
                             return null;
                           },
                         ),
@@ -68,7 +74,7 @@ class LoginScreen extends StatelessWidget {
                           text: 'LOG IN',
                           onTap: () {
                             if (controller.logingFormkey.currentState!
-                                .validate()) print("data");
+                                .validate()) RouteManagement.goToHomeView();
                           },
                         ),
                         Dimens.boxHeight10,
@@ -115,6 +121,7 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ),
                         ),
+                        Dimens.boxHeight5,
                       ],
                     ),
                   ),
