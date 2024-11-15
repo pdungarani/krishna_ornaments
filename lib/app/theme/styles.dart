@@ -15,6 +15,18 @@ abstract class Styles {
     fontSize: Dimens.twelve,
   );
 
+  static TextStyle black50014 = GoogleFonts.kumbhSans(
+    color: ColorsValue.blackColor,
+    fontWeight: FontWeight.w500,
+    fontSize: Dimens.fourteen,
+  );
+
+  static TextStyle color01010160018 = GoogleFonts.kumbhSans(
+    color: ColorsValue.color010101,
+    fontWeight: FontWeight.w600,
+    fontSize: Dimens.eighteen,
+  );
+
   static TextStyle blackBold16 = GoogleFonts.montserrat(
     color: const Color(0xFF0A0A0A),
     fontWeight: FontWeight.bold,
@@ -101,4 +113,9 @@ abstract class Styles {
     fontSize: Dimens.fourteen,
   );
 
+  static TextStyle greyAAA40014 = GoogleFonts.roboto(
+    color: ColorsValue.greyAAAAAA,
+    fontWeight: FontWeight.w400,
+    fontSize: Dimens.fourteen,
+  );
 }

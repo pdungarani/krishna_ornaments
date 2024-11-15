@@ -284,4 +284,7 @@ abstract class ColorsValue {
   static const color212121 = Color(0xff212121);
   static const colorEEEAEA = Color(0xffEEEAEA);
   static const color9C9C9C = Color(0xff9C9C9C);
+  static const greyAAAAAA = Color(0xffAAAAAA);
+  static const color2E363F = Color(0xff2E363F);
+  static const color010101 = Color(0xff010101);
 }

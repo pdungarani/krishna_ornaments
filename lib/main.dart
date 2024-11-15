@@ -78,7 +78,7 @@ class MyApp extends StatelessWidget {
         darkTheme: darkThemeData(context),
         themeMode: ThemeMode.light,
         getPages: AppPages.pages,
-        initialRoute: Routes.splashScreen,
+        initialRoute: Routes.homeScreen,
         translations: TranslationsFile(),
         enableLog: true,
       ),

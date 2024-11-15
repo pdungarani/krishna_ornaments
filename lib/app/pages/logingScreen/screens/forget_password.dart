@@ -41,10 +41,20 @@ class ForgetPasswordView extends StatelessWidget {
                         style: Styles.black40016,
                       ),
                       Dimens.boxHeight40,
-                      const CustomTextFormField(
+                      CustomTextFormField(
                         text: 'Email',
                         hintText: "Enter Your Email",
                         fillColor: ColorsValue.colorEEEAEA,
+                        validation: (value) {
+                          if (value!.isNotEmpty) {
+                            if (validateEmail(value) != null) {
+                              return 'Please enter valid email';
+                            }
+                          } else {
+                            return 'Please enter valid email';
+                          }
+                          return null;
+                        },
                       ),
                       const Spacer(),
                       Expanded(

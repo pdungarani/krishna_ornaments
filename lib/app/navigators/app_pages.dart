@@ -45,5 +45,12 @@ class AppPages {
       binding: LoginBinding(),
       transition: Transition.fadeIn,
     ),
+    GetPage<HomeScreen>(
+      name: _Paths.homeScreen,
+      transitionDuration: transitionDuration,
+      page: HomeScreen.new,
+      binding: HomeBinding(),
+      transition: Transition.fadeIn,
+    ),
   ];
 }
