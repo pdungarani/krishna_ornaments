@@ -52,5 +52,12 @@ class AppPages {
       binding: HomeBinding(),
       transition: Transition.fadeIn,
     ),
+    GetPage<BottomBarScreen>(
+      name: _Paths.bottomBarScreen,
+      transitionDuration: transitionDuration,
+      page: BottomBarScreen.new,
+      binding: BottomBarBinding(),
+      transition: Transition.fadeIn,
+    ),
   ];
 }

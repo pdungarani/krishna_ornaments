@@ -1,6 +1,4 @@
-import 'package:flutter/widgets.dart';
 import 'package:krishna_ornaments/app/app.dart';
-
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
@@ -8,7 +6,17 @@ class HomeController extends GetxController {
 
   final HomePresenter homePresenter;
 
-  final pageController = PageController(
-      viewportFraction: 0.8,
-    );
+  int itemCounter = 0;
+
+  onIncrement() {
+    itemCounter++;
+    update();
+  }
+
+  onDecrement() {
+    if (itemCounter > 0) {
+      itemCounter--;
+    }
+    update();
+  }
 }

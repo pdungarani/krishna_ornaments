@@ -3,15 +3,14 @@ import 'package:krishna_ornaments/app/app.dart';
 
 class CustomButton extends StatefulWidget {
   const CustomButton(
-      {Key? key,
+      {super.key,
       required this.text,
       required this.onTap,
       this.height,
       this.backgroundColor,
       this.radius,
       this.style,
-      this.side})
-      : super(key: key);
+      this.side});
   final String? text;
   final double? height;
   final Color? backgroundColor;
@@ -31,18 +30,20 @@ class _CustomButtonState extends State<CustomButton> {
           InkWell(
             onTap: widget.onTap,
             child: Container(
-                height: widget.height,
-                decoration: BoxDecoration(
-                    color: widget.backgroundColor ?? ColorsValue.lightYellow,
-                    borderRadius:
-                        widget.radius ?? BorderRadius.circular(Dimens.twelve),
-                    border: widget.side),
-                child: Center(
-                  child: Text(
-                    widget.text!,
-                    style: widget.style ?? Styles.txtWhite80018,
-                  ),
-                )),
+              height: widget.height,
+              decoration: BoxDecoration(
+                color: widget.backgroundColor ?? ColorsValue.lightYellow,
+                borderRadius:
+                    widget.radius ?? BorderRadius.circular(Dimens.twelve),
+                border: widget.side,
+              ),
+              child: Center(
+                child: Text(
+                  widget.text!,
+                  style: widget.style ?? Styles.txtWhite80018,
+                ),
+              ),
+            ),
           ),
         ],
       );
