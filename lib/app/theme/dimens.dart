@@ -278,6 +278,9 @@ abstract class Dimens {
   static EdgeInsets edgeInsets0_0_0_15 = EdgeInsets.only(
     bottom: fifteen,
   );
+  static EdgeInsets edgeInsetsTop60 = EdgeInsets.only(
+    top: sixty,
+  );
   static EdgeInsets edgeInsets0_0_0_4 = EdgeInsets.only(
     bottom: four,
   );
@@ -361,6 +364,20 @@ abstract class Dimens {
     ten,
     zero,
     five,
+  );
+
+  static EdgeInsets edgeInsets20_00_20_00 = EdgeInsets.only(
+    left: twenty,
+    top: zero,
+    right: twenty,
+    bottom: zero,
+  );
+
+  static EdgeInsets edgeInsets30_30_30_20 = EdgeInsets.only(
+    left: thirty,
+    top: thirty,
+    right: thirty,
+    bottom: twenty,
   );
 
   static EdgeInsets edgeInsets16_34_16_30 = EdgeInsets.fromLTRB(

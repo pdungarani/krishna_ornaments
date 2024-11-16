@@ -10,6 +10,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
+      initState: (state) {
+        state.controller?.controller = PageController();
+      },
       builder: (controller) => Scaffold(
         backgroundColor: ColorsValue.primaryColor,
         appBar: AppBar(
@@ -186,13 +189,15 @@ class HomeScreen extends StatelessWidget {
                                 Colors.transparent),
                             onTap: () {},
                             child: Container(
-                              height: Dimens.eighty,
-                              width: Dimens.eighty,
+                              height: Dimens.seventyFive,
+                              width: Dimens.seventyFive,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(200),
                                   color: Colors.white),
                               child: Padding(
-                                padding: EdgeInsets.all(Dimens.twenty),
+                                padding: EdgeInsets.all(
+                                  Dimens.fifteen,
+                                ),
                                 child: SvgPicture.asset(
                                   'assets/icons/profile.svg',
                                   colorFilter: const ColorFilter.mode(
