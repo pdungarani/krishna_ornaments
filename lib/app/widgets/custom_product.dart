@@ -7,6 +7,7 @@ import 'package:krishna_ornaments/app/theme/colors_value.dart';
 import 'package:krishna_ornaments/app/theme/dimens.dart';
 import 'package:krishna_ornaments/app/theme/styles.dart';
 
+// ignore: must_be_immutable
 class CustomProductView extends StatefulWidget {
   CustomProductView({
     super.key,

@@ -34,5 +34,33 @@ class BottomBarBinding extends Bindings {
         ),
       ),
     );
+    Get.put<CategoryController>(
+      CategoryController(
+        Get.put(
+          CategoryPresenter(
+            Get.put(
+              CategoryUseCases(
+                Get.find(),
+              ),
+              permanent: true,
+            ),
+          ),
+        ),
+      ),
+    );
+    Get.put<ProfileController>(
+      ProfileController(
+        Get.put(
+          ProfilePresenter(
+            Get.put(
+              ProfileUseCases(
+                Get.find(),
+              ),
+              permanent: true,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

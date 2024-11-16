@@ -57,6 +57,7 @@ class BottomBarScreen extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             children: [
               const HomeScreen(),
+              const CategoryScreen(),
               Container(
                 color: ColorsValue.whiteColor,
                 child: Center(
@@ -71,20 +72,7 @@ class BottomBarScreen extends StatelessWidget {
                       "current selected ${controller.tabController?.index.toString()}"),
                 ),
               ),
-              Container(
-                color: ColorsValue.whiteColor,
-                child: Center(
-                  child: Text(
-                      "current selected ${controller.tabController?.index.toString()}"),
-                ),
-              ),
-              Container(
-                color: ColorsValue.whiteColor,
-                child: Center(
-                  child: Text(
-                      "current selected ${controller.tabController?.index.toString()}"),
-                ),
-              ),
+              const ProfileScreen(),
             ],
           ),
         ),

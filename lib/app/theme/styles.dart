@@ -154,4 +154,46 @@ abstract class Styles {
     fontWeight: FontWeight.w400,
     fontSize: Dimens.fourteen,
   );
+
+  static TextStyle blackW80018 = GoogleFonts.nunito(
+    fontSize: Dimens.eighteen,
+    fontWeight: FontWeight.w800,
+    color: ColorsValue.blackColor,
+  );
+
+  static TextStyle whiteW70014 = GoogleFonts.nunito(
+    fontSize: Dimens.fourteen,
+    fontWeight: FontWeight.w700,
+    color: ColorsValue.whiteColor,
+  );
+
+  static TextStyle color21212170014 = GoogleFonts.nunito(
+    fontSize: Dimens.fourteen,
+    fontWeight: FontWeight.w700,
+    color: ColorsValue.color212121,
+  );
+
+  static TextStyle color21212160014 = GoogleFonts.nunito(
+    fontSize: Dimens.fourteen,
+    fontWeight: FontWeight.w600,
+    color: ColorsValue.color212121,
+  );
+
+  static TextStyle whiteW70016 = GoogleFonts.nunito(
+    fontSize: Dimens.sixteen,
+    fontWeight: FontWeight.w700,
+    color: ColorsValue.whiteColor,
+  );
+
+  static TextStyle black221W60020 = GoogleFonts.nunito(
+    fontSize: Dimens.twenty,
+    fontWeight: FontWeight.w600,
+    color: ColorsValue.black221,
+  );
+
+  static TextStyle whiteW60016 = GoogleFonts.nunito(
+    fontSize: Dimens.sixteen,
+    fontWeight: FontWeight.w600,
+    color: ColorsValue.whiteColor,
+  );
 }

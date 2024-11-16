@@ -1,6 +1,6 @@
 // coverage:ignore-file
 import 'dart:convert';
-import 'dart:io' show Directory, File, FileMode, Platform;
+import 'dart:io' show Directory, File, FileMode;
 import 'dart:math';
 
 import 'package:device_info_plus/device_info_plus.dart';
