@@ -15,16 +15,40 @@ abstract class Styles {
     fontSize: Dimens.twelve,
   );
 
-  static TextStyle black50014 = GoogleFonts.kumbhSans(
+  static TextStyle black50014 = GoogleFonts.montserrat(
     color: ColorsValue.blackColor,
     fontWeight: FontWeight.w500,
     fontSize: Dimens.fourteen,
   );
 
-  static TextStyle color01010160018 = GoogleFonts.kumbhSans(
+  static TextStyle black60016 = GoogleFonts.montserrat(
+    color: ColorsValue.blackColor,
+    fontWeight: FontWeight.w600,
+    fontSize: Dimens.sixteen,
+  );
+
+  static TextStyle black60012 = GoogleFonts.montserrat(
+    color: ColorsValue.blackColor,
+    fontWeight: FontWeight.w600,
+    fontSize: Dimens.twelve,
+  );
+
+  static TextStyle black70014 = GoogleFonts.montserrat(
+    color: ColorsValue.blackColor,
+    fontWeight: FontWeight.w700,
+    fontSize: Dimens.fourteen,
+  );
+
+  static TextStyle color01010160018 = GoogleFonts.montserrat(
     color: ColorsValue.color010101,
     fontWeight: FontWeight.w600,
     fontSize: Dimens.eighteen,
+  );
+
+  static TextStyle color01010170020 = GoogleFonts.montserrat(
+    color: ColorsValue.color010101,
+    fontWeight: FontWeight.w700,
+    fontSize: Dimens.twenty,
   );
 
   static TextStyle blackBold16 = GoogleFonts.montserrat(
@@ -37,6 +61,12 @@ abstract class Styles {
     color: const Color(0xFF0A0A0A),
     fontWeight: FontWeight.w500,
     fontSize: Dimens.twelve,
+  );
+
+  static TextStyle colorFBF7F350010 = GoogleFonts.montserrat(
+    color: ColorsValue.colorFBF7F3,
+    fontWeight: FontWeight.w500,
+    fontSize: Dimens.ten,
   );
 
   static TextStyle lightYellow40012 = GoogleFonts.montserrat(
@@ -65,43 +95,49 @@ abstract class Styles {
       fontSize: Dimens.twentyEight,
       fontWeight: FontWeight.w700);
 
-  static TextStyle color4E4B6680014 = GoogleFonts.kumbhSans(
+  static TextStyle primary50014 = GoogleFonts.montserrat(
+    color: ColorsValue.lightYellow,
+    fontSize: Dimens.fourteen,
+    fontWeight: FontWeight.w500,
+  );
+
+  static TextStyle color4E4B6680014 = GoogleFonts.montserrat(
     color: ColorsValue.color4E4B66,
     fontWeight: FontWeight.w800,
     fontSize: Dimens.fourteen,
   );
 
-  static TextStyle color21212150014 = GoogleFonts.kumbhSans(
+  static TextStyle color21212150014 = GoogleFonts.montserrat(
     color: ColorsValue.color212121,
     fontWeight: FontWeight.w500,
     fontSize: Dimens.fourteen,
   );
 
-  static TextStyle txtRedBold10 = GoogleFonts.kumbhSans(
+  static TextStyle txtRedBold10 = GoogleFonts.montserrat(
     color: ColorsValue.redColor,
     fontWeight: FontWeight.w700,
     fontSize: Dimens.ten,
   );
 
-  static TextStyle color94A3B8W70016 = GoogleFonts.kumbhSans(
+  static TextStyle color94A3B8W70016 = GoogleFonts.montserrat(
     color: ColorsValue.color94A3B8,
     fontWeight: FontWeight.w400,
     fontSize: 16,
   );
 
-  static TextStyle color9C9C9C40016 = GoogleFonts.kumbhSans(
+  static TextStyle color9C9C9C40016 = GoogleFonts.montserrat(
     color: ColorsValue.color9C9C9C,
     fontWeight: FontWeight.w400,
     fontSize: 16,
   );
 
-  static TextStyle txtRedBold12 = GoogleFonts.kumbhSans(
+  static TextStyle txtRedBold12 = GoogleFonts.montserrat(
     color: ColorsValue.redColor.withOpacity(0.7),
     fontWeight: FontWeight.w700,
     fontSize: Dimens.twelve,
   );
 
-  static TextStyle txtWhite80018 = GoogleFonts.kumbhSans(
+  static TextStyle txtWhite80018 = GoogleFonts.montserrat(
     color: ColorsValue.whiteColor,
     fontWeight: FontWeight.w800,
     fontSize: Dimens.eighteen,
@@ -113,7 +149,7 @@ abstract class Styles {
     fontSize: Dimens.fourteen,
   );
 
-  static TextStyle greyAAA40014 = GoogleFonts.roboto(
+  static TextStyle greyAAA40014 = GoogleFonts.montserrat(
     color: ColorsValue.greyAAAAAA,
     fontWeight: FontWeight.w400,
     fontSize: Dimens.fourteen,

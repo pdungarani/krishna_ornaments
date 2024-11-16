@@ -74,7 +74,9 @@ class LoginScreen extends StatelessWidget {
                           text: 'LOG IN',
                           onTap: () {
                             if (controller.logingFormkey.currentState!
-                                .validate()) RouteManagement.goToHomeView();
+                                .validate()) {
+                              RouteManagement.goToBottomBarView();
+                            }
                           },
                         ),
                         Dimens.boxHeight10,
