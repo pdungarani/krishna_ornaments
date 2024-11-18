@@ -164,7 +164,7 @@ class ProfileScreen extends StatelessWidget {
                       child: Center(
                         child: ListTile(
                           contentPadding: Dimens.edgeInsets20_00_20_00,
-                          trailing: Icon(
+                          trailing: const Icon(
                             Icons.arrow_forward_ios_sharp,
                             color: ColorsValue.colorA7A7A7,
                           ),
@@ -193,7 +193,7 @@ class ProfileScreen extends StatelessWidget {
                       child: Center(
                         child: ListTile(
                           contentPadding: Dimens.edgeInsets20_00_20_00,
-                          trailing: Icon(
+                          trailing: const Icon(
                             Icons.arrow_forward_ios_sharp,
                             color: ColorsValue.colorA7A7A7,
                           ),
@@ -222,7 +222,7 @@ class ProfileScreen extends StatelessWidget {
                       child: Center(
                         child: ListTile(
                           contentPadding: Dimens.edgeInsets20_00_20_00,
-                          trailing: Icon(
+                          trailing: const Icon(
                             Icons.arrow_forward_ios_sharp,
                             color: ColorsValue.colorA7A7A7,
                           ),
@@ -251,7 +251,7 @@ class ProfileScreen extends StatelessWidget {
                       child: Center(
                         child: ListTile(
                           contentPadding: Dimens.edgeInsets20_00_20_00,
-                          trailing: Icon(
+                          trailing: const Icon(
                             Icons.arrow_forward_ios_sharp,
                             color: ColorsValue.colorA7A7A7,
                           ),
