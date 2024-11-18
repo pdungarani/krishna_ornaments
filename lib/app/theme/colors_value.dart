@@ -290,9 +290,16 @@ abstract class ColorsValue {
   static const colorEDC97D = Color(0xffEDC97D);
   static const colorFBF7F3 = Color(0xffFBF7F3);
   static const colorDFDFDF = Color(0xffDFDFDF);
+  static const colorD9D9D9 = Color(0xffD9D9D9);
   static const blackEEEAEA = Color(0xffEEEAEA);
   static const greyD9D9D9 = Color(0xffD9D9D9);
   static const greyF4F4F5 = Color(0xffF4F4F5);
+  static Color grey94A3B8 = Color(0xff94A3B8);
   static const black221 = Color(0xff222221);
   static const colorA7A7A7 = Color(0xffA7A7A7);
+  static const appBg = Color(0xffFFF8F1);
+  static const appColor = Color(0xffE7AC2D);
+  static const black333 = Color(0xff333333);
+  static const black343434 = Color(0xff343434);
+  static const black626262 = Color(0xff626262);
 }

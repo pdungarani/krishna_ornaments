@@ -62,5 +62,35 @@ class BottomBarBinding extends Bindings {
         ),
       ),
     );
+
+    Get.put<ShoppingCartController>(
+      ShoppingCartController(
+        Get.put(
+          ShoppingCartPresenter(
+            Get.put(
+              ShoppingCartUsecases(
+                Get.find(),
+              ),
+              permanent: true,
+            ),
+          ),
+        ),
+      ),
+    );
+
+    Get.put<RepairController>(
+      RepairController(
+        Get.put(
+          RepairPresenter(
+            Get.put(
+              RepairUsecases(
+                Get.find(),
+              ),
+              permanent: true,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

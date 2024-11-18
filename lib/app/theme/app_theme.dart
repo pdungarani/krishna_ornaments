@@ -7,6 +7,7 @@ ThemeData themeData(BuildContext context) => ThemeData(
       bottomSheetTheme: const BottomSheetThemeData(
         backgroundColor: Colors.transparent,
       ),
+      dialogBackgroundColor: ColorsValue.whiteColor,
       shadowColor: const Color(0xFFDDE3FD),
       checkboxTheme: CheckboxThemeData(
         fillColor: MaterialStateProperty.all<Color>(const Color(0xFFEA6F00)),

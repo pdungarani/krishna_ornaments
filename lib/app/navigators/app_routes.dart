@@ -10,6 +10,17 @@ abstract class Routes {
   static const signUpScreen = _Paths.signUpScreen;
   static const bottomBarScreen = _Paths.bottomBarScreen;
   static const homeScreen = _Paths.homeScreen;
+  static const orderScreen = _Paths.orderScreen;
+  static const orderDetalisScreen = _Paths.orderDetalisScreen;
+  static const bagDetailScreen = _Paths.bagDetailScreen;
+  static const repairScreen = _Paths.repairScreen;
+  static const repairDetailsScreen = _Paths.repairDetailsScreen;
+  static const repairOrderHistoryScreen = _Paths.repairOrderHistoryScreen;
+  static const repairOrderDetalisScreen = _Paths.repairOrderDetalisScreen;
+  static const sampleOrderScreen = _Paths.sampleOrderScreen;
+  static const sampleOrderDetailsScreen = _Paths.sampleOrderDetailsScreen;
+  static const sampleOrderHistoryScreen = _Paths.sampleOrderHistoryScreen;
+  static const showFullScareenImage = _Paths.showFullScareenImage;
 }
 
 abstract class _Paths {
@@ -19,4 +30,15 @@ abstract class _Paths {
   static const signUpScreen = '/signUpScreen';
   static const bottomBarScreen = '/bottomBarScreen';
   static const homeScreen = '/homeScreen';
+  static const orderScreen = '/orderScreen';
+  static const orderDetalisScreen = '/orderDetalisScreen';
+  static const bagDetailScreen = '/bagDetailScreen';
+  static const repairScreen = '/repairScreen';
+  static const repairDetailsScreen = '/repairDetailsScreen';
+  static const repairOrderHistoryScreen = '/repairOrderHistoryScreen';
+  static const repairOrderDetalisScreen = '/repairOrderDetalisScreen';
+  static const sampleOrderScreen = '/sampleOrderScreen';
+  static const sampleOrderDetailsScreen = '/sampleOrderDetailsScreen';
+  static const sampleOrderHistoryScreen = '/sampleOrderHistoryScreen';
+  static const showFullScareenImage = '/showFullScareenImage';
 }

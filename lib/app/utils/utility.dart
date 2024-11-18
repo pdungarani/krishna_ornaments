@@ -1,6 +1,6 @@
 // coverage:ignore-file
 import 'dart:convert';
-import 'dart:io' show Directory, File, FileMode;
+import 'dart:io' show Directory, File, FileMode, Platform;
 import 'dart:math';
 
 import 'package:device_info_plus/device_info_plus.dart';
@@ -47,6 +47,123 @@ abstract class Utility {
       header.addAll(otherHeader);
     }
     return header;
+  }
+
+  static double getImageSizeMB(String filePath) {
+    var file = File(filePath);
+    final bytes = file.readAsBytesSync().lengthInBytes;
+    final kb = bytes / 1024;
+    final mb = kb / 1024;
+    return mb;
+  }
+
+  static Future<bool> imagePermissionCheack(BuildContext context) async {
+    bool status = false;
+    bool statusVideos = false;
+    bool permanentlyDenied = false;
+    bool permanentlyVideoDenied = false;
+    if (Platform.isAndroid) {
+      DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+      AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+      if (androidInfo.version.sdkInt < 33) {
+        status = await Permission.storage.request().isDenied;
+        permanentlyDenied =
+            await Permission.storage.request().isPermanentlyDenied;
+      } else {
+        status = await Permission.photos.request().isDenied;
+        permanentlyDenied =
+            await Permission.photos.request().isPermanentlyDenied;
+        statusVideos = await Permission.videos.request().isDenied;
+        permanentlyVideoDenied =
+            await Permission.videos.request().isPermanentlyDenied;
+      }
+    } else {
+      status = await Permission.photos.request().isDenied;
+      permanentlyDenied = await Permission.photos.request().isPermanentlyDenied;
+    }
+    if (status || permanentlyDenied || statusVideos || permanentlyVideoDenied) {
+      Get.dialog(
+          barrierDismissible: false,
+          AlertDialog(
+            title: Text(
+              "Permission Needed!",
+              style: Styles.blackColorW50018,
+            ),
+            content: Text(
+              "Please give the Photos Permission for uploading the image.",
+              style: Styles.redcolor50014,
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: Text(
+                  "Allow",
+                  style: Styles.redcolor50014,
+                ),
+                onPressed: () async {
+                  Get.back();
+                  await openAppSettings();
+                },
+              ),
+              TextButton(
+                child: Text(
+                  "Deny",
+                  style: Styles.black50014,
+                ),
+                onPressed: () {
+                  Get.back();
+                },
+              )
+            ],
+          ));
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  static Future<bool> cameraPermissionCheack(BuildContext context) async {
+    final status;
+    var permanentlyDenied;
+    status = await Permission.camera.request().isDenied;
+    permanentlyDenied = await Permission.camera.request().isPermanentlyDenied;
+    if (status || permanentlyDenied) {
+      Get.dialog(
+          barrierDismissible: false,
+          AlertDialog(
+            title: Text(
+              "Permission Needed!",
+              style: Styles.blackColorW50018,
+            ),
+            content: Text(
+              "Please give the Camera Permission for capture image.",
+              style: Styles.redcolor50014,
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: Text(
+                  "Allow",
+                  style: Styles.redcolor50014,
+                ),
+                onPressed: () async {
+                  Get.back();
+                  await openAppSettings();
+                },
+              ),
+              TextButton(
+                child: Text(
+                  "Deny",
+                  style: Styles.black50014,
+                ),
+                onPressed: () {
+                  Get.back();
+                },
+              )
+            ],
+          ));
+      return false;
+    } else {
+      return true;
+    }
   }
 
   // coverage:ignore-start

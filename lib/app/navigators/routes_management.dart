@@ -12,4 +12,24 @@ abstract class RouteManagement {
   static void goToSignupView() => Get.toNamed<void>(Routes.signUpScreen);
   static void goToHomeView() => Get.toNamed<void>(Routes.homeScreen);
   static void goToBottomBarView() => Get.toNamed<void>(Routes.bottomBarScreen);
+  static void goToOrderScreen() => Get.toNamed<void>(Routes.orderScreen);
+  static void goToOrderDetalisScreen() =>
+      Get.toNamed<void>(Routes.orderDetalisScreen);
+  static void goToBagDetailScreen() =>
+      Get.toNamed<void>(Routes.bagDetailScreen);
+  static void goToRepairScreen() => Get.toNamed<void>(Routes.repairScreen);
+  static void goToRepairDetailsScreen() =>
+      Get.toNamed<void>(Routes.repairDetailsScreen);
+  static void goToRepairOrderHistoryScreen() =>
+      Get.toNamed<void>(Routes.repairOrderHistoryScreen);
+  static void goToRepairOrderDetalisScreen(String id) =>
+      Get.toNamed<void>(Routes.repairOrderDetalisScreen, arguments: id);
+  static void goToSampleOrderScreen() =>
+      Get.toNamed<void>(Routes.sampleOrderScreen);
+  static void goToSampleOrderDetailsScreen(String id) =>
+      Get.toNamed<void>(Routes.sampleOrderDetailsScreen, arguments: id);
+  static void goToSampleOrderHistoryScreen() =>
+      Get.toNamed<void>(Routes.sampleOrderHistoryScreen);
+  static void goToShowFullScareenImage(String image, String type) =>
+      Get.toNamed<void>(Routes.showFullScareenImage, arguments: [image, type]);
 }

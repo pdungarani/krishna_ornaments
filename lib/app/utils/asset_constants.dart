@@ -7,4 +7,22 @@ abstract class AssetConstants {
   static const String searchView = 'assets/icons/Search.svg';
   static const String voiceView = 'assets/icons/Voice.svg';
   static const String categoryIconView = 'assets/icons/category_Icon.svg';
+  static const String back_arrow = 'assets/svg/back_arrow.svg';
+  static const String ic_back_arrow = 'assets/svg/ic_back_arrow.svg';
+  static const String placeholder = 'assets/images/placeholder.jpeg';
+  static const String usera = 'assets/images/usera.png';
+  static const String ic_minus = 'assets/svg/ic_minus.svg';
+  static const String ic_plus = 'assets/svg/ic_plus.svg';
+  static const String ic_delete = 'assets/svg/ic_delete.svg';
+  static const String ic_bank = 'assets/svg/ic_bank.svg';
+  static const String ic_block = 'assets/svg/ic_block.svg';
+  static const String ic_call = 'assets/svg/ic_call.svg';
+  static const String ic_repair = 'assets/svg/ic_repair.svg';
+  static const String ic_sample = 'assets/svg/ic_sample.svg';
+  static const String ic_logout = 'assets/svg/ic_logout.svg';
+  static const String ic_right_arrow = 'assets/svg/ic_right_arrow.svg';
+  static const String ic_upload_img = 'assets/svg/ic_upload_img.svg';
+  static const String ic_gallery = 'assets/svg/ic_gallery.svg';
+  static const String ic_camera = 'assets/svg/ic_camera.svg';
+  static const String dwsadsa = '';
 }

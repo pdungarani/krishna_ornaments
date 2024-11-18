@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:flutter/material.dart';
+import 'package:krishna_ornaments/app/navigators/navigators.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -79,13 +80,13 @@ class ProfileScreen extends StatelessWidget {
                                   fit: BoxFit.cover,
                                   placeholder: (context, url) {
                                     return SvgPicture.asset(
-                                      'AssetConstants.ic_outline_user',
+                                      AssetConstants.usera,
                                       fit: BoxFit.cover,
                                     );
                                   },
                                   errorWidget: (context, url, error) {
                                     return SvgPicture.asset(
-                                      'AssetConstants.ic_outline_user',
+                                      AssetConstants.usera,
                                       fit: BoxFit.cover,
                                     );
                                   },
@@ -136,7 +137,7 @@ class ProfileScreen extends StatelessWidget {
                       child: ListTile(
                         contentPadding: Dimens.edgeInsets20_00_20_00,
                         leading: SvgPicture.asset(
-                          'AssetConstants.ic_phone',
+                          AssetConstants.ic_call,
                         ),
                         title: Text(
                           "+91 1234567890",
@@ -152,7 +153,9 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   Dimens.boxHeight20,
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      RouteManagement.goToOrderScreen();
+                    },
                     child: Container(
                       height: Dimens.sixty,
                       decoration: BoxDecoration(
@@ -169,7 +172,7 @@ class ProfileScreen extends StatelessWidget {
                             color: ColorsValue.colorA7A7A7,
                           ),
                           leading: SvgPicture.asset(
-                            'AssetConstants.ic_order',
+                            AssetConstants.ic_block,
                           ),
                           title: Text(
                             "order_history".tr,
@@ -181,7 +184,9 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   Dimens.boxHeight20,
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      RouteManagement.goToRepairOrderHistoryScreen();
+                    },
                     child: Container(
                       height: Dimens.sixty,
                       decoration: BoxDecoration(
@@ -198,7 +203,7 @@ class ProfileScreen extends StatelessWidget {
                             color: ColorsValue.colorA7A7A7,
                           ),
                           leading: SvgPicture.asset(
-                            'AssetConstants.ic_repair',
+                            AssetConstants.ic_repair,
                           ),
                           title: Text(
                             "repair_order_history".tr,
@@ -227,10 +232,10 @@ class ProfileScreen extends StatelessWidget {
                             color: ColorsValue.colorA7A7A7,
                           ),
                           leading: SvgPicture.asset(
-                            'AssetConstants.ic_order',
+                            AssetConstants.ic_bank,
                           ),
                           title: Text(
-                            "Bank Details",
+                            "bank_details".tr,
                             style: Styles.color21212160014,
                           ),
                         ),
@@ -239,7 +244,9 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   Dimens.boxHeight20,
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      RouteManagement.goToSampleOrderHistoryScreen();
+                    },
                     child: Container(
                       height: Dimens.sixty,
                       decoration: BoxDecoration(
@@ -256,7 +263,7 @@ class ProfileScreen extends StatelessWidget {
                             color: ColorsValue.colorA7A7A7,
                           ),
                           leading: SvgPicture.asset(
-                            'AssetConstants.ic_sample_order',
+                            AssetConstants.ic_sample,
                           ),
                           title: Text(
                             "sample_order_history".tr,
@@ -313,7 +320,7 @@ class ProfileScreen extends StatelessWidget {
                                             Text(
                                               "Are you sure you want to\nLogout?"
                                                   .tr,
-                                              style: Styles.black221W60020,
+                                              style: Styles.black221W70010,
                                               textAlign: TextAlign.center,
                                             ),
                                             Dimens.boxHeight20,
@@ -391,7 +398,7 @@ class ProfileScreen extends StatelessWidget {
                         },
                         contentPadding: Dimens.edgeInsets20_00_20_00,
                         leading: SvgPicture.asset(
-                          'AssetConstants.ic_logout',
+                          AssetConstants.ic_logout,
                         ),
                         title: Text(
                           "logout".tr,

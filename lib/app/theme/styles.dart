@@ -27,6 +27,12 @@ abstract class Styles {
     fontSize: Dimens.sixteen,
   );
 
+  static TextStyle grey94A3B860012 = GoogleFonts.roboto(
+    color: ColorsValue.grey94A3B8,
+    fontWeight: FontWeight.w600,
+    fontSize: Dimens.twelve,
+  );
+
   static TextStyle black60012 = GoogleFonts.montserrat(
     color: ColorsValue.blackColor,
     fontWeight: FontWeight.w600,
@@ -131,10 +137,22 @@ abstract class Styles {
     fontSize: 16,
   );
 
+  static TextStyle color9C9C9C40010 = GoogleFonts.montserrat(
+    color: ColorsValue.color9C9C9C,
+    fontWeight: FontWeight.w400,
+    fontSize: Dimens.ten,
+  );
+
   static TextStyle txtRedBold12 = GoogleFonts.montserrat(
     color: ColorsValue.redColor.withOpacity(0.7),
     fontWeight: FontWeight.w700,
     fontSize: Dimens.twelve,
+  );
+
+  static TextStyle redcolor50014 = GoogleFonts.montserrat(
+    color: ColorsValue.redColor,
+    fontWeight: FontWeight.w700,
+    fontSize: Dimens.fourteen,
   );
 
   static TextStyle txtWhite80018 = GoogleFonts.montserrat(
@@ -179,21 +197,153 @@ abstract class Styles {
     color: ColorsValue.color212121,
   );
 
+  static TextStyle color21212160012 = GoogleFonts.nunito(
+    fontSize: Dimens.twelve,
+    fontWeight: FontWeight.w600,
+    color: ColorsValue.color212121,
+  );
+
   static TextStyle whiteW70016 = GoogleFonts.nunito(
     fontSize: Dimens.sixteen,
     fontWeight: FontWeight.w700,
     color: ColorsValue.whiteColor,
   );
 
-  static TextStyle black221W60020 = GoogleFonts.nunito(
-    fontSize: Dimens.twenty,
-    fontWeight: FontWeight.w600,
-    color: ColorsValue.black221,
-  );
-
   static TextStyle whiteW60016 = GoogleFonts.nunito(
     fontSize: Dimens.sixteen,
     fontWeight: FontWeight.w600,
     color: ColorsValue.whiteColor,
+  );
+
+  static TextStyle color212121W80018 = GoogleFonts.nunito(
+    fontSize: Dimens.eighteen,
+    fontWeight: FontWeight.w800,
+    color: ColorsValue.color212121,
+  );
+
+  static TextStyle color212121W70012 = GoogleFonts.nunito(
+    fontSize: Dimens.twelve,
+    fontWeight: FontWeight.w700,
+    color: ColorsValue.color212121,
+  );
+
+  static TextStyle color212121W50014 = GoogleFonts.nunito(
+    fontSize: Dimens.fourteen,
+    fontWeight: FontWeight.w500,
+    color: ColorsValue.color212121,
+  );
+
+  static TextStyle color212121W70024 = GoogleFonts.nunito(
+    fontSize: Dimens.twentyFour,
+    fontWeight: FontWeight.w700,
+    color: ColorsValue.color212121,
+  );
+
+  static TextStyle color212121W70010 = GoogleFonts.nunito(
+    fontSize: Dimens.ten,
+    fontWeight: FontWeight.w700,
+    color: ColorsValue.color212121,
+  );
+
+  static TextStyle color212121W90010 = GoogleFonts.nunito(
+    fontSize: Dimens.ten,
+    fontWeight: FontWeight.w900,
+    color: ColorsValue.color212121,
+  );
+
+  static TextStyle color9C9C9CW50010 = GoogleFonts.nunito(
+    fontSize: Dimens.ten,
+    fontWeight: FontWeight.w500,
+    color: ColorsValue.color9C9C9C,
+  );
+
+  static TextStyle appColor70010 = GoogleFonts.nunito(
+    fontSize: Dimens.ten,
+    fontWeight: FontWeight.w700,
+    color: ColorsValue.appColor,
+  );
+
+  static TextStyle appColor70012 = GoogleFonts.nunito(
+    fontSize: Dimens.twelve,
+    fontWeight: FontWeight.w700,
+    color: ColorsValue.appColor,
+  );
+
+  static TextStyle grey94A3B850014 = GoogleFonts.roboto(
+    color: ColorsValue.grey94A3B8,
+    fontWeight: FontWeight.w500,
+    fontSize: Dimens.fourteen,
+  );
+
+  static TextStyle appColor70014 = GoogleFonts.nunito(
+    fontSize: Dimens.fourteen,
+    fontWeight: FontWeight.w700,
+    color: ColorsValue.appColor,
+  );
+
+  static TextStyle colorA7A7A750016 = GoogleFonts.nunito(
+    fontSize: Dimens.sixteen,
+    fontWeight: FontWeight.w500,
+    color: ColorsValue.colorA7A7A7,
+  );
+
+  static TextStyle colorA7A7A750010 = GoogleFonts.nunito(
+    fontSize: Dimens.ten,
+    fontWeight: FontWeight.w500,
+    color: ColorsValue.colorA7A7A7,
+  );
+
+  static TextStyle colorA7A7A780014 = GoogleFonts.nunito(
+    fontSize: Dimens.fourteen,
+    fontWeight: FontWeight.w800,
+    color: ColorsValue.colorA7A7A7,
+  );
+
+  static TextStyle colorA7A7A750012 = GoogleFonts.nunito(
+    fontSize: Dimens.twelve,
+    fontWeight: FontWeight.w500,
+    color: ColorsValue.colorA7A7A7,
+  );
+
+  static TextStyle colorA7A7A770012 = GoogleFonts.nunito(
+    fontSize: Dimens.twelve,
+    fontWeight: FontWeight.w700,
+    color: ColorsValue.colorA7A7A7,
+  );
+
+  static TextStyle whiteW80024 = GoogleFonts.nunito(
+    fontSize: Dimens.twentyFour,
+    fontWeight: FontWeight.w800,
+    color: ColorsValue.whiteColor,
+  );
+
+  static TextStyle whiteW80014 = GoogleFonts.nunito(
+    fontSize: Dimens.fourteen,
+    fontWeight: FontWeight.w800,
+    color: ColorsValue.whiteColor,
+  );
+
+  static TextStyle whiteW60012 = GoogleFonts.nunito(
+    fontSize: Dimens.twelve,
+    fontWeight: FontWeight.w600,
+    color: ColorsValue.whiteColor,
+  );
+
+  static TextStyle black221W70010 = GoogleFonts.nunito(
+    fontSize: Dimens.ten,
+    fontWeight: FontWeight.w700,
+    color: ColorsValue.black221,
+  );
+
+  static TextStyle black626262W50012 = GoogleFonts.nunito(
+    fontSize: Dimens.twelve,
+    fontWeight: FontWeight.w500,
+    color: ColorsValue.black626262,
+  );
+
+  static TextStyle blackColorW50018 = GoogleFonts.nunito(
+    fontSize: Dimens.eighteen,
+    fontWeight: FontWeight.w500,
+    color: ColorsValue.blackColor,
   );
 }

@@ -32,11 +32,10 @@ class BottomBarScreen extends StatelessWidget {
                     SvgPicture.asset("assets/icons/Selected Category.svg"),
               ),
               TabItem(
-                icon: InkWell(
-                  onTap: () {},
-                  child: CircleAvatar(
-                    backgroundColor: ColorsValue.lightYellow,
-                    child: SvgPicture.asset('assets/icons/shoping.svg'),
+                icon: CircleAvatar(
+                  backgroundColor: ColorsValue.appColor,
+                  child: SvgPicture.asset(
+                    'assets/icons/shoping.svg',
                   ),
                 ),
               ),
@@ -58,20 +57,8 @@ class BottomBarScreen extends StatelessWidget {
             children: [
               const HomeScreen(),
               const CategoryScreen(),
-              Container(
-                color: ColorsValue.whiteColor,
-                child: Center(
-                  child: Text(
-                      "current selected ${controller.tabController?.index.toString()}"),
-                ),
-              ),
-              Container(
-                color: ColorsValue.whiteColor,
-                child: Center(
-                  child: Text(
-                      "current selected ${controller.tabController?.index.toString()}"),
-                ),
-              ),
+              const ShoppingCartScreen(),
+              const RepairScreen(),
               const ProfileScreen(),
             ],
           ),
