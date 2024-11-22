@@ -1,8 +1,8 @@
 //coverage:ignore-file
 
-import 'package:krishna_ornaments/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:krishna_ornaments/app/app.dart';
 
 /// A chunk of styles used in the application.
 /// Will be ignored for test since all are static values and would not change.
@@ -13,6 +13,12 @@ abstract class Styles {
     color: ColorsValue.blackColor,
     fontWeight: FontWeight.bold,
     fontSize: Dimens.twelve,
+  );
+
+  static TextStyle black64748BW50016 = GoogleFonts.outfit(
+    color: ColorsValue.black64748B,
+    fontSize: Dimens.sixteen,
+    fontWeight: FontWeight.w500,
   );
 
   static TextStyle black50014 = GoogleFonts.montserrat(

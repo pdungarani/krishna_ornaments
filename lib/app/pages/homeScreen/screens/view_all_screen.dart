@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/widgets/appbar_widgets.dart';
 import 'package:krishna_ornaments/app/widgets/custom_button.dart';
+import 'package:krishna_ornaments/app/widgets/custom_product.dart';
 
 class ViewAllProductScreen extends StatelessWidget {
   const ViewAllProductScreen({super.key});
@@ -12,44 +13,44 @@ class ViewAllProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
       initState: (state) async {
-        var controller = Get.find<ProductDetailController>();
-        controller.productType = Get.arguments ?? "";
-        controller.isLoading = true;
-        if (controller.productType == "Best Seller") {
-          await controller.postBestSellerList(1);
-          controller.scrollBestSellerController.addListener(() async {
-            if (controller.scrollBestSellerController.position.pixels ==
-                controller
-                    .scrollBestSellerController.position.maxScrollExtent) {
-              if (controller.isBestSellerLoading == false) {
-                controller.isBestSellerLoading = true;
-                controller.update();
-                if (controller.isBestSellerLastPage == false) {
-                  await controller.postBestSellerList(controller.pageCount);
-                }
-                controller.isBestSellerLoading = false;
-                controller.update();
-              }
-            }
-          });
-        } else {
-          await controller.postComboList(1);
-          controller.scrollBestSellerController.addListener(() async {
-            if (controller.scrollBestSellerController.position.pixels ==
-                controller
-                    .scrollBestSellerController.position.maxScrollExtent) {
-              if (controller.isBestSellerLoading == false) {
-                controller.isBestSellerLoading = true;
-                controller.update();
-                if (controller.isBestSellerLastPage == false) {
-                  await controller.postComboList(controller.pageCount);
-                }
-                controller.isBestSellerLoading = false;
-                controller.update();
-              }
-            }
-          });
-        }
+        // var controller = Get.find<ProductDetailController>();
+        // controller.productType = Get.arguments ?? "";
+        // controller.isLoading = true;
+        // if (controller.productType == "Best Seller") {
+        //   await controller.postBestSellerList(1);
+        //   controller.scrollBestSellerController.addListener(() async {
+        //     if (controller.scrollBestSellerController.position.pixels ==
+        //         controller
+        //             .scrollBestSellerController.position.maxScrollExtent) {
+        //       if (controller.isBestSellerLoading == false) {
+        //         controller.isBestSellerLoading = true;
+        //         controller.update();
+        //         if (controller.isBestSellerLastPage == false) {
+        //           await controller.postBestSellerList(controller.pageCount);
+        //         }
+        //         controller.isBestSellerLoading = false;
+        //         controller.update();
+        //       }
+        //     }
+        //   });
+        // } else {
+        //   await controller.postComboList(1);
+        //   controller.scrollBestSellerController.addListener(() async {
+        //     if (controller.scrollBestSellerController.position.pixels ==
+        //         controller
+        //             .scrollBestSellerController.position.maxScrollExtent) {
+        //       if (controller.isBestSellerLoading == false) {
+        //         controller.isBestSellerLoading = true;
+        //         controller.update();
+        //         if (controller.isBestSellerLastPage == false) {
+        //           await controller.postComboList(controller.pageCount);
+        //         }
+        //         controller.isBestSellerLoading = false;
+        //         controller.update();
+        //       }
+        //     }
+        //   });
+        // }
       },
       builder: (controller) {
         return Scaffold(
@@ -898,63 +899,22 @@ class ViewAllProductScreen extends StatelessWidget {
                                   itemCount: controller.productList.length,
                                   scrollDirection: Axis.vertical,
                                   itemBuilder: (context, index) {
-                                    var item = controller.productList[index];
                                     return InkWell(
                                       onTap: () {
                                         // RouteManagement.goToProductDetailScreen(
                                         //     item.id ?? "", "Best Seller");
                                       },
-                                      child: ProductWidget(
-                                        isRightPadding: false,
-                                        onTapFavorite: () {
-                                          if (Utility.isLoginOrNot()) {
-                                            controller.postWishListAddRemove(
-                                                item.id ?? "");
-                                          } else {
-                                            RouteManagement.goToLoginScreen();
-                                          }
-                                        },
-                                        productImage:
-                                            item.productId?.bannerImage ?? "",
-                                        productName: controller.language ==
-                                                "hindi"
-                                            ? item.productId?.hiProductName ??
-                                                ""
-                                            : controller.language == "marathi"
-                                                ? (item.productId
-                                                        ?.mrProductName ??
-                                                    "")
-                                                : controller.language ==
-                                                        "gujarati"
-                                                    ? item.productId
-                                                            ?.guProductName ??
-                                                        ""
-                                                    : item.productId
-                                                            ?.enProductName ??
-                                                        "",
-                                        productSize:
-                                            item.sizeId?.sizeName ?? "",
-                                        productPrice:
-                                            item.inrGrossAmount != null
-                                                ? item.perpcsInrGrossamount
-                                                        ?.toDouble() ??
-                                                    0
-                                                : item.perpcsUsdGrossamount
-                                                        ?.toDouble() ??
-                                                    0,
-                                        productPriceDiscount: item.inrPrice !=
-                                                null
-                                            ? item.perpcsInrPrice?.toDouble() ??
-                                                0
-                                            : item.perpcsUsdPrice?.toDouble() ??
-                                                0,
-                                        productRating:
-                                            item.averageRating?.toDouble() ?? 0,
-                                        isWishlist: item.inWishlist ?? false,
-                                        customerReview:
-                                            item.customerreview ?? 0,
-                                        isCombo:
-                                            item.productId?.iscombo ?? false,
+                                      child: CustomProductView(
+                                        productName: 'productName',
+                                        imageUrl:
+                                            'assets/images/Mask group.png',
+                                        categoryName: 'categoryName',
+                                        productGrossAmount: '230',
+                                        productPrice: '250',
+                                        productRatting: '2.4',
+                                        inWishList: false,
+                                        onTap: () {},
+                                        addFavorite: () {},
                                       ),
                                     );
                                   },
@@ -965,7 +925,7 @@ class ViewAllProductScreen extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     SvgPicture.asset(
-                                      AssetConstants.ic_filter_empty,
+                                      'AssetConstants.ic_filter_empty',
                                     ),
                                     Dimens.boxHeight10,
                                     Text(
