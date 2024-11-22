@@ -10,8 +10,6 @@ class HomeController extends GetxController {
 
   int itemCounter = 0;
 
-  
-
   onIncrement() {
     itemCounter++;
     update();
@@ -23,4 +21,24 @@ class HomeController extends GetxController {
     }
     update();
   }
+
+  /// >>>>>>>>>>>>>> For view all Screen <<<<<<<<<<<<<<<<<<<< ///
+
+  String productType = "";
+  int radioValue = 0;
+  String radioSortValue = "DLTH";
+  bool isLoading = true;
+  List<String> filterType = [
+    'price'.tr,
+    'customer_rating'.tr,
+  ];
+  int filterValue = 0;
+  double minValue = 2000;
+  double maxValue = 2000;
+  double startValue = 100;
+  double endValue = 2000;
+  int filterRating = 5;
+  bool isFilter = false;
+  List productList = [];
+  final ScrollController scrollBestSellerController = ScrollController();
 }

@@ -229,6 +229,7 @@ abstract class Dimens {
   static double pointEightStatic = 0.8;
   static double oneStatic = 1.0;
   static double hundredFourtyFive = 145.sp;
+  static double twoHundredSixty = 260;
 
   /// Get the height with the percent value of the screen height.
   static double percentHeight(double percentValue) => percentValue.sh;
@@ -1854,6 +1855,7 @@ abstract class Dimens {
   static SizedBox boxHeight104 = SizedBox(height: hundredFour);
   static SizedBox boxHeight113 = SizedBox(height: hundredThirteen);
   static SizedBox boxHeight200 = SizedBox(height: twoHundred);
+  static SizedBox boxWidth23 = SizedBox(width: twentyThree);
 
   static SizedBox box0 = const SizedBox.shrink();
 }

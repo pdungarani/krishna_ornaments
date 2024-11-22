@@ -21,6 +21,60 @@ abstract class Styles {
     fontSize: Dimens.fourteen,
   );
 
+  static TextStyle txtBlackColorW70018 = GoogleFonts.outfit(
+    color: ColorsValue.txtBlackColor,
+    fontSize: Dimens.eighteen,
+    fontWeight: FontWeight.w700,
+  );
+
+  static TextStyle appColorW50012 = GoogleFonts.outfit(
+    color: ColorsValue.appColor,
+    fontSize: Dimens.twelve,
+    fontWeight: FontWeight.w500,
+  );
+
+  static TextStyle txtBlackColorW60014 = GoogleFonts.outfit(
+    color: ColorsValue.txtBlackColor,
+    fontSize: Dimens.fourteen,
+    fontWeight: FontWeight.w600,
+  );
+
+  static TextStyle whiteColorW60012 = GoogleFonts.outfit(
+    color: ColorsValue.whiteColor,
+    fontSize: Dimens.twelve,
+    fontWeight: FontWeight.w600,
+  );
+
+  static TextStyle whiteColorW80016 = GoogleFonts.outfit(
+    color: ColorsValue.whiteColor,
+    fontSize: Dimens.sixteen,
+    fontWeight: FontWeight.w800,
+  );
+
+  static TextStyle txtBlackColorW60016 = GoogleFonts.outfit(
+    color: ColorsValue.txtBlackColor,
+    fontSize: Dimens.sixteen,
+    fontWeight: FontWeight.w600,
+  );
+
+  static TextStyle txtBlackColorW70014 = GoogleFonts.outfit(
+    color: ColorsValue.txtBlackColor,
+    fontSize: Dimens.fourteen,
+    fontWeight: FontWeight.w700,
+  );
+
+  static TextStyle txtBlackColorW50014 = GoogleFonts.outfit(
+    color: ColorsValue.txtBlackColor,
+    fontSize: Dimens.fourteen,
+    fontWeight: FontWeight.w500,
+  );
+
+  static TextStyle black010101W40014 = GoogleFonts.outfit(
+    color: ColorsValue.black010101,
+    fontSize: Dimens.fourteen,
+    fontWeight: FontWeight.w400,
+  );
+
   static TextStyle black60016 = GoogleFonts.montserrat(
     color: ColorsValue.blackColor,
     fontWeight: FontWeight.w600,
