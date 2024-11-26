@@ -1,7 +1,4 @@
-import 'package:krishna_ornaments/data/data.dart';
-import 'package:krishna_ornaments/domain/models/login_model.dart';
-import 'package:krishna_ornaments/domain/models/register_model.dart';
-import 'package:krishna_ornaments/domain/usecases/usecases.dart';
+import 'package:krishna_ornaments/domain/domain.dart';
 
 class LoginPresenter {
   LoginPresenter(this.authUseCases);
@@ -18,6 +15,15 @@ class LoginPresenter {
         mobile: mobile,
         password: password,
         fcm: fcm,
+        isLoading: isLoading,
+      );
+
+  Future<ForgotPassModel?> forgotPass({
+    bool isLoading = false,
+    required String email,
+  }) async =>
+      await authUseCases.forgotPass(
+        email: email,
         isLoading: isLoading,
       );
 

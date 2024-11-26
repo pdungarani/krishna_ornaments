@@ -17,6 +17,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:intl/intl.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/domain/models/response_model.dart';
+import 'package:krishna_ornaments/domain/repositories/repositories.dart';
 import 'package:logger/logger.dart';
 import 'package:lottie/lottie.dart';
 import 'package:path_provider/path_provider.dart';
@@ -38,8 +39,8 @@ abstract class Utility {
     };
     if (isDefaultAuthorizationKeyAdd) {
       header.addAll({
-        // 'Authorization':
-        //     'Token ${Get.find<Repository>().getStringValue(LocalKey.isDefaultAuthorizationKeyAdd)}',
+        'Authorization':
+            'Token ${Get.find<Repository>().getStringValue(LocalKeys.authToken)}',
       });
     }
 

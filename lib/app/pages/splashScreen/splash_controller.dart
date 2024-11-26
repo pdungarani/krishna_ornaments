@@ -1,6 +1,7 @@
+import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/navigators/navigators.dart';
-import 'package:get/get.dart';
+import 'package:krishna_ornaments/domain/domain.dart';
 
 class SplashController extends GetxController {
   SplashController(this.splashPresenter);
@@ -12,7 +13,13 @@ class SplashController extends GetxController {
     super.onInit();
     Future.delayed(const Duration(seconds: 2)).then(
       (value) {
-        RouteManagement.goToLoginView();
+        final result =
+            Get.find<Repository>().getStringValue(LocalKeys.authToken).isEmpty;
+        if (result) {
+          RouteManagement.goToLoginView();
+        } else {
+          RouteManagement.goToBottomBarView();
+        }
       },
     );
   }

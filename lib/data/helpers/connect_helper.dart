@@ -9,7 +9,6 @@ import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/data/data.dart';
 import 'package:krishna_ornaments/data/helpers/end_points.dart';
 import 'package:krishna_ornaments/domain/domain.dart';
-import 'package:krishna_ornaments/domain/models/response_model.dart';
 
 /// The helper class which will connect to the world to get the data.
 class ConnectHelper {
@@ -86,7 +85,7 @@ class ConnectHelper {
     required String fcm,
   }) async {
     var data = {
-      "mobile": mobile,
+      "username": mobile,
       "password": password,
       "fcm": fcm,
     };
@@ -94,6 +93,36 @@ class ConnectHelper {
       EndPoints.login,
       Request.post,
       data,
+      isLoading,
+      Utility.commonHeader(),
+    );
+    return response;
+  }
+
+  Future<ResponseModel> forgotPass({
+    bool isLoading = false,
+    required String email,
+  }) async {
+    var data = {
+      "email": email,
+    };
+    var response = await apiWrapper.makeRequest(
+      EndPoints.forgotpass,
+      Request.post,
+      data,
+      isLoading,
+      Utility.commonHeader(),
+    );
+    return response;
+  }
+
+  Future<ResponseModel> getProfile({
+    bool isLoading = false,
+  }) async {
+    var response = await apiWrapper.makeRequest(
+      EndPoints.getProfile,
+      Request.get,
+      null,
       isLoading,
       Utility.commonHeader(),
     );

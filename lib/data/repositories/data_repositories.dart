@@ -78,6 +78,22 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading,
       );
 
+  Future<ResponseModel> forgotPass({
+    bool isLoading = false,
+    required String email,
+  }) async =>
+      await connectHelper.forgotPass(
+        email: email,
+        isLoading: isLoading,
+      );
+
+  Future<ResponseModel> getProfile({
+    bool isLoading = false,
+  }) async =>
+      await connectHelper.getProfile(
+        isLoading: isLoading,
+      );
+
   Future<ResponseModel> registerApi({
     bool isLoading = false,
     required String name,

@@ -5,7 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/navigators/routes_management.dart';
-import 'package:krishna_ornaments/data/helpers/helpers.dart';
 import 'package:krishna_ornaments/domain/models/login_model.dart';
 import 'package:krishna_ornaments/domain/repositories/repositories.dart';
 
@@ -25,11 +24,11 @@ class LoginController extends GetxController {
 
   Future<void> loginApi({
     required String emailController,
-    required String mobileController,
+    required String passwordController,
   }) async {
     var response = await loginPresenter.loginApi(
       mobile: emailController,
-      password: mobileController,
+      password: passwordController,
       fcm: '',
       isLoading: true,
     );
@@ -74,6 +73,25 @@ class LoginController extends GetxController {
       update();
     } else {
       Utility.errorMessage(jsonDecode(response?.message ?? ""));
+    }
+  }
+
+  ///// =========== >>>>> Signup Screen <<<<< =========== /////
+
+  TextEditingController forgotEmailController = TextEditingController();
+  GlobalKey<FormState> forgotPassFormkey = GlobalKey<FormState>();
+
+  Future<void> forgotPass() async {
+    var response = await loginPresenter.forgotPass(
+      email: forgotEmailController.text,
+      isLoading: true,
+    );
+
+    if (response?.data != null) {
+      Get.snackbar('Forgot PassWord', response!.message.toString());
+      update();
+    } else {
+      Utility.errorMessage('Oops something went wrong');
     }
   }
 }
