@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -142,9 +140,9 @@ class _SignupScreenState extends State<SignupScreen> {
                       height: Dimens.fourtyFive,
                       text: 'Sign Up',
                       onTap: () {
-                        if (controller.signUpFormkey.currentState!.validate()) {
-                          log('signUp');
-                        }
+                        // if (controller.signUpFormkey.currentState!.validate()) {
+                        controller.registerApi();
+                        // }
                       },
                     )
                   ],

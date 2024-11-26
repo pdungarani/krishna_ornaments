@@ -1,13 +1,13 @@
-import 'package:krishna_ornaments/app/app.dart';
-import 'package:krishna_ornaments/app/navigators/navigators.dart';
-import 'package:krishna_ornaments/data/data.dart';
-import 'package:krishna_ornaments/device/device.dart';
-import 'package:krishna_ornaments/domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:krishna_ornaments/app/app.dart';
+import 'package:krishna_ornaments/app/navigators/navigators.dart';
+import 'package:krishna_ornaments/data/data.dart';
+import 'package:krishna_ornaments/device/device.dart';
+import 'package:krishna_ornaments/domain/domain.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -78,7 +78,7 @@ class MyApp extends StatelessWidget {
         darkTheme: darkThemeData(context),
         themeMode: ThemeMode.light,
         getPages: AppPages.pages,
-        initialRoute: Routes.bottomBarScreen,
+        initialRoute: Routes.splashScreen,
         translations: TranslationsFile(),
         enableLog: true,
       ),

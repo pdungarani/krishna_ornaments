@@ -1,9 +1,10 @@
 import 'dart:async';
 
+import 'package:krishna_ornaments/app/utils/utils.dart';
 import 'package:krishna_ornaments/data/data.dart';
 import 'package:krishna_ornaments/device/device.dart';
-
-
+import 'package:krishna_ornaments/domain/models/login_model.dart';
+import 'package:krishna_ornaments/domain/models/register_model.dart';
 
 /// The main repository which will get the data from [DeviceRepository] or the
 /// [DataRepository].
@@ -138,6 +139,70 @@ class Repository {
       _deviceRepository.deleteAllSecuredValues();
     } catch (_) {
       _dataRepository.deleteAllSecuredValues();
+    }
+  }
+
+  Future<LoginModel?> loginApi({
+    bool isLoading = false,
+    required String mobile,
+    required String password,
+    required String fcm,
+  }) async {
+    try {
+      var response = await _dataRepository.loginApi(
+        mobile: mobile,
+        password: password,
+        fcm: fcm,
+        isLoading: isLoading,
+      );
+      var loginModel = loginModelFromJson(response.data);
+      if (loginModel.data != null) {
+        return loginModel;
+      } else {
+        Utility.errorMessage(loginModel.message.toString());
+        return null;
+      }
+    } catch (_) {
+      Utility.closeDialog();
+      UnimplementedError();
+      return null;
+    }
+  }
+
+  Future<RegisterModel?> registerApi({
+    bool isLoading = false,
+    required String city,
+    required String countryCode,
+    required String mobile,
+    required CountryWiseContact countryWiseContact,
+    required String password,
+    required String name,
+    required String email,
+    required String companyname,
+  }) async {
+    try {
+      var response = await _dataRepository.registerApi(
+        city: city,
+        countryCode: countryCode,
+        mobile: mobile,
+        countryWiseContact: countryWiseContact,
+        password: password,
+        name: name,
+        email: email,
+        companyname: companyname,
+        isLoading: isLoading,
+      );
+      var registerModel = registerModelFromJson(response.data);
+      if (registerModel.data != null) {
+        return registerModel;
+      } else {
+        Utility.errorMessage(registerModel.message.toString());
+        return null;
+      }
+    } catch (_) {
+      Utility.closeDialog();
+      UnimplementedError();
+      return null;
     }
   }
 

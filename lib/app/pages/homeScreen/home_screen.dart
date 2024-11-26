@@ -1,7 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
-import 'package:flutter/material.dart';
 import 'package:krishna_ornaments/app/widgets/custom_product.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -242,7 +242,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 Dimens.boxHeight10,
                 SizedBox(
-                  height: 287,
+                  height: 290,
                   child: ListView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,

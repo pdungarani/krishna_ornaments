@@ -1,4 +1,5 @@
 import 'package:krishna_ornaments/data/data.dart';
+import 'package:krishna_ornaments/domain/models/response_model.dart';
 import 'package:krishna_ornaments/domain/repositories/repositories.dart';
 
 /// Repositories (retrieve data, heavy processing etc..)
@@ -63,4 +64,39 @@ class DataRepository extends DomainRepository {
   /// API to get the IP of the user
   @override
   Future<String> getIp() async => await connectHelper.getIp();
+
+  Future<ResponseModel> loginApi({
+    bool isLoading = false,
+    required String mobile,
+    required String password,
+    required String fcm,
+  }) async =>
+      await connectHelper.loginApi(
+        mobile: mobile,
+        password: password,
+        fcm: fcm,
+        isLoading: isLoading,
+      );
+
+  Future<ResponseModel> registerApi({
+    bool isLoading = false,
+    required String city,
+    required String countryCode,
+    required String mobile,
+    required CountryWiseContact countryWiseContact,
+    required String password,
+    required String name,
+    required String email,
+    required String companyname,
+  }) async =>
+      await connectHelper.registerApi(
+        city: city,
+        countryCode: countryCode,
+        mobile: mobile,
+        countryWiseContact: countryWiseContact,
+        password: password,
+        name: name,
+        email: email,
+        companyname: companyname,
+      );
 }

@@ -3,19 +3,19 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+import 'package:http_parser/src/media_type.dart' as media_type;
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/data/data.dart';
 import 'package:krishna_ornaments/device/device.dart';
 import 'package:krishna_ornaments/domain/domain.dart';
-import 'package:get/get.dart';
-import 'package:http_parser/src/media_type.dart' as media_type;
-import 'package:http/http.dart' as http;
 
 import '../../domain/models/response_model.dart';
 
 /// API WRAPPER to call all the APIs and handle the error status codes
 class ApiWrapper {
-  final String _baseUrl = 'https://devapi.eventopackage.com/organizer/';
+  final String _baseUrl = 'http://192.168.1.14:3000/';
   static String imageUrl = 'https://eventopackage.s3.ap-south-1.amazonaws.com/';
 
   /// Method to make all the requests inside the app like GET, POST, PUT, Delete

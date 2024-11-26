@@ -3,9 +3,12 @@ import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/data/data.dart';
-import 'package:get/get.dart';
+import 'package:krishna_ornaments/data/helpers/end_points.dart';
+import 'package:krishna_ornaments/domain/domain.dart';
+import 'package:krishna_ornaments/domain/models/response_model.dart';
 
 /// The helper class which will connect to the world to get the data.
 class ConnectHelper {
@@ -74,4 +77,73 @@ class ConnectHelper {
     }
     return '0.0.0.0';
   }
+
+  Future<ResponseModel> loginApi({
+    bool isLoading = false,
+    required String mobile,
+    required String password,
+    required String fcm,
+  }) async {
+    var data = {
+      "mobile": mobile,
+      "password": password,
+      "fcm": fcm,
+    };
+    var response = await apiWrapper.makeRequest(
+      EndPoints.login,
+      Request.post,
+      data,
+      isLoading,
+      Utility.commonHeader(),
+    );
+    return response;
+  }
+
+  Future<ResponseModel> registerApi({
+    bool isLoading = false,
+    required String city,
+    required String countryCode,
+    required String mobile,
+    required CountryWiseContact countryWiseContact,
+    required String password,
+    required String name,
+    required String email,
+    required String companyname,
+  }) async {
+    var data = {
+      "city": city,
+      "countryCode": countryCode,
+      "mobile": mobile,
+      "countryWiseContact": countryWiseContact,
+      "password": password,
+      "name": name,
+      "email": email,
+      "companyname": companyname,
+    };
+    var response = await apiWrapper.makeRequest(
+      EndPoints.register,
+      Request.post,
+      data,
+      isLoading,
+      Utility.commonHeader(),
+    );
+    return response;
+  }
+}
+
+class CountryWiseContact {
+  CountryWiseContact({
+    required this.number,
+    required this.internationalNumber,
+    required this.nationalNumber,
+    required this.e164Number,
+    required this.countryCode,
+    required this.dialCode,
+  });
+  final String number;
+  final String internationalNumber;
+  final String nationalNumber;
+  final String e164Number;
+  final String countryCode;
+  final String dialCode;
 }

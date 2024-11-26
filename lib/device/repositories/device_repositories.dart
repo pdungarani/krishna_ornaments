@@ -1,10 +1,12 @@
 // coverage:ignore-file
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:krishna_ornaments/app/utils/strings/strings.dart';
+import 'package:krishna_ornaments/app/utils/utils.dart';
 import 'package:krishna_ornaments/data/data.dart';
 import 'package:krishna_ornaments/device/device.dart';
 import 'package:krishna_ornaments/domain/domain.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:krishna_ornaments/domain/models/login_model.dart';
 
 /// Repositories that communicate with the platform e.g. GPS
 class DeviceRepository extends DomainRepository {
@@ -52,7 +54,7 @@ class DeviceRepository extends DomainRepository {
 
   /// store the data
   @override
-  void saveValue(dynamic key, dynamic value) {
+  void saveValue(dynamic key, dynamic value) {  
     _getBox().put(key, value);
   }
 
