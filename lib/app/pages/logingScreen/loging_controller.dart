@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -54,28 +56,24 @@ class LoginController extends GetxController {
   TextEditingController newPasswordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
 
+  bool isEditValid = false;
+  var dailEditcode = '+91';
+
   Future<void> registerApi() async {
     var response = await loginPresenter.registerApi(
       city: cityController.text,
-      countryCode: '',
+      countryCode: dailEditcode,
       mobile: mobileNumberController.text,
-      countryWiseContact: CountryWiseContact(
-        number: 'number',
-        internationalNumber: 'internationalNumber',
-        nationalNumber: 'nationalNumber',
-        e164Number: 'e164Number',
-        countryCode: 'countryCode',
-        dialCode: 'dialCode',
-      ),
-      password: passwordController.text,
+      password: confirmPasswordController.text,
       name: nameController.text,
       email: emailController.text,
       companyname: compleyNameController.text,
       isLoading: true,
     );
     if (response?.data != null) {
-      Utility.showDialog(response?.message ?? '');
       update();
+    } else {
+      Utility.errorMessage(jsonDecode(response?.message ?? ""));
     }
   }
 }

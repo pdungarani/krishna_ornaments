@@ -79,7 +79,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         Dimens.boxHeight5,
         TextFormField(
           controller: widget.controller,
-          cursorColor: ColorsValue.greyColor,
+          cursorColor: ColorsValue.appColor,
           obscureText: widget.obscure,
           readOnly: widget.readOnly,
           onChanged: widget.onChanged,
@@ -127,7 +127,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               borderSide: BorderSide(
                 width: Dimens.two,
                 style: BorderStyle.solid,
-                color: ColorsValue.redColor.withOpacity(0.5),
+                color: ColorsValue.textfildBorder,
               ),
               borderRadius: BorderRadius.circular(Dimens.six),
             ),
@@ -135,14 +135,14 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               borderSide: BorderSide(
                 width: Dimens.two,
                 style: BorderStyle.solid,
-                color: ColorsValue.redColor.withOpacity(0.5),
+                color: ColorsValue.textfildBorder,
               ),
               borderRadius: BorderRadius.circular(Dimens.six),
             ),
             fillColor: widget.fillColor ?? ColorsValue.colorEEEAEA,
             filled: true,
             hintStyle: widget.hintTextStyle ?? Styles.color9C9C9C40016,
-            errorStyle: Styles.txtRedBold12,
+            errorStyle: Styles.txtRedW50010,
             hintText: widget.hintText,
           ),
         )

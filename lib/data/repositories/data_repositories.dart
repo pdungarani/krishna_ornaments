@@ -80,23 +80,21 @@ class DataRepository extends DomainRepository {
 
   Future<ResponseModel> registerApi({
     bool isLoading = false,
-    required String city,
-    required String countryCode,
-    required String mobile,
-    required CountryWiseContact countryWiseContact,
-    required String password,
     required String name,
     required String email,
     required String companyname,
+    required String city,
+    required String countryCode,
+    required String mobile,
+    required String password,
   }) async =>
       await connectHelper.registerApi(
-        city: city,
-        countryCode: countryCode,
-        mobile: mobile,
-        countryWiseContact: countryWiseContact,
-        password: password,
         name: name,
         email: email,
+        city: city,
         companyname: companyname,
+        countryCode: countryCode,
+        mobile: mobile,
+        password: password,
       );
 }

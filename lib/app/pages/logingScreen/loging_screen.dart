@@ -23,7 +23,7 @@ class LoginScreen extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: context.width,
-                    height: context.height * 0.5,
+                    height: context.height * 0.4,
                     child: SvgPicture.asset(
                       AssetConstants.loginMainView,
                       fit: BoxFit.cover,
@@ -109,9 +109,7 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: context.height / 30,
-                        ),
+                        Dimens.boxHeight40,
                         Center(
                           child: Text.rich(
                             TextSpan(

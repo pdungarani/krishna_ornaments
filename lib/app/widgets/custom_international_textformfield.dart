@@ -46,24 +46,24 @@ class CustomInternationalPhoneFild extends StatelessWidget {
             keyboardType: const TextInputType.numberWithOptions(
                 signed: false, decimal: true),
             inputBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(Dimens.six),
               borderSide:
                   const BorderSide(color: ColorsValue.textfildBorder, width: 2),
             ),
             inputDecoration: InputDecoration(
               contentPadding: Dimens.edgeInsets15,
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(Dimens.six),
                 borderSide: const BorderSide(
                     color: ColorsValue.textfildBorder, width: 2),
               ),
               disabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(Dimens.six),
                 borderSide: const BorderSide(
                     color: ColorsValue.textfildBorder, width: 2),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(Dimens.six),
                 borderSide: const BorderSide(
                     color: ColorsValue.textfildBorder, width: 2),
               ),
@@ -71,22 +71,22 @@ class CustomInternationalPhoneFild extends StatelessWidget {
                 borderSide: BorderSide(
                   width: Dimens.two,
                   style: BorderStyle.solid,
-                  color: ColorsValue.redColor.withOpacity(0.5),
+                  color: ColorsValue.textfildBorder,
                 ),
-                borderRadius: BorderRadius.circular(Dimens.twelve),
+                borderRadius: BorderRadius.circular(Dimens.six),
               ),
               errorBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   width: Dimens.two,
                   style: BorderStyle.solid,
-                  color: ColorsValue.redColor.withOpacity(0.5),
+                  color: ColorsValue.textFieldBorderColor,
                 ),
-                borderRadius: BorderRadius.circular(Dimens.twelve),
+                borderRadius: BorderRadius.circular(Dimens.six),
               ),
               hintText: hintText,
               hintStyle: Styles.greyAAA40014,
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(Dimens.six),
                 borderSide: const BorderSide(
                     color: ColorsValue.textfildBorder, width: 2),
               ),

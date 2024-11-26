@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/data/data.dart';
 import 'package:krishna_ornaments/data/helpers/end_points.dart';
@@ -101,24 +102,30 @@ class ConnectHelper {
 
   Future<ResponseModel> registerApi({
     bool isLoading = false,
-    required String city,
-    required String countryCode,
-    required String mobile,
-    required CountryWiseContact countryWiseContact,
-    required String password,
     required String name,
     required String email,
     required String companyname,
+    required String city,
+    required String countryCode,
+    required String mobile,
+    required String password,
   }) async {
     var data = {
-      "city": city,
-      "countryCode": countryCode,
-      "mobile": mobile,
-      "countryWiseContact": countryWiseContact,
-      "password": password,
       "name": name,
       "email": email,
       "companyname": companyname,
+      "city": city,
+      "countryCode": countryCode,
+      "mobile": mobile,
+      "country_wise_contact": {
+        "number": mobile.isEmpty ? "" : "0${mobile}",
+        "internationalNumber": "${countryCode} ${mobile}",
+        "nationalNumber": "0${mobile}",
+        "e164Number": countryCode + mobile,
+        "countryCode": PhoneNumber.getISO2CodeByPrefix(countryCode),
+        "dialCode": countryCode
+      },
+      "password": password,
     };
     var response = await apiWrapper.makeRequest(
       EndPoints.register,
