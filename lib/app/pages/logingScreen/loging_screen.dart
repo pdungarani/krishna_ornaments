@@ -78,16 +78,10 @@ class LoginScreen extends StatelessWidget {
                                 controller.loginApi(
                                   emailController:
                                       controller.emailController.text,
-                                  mobileController:
-                                      controller.mobileNumberController.text,
+                                  passwordController:
+                                      controller.passwordController.text,
                                 );
-                            }
-
-                            // onTap: () {
-                            //   //  {
-                            //   // }
-                            // },
-                            ),
+                            }),
                         Dimens.boxHeight10,
                         Center(
                           child: Text.rich(

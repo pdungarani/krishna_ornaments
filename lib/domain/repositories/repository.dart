@@ -3,8 +3,7 @@ import 'dart:async';
 import 'package:krishna_ornaments/app/utils/utils.dart';
 import 'package:krishna_ornaments/data/data.dart';
 import 'package:krishna_ornaments/device/device.dart';
-import 'package:krishna_ornaments/domain/models/login_model.dart';
-import 'package:krishna_ornaments/domain/models/register_model.dart';
+import 'package:krishna_ornaments/domain/domain.dart';
 
 /// The main repository which will get the data from [DeviceRepository] or the
 /// [DataRepository].
@@ -160,6 +159,50 @@ class Repository {
         return loginModel;
       } else {
         Utility.errorMessage(loginModel.message.toString());
+        return null;
+      }
+    } catch (_) {
+      Utility.closeDialog();
+      UnimplementedError();
+      return null;
+    }
+  }
+
+  Future<ForgotPassModel?> forgotPass({
+    bool isLoading = false,
+    required String email,
+  }) async {
+    try {
+      var response = await _dataRepository.forgotPass(
+        email: email,
+        isLoading: isLoading,
+      );
+      var forgotPassModel = forgotPassModelFromJson(response.data);
+      if (forgotPassModel.data != null) {
+        return forgotPassModel;
+      } else {
+        Utility.errorMessage(forgotPassModel.message.toString());
+        return null;
+      }
+    } catch (_) {
+      Utility.closeDialog();
+      UnimplementedError();
+      return null;
+    }
+  }
+
+  Future<GetProfileModel?> getProfile({
+    bool isLoading = false,
+  }) async {
+    try {
+      var response = await _dataRepository.getProfile(
+        isLoading: isLoading,
+      );
+      var profileModel = getProfileModelFromJson(response.data);
+      if (profileModel.data != null) {
+        return profileModel;
+      } else {
+        Utility.errorMessage(profileModel.message.toString());
         return null;
       }
     } catch (_) {

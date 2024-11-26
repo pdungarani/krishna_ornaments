@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
-import 'package:flutter/material.dart';
 import 'package:krishna_ornaments/app/navigators/navigators.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -11,6 +11,10 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProfileController>(
+      initState: (state) {
+        var controller = Get.find<ProfileController>();
+        controller.getProfile();
+      },
       builder: (controller) => Scaffold(
         backgroundColor: ColorsValue.primaryColor,
         body: ListView(
@@ -35,12 +39,12 @@ class ProfileScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text(
-                            "User",
+                            controller.getProfileModel?.id ?? ' - ',
                             style: Styles.blackW80018,
                           ),
                           Dimens.boxHeight5,
                           Text(
-                            " email ",
+                            controller.getProfileModel?.email ?? 'email',
                             style: Styles.color21212170014,
                           ),
                           Dimens.boxHeight25
@@ -140,7 +144,8 @@ class ProfileScreen extends StatelessWidget {
                           AssetConstants.ic_call,
                         ),
                         title: Text(
-                          "+91 1234567890",
+                          controller.getProfileModel?.mobile ??
+                              "+91 1234567890",
                           style: Styles.color21212160014,
                         ),
                       ),

@@ -10,4 +10,11 @@ abstract class StringConstants {
   static String video = 'VIDEO';
   static String sign_in = 'Sign In';
   static String forgot_password = 'Forgot Password';
+  static String enter_email_set_pass =
+      "Enter your email and we'll send you your old password";
+  static String email = "Email";
+  static String enter_email = "Enter Your Email";
+  static String please_enter_valid_email = "Please enter valid email";
+  static String recover_password = "Recover Password";
+  
 }

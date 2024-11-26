@@ -1,7 +1,4 @@
-import 'package:krishna_ornaments/data/data.dart';
-import 'package:krishna_ornaments/domain/models/login_model.dart';
-import 'package:krishna_ornaments/domain/models/register_model.dart';
-import 'package:krishna_ornaments/domain/repositories/repositories.dart';
+import 'package:krishna_ornaments/domain/domain.dart';
 
 /// Use case for getting the data from the API
 class AuthUseCases {
@@ -19,6 +16,15 @@ class AuthUseCases {
         mobile: mobile,
         password: password,
         fcm: fcm,
+        isLoading: isLoading,
+      );
+
+  Future<ForgotPassModel?> forgotPass({
+    bool isLoading = false,
+    required String email,
+  }) async =>
+      await repository.forgotPass(
+        email: email,
         isLoading: isLoading,
       );
 
