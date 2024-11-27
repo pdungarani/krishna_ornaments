@@ -5,4 +5,14 @@ class RepairUsecases {
 
   final Repository repository;
 
+  Future<RepairOrderHistoryModel?> repairOrderList({
+    bool isLoading = false,
+    required int page,
+    required int limit,
+  }) async =>
+      await repository.repairOrderList(
+        page: page,
+        limit: limit,
+        isLoading: isLoading,
+      );
 }

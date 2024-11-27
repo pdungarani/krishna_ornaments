@@ -4,6 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/navigators/navigators.dart';
+import 'package:krishna_ornaments/data/data.dart';
+import 'package:krishna_ornaments/device/device.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -54,7 +56,9 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   Center(
                     child: InkWell(
-                      onTap: () async {},
+                      onTap: () async {
+                        controller.selectProfilePic();
+                      },
                       child: SizedBox(
                         height: Dimens.hundredTen,
                         width: Dimens.hundredTen,
@@ -80,7 +84,9 @@ class ProfileScreen extends StatelessWidget {
                                 child: CachedNetworkImage(
                                   height: Dimens.hundredTen,
                                   width: Dimens.hundredTen,
-                                  imageUrl: "",
+                                  imageUrl: ApiWrapper.imageUrl +
+                                      (controller.getProfileModel?.profilePic ??
+                                          ""),
                                   fit: BoxFit.cover,
                                   placeholder: (context, url) {
                                     return SvgPicture.asset(
@@ -325,7 +331,7 @@ class ProfileScreen extends StatelessWidget {
                                             Text(
                                               "Are you sure you want to\nLogout?"
                                                   .tr,
-                                              style: Styles.black221W70010,
+                                              style: Styles.black221W70018,
                                               textAlign: TextAlign.center,
                                             ),
                                             Dimens.boxHeight20,
@@ -358,7 +364,8 @@ class ProfileScreen extends StatelessWidget {
                                                       "cancle".tr.toUpperCase(),
                                                       textAlign:
                                                           TextAlign.center,
-                                                      style: Styles.whiteW60016,
+                                                      style: Styles
+                                                          .txtBlackColorW60016,
                                                     ),
                                                   ),
                                                 ),
@@ -380,7 +387,13 @@ class ProfileScreen extends StatelessWidget {
                                                                     Dimens.six),
                                                       ),
                                                     ),
-                                                    onPressed: () {},
+                                                    onPressed: () {
+                                                      Get.find<
+                                                              DeviceRepository>()
+                                                          .deleteBox();
+                                                      RouteManagement
+                                                          .goToLoginView();
+                                                    },
                                                     child: Text(
                                                       "logout".tr.toUpperCase(),
                                                       textAlign:

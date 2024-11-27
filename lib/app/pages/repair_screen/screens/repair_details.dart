@@ -10,14 +10,13 @@ class RepairDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<RepairController>(initState: (state) {
-      var controller = Get.find<RepairController>();
-      controller.descriptionController.clear();
-    }, builder: (controller) {
+    return GetBuilder<RepairController>( builder: (controller) {
       return Scaffold(
         backgroundColor: ColorsValue.appBg,
         appBar: AppBarWidget(
-          onTapBack: () {},
+          onTapBack: () {
+            Get.back();
+          },
           title: 'repair_order'.tr,
         ),
         bottomNavigationBar: Padding(

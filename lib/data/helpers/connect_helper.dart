@@ -4,11 +4,13 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+import 'package:http_parser/src/media_type.dart' as mediaType;
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/data/data.dart';
 import 'package:krishna_ornaments/data/helpers/end_points.dart';
 import 'package:krishna_ornaments/domain/domain.dart';
+import 'package:mime/mime.dart';
 
 /// The helper class which will connect to the world to get the data.
 class ConnectHelper {
@@ -165,21 +167,57 @@ class ConnectHelper {
     );
     return response;
   }
-}
 
-class CountryWiseContact {
-  CountryWiseContact({
-    required this.number,
-    required this.internationalNumber,
-    required this.nationalNumber,
-    required this.e164Number,
-    required this.countryCode,
-    required this.dialCode,
-  });
-  final String number;
-  final String internationalNumber;
-  final String nationalNumber;
-  final String e164Number;
-  final String countryCode;
-  final String dialCode;
+  Future<ResponseModel> repairOrderList({
+    bool isLoading = false,
+    required int page,
+    required int limit,
+  }) async {
+    var data = {
+      "page": page,
+      "limit": limit,
+    };
+    var response = await apiWrapper.makeRequest(
+      EndPoints.repairOrderList,
+      Request.post,
+      data,
+      isLoading,
+      Utility.commonHeader(),
+    );
+    return response;
+  }
+
+  Future<ResponseModel> getOneRepairOrder({
+    bool isLoading = false,
+    required String repairingOrderId,
+  }) async {
+    var data = {
+      "repairingOrderId": repairingOrderId,
+    };
+    var response = await apiWrapper.makeRequest(
+      EndPoints.getOneRepairOrder,
+      Request.post,
+      data,
+      isLoading,
+      Utility.commonHeader(),
+    );
+    return response;
+  }
+
+  Future<ResponseModel> postUploadProfile({
+    bool isLoading = false,
+    required String filePath,
+  }) async {
+    var type = lookupMimeType(filePath)!.split('/');
+
+    var response = await apiWrapper.makeRequest(
+      EndPoints.postUploadProfile,
+      Request.awsUpload,
+      filePath,
+      isLoading,
+      Utility.commonHeader(),
+      mediaType: mediaType.MediaType(type[0], type[1]),
+    );
+    return response;
+  }
 }

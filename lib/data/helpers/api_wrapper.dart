@@ -11,12 +11,10 @@ import 'package:krishna_ornaments/data/data.dart';
 import 'package:krishna_ornaments/device/device.dart';
 import 'package:krishna_ornaments/domain/domain.dart';
 
-import '../../domain/models/response_model.dart';
-
 /// API WRAPPER to call all the APIs and handle the error status codes
 class ApiWrapper {
   final String _baseUrl = 'https://krishna.areumjewels.com/';
-  static String imageUrl = 'https://eventopackage.s3.ap-south-1.amazonaws.com/';
+  static String imageUrl = 'https://krishna.s3.ap-south-1.amazonaws.com/';
 
   /// Method to make all the requests inside the app like GET, POST, PUT, Delete
   Future<ResponseModel> makeRequest(

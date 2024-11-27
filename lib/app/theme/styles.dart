@@ -401,6 +401,12 @@ abstract class Styles {
     color: ColorsValue.black221,
   );
 
+  static TextStyle black221W70018 = GoogleFonts.nunito(
+    fontSize: Dimens.eighteen,
+    fontWeight: FontWeight.w700,
+    color: ColorsValue.black221,
+  );
+
   static TextStyle black626262W50012 = GoogleFonts.nunito(
     fontSize: Dimens.twelve,
     fontWeight: FontWeight.w500,

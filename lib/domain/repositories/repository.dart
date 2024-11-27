@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:krishna_ornaments/app/utils/utils.dart';
 import 'package:krishna_ornaments/data/data.dart';
@@ -203,6 +204,53 @@ class Repository {
         return profileModel;
       } else {
         Utility.errorMessage(profileModel.message.toString());
+        return null;
+      }
+    } catch (_) {
+      Utility.closeDialog();
+      UnimplementedError();
+      return null;
+    }
+  }
+
+  Future<String?> postUploadProfile({
+    bool isLoading = false,
+    required String filePath,
+  }) async {
+    try {
+      var response = await _dataRepository.postUploadProfile(
+        isLoading: isLoading,
+        filePath: filePath,
+      );
+      if (response.statusCode == 200) {
+        return json.decode(response.data)['Data']['profile_pic'];
+      } else {
+        Utility.errorMessage(json.decode(response.data)['Message'].toString());
+        return null;
+      }
+    } catch (_) {
+      Utility.closeDialog();
+      UnimplementedError();
+      return null;
+    }
+  }
+
+  Future<RepairOrderHistoryModel?> repairOrderList({
+    bool isLoading = false,
+    required int page,
+    required int limit,
+  }) async {
+    try {
+      var response = await _dataRepository.repairOrderList(
+        page: page,
+        limit: limit,
+        isLoading: isLoading,
+      );
+      var repairOrderModel = repairOrderHistoryModelFromJson(response.data);
+      if (repairOrderModel.data != null) {
+        return repairOrderModel;
+      } else {
+        Utility.errorMessage(repairOrderModel.message.toString());
         return null;
       }
     } catch (_) {

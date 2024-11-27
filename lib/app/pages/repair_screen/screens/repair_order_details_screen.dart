@@ -1,12 +1,9 @@
 import 'package:another_stepper/another_stepper.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/widgets/appbar_widgets.dart';
-
-import '../../../navigators/routes_management.dart';
 
 class RepairOrderDetalisScreen extends StatelessWidget {
   const RepairOrderDetalisScreen({super.key});
@@ -15,9 +12,6 @@ class RepairOrderDetalisScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<RepairController>(initState: (state) {
       var controller = Get.find<RepairController>();
-      // controller.repairingOrderId = Get.arguments;
-      // controller.getOneRepairData != null;
-      // controller.getOneRepair();
     }, builder: (controller) {
       return Scaffold(
           backgroundColor: ColorsValue.appBg,
