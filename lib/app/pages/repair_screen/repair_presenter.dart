@@ -15,4 +15,13 @@ class RepairPresenter {
         limit: limit,
         isLoading: isLoading,
       );
+
+  Future<GetOneRepairOrderModel?> getOneRepairOrder({
+    bool isLoading = false,
+    required String repairingOrderId,
+  }) async =>
+      await repairUsecases.getOneRepairOrder(
+        repairingOrderId: repairingOrderId,
+        isLoading: isLoading,
+      );
 }

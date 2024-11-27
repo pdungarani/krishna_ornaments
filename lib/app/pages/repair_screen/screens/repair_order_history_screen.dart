@@ -42,7 +42,7 @@ class RepairOrderHistoryScreen extends StatelessWidget {
                 padding: Dimens.edgeInsets20_00_20_00,
                 child: InkWell(
                   onTap: () {
-                    RouteManagement.goToRepairOrderDetalisScreen("");
+                    RouteManagement.goToRepairOrderDetalisScreen(item.id ?? '');
                   },
                   child: Container(
                     margin: Dimens.edgeInsetsBottom10,

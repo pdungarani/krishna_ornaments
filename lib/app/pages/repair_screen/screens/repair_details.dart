@@ -10,7 +10,7 @@ class RepairDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<RepairController>( builder: (controller) {
+    return GetBuilder<RepairController>(builder: (controller) {
       return Scaffold(
         backgroundColor: ColorsValue.appBg,
         appBar: AppBarWidget(

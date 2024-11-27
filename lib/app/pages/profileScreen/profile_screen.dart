@@ -4,7 +4,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/navigators/navigators.dart';
-import 'package:krishna_ornaments/data/data.dart';
 import 'package:krishna_ornaments/device/device.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -84,9 +83,9 @@ class ProfileScreen extends StatelessWidget {
                                 child: CachedNetworkImage(
                                   height: Dimens.hundredTen,
                                   width: Dimens.hundredTen,
-                                  imageUrl: ApiWrapper.imageUrl +
-                                      (controller.getProfileModel?.profilePic ??
-                                          ""),
+                                  imageUrl:
+                                      controller.getProfileModel?.profilePic ??
+                                          "",
                                   fit: BoxFit.cover,
                                   placeholder: (context, url) {
                                     return SvgPicture.asset(

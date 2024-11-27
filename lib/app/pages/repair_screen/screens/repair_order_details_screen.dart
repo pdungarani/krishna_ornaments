@@ -2,6 +2,7 @@ import 'package:another_stepper/another_stepper.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/widgets/appbar_widgets.dart';
 
@@ -12,12 +13,15 @@ class RepairOrderDetalisScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<RepairController>(initState: (state) {
       var controller = Get.find<RepairController>();
+      controller.getOneRepairOrder(repairingOrderId: Get.arguments);
     }, builder: (controller) {
       return Scaffold(
           backgroundColor: ColorsValue.appBg,
           appBar: AppBarWidget(
-            onTapBack: () {},
-            title: "A1",
+            onTapBack: () {
+              Get.back();
+            },
+            title: controller.getOneRepairOrderData?.orderNumber ?? "A1",
           ),
           body: Padding(
             padding: Dimens.edgeInsets20,
@@ -46,7 +50,8 @@ class RepairOrderDetalisScreen extends StatelessWidget {
                           Dimens.five,
                         ),
                         child: CachedNetworkImage(
-                          imageUrl: "",
+                          imageUrl:
+                              controller.getOneRepairOrderData?.file ?? '',
                           fit: BoxFit.cover,
                           maxWidthDiskCache: 300,
                           maxHeightDiskCache: 300,
@@ -75,7 +80,8 @@ class RepairOrderDetalisScreen extends StatelessWidget {
                   ),
                   Dimens.boxHeight5,
                   Text(
-                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                    controller.getOneRepairOrderData?.description ??
+                        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
                     style: Styles.colorA7A7A750012,
                   ),
                   Dimens.boxHeight20,
@@ -85,7 +91,9 @@ class RepairOrderDetalisScreen extends StatelessWidget {
                   ),
                   Dimens.boxHeight5,
                   Text(
-                    "03, August, 2023",
+                    DateFormat('dd, MMM yyyy').format(
+                        controller.getOneRepairOrderData?.createdAt ??
+                            DateTime.now()),
                     style: Styles.colorA7A7A750012,
                   ),
                   Dimens.boxHeight20,
@@ -95,7 +103,8 @@ class RepairOrderDetalisScreen extends StatelessWidget {
                   ),
                   Dimens.boxHeight5,
                   Text(
-                    "11",
+                    controller.getOneRepairOrderData?.bagNumber.toString() ??
+                        '0',
                     style: Styles.colorA7A7A750012,
                   ),
                   Dimens.boxHeight30,
