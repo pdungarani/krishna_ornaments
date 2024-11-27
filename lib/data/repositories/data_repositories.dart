@@ -94,6 +94,25 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading,
       );
 
+  Future<ResponseModel> postUploadProfile({
+    bool isLoading = false,
+    required String filePath,
+  }) async =>
+      await connectHelper.postUploadProfile(
+        filePath: filePath,
+        isLoading: isLoading,
+      );
+
+  Future<ResponseModel> repairOrderList({
+    bool isLoading = false,
+    required int page,
+    required int limit,
+  }) async =>
+      await connectHelper.repairOrderList(
+        page: page,
+        limit: limit,
+      );
+
   Future<ResponseModel> registerApi({
     bool isLoading = false,
     required String name,

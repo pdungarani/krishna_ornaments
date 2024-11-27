@@ -14,7 +14,9 @@ class RepairScreen extends StatelessWidget {
       return Scaffold(
         backgroundColor: ColorsValue.appBg,
         appBar: AppBarWidget(
-          onTapBack: () {},
+          onTapBack: () {
+            Get.back();
+          },
           title: '',
           isTitle: true,
         ),
@@ -49,7 +51,7 @@ class RepairScreen extends StatelessWidget {
                     ),
                   ),
                   Dimens.boxWidth10,
-                  Expanded(
+                   Expanded(
                     child: InkWell(
                       onTap: () {
                         controller.selectedValue = 1;

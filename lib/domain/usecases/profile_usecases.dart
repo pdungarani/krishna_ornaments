@@ -11,4 +11,14 @@ class ProfileUseCases {
       await repository.getProfile(
         isLoading: isLoading,
       );
+
+  Future<String?> postUploadProfile({
+    bool isLoading = false,
+    required String filePath,
+  }) async =>
+      await repository.postUploadProfile(
+        filePath: filePath,
+        isLoading: isLoading,
+      );
+
 }

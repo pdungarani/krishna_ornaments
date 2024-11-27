@@ -15,7 +15,9 @@ class OrderScreen extends StatelessWidget {
           return Scaffold(
               backgroundColor: ColorsValue.appBg,
               appBar: AppBarWidget(
-                onTapBack: () {},
+                onTapBack: () {
+                  Get.back();
+                },
                 title: 'order_history'.tr,
               ),
               body: ListView.builder(

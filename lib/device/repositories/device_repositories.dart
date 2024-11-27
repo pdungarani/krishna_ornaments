@@ -36,7 +36,7 @@ class DeviceRepository extends DomainRepository {
   /// Delete the box
   @override
   void deleteBox() {
-    Hive.box<void>(StringConstants.appName).clear();
+    Hive.box<dynamic>(StringConstants.appName).clear();
   }
 
   /// returns stored string value

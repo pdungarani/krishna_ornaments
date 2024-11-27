@@ -27,7 +27,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
         visible: isVisible,
         child: Padding(
           padding: Dimens.edgeInsetsLeft20,
-          child: InkWell(
+          child: GestureDetector(
             onTap: onTapBack,
             child: SvgPicture.asset(
               AssetConstants.ic_back_arrow,

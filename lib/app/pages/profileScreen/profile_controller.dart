@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/domain/domain.dart';
 
@@ -20,5 +21,27 @@ class ProfileController extends GetxController {
     } else {
       Utility.errorMessage(response?.message ?? "");
     }
+  }
+
+  String? profileImage;
+  final picker = ImagePicker();
+
+  Future selectProfilePic() async {
+    final pickedFile = await picker.pickImage(
+      source: ImageSource.gallery,
+    );
+
+    if (pickedFile != null) {
+      if (Utility.getImageSizeMB(pickedFile.path) <= 5) {
+        profileImage = await profilePresenter.postUploadProfile(
+          filePath: pickedFile.path,
+          isLoading: true,
+        );
+        update();
+      } else {
+        Utility.errorMessage("max_5_mb_img_error".tr);
+      }
+    }
+    update();
   }
 }

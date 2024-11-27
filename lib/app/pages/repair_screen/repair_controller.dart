@@ -3,9 +3,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:krishna_ornaments/app/app.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/navigators/navigators.dart';
+import 'package:krishna_ornaments/domain/models/models.dart';
 
 class RepairController extends GetxController {
   RepairController(this.repairPresenter);
@@ -141,4 +143,31 @@ class RepairController extends GetxController {
   GlobalKey<FormState> sampleKey = GlobalKey<FormState>();
   TextEditingController descriptionSampleController = TextEditingController();
   int selectQuantity = 1;
+
+  PagingController<int, RepairOrderHistoryDoc> repairOrderPagingController =
+      PagingController(firstPageKey: 1);
+
+  List<RepairOrderHistoryDoc> repairOrderList = [];
+
+  Future<void> repairOrderListData(pageKey) async {
+    var response = await repairPresenter.repairOrderList(
+      page: pageKey,
+      limit: 10,
+      isLoading: true,
+    );
+    repairOrderList.clear();
+    if (pageKey == 1) {
+      repairOrderList.clear();
+    }
+    repairOrderList = response?.data?.docs ?? [];
+
+    final isLastPage = repairOrderList.length < 10;
+    if (isLastPage) {
+      repairOrderPagingController.appendLastPage(repairOrderList);
+    } else {
+      var nextPageKey = pageKey + 1;
+      repairOrderPagingController.appendPage(repairOrderList, nextPageKey);
+    }
+    update();
+  }
 }
