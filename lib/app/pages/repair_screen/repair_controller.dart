@@ -170,4 +170,22 @@ class RepairController extends GetxController {
     }
     update();
   }
+
+  GetOneRepairOrderData? getOneRepairOrderData;
+
+  Future<void> getOneRepairOrder({
+    required String repairingOrderId,
+  }) async {
+    var response = await repairPresenter.getOneRepairOrder(
+      repairingOrderId: repairingOrderId,
+      isLoading: true,
+    );
+    getOneRepairOrderData = null;
+    if (response?.data != null) {
+      getOneRepairOrderData = response?.data;
+      update();
+    } else {
+      Utility.errorMessage('Oops something went wrong');
+    }
+  }
 }

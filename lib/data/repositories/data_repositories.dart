@@ -113,6 +113,14 @@ class DataRepository extends DomainRepository {
         limit: limit,
       );
 
+  Future<ResponseModel> getOneRepairOrder({
+    bool isLoading = false,
+    required String repairingOrderId,
+  }) async =>
+      await connectHelper.getOneRepairOrder(
+        repairingOrderId: repairingOrderId,
+      );
+
   Future<ResponseModel> registerApi({
     bool isLoading = false,
     required String name,

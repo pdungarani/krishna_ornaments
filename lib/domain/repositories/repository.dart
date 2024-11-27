@@ -260,6 +260,30 @@ class Repository {
     }
   }
 
+  Future<GetOneRepairOrderModel?> getOneRepairOrder({
+    bool isLoading = false,
+    required String repairingOrderId,
+  }) async {
+    try {
+      var response = await _dataRepository.getOneRepairOrder(
+        repairingOrderId: repairingOrderId,
+        isLoading: isLoading,
+      );
+      var getOneRepairOrderModel =
+          getOneRepairOrderModelFromJson(response.data);
+      if (getOneRepairOrderModel.data != null) {
+        return getOneRepairOrderModel;
+      } else {
+        Utility.errorMessage(getOneRepairOrderModel.message.toString());
+        return null;
+      }
+    } catch (_) {
+      Utility.closeDialog();
+      UnimplementedError();
+      return null;
+    }
+  }
+
   Future<RegisterModel?> registerApi({
     bool isLoading = false,
     required String city,

@@ -15,4 +15,13 @@ class RepairUsecases {
         limit: limit,
         isLoading: isLoading,
       );
+
+  Future<GetOneRepairOrderModel?> getOneRepairOrder({
+    bool isLoading = false,
+    required String repairingOrderId,
+  }) async =>
+      await repository.getOneRepairOrder(
+        repairingOrderId: repairingOrderId,
+        isLoading: isLoading,
+      );
 }
