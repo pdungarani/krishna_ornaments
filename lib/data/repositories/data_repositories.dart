@@ -113,6 +113,35 @@ class DataRepository extends DomainRepository {
         limit: limit,
       );
 
+  Future<ResponseModel> repairOrderImage({
+    bool isLoading = false,
+    required String filePath,
+  }) async =>
+      await connectHelper.repairOrderImage(
+        filePath: filePath,
+        isLoading: isLoading,
+      );
+
+  Future<ResponseModel> sampleOrderImage({
+    bool isLoading = false,
+    required String filePath,
+  }) async =>
+      await connectHelper.sampleOrderImage(
+        filePath: filePath,
+        isLoading: isLoading,
+      );
+
+  Future<ResponseModel> postRepairOrder({
+    bool isLoading = false,
+    required String file,
+    required String description,
+  }) async =>
+      connectHelper.postRepairOrder(
+        file: file,
+        description: description,
+        isLoading: isLoading,
+      );
+
   Future<ResponseModel> getOneRepairOrder({
     bool isLoading = false,
     required String repairingOrderId,

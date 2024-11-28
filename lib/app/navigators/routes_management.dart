@@ -1,7 +1,7 @@
 // coverage:ignore-file
 
-import 'package:krishna_ornaments/app/navigators/navigators.dart';
 import 'package:get/get.dart';
+import 'package:krishna_ornaments/app/navigators/navigators.dart';
 
 /// A chunk of routes taken in the application.
 ///

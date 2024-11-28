@@ -116,6 +116,7 @@ class RepairController extends GetxController {
   final pickerProfile = ImagePicker();
   File? imageFile;
   String profileImage = "";
+  RepairOrderUploadImageData? reapirUploadData;
 
   Future selectPic(ImageSource sourcePic, bool isSample) async {
     final pickedFile = await pickerProfile.pickImage(
@@ -125,14 +126,64 @@ class RepairController extends GetxController {
     if (pickedFile != null) {
       if (Utility.getImageSizeMB(pickedFile.path) <= 10) {
         imageFile = File(pickedFile.path);
-        isSample
-            ? RouteManagement.goToSampleOrderScreen()
-            : RouteManagement.goToRepairDetailsScreen();
+        var response = await repairPresenter.repairOrderImage(
+          filePath: pickedFile.path,
+          isLoading: true,
+        );
+        reapirUploadData = null;
+        if (response?.data != null) {
+          reapirUploadData = response?.data;
+          RouteManagement.goToRepairDetailsScreen();
+        }
       } else {
         Utility.errorMessage("max_10_mb_img".tr);
       }
     }
     update();
+  }
+
+  String selectSamplePic = "";
+  List<SampleOrderImage> imageList = [];
+  final picker = ImagePicker();
+
+  Future sampleOrderImage(ImageSource sourcePic, bool isSample) async {
+    final List<XFile> selectedImages =
+        await picker.pickMultiImage(imageQuality: 5);
+
+    if (selectedImages.isNotEmpty) {
+      for (var images in selectedImages) {
+        if (Utility.getImageSizeMB(images.path) <= 10) {
+          if (imageList.length < 5) {
+            var response = await repairPresenter.sampleOrderImage(
+              filePath: images.path,
+              isLoading: true,
+            );
+            // imageList.addAll(response?.data ?? []);
+            if (response != null) {
+              RouteManagement.goToSampleOrderScreen();
+            }
+            update();
+          } else {
+            Utility.errorMessage('Maximum 5 Photos Upload'.tr);
+          }
+        } else {
+          Utility.errorMessage("max_10_mb_img".tr);
+        }
+      }
+    }
+    update();
+  }
+
+  Future<void> postRepairOrder() async {
+    var response = await repairPresenter.postRepairOrder(
+      file: reapirUploadData?.fileId ?? "",
+      description: descriptionController.text,
+      isLoading: true,
+    );
+    if (response?.statusCode == 200) {
+      RouteManagement.goToBottomBarView();
+      update();
+    }
   }
 
   String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
@@ -148,27 +199,29 @@ class RepairController extends GetxController {
       PagingController(firstPageKey: 1);
 
   List<RepairOrderHistoryDoc> repairOrderList = [];
+  int repairLimit = 10;
 
   Future<void> repairOrderListData(pageKey) async {
     var response = await repairPresenter.repairOrderList(
       page: pageKey,
-      limit: 10,
+      limit: repairLimit,
       isLoading: true,
     );
-    repairOrderList.clear();
-    if (pageKey == 1) {
-      repairOrderList.clear();
-    }
-    repairOrderList = response?.data?.docs ?? [];
+    if (response != null) {
+      if (pageKey == 1) {
+        repairOrderList.clear();
+      }
+      repairOrderList = response.data?.docs ?? [];
 
-    final isLastPage = repairOrderList.length < 10;
-    if (isLastPage) {
-      repairOrderPagingController.appendLastPage(repairOrderList);
-    } else {
-      var nextPageKey = pageKey + 1;
-      repairOrderPagingController.appendPage(repairOrderList, nextPageKey);
+      final isLastPage = repairOrderList.length < repairLimit;
+      if (isLastPage) {
+        repairOrderPagingController.appendLastPage(repairOrderList);
+      } else {
+        var nextPageKey = pageKey + 1;
+        repairOrderPagingController.appendPage(repairOrderList, nextPageKey);
+      }
+      update();
     }
-    update();
   }
 
   GetOneRepairOrderData? getOneRepairOrderData;
