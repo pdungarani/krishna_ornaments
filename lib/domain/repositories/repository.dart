@@ -284,6 +284,128 @@ class Repository {
     }
   }
 
+  Future<ResponseModel?> postSampleOrder({
+    bool isLoading = false,
+    required List<SampleOrderImageDatum> images,
+    required int totalQuantity,
+    required String description,
+  }) async {
+    try {
+      var response = await _dataRepository.postSampleOrder(
+        images: images,
+        totalQuantity: totalQuantity,
+        description: description,
+        isLoading: isLoading,
+      );
+      return response;
+    } catch (_) {
+      Utility.closeDialog();
+      UnimplementedError();
+      return null;
+    }
+  }
+
+  Future<SampleOrderHistoryModel?> postSampleOrderHistory({
+    bool isLoading = false,
+    required int page,
+    required int limit,
+  }) async {
+    try {
+      var response = await _dataRepository.postSampleOrderHistory(
+        page: page,
+        limit: limit,
+        isLoading: isLoading,
+      );
+      var sampleOrderHistoryModel =
+          sampleOrderHistoryModelFromJson(response.data);
+      if (sampleOrderHistoryModel.status == 200) {
+        return sampleOrderHistoryModel;
+      } else {
+        Utility.showMessage(sampleOrderHistoryModel.message.toString(),
+            MessageType.error, () => null, '');
+        return null;
+      }
+    } catch (_) {
+      Utility.closeDialog();
+      UnimplementedError();
+      return null;
+    }
+  }
+
+  Future<GetOneSampleModel?> getOneSample({
+    bool isLoading = false,
+    required String sampleOrderId,
+  }) async {
+    try {
+      var response = await _dataRepository.getOneSample(
+        sampleOrderId: sampleOrderId,
+        isLoading: isLoading,
+      );
+      var getOneSampleModel = getOneSampleModelFromJson(response.data);
+      if (getOneSampleModel.status == 200) {
+        return getOneSampleModel;
+      } else {
+        Utility.showMessage(getOneSampleModel.message.toString(),
+            MessageType.error, () => null, '');
+        return null;
+      }
+    } catch (_) {
+      Utility.closeDialog();
+      UnimplementedError();
+      return null;
+    }
+  }
+
+  Future<GetOrderHistoryModel?> postOrderHistory({
+    bool isLoading = false,
+    required int page,
+    required int limit,
+  }) async {
+    try {
+      var response = await _dataRepository.postOrderHistory(
+        page: page,
+        limit: limit,
+        isLoading: isLoading,
+      );
+      var getOrderHistoryModel = getOrderHistoryModelFromJson(response.data);
+      if (getOrderHistoryModel.status == 200) {
+        return getOrderHistoryModel;
+      } else {
+        Utility.showMessage(getOrderHistoryModel.message.toString(),
+            MessageType.error, () => null, '');
+        return null;
+      }
+    } catch (_) {
+      Utility.closeDialog();
+      UnimplementedError();
+      return null;
+    }
+  }
+
+  Future<GetOneOrderModel?> postOrderGetOne({
+    bool isLoading = false,
+    required String orderId,
+  }) async {
+    try {
+      var response = await _dataRepository.postOrderGetOne(
+        orderId: orderId,
+        isLoading: isLoading,
+      );
+      var getOneOrderModel = getOneOrderModelFromJson(response.data);
+      if (getOneOrderModel.status == 200) {
+        return getOneOrderModel;
+      } else {
+        Utility.showMessage(getOneOrderModel.message.toString(),
+            MessageType.error, () => null, '');
+        return null;
+      }
+    } catch (_) {
+      Utility.closeDialog();
+      UnimplementedError();
+      return null;
+    }
+  }
+
   Future<ResponseModel?> postRepairOrder({
     bool isLoading = false,
     required String file,

@@ -2,7 +2,6 @@ import 'package:another_stepper/another_stepper.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/widgets/appbar_widgets.dart';
 
@@ -80,8 +79,7 @@ class RepairOrderDetalisScreen extends StatelessWidget {
                   ),
                   Dimens.boxHeight5,
                   Text(
-                    controller.getOneRepairOrderData?.description ??
-                        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                    controller.getOneRepairOrderData?.description ?? " -ß ",
                     style: Styles.colorA7A7A750012,
                   ),
                   Dimens.boxHeight20,
@@ -91,9 +89,8 @@ class RepairOrderDetalisScreen extends StatelessWidget {
                   ),
                   Dimens.boxHeight5,
                   Text(
-                    DateFormat('dd, MMM yyyy').format(
-                        controller.getOneRepairOrderData?.createdAt ??
-                            DateTime.now()),
+                    controller.getOneRepairOrderData?.createdAt?.dateFormate ??
+                        '',
                     style: Styles.colorA7A7A750012,
                   ),
                   Dimens.boxHeight20,

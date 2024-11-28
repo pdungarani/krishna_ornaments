@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:intl/intl.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/navigators/navigators.dart';
 import 'package:krishna_ornaments/app/widgets/appbar_widgets.dart';
@@ -88,9 +87,7 @@ class RepairOrderHistoryScreen extends StatelessWidget {
                                         style: Styles.grey94A3B850014,
                                       ),
                                       Text(
-                                        DateFormat('dd, MMM yyyy').format(
-                                            item.createdAt ?? DateTime.now()),
-                                        // "03, August, 2023",
+                                        item.createdAt?.dateFormate ?? '',
                                         style: Styles.color212121W50014,
                                       )
                                     ],

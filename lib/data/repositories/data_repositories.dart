@@ -1,5 +1,5 @@
 import 'package:krishna_ornaments/data/data.dart';
-import 'package:krishna_ornaments/domain/models/response_model.dart';
+import 'package:krishna_ornaments/domain/models/models.dart';
 import 'package:krishna_ornaments/domain/repositories/repositories.dart';
 
 /// Repositories (retrieve data, heavy processing etc..)
@@ -128,6 +128,59 @@ class DataRepository extends DomainRepository {
   }) async =>
       await connectHelper.sampleOrderImage(
         filePath: filePath,
+        isLoading: isLoading,
+      );
+
+  Future<ResponseModel> postSampleOrder({
+    bool isLoading = false,
+    required List<SampleOrderImageDatum> images,
+    required int totalQuantity,
+    required String description,
+  }) async =>
+      connectHelper.postSampleOrder(
+        images: images,
+        totalQuantity: totalQuantity,
+        description: description,
+        isLoading: isLoading,
+      );
+
+  Future<ResponseModel> postSampleOrderHistory({
+    bool isLoading = false,
+    required int page,
+    required int limit,
+  }) async =>
+      connectHelper.postSampleOrderHistory(
+        page: page,
+        limit: limit,
+        isLoading: isLoading,
+      );
+
+  Future<ResponseModel> getOneSample({
+    bool isLoading = false,
+    required String sampleOrderId,
+  }) async =>
+      connectHelper.getOneSample(
+        sampleOrderId: sampleOrderId,
+        isLoading: isLoading,
+      );
+
+  Future<ResponseModel> postOrderHistory({
+    bool isLoading = false,
+    required int page,
+    required int limit,
+  }) async =>
+      connectHelper.postOrderHistory(
+        page: page,
+        limit: limit,
+        isLoading: isLoading,
+      );
+
+  Future<ResponseModel> postOrderGetOne({
+    bool isLoading = false,
+    required String orderId,
+  }) async =>
+      connectHelper.postOrderGetOne(
+        orderId: orderId,
         isLoading: isLoading,
       );
 

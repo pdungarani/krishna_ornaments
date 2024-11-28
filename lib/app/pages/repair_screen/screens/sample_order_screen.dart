@@ -53,7 +53,9 @@ class SampleOrderScreen extends StatelessWidget {
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {
-                    if (controller.sampleKey.currentState!.validate()) {}
+                    if (controller.sampleKey.currentState!.validate()) {
+                      controller.postSampleOrder();
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     fixedSize: Size(
@@ -93,7 +95,7 @@ class SampleOrderScreen extends StatelessWidget {
                       onTap: () async {
                         var data = await Utility.imagePermissionCheack(context);
                         if (data) {
-                          // controller.selectSampleImage();
+                          controller.sampleOrderImage();
                         }
                       },
                       child: Container(
@@ -134,84 +136,84 @@ class SampleOrderScreen extends StatelessWidget {
                       ),
                     ),
                     Dimens.boxWidth10,
-                    // if (controller.imageList.isNotEmpty) ...[
-                    //   Expanded(
-                    //     child: SizedBox(
-                    //       width: Dimens.eighty,
-                    //       height: Dimens.eighty,
-                    //       child: ListView.builder(
-                    //         scrollDirection: Axis.horizontal,
-                    //         itemCount: controller.imageList.length,
-                    //         itemBuilder: (context, index) {
-                    //           return Padding(
-                    //             padding: Dimens.edgeInsetsRight10,
-                    //             child: Stack(
-                    //               children: [
-                    //                 ClipRRect(
-                    //                   borderRadius: BorderRadius.circular(
-                    //                     Dimens.six,
-                    //                   ),
-                    //                   child: CachedNetworkImage(
-                    //                     width: Dimens.eighty,
-                    //                     height: Dimens.eighty,
-                    //                     imageUrl: ApiWrapper.imageUrl +
-                    //                         (controller.imageList[index].path ??
-                    //                             ""),
-                    //                     fit: BoxFit.cover,
-                    //                     placeholder: (context, url) {
-                    //                       return Image.asset(
-                    //                         AssetConstants.placeholder,
-                    //                         fit: BoxFit.cover,
-                    //                       );
-                    //                     },
-                    //                     errorWidget: (context, url, error) {
-                    //                       return Image.asset(
-                    //                         AssetConstants.placeholder,
-                    //                         fit: BoxFit.cover,
-                    //                       );
-                    //                     },
-                    //                   ),
-                    //                 ),
-                    //                 Positioned(
-                    //                   right: 0,
-                    //                   child: Padding(
-                    //                     padding: Dimens.edgeInsets8,
-                    //                     child: InkWell(
-                    //                       onTap: () {
-                    //                         controller.imageList
-                    //                             .removeAt(index);
-                    //                         controller.update();
-                    //                       },
-                    //                       child: Container(
-                    //                         padding: Dimens.edgeInsets3,
-                    //                         height: Dimens.twenty,
-                    //                         width: Dimens.twenty,
-                    //                         decoration: BoxDecoration(
-                    //                           color: ColorsValue.whiteColor,
-                    //                           borderRadius:
-                    //                               BorderRadius.circular(
-                    //                             Dimens.hundred,
-                    //                           ),
-                    //                         ),
-                    //                         child: SvgPicture.asset(
-                    //                           AssetConstants.ic_delete,
-                    //                           colorFilter: ColorFilter.mode(
-                    //                             ColorsValue.redColor,
-                    //                             BlendMode.srcIn,
-                    //                           ),
-                    //                         ),
-                    //                       ),
-                    //                     ),
-                    //                   ),
-                    //                 ),
-                    //               ],
-                    //             ),
-                    //           );
-                    //         },
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ],
+                    if (controller.imageList.isNotEmpty) ...[
+                      Expanded(
+                        child: SizedBox(
+                          width: Dimens.eighty,
+                          height: Dimens.eighty,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: controller.imageList.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: Dimens.edgeInsetsRight10,
+                                child: Stack(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(
+                                        Dimens.six,
+                                      ),
+                                      child: CachedNetworkImage(
+                                        width: Dimens.eighty,
+                                        height: Dimens.eighty,
+                                        imageUrl:
+                                            controller.imageList[index].path ??
+                                                "",
+                                        fit: BoxFit.cover,
+                                        placeholder: (context, url) {
+                                          return Image.asset(
+                                            AssetConstants.placeholder,
+                                            fit: BoxFit.cover,
+                                          );
+                                        },
+                                        errorWidget: (context, url, error) {
+                                          return Image.asset(
+                                            AssetConstants.placeholder,
+                                            fit: BoxFit.cover,
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                    Positioned(
+                                      right: 0,
+                                      child: Padding(
+                                        padding: Dimens.edgeInsets8,
+                                        child: InkWell(
+                                          onTap: () {
+                                            controller.imageList
+                                                .removeAt(index);
+                                            controller.update();
+                                          },
+                                          child: Container(
+                                            padding: Dimens.edgeInsets3,
+                                            height: Dimens.twenty,
+                                            width: Dimens.twenty,
+                                            decoration: BoxDecoration(
+                                              color: ColorsValue.whiteColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                Dimens.hundred,
+                                              ),
+                                            ),
+                                            child: SvgPicture.asset(
+                                              AssetConstants.ic_delete,
+                                              colorFilter: ColorFilter.mode(
+                                                ColorsValue.redColor,
+                                                BlendMode.srcIn,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
                   ],
                 ),
                 Dimens.boxHeight30,

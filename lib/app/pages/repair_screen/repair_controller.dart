@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -60,7 +61,7 @@ class RepairController extends GetxController {
                         InkWell(
                           onTap: () async {
                             if (await Utility.imagePermissionCheack(context)) {
-                              selectPic(ImageSource.gallery, isSample);
+                              selectPic(ImageSource.gallery);
                               Get.back();
                             }
                           },
@@ -82,7 +83,7 @@ class RepairController extends GetxController {
                         InkWell(
                           onTap: () async {
                             if (await Utility.cameraPermissionCheack(context)) {
-                              selectPic(ImageSource.camera, isSample);
+                              selectPic(ImageSource.camera);
                               Get.back();
                             }
                           },
@@ -118,7 +119,7 @@ class RepairController extends GetxController {
   String profileImage = "";
   RepairOrderUploadImageData? reapirUploadData;
 
-  Future selectPic(ImageSource sourcePic, bool isSample) async {
+  Future selectPic(ImageSource sourcePic) async {
     final pickedFile = await pickerProfile.pickImage(
       source: sourcePic,
     );
@@ -143,10 +144,10 @@ class RepairController extends GetxController {
   }
 
   String selectSamplePic = "";
-  List<SampleOrderImage> imageList = [];
+  List<SampleOrderImageDatum> imageList = [];
   final picker = ImagePicker();
 
-  Future sampleOrderImage(ImageSource sourcePic, bool isSample) async {
+  Future sampleOrderImage() async {
     final List<XFile> selectedImages =
         await picker.pickMultiImage(imageQuality: 5);
 
@@ -158,8 +159,8 @@ class RepairController extends GetxController {
               filePath: images.path,
               isLoading: true,
             );
-            // imageList.addAll(response?.data ?? []);
             if (response != null) {
+              imageList.addAll(response.data ?? []);
               RouteManagement.goToSampleOrderScreen();
             }
             update();
@@ -172,6 +173,23 @@ class RepairController extends GetxController {
       }
     }
     update();
+  }
+
+  int selectQuantity = 1;
+  Future<void> postSampleOrder() async {
+    var response = await repairPresenter.postSampleOrder(
+      images: imageList,
+      totalQuantity: selectQuantity,
+      description: descriptionSampleController.text,
+      isLoading: true,
+    );
+    if (response?.statusCode == 200) {
+      RouteManagement.goToBottomBarView();
+      update();
+    } else {
+      Utility.errorMessage(
+          jsonDecode(response?.data.toString() ?? "")["Message"]);
+    }
   }
 
   Future<void> postRepairOrder() async {
@@ -193,7 +211,6 @@ class RepairController extends GetxController {
 
   GlobalKey<FormState> sampleKey = GlobalKey<FormState>();
   TextEditingController descriptionSampleController = TextEditingController();
-  int selectQuantity = 1;
 
   PagingController<int, RepairOrderHistoryDoc> repairOrderPagingController =
       PagingController(firstPageKey: 1);
@@ -239,6 +256,51 @@ class RepairController extends GetxController {
       update();
     } else {
       Utility.errorMessage('Oops something went wrong');
+    }
+  }
+
+  PagingController<int, SampleOrderHistoryDoc> smaplePagingController =
+      PagingController(firstPageKey: 1);
+
+  List<SampleOrderHistoryDoc> smapleListModel = [];
+  int smapleLimit = 10;
+
+  Future<void> postSampleOrderHistory(int pageKey) async {
+    var response = await repairPresenter.postSampleOrderHistory(
+      page: pageKey,
+      limit: smapleLimit,
+      isLoading: false,
+    );
+    if (response != null) {
+      if (pageKey == 1) {
+        smapleListModel.clear();
+      }
+      smapleListModel = response.data?.docs ?? [];
+
+      final isLastPage = smapleListModel.length < smapleLimit;
+      if (isLastPage) {
+        smaplePagingController.appendLastPage(smapleListModel);
+      } else {
+        var nextPageKey = pageKey + 1;
+        smaplePagingController.appendPage(smapleListModel, nextPageKey);
+      }
+      update();
+    }
+  }
+
+  GetOneSampleData? getOneSampleData = GetOneSampleData();
+
+  String sampleOrderId = "";
+
+  Future<void> getOneSample() async {
+    var response = await repairPresenter.getOneSample(
+      sampleOrderId: sampleOrderId,
+      isLoading: false,
+    );
+    getOneSampleData = null;
+    if (response != null) {
+      getOneSampleData = response.data;
+      update();
     }
   }
 }

@@ -221,6 +221,102 @@ class ConnectHelper {
     return response;
   }
 
+  Future<ResponseModel> postSampleOrder({
+    bool isLoading = false,
+    required List<SampleOrderImageDatum> images,
+    required int totalQuantity,
+    required String description,
+  }) async {
+    var data = {
+      "images": images,
+      "totalQuantity": totalQuantity,
+      "description": description,
+    };
+    var response = await apiWrapper.makeRequest(
+      EndPoints.postSampleOrder,
+      Request.post,
+      data,
+      isLoading,
+      Utility.commonHeader(),
+    );
+    return response;
+  }
+
+  Future<ResponseModel> postSampleOrderHistory({
+    bool isLoading = false,
+    required int page,
+    required int limit,
+  }) async {
+    var data = {
+      "page": page,
+      "limit": limit,
+    };
+    var response = await apiWrapper.makeRequest(
+      EndPoints.sampleOrderHistory,
+      Request.post,
+      data,
+      isLoading,
+      Utility.commonHeader(),
+    );
+    return response;
+  }
+
+  Future<ResponseModel> getOneSample({
+    bool isLoading = false,
+    required String sampleOrderId,
+  }) async {
+    var data = {
+      "sampleOrderId": sampleOrderId,
+    };
+    var response = await apiWrapper.makeRequest(
+      EndPoints.getOneSampleOrder,
+      Request.post,
+      data,
+      isLoading,
+      Utility.commonHeader(),
+    );
+    return response;
+  }
+
+
+
+Future<ResponseModel> postOrderHistory({
+    bool isLoading = false,
+    required int page,
+    required int limit,
+  }) async {
+    var data = {
+      "page": page,
+      "limit": limit,
+    };
+    var response = await apiWrapper.makeRequest(
+      EndPoints.postOrderHistory,
+      Request.post,
+      data,
+      isLoading,
+      Utility.commonHeader(),
+    );
+    return response;
+  }
+
+  
+  Future<ResponseModel> postOrderGetOne({
+    bool isLoading = false,
+    required String orderId,
+  }) async {
+    var data = {
+      "orderId": orderId,
+    };
+    var response = await apiWrapper.makeRequest(
+      EndPoints.postOrderGetOne,
+      Request.post,
+      data,
+      isLoading,
+      Utility.commonHeader(),
+    );
+    return response;
+  }
+
   Future<ResponseModel> postRepairOrder({
     bool isLoading = false,
     required String file,
@@ -273,4 +369,25 @@ class ConnectHelper {
     );
     return response;
   }
+}
+
+class SmapleUploadDatum {
+  String? fileId;
+  String? path;
+
+  SmapleUploadDatum({
+    this.fileId,
+    this.path,
+  });
+
+  factory SmapleUploadDatum.fromJson(Map<String, dynamic> json) =>
+      SmapleUploadDatum(
+        fileId: json["fileId"],
+        path: json["path"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "fileId": fileId,
+        "path": path,
+      };
 }

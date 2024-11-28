@@ -14,11 +14,16 @@ class SampleOrderDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<RepairController>(initState: (state) {
       var controller = Get.find<RepairController>();
+      controller.sampleOrderId = Get.arguments;
+      controller.getOneSampleData = null;
+      controller.getOneSample();
     }, builder: (controller) {
       return Scaffold(
         backgroundColor: ColorsValue.appBg,
         appBar: AppBarWidget(
-          onTapBack: () {},
+          onTapBack: () {
+            Get.back();
+          },
           title: 'sample_order'.tr,
         ),
         body: Padding(
@@ -36,14 +41,15 @@ class SampleOrderDetailsScreen extends StatelessWidget {
                   height: Dimens.hundred,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 10,
+                    itemCount: controller.getOneSampleData?.images?.length,
                     itemBuilder: (context, index) {
+                      var item = controller.getOneSampleData?.images?[index];
                       return Padding(
                         padding: Dimens.edgeInsetsRight6,
                         child: InkWell(
                           onTap: () {
                             RouteManagement.goToShowFullScareenImage(
-                                "", "image");
+                                item?.path ?? "", "image");
                           },
                           child: Container(
                             height: Dimens.hundred,
@@ -62,7 +68,7 @@ class SampleOrderDetailsScreen extends StatelessWidget {
                                 Dimens.five,
                               ),
                               child: CachedNetworkImage(
-                                imageUrl: "",
+                                imageUrl: item?.path ?? '',
                                 fit: BoxFit.cover,
                                 maxWidthDiskCache: 300,
                                 maxHeightDiskCache: 300,
@@ -95,7 +101,7 @@ class SampleOrderDetailsScreen extends StatelessWidget {
                 ),
                 Dimens.boxHeight5,
                 Text(
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                  controller.getOneSampleData?.description ?? '',
                   style: Styles.colorA7A7A750012,
                 ),
                 Dimens.boxHeight20,
@@ -105,7 +111,7 @@ class SampleOrderDetailsScreen extends StatelessWidget {
                 ),
                 Dimens.boxHeight5,
                 Text(
-                  "01",
+                  controller.getOneSampleData?.totalQuantity.toString() ?? '',
                   style: Styles.colorA7A7A750012,
                 ),
                 Dimens.boxHeight20,
@@ -115,7 +121,7 @@ class SampleOrderDetailsScreen extends StatelessWidget {
                 ),
                 Dimens.boxHeight5,
                 Text(
-                  "01",
+                  controller.getOneSampleData?.bagNumber.toString() ?? '',
                   style: Styles.colorA7A7A750012,
                 ),
                 Dimens.boxHeight30,
