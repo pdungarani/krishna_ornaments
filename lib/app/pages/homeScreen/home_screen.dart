@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/widgets/custom_product.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -10,8 +11,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
-      initState: (state) {
-        state.controller?.controller = PageController();
+      initState: (state) async {
+        var controller = Get.find<HomeController>();
+        await controller.postAllProduct(1);
       },
       builder: (controller) => Scaffold(
         backgroundColor: ColorsValue.primaryColor,
@@ -52,7 +54,6 @@ class HomeScreen extends StatelessWidget {
                           child: Center(
                             child: Text(
                               '1'.toString(),
-                              style: Styles.white14,
                             ),
                           ),
                         ),
@@ -141,9 +142,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     hintText: 'Search...',
-                    hintStyle: Styles.greyAAA40014.copyWith(
-                      fontSize: Dimens.sixteen,
-                    ),
+                    hintStyle: Styles.greyAAA40014,
                     prefixIcon: Padding(
                       padding: const EdgeInsets.all(12),
                       child: SvgPicture.asset(AssetConstants.searchView),
@@ -156,81 +155,126 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                Dimens.boxHeight10,
-                Container(
-                  width: context.width,
-                  height: 200,
-                  decoration: BoxDecoration(
-                    color: ColorsValue.redColor,
-                    borderRadius: BorderRadius.circular(Dimens.thirteen),
-                  ),
-                ),
-                Dimens.boxHeight10,
-                Text(
-                  'Categories',
-                  style: Styles.color01010160018.copyWith(
-                    fontSize: Dimens.twenty,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
+                Dimens.boxHeight20,
                 SizedBox(
-                  height: 130,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 7,
-                    itemBuilder: (context, index) => Padding(
-                      padding: EdgeInsets.only(right: Dimens.twenty),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          InkWell(
-                            overlayColor: const WidgetStatePropertyAll(
-                                Colors.transparent),
-                            onTap: () {},
-                            child: Container(
-                              height: Dimens.seventyFive,
-                              width: Dimens.seventyFive,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(200),
-                                  color: Colors.white),
-                              child: Padding(
-                                padding: EdgeInsets.all(
-                                  Dimens.fifteen,
-                                ),
-                                child: SvgPicture.asset(
-                                  'assets/icons/profile.svg',
-                                  colorFilter: const ColorFilter.mode(
-                                    Color(0xff3E6227),
-                                    BlendMode.srcIn,
-                                  ),
-                                ),
-                              ),
+                  height: Dimens.hundredEighty,
+                  child: PageView.builder(
+                    itemCount: controller.filterType.length,
+                    onPageChanged: (value) {
+                      controller.selectPage = value;
+                      controller.update();
+                    },
+                    itemBuilder: (context, index) {
+                      return ClipRRect(
+                        borderRadius: BorderRadius.circular(
+                          Dimens.ten,
+                        ),
+                        child: Image.asset(
+                          AssetConstants.banner,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                Dimens.boxHeight8,
+                Center(
+                  child: Wrap(
+                    children: controller.filterType.asMap().entries.map((e) {
+                      return Padding(
+                        padding: Dimens.edgeInsetsLeft4,
+                        child: Container(
+                          width: controller.selectPage == e.key
+                              ? Dimens.ten
+                              : Dimens.six,
+                          height: Dimens.six,
+                          decoration: BoxDecoration(
+                            color: controller.selectPage == e.key
+                                ? ColorsValue.appColor
+                                : ColorsValue.lightPrimaryColor,
+                            borderRadius: BorderRadius.circular(
+                              Dimens.twenty,
                             ),
                           ),
-                          SizedBox(height: Dimens.ten),
-                          Text(
-                            'name',
-                            style: Styles.black12.copyWith(
-                              fontWeight: FontWeight.w600,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
+                        ),
+                      );
+                    }).toList(),
                   ),
                 ),
+                Dimens.boxHeight20,
+                if (controller.getCategoriesList.isNotEmpty) ...[
+                  Text(
+                    'Categories',
+                    style: Styles.color01010170020,
+                  ),
+                  SizedBox(
+                    height: Dimens.hundredThirty,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: controller.getCategoriesList.length,
+                      itemBuilder: (context, index) {
+                        var item = controller.getCategoriesList[index];
+                        var type = controller.getCategoriesList[index].image
+                            ?.split(".")
+                            .last;
+                        return Padding(
+                          padding: Dimens.edgeInsetsRight20,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: Dimens.seventyFive,
+                                width: Dimens.seventyFive,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                    Dimens.fiveHundred,
+                                  ),
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(
+                                    Dimens.fiveHundred,
+                                  ),
+                                  child: type != "svg"
+                                      ? CachedNetworkImage(
+                                          imageUrl: (item.image ?? ""),
+                                          fit: BoxFit.cover,
+                                          placeholder: (context, url) {
+                                            return Image.asset(
+                                              AssetConstants.placeholder,
+                                              fit: BoxFit.cover,
+                                            );
+                                          },
+                                          errorWidget: (context, url, error) {
+                                            return Image.asset(
+                                              AssetConstants.placeholder,
+                                              fit: BoxFit.cover,
+                                            );
+                                          },
+                                        )
+                                      : SvgPicture.network(
+                                          item.image ?? "",
+                                        ),
+                                ),
+                              ),
+                              Dimens.boxHeight10,
+                              Text(
+                                item.name ?? "",
+                                style: Styles.blackw60012,
+                              )
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       'New Arrival',
-                      style: Styles.color01010170020.copyWith(
-                        fontSize: 20,
-                        color: ColorsValue.blackColor,
-                        fontWeight: FontWeight.w700,
-                      ),
+                      style: Styles.color01010170020,
                     ),
                     Center(
                       child: Text(
@@ -242,56 +286,73 @@ class HomeScreen extends StatelessWidget {
                 ),
                 Dimens.boxHeight10,
                 SizedBox(
-                  height: 290,
+                  height: Dimens.twoHundredNinety,
                   child: ListView.builder(
-                    shrinkWrap: true,
+                    controller: controller.scrollBestSellerController,
+                    padding: Dimens.edgeInsets0,
                     scrollDirection: Axis.horizontal,
-                    itemCount: 4,
-                    itemBuilder: (context, index) => Padding(
-                      padding: Dimens.edgeInsetsRight20,
-                      child: CustomProductView(
-                        productName: 'productName',
-                        imageUrl: 'assets/images/Mask group.png',
-                        categoryName: 'categoryName',
-                        productGrossAmount: '230',
-                        productPrice: '250',
-                        productRatting: '2.4',
-                        inWishList: false,
-                        onTap: () {},
-                        addFavorite: () {},
-                      ),
-                    ),
+                    itemCount: controller.productDocList.length,
+                    itemBuilder: (context, index) {
+                      var item = controller.productDocList[index];
+                      return Padding(
+                        padding: Dimens.edgeInsetsRight20,
+                        child: CustomProductView(
+                          productName: item.name ?? "",
+                          imageUrl: item.image ?? "",
+                          categoryName: item.category?.name ?? "",
+                          quantity: item.quantity ?? 1,
+                          weigth: item.weight ?? "",
+                          inWishList: item.isWishlist,
+                          onTap: () {},
+                          addFavorite: () {
+                            if (item.isWishlist) {
+                              item.isWishlist = false;
+                            } else {
+                              item.isWishlist = true;
+                            }
+                            controller.update();
+                          },
+                          increment: () {
+                            if (controller.productDocList[index].quantity
+                                    .toDouble() >
+                                1) {
+                              controller.productDocList[index].quantity--;
+                            }
+                            controller.update();
+                          },
+                          dincrement: () {
+                            controller.productDocList[index].quantity++;
+                            controller.update();
+                          },
+                        ),
+                      );
+                    },
                   ),
                 ),
                 Dimens.boxHeight20,
                 ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 4,
+                  itemCount: 2,
                   itemBuilder: (context, index) => Padding(
                     padding: Dimens.edgeInsetsBottom10,
-                    child: Container(
-                      width: context.width,
-                      height: 130,
-                      decoration: BoxDecoration(
-                        color: ColorsValue.blackColorWithOpacity59,
-                        borderRadius: BorderRadius.circular(Dimens.twelve),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(
+                        Dimens.ten,
+                      ),
+                      child: Image.asset(
+                        AssetConstants.banner,
                       ),
                     ),
                   ),
                 ),
-                Dimens.boxHeight20,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       'Trending Product',
-                      style: Styles.color01010170020.copyWith(
-                        fontSize: 20,
-                        color: ColorsValue.blackColor,
-                        fontWeight: FontWeight.w700,
-                      ),
+                      style: Styles.color01010170020,
                     ),
                     Center(
                       child: Text(
@@ -303,25 +364,47 @@ class HomeScreen extends StatelessWidget {
                 ),
                 Dimens.boxHeight10,
                 SizedBox(
-                  height: 287,
+                  height: Dimens.twoHundredNinety,
                   child: ListView.builder(
-                    shrinkWrap: true,
+                    controller: controller.scrollBestSellerController,
+                    padding: Dimens.edgeInsets0,
                     scrollDirection: Axis.horizontal,
-                    itemCount: 4,
-                    itemBuilder: (context, index) => Padding(
-                      padding: Dimens.edgeInsetsRight20,
-                      child: CustomProductView(
-                        productName: 'productName',
-                        imageUrl: 'assets/images/Mask group.png',
-                        categoryName: 'categoryName',
-                        productGrossAmount: '230',
-                        productPrice: '250',
-                        productRatting: '2.4',
-                        inWishList: false,
-                        onTap: () {},
-                        addFavorite: () {},
-                      ),
-                    ),
+                    itemCount: controller.productDocList.length,
+                    itemBuilder: (context, index) {
+                      var item = controller.productDocList[index];
+                      return Padding(
+                        padding: Dimens.edgeInsetsRight20,
+                        child: CustomProductView(
+                          productName: item.name ?? "",
+                          imageUrl: item.image ?? "",
+                          categoryName: item.category?.name ?? "",
+                          quantity: item.quantity ?? 1,
+                          weigth: item.weight ?? "",
+                          inWishList: item.isWishlist,
+                          onTap: () {},
+                          addFavorite: () {
+                            if (item.isWishlist) {
+                              item.isWishlist = false;
+                            } else {
+                              item.isWishlist = true;
+                            }
+                            controller.update();
+                          },
+                          increment: () {
+                            if (controller.productDocList[index].quantity
+                                    .toDouble() >
+                                1) {
+                              controller.productDocList[index].quantity--;
+                            }
+                            controller.update();
+                          },
+                          dincrement: () {
+                            controller.productDocList[index].quantity++;
+                            controller.update();
+                          },
+                        ),
+                      );
+                    },
                   ),
                 ),
               ],

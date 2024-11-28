@@ -142,6 +142,56 @@ class Repository {
     }
   }
 
+  Future<GetCategoriesModel?> getAllCategories({
+    bool isLoading = false,
+  }) async {
+    try {
+      var response = await _dataRepository.getAllCategories(
+        isLoading: isLoading,
+      );
+      var loginModel = getCategoriesModelFromJson(response.data);
+      if (loginModel.data != null) {
+        return loginModel;
+      } else {
+        Utility.errorMessage(loginModel.message.toString());
+        return null;
+      }
+    } catch (_) {
+      Utility.closeDialog();
+      UnimplementedError();
+      return null;
+    }
+  }
+
+  Future<ProductsModel?> postAllProduct({
+    bool isLoading = false,
+    required int page,
+    required int limit,
+    required String search,
+    required String category,
+  }) async {
+    try {
+      var response = await _dataRepository.postAllProduct(
+        page: page,
+        limit: limit,
+        search: search,
+        category: category,
+        isLoading: isLoading,
+      );
+      var loginModel = productsModelFromJson(response.data);
+      if (loginModel.data != null) {
+        return loginModel;
+      } else {
+        Utility.errorMessage(loginModel.message.toString());
+        return loginModel;
+      }
+    } catch (_) {
+      Utility.closeDialog();
+      UnimplementedError();
+      return null;
+    }
+  }
+
   Future<LoginModel?> loginApi({
     bool isLoading = false,
     required String mobile,

@@ -24,5 +24,10 @@ abstract class AssetConstants {
   static const String ic_upload_img = 'assets/svg/ic_upload_img.svg';
   static const String ic_gallery = 'assets/svg/ic_gallery.svg';
   static const String ic_camera = 'assets/svg/ic_camera.svg';
+  static const String banner = 'assets/images/baneer.jpg';
+  static const String ic_fill_like = 'assets/svg/ic_fill_like.svg';
+  static const String ic_like = 'assets/svg/ic_like.svg';
+  static const String plus = 'assets/svg/plus.svg';
+  static const String minus = 'assets/svg/minus.svg';
   static const String dwsadsa = '';
 }

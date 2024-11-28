@@ -156,10 +156,17 @@ abstract class Styles {
     fontSize: Dimens.twelve,
   );
 
+  static TextStyle blackw60012 = GoogleFonts.montserrat(
+    color: ColorsValue.blackColor,
+    fontWeight: FontWeight.w600,
+    fontSize: Dimens.twelve,
+  );
+
   static TextStyle primaryBold28 = GoogleFonts.montserrat(
-      color: ColorsValue.lightYellow,
-      fontSize: Dimens.twentyEight,
-      fontWeight: FontWeight.w700);
+    color: ColorsValue.lightYellow,
+    fontSize: Dimens.twentyEight,
+    fontWeight: FontWeight.w700,
+  );
 
   static TextStyle primary50014 = GoogleFonts.montserrat(
     color: ColorsValue.lightYellow,

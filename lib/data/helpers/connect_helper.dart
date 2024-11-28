@@ -80,6 +80,42 @@ class ConnectHelper {
     return '0.0.0.0';
   }
 
+  Future<ResponseModel> getAllCategories({
+    bool isLoading = false,
+  }) async {
+    var response = await apiWrapper.makeRequest(
+      EndPoints.getAllCategories,
+      Request.get,
+      null,
+      isLoading,
+      Utility.commonHeader(),
+    );
+    return response;
+  }
+
+  Future<ResponseModel> postAllProduct({
+    bool isLoading = false,
+    required int page,
+    required int limit,
+    required String search,
+    required String category,
+  }) async {
+    var data = {
+      "page": page,
+      "limit": limit,
+      "search": search,
+      "category": category,
+    };
+    var response = await apiWrapper.makeRequest(
+      EndPoints.postAllProduct,
+      Request.post,
+      data,
+      isLoading,
+      Utility.commonHeader(),
+    );
+    return response;
+  }
+
   Future<ResponseModel> loginApi({
     bool isLoading = false,
     required String mobile,
