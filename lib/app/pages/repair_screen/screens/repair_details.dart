@@ -55,7 +55,7 @@ class RepairDetailsScreen extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     if (controller.desKey.currentState!.validate()) {
-                      // controller.postRepairOrder();
+                      controller.postRepairOrder();
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -107,7 +107,7 @@ class RepairDetailsScreen extends StatelessWidget {
                               Dimens.five,
                             ),
                             child: CachedNetworkImage(
-                              imageUrl: "",
+                              imageUrl: controller.reapirUploadData?.path ?? '',
                               fit: BoxFit.cover,
                               maxWidthDiskCache: 300,
                               maxHeightDiskCache: 300,

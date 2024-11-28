@@ -24,4 +24,33 @@ class RepairPresenter {
         repairingOrderId: repairingOrderId,
         isLoading: isLoading,
       );
+
+  Future<RepairOrderUploadImageApi?> repairOrderImage({
+    bool isLoading = false,
+    required String filePath,
+  }) async =>
+      await repairUsecases.repairOrderImage(
+        filePath: filePath,
+        isLoading: isLoading,
+      );
+
+  Future<SampleOrderImage?> sampleOrderImage({
+    bool isLoading = false,
+    required String filePath,
+  }) async =>
+      await repairUsecases.sampleOrderImage(
+        filePath: filePath,
+        isLoading: isLoading,
+      );
+
+  Future<ResponseModel?> postRepairOrder({
+    bool isLoading = false,
+    required String file,
+    required String description,
+  }) async =>
+      await repairUsecases.postRepairOrder(
+        file: file,
+        description: description,
+        isLoading: isLoading,
+      );
 }

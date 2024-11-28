@@ -143,23 +143,22 @@ class RepairOrderHistoryScreen extends StatelessWidget {
                             )
                           ],
                         ),
-                        Dimens.boxHeight5,
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'delivery_date'.tr,
-                              style: Styles.grey94A3B850014,
-                            ),
-                            Text(
-                              "02/09/2024",
-                              style: Styles.color21212150014,
-                            )
-                          ],
-                        ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //   children: [
+                        //     Text(
+                        //       'delivery_date'.tr,
+                        //       style: Styles.grey94A3B850014,
+                        //     ),
+                        //     Text(
+                        //       "02/09/2024",
+                        //       style: Styles.color21212150014,
+                        //     )
+                        //   ],
+                        // ),
                         Dimens.boxHeight5,
                         Text(
-                          "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                          item.description ?? '',
                           style: Styles.colorA7A7A750010,
                         ),
                       ],

@@ -7,4 +7,8 @@ class EndPoints {
   static String postUploadProfile = 'user/profile';
   static String repairOrderList = 'user/repairingorders';
   static String getOneRepairOrder = 'user/repairingorders/getone';
+  static String repairOrderImage = 'user/repairingorders/upload';
+  static String postRepairOrder = 'user/repairingorders/save';
+  static String sampleOrderImage = 'user/sampleorders/upload';
+  
 }

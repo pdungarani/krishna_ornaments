@@ -7,3 +7,5 @@ export 'login_model.dart';
 export 'register_model.dart';
 export 'repair_order_history_model.dart';
 export 'response_model.dart';
+export 'repair_order_image_model.dart';
+export 'sample_oredr_image_mode.dart';

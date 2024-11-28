@@ -235,6 +235,74 @@ class Repository {
     }
   }
 
+  Future<RepairOrderUploadImageApi?> repairOrderImage({
+    bool isLoading = false,
+    required String filePath,
+  }) async {
+    try {
+      var response = await _dataRepository.repairOrderImage(
+        isLoading: isLoading,
+        filePath: filePath,
+      );
+      var repairOrderUploadImageModel =
+          repairOrderUploadImageApiFromJson(response.data);
+      if (repairOrderUploadImageModel.status == 200) {
+        return repairOrderUploadImageModel;
+      } else {
+        Utility.showMessage(repairOrderUploadImageModel.message.toString(),
+            MessageType.error, () => null, '');
+        return null;
+      }
+    } catch (_) {
+      Utility.closeDialog();
+      UnimplementedError();
+      return null;
+    }
+  }
+
+  Future<SampleOrderImage?> sampleOrderImage({
+    bool isLoading = false,
+    required String filePath,
+  }) async {
+    try {
+      var response = await _dataRepository.sampleOrderImage(
+        isLoading: isLoading,
+        filePath: filePath,
+      );
+      var sampleOrderUploadImageModel = sampleOrderImageFromJson(response.data);
+      if (sampleOrderUploadImageModel.status == 200) {
+        return sampleOrderUploadImageModel;
+      } else {
+        Utility.showMessage(sampleOrderUploadImageModel.message.toString(),
+            MessageType.error, () => null, '');
+        return null;
+      }
+    } catch (_) {
+      Utility.closeDialog();
+      UnimplementedError();
+      return null;
+    }
+  }
+
+  Future<ResponseModel?> postRepairOrder({
+    bool isLoading = false,
+    required String file,
+    required String description,
+  }) async {
+    try {
+      var response = await _dataRepository.postRepairOrder(
+        file: file,
+        description: description,
+        isLoading: isLoading,
+      );
+      return response;
+    } catch (_) {
+      Utility.closeDialog();
+      UnimplementedError();
+      return null;
+    }
+  }
+
   Future<RepairOrderHistoryModel?> repairOrderList({
     bool isLoading = false,
     required int page,

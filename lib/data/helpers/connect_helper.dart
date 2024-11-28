@@ -187,6 +187,59 @@ class ConnectHelper {
     return response;
   }
 
+  Future<ResponseModel> repairOrderImage({
+    bool isLoading = false,
+    required String filePath,
+  }) async {
+    var type = lookupMimeType(filePath)!.split('/');
+
+    var response = await apiWrapper.makeRequest(
+      EndPoints.repairOrderImage,
+      Request.awsUpload,
+      filePath,
+      isLoading,
+      Utility.commonHeader(),
+      mediaType: mediaType.MediaType(type[0], type[1]),
+    );
+    return response;
+  }
+
+  Future<ResponseModel> sampleOrderImage({
+    bool isLoading = false,
+    required String filePath,
+  }) async {
+    var type = lookupMimeType(filePath)!.split('/');
+
+    var response = await apiWrapper.makeRequest(
+      EndPoints.sampleOrderImage,
+      Request.awsUpload,
+      filePath,
+      isLoading,
+      Utility.commonHeader(),
+      mediaType: mediaType.MediaType(type[0], type[1]),
+    );
+    return response;
+  }
+
+  Future<ResponseModel> postRepairOrder({
+    bool isLoading = false,
+    required String file,
+    required String description,
+  }) async {
+    var data = {
+      "file": file,
+      "description": description,
+    };
+    var response = await apiWrapper.makeRequest(
+      EndPoints.postRepairOrder,
+      Request.post,
+      data,
+      isLoading,
+      Utility.commonHeader(),
+    );
+    return response;
+  }
+
   Future<ResponseModel> getOneRepairOrder({
     bool isLoading = false,
     required String repairingOrderId,

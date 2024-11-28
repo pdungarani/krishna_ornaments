@@ -24,4 +24,33 @@ class RepairUsecases {
         repairingOrderId: repairingOrderId,
         isLoading: isLoading,
       );
+
+  Future<RepairOrderUploadImageApi?> repairOrderImage({
+    bool isLoading = false,
+    required String filePath,
+  }) async =>
+      await repository.repairOrderImage(
+        filePath: filePath,
+        isLoading: isLoading,
+      );
+
+  Future<SampleOrderImage?> sampleOrderImage({
+    bool isLoading = false,
+    required String filePath,
+  }) async =>
+      await repository.sampleOrderImage(
+        filePath: filePath,
+        isLoading: isLoading,
+      );
+
+  Future<ResponseModel?> postRepairOrder({
+    bool isLoading = false,
+    required String file,
+    required String description,
+  }) async =>
+      await repository.postRepairOrder(
+        file: file,
+        description: description,
+        isLoading: isLoading,
+      );
 }

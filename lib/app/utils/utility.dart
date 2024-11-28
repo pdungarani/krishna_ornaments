@@ -16,8 +16,7 @@ import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:intl/intl.dart';
 import 'package:krishna_ornaments/app/app.dart';
-import 'package:krishna_ornaments/domain/models/response_model.dart';
-import 'package:krishna_ornaments/domain/repositories/repositories.dart';
+import 'package:krishna_ornaments/domain/domain.dart';
 import 'package:logger/logger.dart';
 import 'package:lottie/lottie.dart';
 import 'package:path_provider/path_provider.dart';
@@ -48,6 +47,50 @@ abstract class Utility {
       header.addAll(otherHeader);
     }
     return header;
+  }
+
+  static void showMessage(String? message, MessageType messageType,
+      Function()? onTap, String actionName) {
+    if (message == null || message.isEmpty) return;
+    closeSnackbar();
+    var backgroundColor = Colors.black;
+    switch (messageType) {
+      case MessageType.error:
+        backgroundColor = Colors.red;
+        break;
+      case MessageType.information:
+        backgroundColor = Colors.black.withOpacity(0.3);
+        break;
+      case MessageType.success:
+        backgroundColor = Colors.green;
+        break;
+      default:
+        backgroundColor = Colors.black;
+        break;
+    }
+    Future.delayed(
+      const Duration(seconds: 0),
+      () {
+        Get.rawSnackbar(
+          snackPosition: SnackPosition.TOP,
+          messageText: Text(
+            message,
+            style: const TextStyle(color: Colors.white),
+          ),
+          mainButton: TextButton(
+            onPressed: onTap ?? Get.back,
+            child: Text(
+              actionName,
+              style: const TextStyle(color: Colors.white),
+            ),
+          ),
+          backgroundColor: backgroundColor,
+          margin: const EdgeInsets.all(15.0),
+          borderRadius: 15,
+          snackStyle: SnackStyle.FLOATING,
+        );
+      },
+    );
   }
 
   static double getImageSizeMB(String filePath) {
@@ -1370,6 +1413,10 @@ Widget Loader() {
 }
 
 extension StringCasingExtension on String {
-  String get toCapitalized => length > 0 ?'${this[0].toUpperCase()}${substring(1).toLowerCase()}':'';
-  String get toTitleCase => replaceAll(RegExp(' +'), ' ').split(' ').map((str) => str.toCapitalized).join(' ');
+  String get toCapitalized =>
+      length > 0 ? '${this[0].toUpperCase()}${substring(1).toLowerCase()}' : '';
+  String get toTitleCase => replaceAll(RegExp(' +'), ' ')
+      .split(' ')
+      .map((str) => str.toCapitalized)
+      .join(' ');
 }
