@@ -2,10 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:krishna_ornaments/app/pages/pages.dart';
-import 'package:krishna_ornaments/app/theme/colors_value.dart';
-import 'package:krishna_ornaments/app/theme/dimens.dart';
-import 'package:krishna_ornaments/app/theme/styles.dart';
+import 'package:krishna_ornaments/app/app.dart';
 
 // ignore: must_be_immutable
 class CustomProductView extends StatefulWidget {
@@ -14,26 +11,28 @@ class CustomProductView extends StatefulWidget {
     required this.productName,
     required this.imageUrl,
     required this.categoryName,
-    required this.productGrossAmount,
-    required this.productPrice,
-    required this.productRatting,
     required this.inWishList,
+    required this.quantity,
+    required this.weigth,
     this.isHorizontal = false,
     required this.onTap,
     required this.addFavorite,
+    required this.increment,
+    required this.dincrement,
     this.height,
   });
   String productName;
   double? height;
   String categoryName;
-  String productPrice;
-  String productGrossAmount;
-  String productRatting;
   String imageUrl;
+  String weigth;
+  int quantity;
   bool inWishList;
   bool isHorizontal;
   void Function()? onTap;
   void Function()? addFavorite;
+  void Function()? increment;
+  void Function()? dincrement;
 
   @override
   State<CustomProductView> createState() => _CustomProductViewState();
@@ -49,30 +48,30 @@ class _CustomProductViewState extends State<CustomProductView> {
           child: InkWell(
             onTap: widget.onTap,
             child: Container(
-              width: Get.width / 1.6,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
+              width: Get.width / 1.7,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(
+                  Dimens.ten,
                 ),
-                color: Color(0xffFFFFFF),
+                color: ColorsValue.whiteColor,
               ),
               child: Padding(
-                padding: const EdgeInsets.all(10),
+                padding: Dimens.edgeInsets10,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Stack(
                       children: [
                         Container(
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                              Dimens.ten,
                             ),
-                            color: Color(0xffCCCCCC),
+                            color: ColorsValue.appBg,
                           ),
                           child: ClipRRect(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(10),
+                            borderRadius: BorderRadius.circular(
+                              Dimens.ten,
                             ),
                             child: CachedNetworkImage(
                               imageUrl: widget.imageUrl,
@@ -82,39 +81,41 @@ class _CustomProductViewState extends State<CustomProductView> {
                                   : Get.height / 5,
                               width: Get.width / 1.3,
                               placeholder: (context, url) => Image.asset(
-                                'assets/images/Mask group.png',
+                                AssetConstants.placeholder,
                                 fit: BoxFit.cover,
                               ),
                               errorWidget: (context, url, error) => Image.asset(
-                                'assets/images/Mask group.png',
+                                AssetConstants.placeholder,
                                 fit: BoxFit.cover,
                               ),
                             ),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: Dimens.edgeInsets8,
                           child: Align(
                             alignment: Alignment.topRight,
                             child: Container(
-                              height: 30,
-                              width: 30,
-                              decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(20),
+                              height: Dimens.thirty,
+                              width: Dimens.thirty,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  Dimens.fifty,
                                 ),
-                                color: Color(0xffFFFFFF),
+                                color: ColorsValue.whiteColor,
+                                border: Border.all(
+                                  width: Dimens.one,
+                                  color: ColorsValue.lightPrimaryColor,
+                                ),
                               ),
                               child: Center(
                                 child: InkWell(
                                   onTap: widget.addFavorite,
-                                  child: widget.inWishList
-                                      ? SvgPicture.asset(
-                                          'assets/icons/selected_heart.svg',
-                                        )
-                                      : SvgPicture.asset(
-                                          'assets/icons/heart.svg',
-                                        ),
+                                  child: SvgPicture.asset(
+                                    widget.inWishList
+                                        ? AssetConstants.ic_fill_like
+                                        : AssetConstants.ic_like,
+                                  ),
                                 ),
                               ),
                             ),
@@ -122,7 +123,7 @@ class _CustomProductViewState extends State<CustomProductView> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 10),
+                    Dimens.boxHeight10,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -143,7 +144,7 @@ class _CustomProductViewState extends State<CustomProductView> {
                                 style: Styles.black70014,
                               ),
                               Text(
-                                "3.9 gm",
+                                widget.weigth,
                                 style: Styles.black60012,
                               ),
                             ],
@@ -154,40 +155,38 @@ class _CustomProductViewState extends State<CustomProductView> {
                           children: [
                             Row(
                               children: [
-                                InkWell(
-                                  onTap: controller.onIncrement,
+                                GestureDetector(
+                                  onTap: widget.increment,
                                   child: Container(
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
+                                      borderRadius: BorderRadius.circular(
+                                        Dimens.ten,
+                                      ),
                                       color: ColorsValue.colorDFDFDF,
                                     ),
-                                    child: const Padding(
-                                      padding: EdgeInsets.all(4),
-                                      child: Icon(
-                                        Icons.add,
-                                        size: 20,
-                                        color: ColorsValue.color9C9C9C,
-                                      ),
+                                    child: SvgPicture.asset(
+                                      AssetConstants.minus,
+                                      height: Dimens.twentyFour,
+                                      width: Dimens.twentyFour,
                                     ),
                                   ),
                                 ),
                                 Dimens.boxWidth10,
-                                Text(controller.itemCounter.toString()),
+                                Text(
+                                  widget.quantity.toString(),
+                                ),
                                 Dimens.boxWidth10,
-                                InkWell(
-                                  onTap: controller.onDecrement,
+                                GestureDetector(
+                                  onTap: widget.dincrement,
                                   child: Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
                                       color: ColorsValue.colorDFDFDF,
                                     ),
-                                    child: const Padding(
-                                      padding: EdgeInsets.all(4),
-                                      child: Icon(
-                                        Icons.remove,
-                                        size: 20,
-                                        color: ColorsValue.color9C9C9C,
-                                      ),
+                                    child: SvgPicture.asset(
+                                      AssetConstants.plus,
+                                      height: Dimens.twentyFour,
+                                      width: Dimens.twentyFour,
                                     ),
                                   ),
                                 ),
@@ -197,17 +196,18 @@ class _CustomProductViewState extends State<CustomProductView> {
                             InkWell(
                               onTap: widget.onTap,
                               child: Container(
+                                alignment: Alignment.center,
+                                padding: Dimens.edgeInsets14_0_14_0,
+                                height: Dimens.twentyFive,
                                 decoration: BoxDecoration(
                                   color: ColorsValue.colorEDC97D,
-                                  borderRadius:
-                                      BorderRadius.circular(Dimens.twelve),
-                                ),
-                                child: Padding(
-                                  padding: Dimens.edgeInsets10,
-                                  child: Text(
-                                    'Add To Cart',
-                                    style: Styles.colorFBF7F350010,
+                                  borderRadius: BorderRadius.circular(
+                                    Dimens.four,
                                   ),
+                                ),
+                                child: Text(
+                                  'Add To Cart',
+                                  style: Styles.colorFBF7F350010,
                                 ),
                               ),
                             ),

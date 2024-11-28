@@ -13,7 +13,10 @@ class EndPoints {
   static String postSampleOrder = 'user/sampleorders/save';
   static String sampleOrderHistory = 'user/sampleorders';
   static String getOneSampleOrder = 'user/sampleorders/getone';
-
   static String postOrderHistory = 'user/orders/history';
   static String postOrderGetOne = 'user/orders/getone';
+
+  // Harshil Gopani
+  static String getAllCategories = 'user/categories';
+  static String postAllProduct = 'user/products';
 }

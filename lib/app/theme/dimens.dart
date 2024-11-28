@@ -148,6 +148,7 @@ abstract class Dimens {
   static double twoHundredSixtySix = 266.sp;
   static double twoHundredSixtyEight = 268.sp;
   static double twoHundredEighty = 280.sp;
+  static double twoHundredSeventyFive = 275.sp;
   static double twoHundredNintyOne = 291.sp;
   static double twoHundredNintyTwo = 292.sp;
   static double threeHundred = 300.sp;
@@ -180,7 +181,8 @@ abstract class Dimens {
   static double hundredFiftyStatic = 150;
   static double twoHundredStatic = 200;
   static double twoHundredFifteen = 215;
-  static double twoHundredSeventy = 270;
+  static double twoHundredNinety = 290;
+  static double twoHundredSeventyEight = 278;
 
   static double pointZeroZeroEight = 0.08.sp;
   static double pointZeroZeroNine = 0.09.sp;
@@ -320,6 +322,7 @@ abstract class Dimens {
   static EdgeInsets edgeInsetsBottom30 = EdgeInsets.only(bottom: thirty);
 
   static EdgeInsets edgeInsetsLeft2 = EdgeInsets.only(left: two);
+  static EdgeInsets edgeInsetsLeft4 = EdgeInsets.only(left: four);
 
   static EdgeInsets edgeInsetsRight24 = EdgeInsets.only(right: twentyFour);
 
@@ -1063,6 +1066,13 @@ abstract class Dimens {
     zero,
     twenty,
     zero,
+  );
+
+  static EdgeInsets edgeInsets20_0_20_20 = EdgeInsets.fromLTRB(
+    twenty,
+    zero,
+    twenty,
+    twenty,
   );
   static EdgeInsets edgeInsets20_5_20_5 = EdgeInsets.fromLTRB(
     twenty,
