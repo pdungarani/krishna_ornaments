@@ -13,8 +13,8 @@ abstract class RouteManagement {
   static void goToHomeView() => Get.toNamed<void>(Routes.homeScreen);
   static void goToBottomBarView() => Get.toNamed<void>(Routes.bottomBarScreen);
   static void goToOrderScreen() => Get.toNamed<void>(Routes.orderScreen);
-  static void goToOrderDetalisScreen() =>
-      Get.toNamed<void>(Routes.orderDetalisScreen);
+  static void goToOrderDetalisScreen(String orderId) =>
+      Get.toNamed<void>(Routes.orderDetalisScreen, arguments: orderId);
   static void goToBagDetailScreen() =>
       Get.toNamed<void>(Routes.bagDetailScreen);
   static void goToRepairScreen() => Get.toNamed<void>(Routes.repairScreen);

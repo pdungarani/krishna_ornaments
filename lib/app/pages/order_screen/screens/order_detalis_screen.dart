@@ -12,7 +12,11 @@ class OrderDetalisScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<OrderController>(
-      initState: (state) {},
+      initState: (state) {
+        var controller = Get.find<OrderController>();
+        controller.orderId = Get.arguments;
+        controller.postOrderGetOne();
+      },
       builder: (controller) {
         return Scaffold(
           backgroundColor: ColorsValue.appBg,
@@ -34,14 +38,14 @@ class OrderDetalisScreen extends StatelessWidget {
                     ),
                     Dimens.boxHeight5,
                     Text(
-                      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                      controller.getOneOrderData?.mainDescription ?? "",
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                       style: Styles.colorA7A7A750012,
                     ),
                     Dimens.boxHeight20,
                     Wrap(
-                      children: controller.list.map((e) {
+                      children: controller.getOneOrderData?.products?.map((e) {
                             return Padding(
                               padding: Dimens.edgeInsetsBottom10,
                               child: Container(
@@ -71,7 +75,7 @@ class OrderDetalisScreen extends StatelessWidget {
                                             Dimens.five,
                                           ),
                                           child: CachedNetworkImage(
-                                            imageUrl: "",
+                                            imageUrl: e.productImage ?? '',
                                             fit: BoxFit.cover,
                                             placeholder: (context, url) {
                                               return Image.asset(
@@ -93,7 +97,7 @@ class OrderDetalisScreen extends StatelessWidget {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              "${"total_quentity".tr} 750",
+                                              "${"total_quentity".tr} ${e.quantity}",
                                               style: Styles.color212121W90010,
                                             ),
                                             Dimens.boxHeight5,
@@ -103,7 +107,7 @@ class OrderDetalisScreen extends StatelessWidget {
                                             ),
                                             Dimens.boxHeight5,
                                             Text(
-                                              "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                                              e.description ?? '',
                                               maxLines: 3,
                                               overflow: TextOverflow.ellipsis,
                                               style: Styles.colorA7A7A750010,
@@ -121,12 +125,12 @@ class OrderDetalisScreen extends StatelessWidget {
                     ),
                     Dimens.boxHeight20,
                     Text(
-                      "${"total_bag".tr} 001",
+                      "${"total_bag".tr} ${controller.getOneOrderData?.totalBags ?? ""}",
                       style: Styles.appColor70014,
                     ),
                     Dimens.boxHeight12,
                     Wrap(
-                      children: controller.list.map(
+                      children: controller.getOneOrderData?.bags?.map(
                             (e) {
                               return Container(
                                 margin: Dimens.edgeInsetsBottom10,

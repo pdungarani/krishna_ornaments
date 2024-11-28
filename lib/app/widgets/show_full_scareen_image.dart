@@ -1,10 +1,8 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/widgets/appbar_widgets.dart';
-import 'package:krishna_ornaments/data/data.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
@@ -17,7 +15,9 @@ class ShowFullScareenImage extends StatelessWidget {
       return Scaffold(
         backgroundColor: ColorsValue.appBg,
         appBar: AppBarWidget(
-          onTapBack: () {},
+          onTapBack: () {
+            Get.back();
+          },
           title: 'Gallery'.tr,
         ),
         body: SafeArea(
@@ -45,7 +45,7 @@ class ShowFullScareenImage extends StatelessWidget {
 
   PhotoViewGalleryPageOptions buildForImage(image) {
     return PhotoViewGalleryPageOptions(
-      imageProvider: CachedNetworkImageProvider(ApiWrapper.imageUrl + image),
+      imageProvider: CachedNetworkImageProvider(image),
       initialScale: PhotoViewComputedScale.contained * 1,
       minScale: PhotoViewComputedScale.contained * 1,
     );

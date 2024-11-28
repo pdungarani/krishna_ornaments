@@ -10,6 +10,11 @@ class EndPoints {
   static String repairOrderImage = 'user/repairingorders/upload';
   static String postRepairOrder = 'user/repairingorders/save';
   static String sampleOrderImage = 'user/sampleorders/upload';
+  static String postSampleOrder = 'user/sampleorders/save';
+  static String sampleOrderHistory = 'user/sampleorders';
+  static String getOneSampleOrder = 'user/sampleorders/getone';
+  static String postOrderHistory = 'user/orders/history';
+  static String postOrderGetOne = 'user/orders/getone';
 
   // Harshil Gopani
   static String getAllCategories = 'user/categories';

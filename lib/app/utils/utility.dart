@@ -1420,3 +1420,7 @@ extension StringCasingExtension on String {
       .map((str) => str.toCapitalized)
       .join(' ');
 }
+
+extension DateTimex on DateTime {
+  String get dateFormate => DateFormat('dd, MMM yyyy').format(this);
+}

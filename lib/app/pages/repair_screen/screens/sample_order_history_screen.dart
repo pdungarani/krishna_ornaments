@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/navigators/navigators.dart';
 import 'package:krishna_ornaments/app/widgets/appbar_widgets.dart';
+import 'package:krishna_ornaments/domain/models/models.dart';
 
 class SampleOrderHistoryScreen extends StatelessWidget {
   const SampleOrderHistoryScreen({super.key});
@@ -12,20 +14,35 @@ class SampleOrderHistoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<RepairController>(initState: (state) {
       var controller = Get.find<RepairController>();
+      controller.smaplePagingController.addPageRequestListener((pageKey) async {
+        await controller.postSampleOrderHistory(pageKey);
+      });
     }, builder: (controller) {
       return Scaffold(
-          backgroundColor: ColorsValue.appBg,
-          appBar: AppBarWidget(
-            onTapBack: () {},
-            title: 'sample_order_history'.tr,
-          ),
-          body: ListView.builder(
-            itemBuilder: (context, index) {
+        backgroundColor: ColorsValue.appBg,
+        appBar: AppBarWidget(
+          onTapBack: () {
+            Get.back();
+          },
+          title: 'sample_order_history'.tr,
+        ),
+        body: PagedListView<int, SampleOrderHistoryDoc>(
+          pagingController: controller.smaplePagingController,
+          builderDelegate: PagedChildBuilderDelegate<SampleOrderHistoryDoc>(
+            noItemsFoundIndicatorBuilder: (context) {
+              return Center(
+                child: Text(
+                  "Sample Order history data empty.",
+                  style: Styles.black50014,
+                ),
+              );
+            },
+            itemBuilder: (context, item, index) {
               return Padding(
                 padding: Dimens.edgeInsets20_00_20_00,
                 child: InkWell(
                   onTap: () {
-                    RouteManagement.goToSampleOrderDetailsScreen("");
+                    RouteManagement.goToSampleOrderDetailsScreen(item.id ?? '');
                   },
                   child: Container(
                     margin: Dimens.edgeInsetsBottom10,
@@ -86,7 +103,7 @@ class SampleOrderHistoryScreen extends StatelessWidget {
                                         style: Styles.grey94A3B850014,
                                       ),
                                       Text(
-                                        "03",
+                                        item.bagNumber.toString(),
                                         style: Styles.color212121W50014,
                                       )
                                     ],
@@ -105,7 +122,7 @@ class SampleOrderHistoryScreen extends StatelessWidget {
                               style: Styles.grey94A3B850014,
                             ),
                             Text(
-                              "R1",
+                              item.orderNumber ?? '',
                               style: Styles.color212121W50014,
                             )
                           ],
@@ -119,28 +136,14 @@ class SampleOrderHistoryScreen extends StatelessWidget {
                               style: Styles.grey94A3B850014,
                             ),
                             Text(
-                              "Completed",
+                              item.orderTracking?.toCapitalized ?? '',
                               style: Styles.appColor70014,
                             )
                           ],
                         ),
                         Dimens.boxHeight5,
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'delivery_date'.tr,
-                              style: Styles.grey94A3B850014,
-                            ),
-                            Text(
-                              "02/09/2024",
-                              style: Styles.color21212150014,
-                            )
-                          ],
-                        ),
-                        Dimens.boxHeight5,
                         Text(
-                          "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                          item.description ?? '',
                           style: Styles.colorA7A7A750010,
                         ),
                       ],
@@ -149,7 +152,9 @@ class SampleOrderHistoryScreen extends StatelessWidget {
                 ),
               );
             },
-          ));
+          ),
+        ),
+      );
     });
   }
 }

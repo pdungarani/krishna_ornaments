@@ -51,7 +51,7 @@ class RepairScreen extends StatelessWidget {
                     ),
                   ),
                   Dimens.boxWidth10,
-                   Expanded(
+                  Expanded(
                     child: InkWell(
                       onTap: () {
                         controller.selectedValue = 1;
@@ -127,7 +127,7 @@ class RepairScreen extends StatelessWidget {
             ] else ...[
               InkWell(
                 onTap: () {
-                  controller.selectImage(context, true);
+                  controller.sampleOrderImage();
                 },
                 child: SizedBox(
                   height: 394,

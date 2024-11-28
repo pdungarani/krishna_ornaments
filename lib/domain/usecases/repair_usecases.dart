@@ -43,6 +43,39 @@ class RepairUsecases {
         isLoading: isLoading,
       );
 
+  Future<ResponseModel?> postSampleOrder({
+    bool isLoading = false,
+    required List<SampleOrderImageDatum> images,
+    required int totalQuantity,
+    required String description,
+  }) async =>
+      await repository.postSampleOrder(
+        images: images,
+        totalQuantity: totalQuantity,
+        description: description,
+        isLoading: isLoading,
+      );
+
+  Future<SampleOrderHistoryModel?> postSampleOrderHistory({
+    bool isLoading = false,
+    required int page,
+    required int limit,
+  }) async =>
+      await repository.postSampleOrderHistory(
+        page: page,
+        limit: limit,
+        isLoading: isLoading,
+      );
+
+  Future<GetOneSampleModel?> getOneSample({
+    bool isLoading = false,
+    required String sampleOrderId,
+  }) async =>
+      await repository.getOneSample(
+        sampleOrderId: sampleOrderId,
+        isLoading: isLoading,
+      );
+
   Future<ResponseModel?> postRepairOrder({
     bool isLoading = false,
     required String file,

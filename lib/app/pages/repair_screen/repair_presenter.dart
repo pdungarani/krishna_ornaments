@@ -1,3 +1,4 @@
+import 'package:krishna_ornaments/data/data.dart';
 import 'package:krishna_ornaments/domain/domain.dart';
 
 class RepairPresenter {
@@ -40,6 +41,39 @@ class RepairPresenter {
   }) async =>
       await repairUsecases.sampleOrderImage(
         filePath: filePath,
+        isLoading: isLoading,
+      );
+
+  Future<ResponseModel?> postSampleOrder({
+    bool isLoading = false,
+    required List<SampleOrderImageDatum> images,
+    required int totalQuantity,
+    required String description,
+  }) async =>
+      await repairUsecases.postSampleOrder(
+        images: images,
+        totalQuantity: totalQuantity,
+        description: description,
+        isLoading: isLoading,
+      );
+
+  Future<SampleOrderHistoryModel?> postSampleOrderHistory({
+    bool isLoading = false,
+    required int page,
+    required int limit,
+  }) async =>
+      await repairUsecases.postSampleOrderHistory(
+        page: page,
+        limit: limit,
+        isLoading: isLoading,
+      );
+
+  Future<GetOneSampleModel?> getOneSample({
+    bool isLoading = false,
+    required String sampleOrderId,
+  }) async =>
+      await repairUsecases.getOneSample(
+        sampleOrderId: sampleOrderId,
         isLoading: isLoading,
       );
 
