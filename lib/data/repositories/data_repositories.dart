@@ -65,6 +65,28 @@ class DataRepository extends DomainRepository {
   @override
   Future<String> getIp() async => await connectHelper.getIp();
 
+  Future<ResponseModel> getAllCategories({
+    bool isLoading = false,
+  }) async =>
+      await connectHelper.getAllCategories(
+        isLoading: isLoading,
+      );
+
+  Future<ResponseModel> postAllProduct({
+    bool isLoading = false,
+    required int page,
+    required int limit,
+    required String search,
+    required String category,
+  }) async =>
+      await connectHelper.postAllProduct(
+        page: page,
+        limit: limit,
+        search: search,
+        category: category,
+        isLoading: isLoading,
+      );
+
   Future<ResponseModel> loginApi({
     bool isLoading = false,
     required String mobile,

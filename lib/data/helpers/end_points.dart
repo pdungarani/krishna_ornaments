@@ -10,5 +10,8 @@ class EndPoints {
   static String repairOrderImage = 'user/repairingorders/upload';
   static String postRepairOrder = 'user/repairingorders/save';
   static String sampleOrderImage = 'user/sampleorders/upload';
-  
+
+  // Harshil Gopani
+  static String getAllCategories = 'user/categories';
+  static String postAllProduct = 'user/products';
 }

@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter/material.dart';
@@ -9,38 +11,66 @@ class CategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CategoryController>(
+      initState: (state) async {
+        var controller = Get.find<CategoryController>();
+        await controller.getAllCategories();
+      },
       builder: (controller) => Scaffold(
         backgroundColor: ColorsValue.primaryColor,
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: Dimens.edgeInsets20_20.copyWith(bottom: 30),
-            child: Column(
-              children: [
-                Dimens.boxHeight20,
-                Text(
-                  "Categories",
-                  style: Styles.color01010170020,
-                ),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 10,
-                  itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: Container(
-                      height: context.height / 7,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                          Dimens.twelve,
-                        ),
-                        color: ColorsValue.redColor,
-                      ),
-                    ),
+        appBar: AppBar(
+          backgroundColor: ColorsValue.primaryColor,
+          automaticallyImplyLeading: false,
+          centerTitle: true,
+          title: Text(
+            "Categories",
+            style: Styles.color01010170020,
+          ),
+        ),
+        body: ListView.builder(
+          padding: Dimens.edgeInsets20_0_20_20,
+          itemCount: controller.getCategoriesList.length,
+          itemBuilder: (context, index) {
+            var item = controller.getCategoriesList[index];
+            var type =
+                controller.getCategoriesList[index].image?.split(".").last;
+            return Padding(
+              padding: Dimens.edgeInsetsTopt10,
+              child: Container(
+                width: double.maxFinite,
+                height: Dimens.hundredTwenty,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                    Dimens.ten,
                   ),
                 ),
-              ],
-            ),
-          ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(
+                    Dimens.ten,
+                  ),
+                  child: type != "svg"
+                      ? CachedNetworkImage(
+                          imageUrl: (item.image ?? ""),
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) {
+                            return Image.asset(
+                              AssetConstants.placeholder,
+                              fit: BoxFit.cover,
+                            );
+                          },
+                          errorWidget: (context, url, error) {
+                            return Image.asset(
+                              AssetConstants.placeholder,
+                              fit: BoxFit.cover,
+                            );
+                          },
+                        )
+                      : SvgPicture.network(
+                          item.image ?? "",
+                        ),
+                ),
+              ),
+            );
+          },
         ),
       ),
     );

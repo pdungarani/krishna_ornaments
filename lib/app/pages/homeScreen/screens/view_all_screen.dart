@@ -899,24 +899,22 @@ class ViewAllProductScreen extends StatelessWidget {
                                   itemCount: controller.productList.length,
                                   scrollDirection: Axis.vertical,
                                   itemBuilder: (context, index) {
-                                    return InkWell(
-                                      onTap: () {
-                                        // RouteManagement.goToProductDetailScreen(
-                                        //     item.id ?? "", "Best Seller");
-                                      },
-                                      child: CustomProductView(
-                                        productName: 'productName',
-                                        imageUrl:
-                                            'assets/images/Mask group.png',
-                                        categoryName: 'categoryName',
-                                        productGrossAmount: '230',
-                                        productPrice: '250',
-                                        productRatting: '2.4',
-                                        inWishList: false,
-                                        onTap: () {},
-                                        addFavorite: () {},
-                                      ),
-                                    );
+                                    return Center();
+                                    // return InkWell(
+                                    //   onTap: () {
+                                    //     // RouteManagement.goToProductDetailScreen(
+                                    //     //     item.id ?? "", "Best Seller");
+                                    //   },
+                                    //   child: CustomProductView(
+                                    //     productName: 'productName',
+                                    //     imageUrl:
+                                    //         'assets/images/Mask group.png',
+                                    //     categoryName: 'categoryName',
+                                    //     inWishList: false,
+                                    //     onTap: () {},
+                                    //     addFavorite: () {},
+                                    //   ),
+                                    // );
                                   },
                                 ),
                               )
