@@ -14,6 +14,7 @@ class HomeScreen extends StatelessWidget {
       initState: (state) async {
         var controller = Get.find<HomeController>();
         await controller.postAllProduct(1);
+        await controller.postAllTrendingProduct(1);
       },
       builder: (controller) => Scaffold(
         backgroundColor: ColorsValue.primaryColor,
@@ -291,9 +292,9 @@ class HomeScreen extends StatelessWidget {
                     controller: controller.scrollBestSellerController,
                     padding: Dimens.edgeInsets0,
                     scrollDirection: Axis.horizontal,
-                    itemCount: controller.productDocList.length,
+                    itemCount: controller.productArrivalDocList.length,
                     itemBuilder: (context, index) {
-                      var item = controller.productDocList[index];
+                      var item = controller.productArrivalDocList[index];
                       return Padding(
                         padding: Dimens.edgeInsetsRight20,
                         child: CustomProductView(
@@ -303,7 +304,16 @@ class HomeScreen extends StatelessWidget {
                           quantity: item.quantity ?? 1,
                           weigth: item.weight ?? "",
                           inWishList: item.isWishlist,
-                          onTap: () {},
+                          inCart: item.inCart ?? false,
+                          onAddToCard: () {
+                            if (item.inCart ?? false) {
+                              Get.find<BottomBarController>()
+                                  .tabController
+                                  ?.animateTo(2);
+                            } else {
+                              controller.postAddToCart(item, index, "arrival");
+                            }
+                          },
                           addFavorite: () {
                             if (item.isWishlist) {
                               item.isWishlist = false;
@@ -313,15 +323,16 @@ class HomeScreen extends StatelessWidget {
                             controller.update();
                           },
                           increment: () {
-                            if (controller.productDocList[index].quantity
+                            if (controller.productArrivalDocList[index].quantity
                                     .toDouble() >
                                 1) {
-                              controller.productDocList[index].quantity--;
+                              controller
+                                  .productArrivalDocList[index].quantity--;
                             }
                             controller.update();
                           },
                           dincrement: () {
-                            controller.productDocList[index].quantity++;
+                            controller.productArrivalDocList[index].quantity++;
                             controller.update();
                           },
                         ),
@@ -366,14 +377,14 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   height: Dimens.twoHundredNinety,
                   child: ListView.builder(
-                    controller: controller.scrollBestSellerController,
+                    controller: controller.scrollTrendingController,
                     padding: Dimens.edgeInsets0,
                     scrollDirection: Axis.horizontal,
-                    itemCount: controller.productDocList.length,
+                    itemCount: controller.productTrendingDocList.length,
                     itemBuilder: (context, index) {
-                      var item = controller.productDocList[index];
+                      var item = controller.productTrendingDocList[index];
                       return Padding(
-                        padding: Dimens.edgeInsetsRight20,
+                        padding: Dimens.edgeInsetsRight10,
                         child: CustomProductView(
                           productName: item.name ?? "",
                           imageUrl: item.image ?? "",
@@ -381,7 +392,16 @@ class HomeScreen extends StatelessWidget {
                           quantity: item.quantity ?? 1,
                           weigth: item.weight ?? "",
                           inWishList: item.isWishlist,
-                          onTap: () {},
+                          inCart: item.inCart ?? false,
+                          onAddToCard: () {
+                            if (item.inCart ?? false) {
+                              Get.find<BottomBarController>()
+                                  .tabController
+                                  ?.animateTo(2);
+                            } else {
+                              controller.postAddToCart(item, index, "trending");
+                            }
+                          },
                           addFavorite: () {
                             if (item.isWishlist) {
                               item.isWishlist = false;
@@ -391,15 +411,17 @@ class HomeScreen extends StatelessWidget {
                             controller.update();
                           },
                           increment: () {
-                            if (controller.productDocList[index].quantity
+                            if (controller
+                                    .productTrendingDocList[index].quantity
                                     .toDouble() >
                                 1) {
-                              controller.productDocList[index].quantity--;
+                              controller
+                                  .productTrendingDocList[index].quantity--;
                             }
                             controller.update();
                           },
                           dincrement: () {
-                            controller.productDocList[index].quantity++;
+                            controller.productTrendingDocList[index].quantity++;
                             controller.update();
                           },
                         ),

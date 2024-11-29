@@ -78,12 +78,47 @@ class DataRepository extends DomainRepository {
     required int limit,
     required String search,
     required String category,
+    required String min,
+    required String max,
+    required String productType,
   }) async =>
       await connectHelper.postAllProduct(
         page: page,
         limit: limit,
         search: search,
         category: category,
+        min: min,
+        max: max,
+        productType: productType,
+        isLoading: isLoading,
+      );
+
+  Future<ResponseModel> postAddToCart({
+    bool isLoading = false,
+    required String productId,
+    required int quantity,
+    required String description,
+  }) async =>
+      await connectHelper.postAddToCart(
+        productId: productId,
+        quantity: quantity,
+        description: description,
+        isLoading: isLoading,
+      );
+
+  Future<ResponseModel> postGetAllCartProduct({
+    bool isLoading = false,
+  }) async =>
+      await connectHelper.postGetAllCartProduct(
+        isLoading: isLoading,
+      );
+
+  Future<ResponseModel> postCartProductRemove({
+    bool isLoading = false,
+    required String productId,
+  }) async =>
+      await connectHelper.postCartProductRemove(
+        productId: productId,
         isLoading: isLoading,
       );
 

@@ -169,6 +169,9 @@ class Repository {
     required int limit,
     required String search,
     required String category,
+    required String min,
+    required String max,
+    required String productType,
   }) async {
     try {
       var response = await _dataRepository.postAllProduct(
@@ -176,6 +179,9 @@ class Repository {
         limit: limit,
         search: search,
         category: category,
+        min: min,
+        max: max,
+        productType: productType,
         isLoading: isLoading,
       );
       var loginModel = productsModelFromJson(response.data);
@@ -185,6 +191,62 @@ class Repository {
         Utility.errorMessage(loginModel.message.toString());
         return loginModel;
       }
+    } catch (_) {
+      Utility.closeDialog();
+      UnimplementedError();
+      return null;
+    }
+  }
+
+  Future<ResponseModel?> postAddToCart({
+    bool isLoading = false,
+    required String productId,
+    required int quantity,
+    required String description,
+  }) async {
+    try {
+      var response = await _dataRepository.postAddToCart(
+        productId: productId,
+        quantity: quantity,
+        description: description,
+        isLoading: isLoading,
+      );
+      return response;
+    } catch (_) {
+      Utility.closeDialog();
+      UnimplementedError();
+      return null;
+    }
+  }
+
+  Future<ResponseModel?> postGetAllCartProduct({
+    bool isLoading = false,
+    required String productId,
+    required int quantity,
+    required String description,
+  }) async {
+    try {
+      var response = await _dataRepository.postGetAllCartProduct(
+        isLoading: isLoading,
+      );
+      return response;
+    } catch (_) {
+      Utility.closeDialog();
+      UnimplementedError();
+      return null;
+    }
+  }
+
+  Future<ResponseModel?> postCartProductRemove({
+    bool isLoading = false,
+    required String productId,
+  }) async {
+    try {
+      var response = await _dataRepository.postCartProductRemove(
+        productId: productId,
+        isLoading: isLoading,
+      );
+      return response;
     } catch (_) {
       Utility.closeDialog();
       UnimplementedError();

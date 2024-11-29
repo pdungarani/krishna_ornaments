@@ -98,6 +98,9 @@ class ConnectHelper {
     required int page,
     required int limit,
     required String search,
+    required String min,
+    required String max,
+    required String productType,
     required String category,
   }) async {
     var data = {
@@ -105,9 +108,63 @@ class ConnectHelper {
       "limit": limit,
       "search": search,
       "category": category,
+      "min": min,
+      "max": max,
+      "productType": productType,
     };
     var response = await apiWrapper.makeRequest(
       EndPoints.postAllProduct,
+      Request.post,
+      data,
+      isLoading,
+      Utility.commonHeader(),
+    );
+    return response;
+  }
+
+  Future<ResponseModel> postGetAllCartProduct({
+    bool isLoading = false,
+  }) async {
+    var response = await apiWrapper.makeRequest(
+      EndPoints.postGetAllCartProduct,
+      Request.post,
+      null,
+      isLoading,
+      Utility.commonHeader(),
+    );
+    return response;
+  }
+
+  Future<ResponseModel> postCartProductRemove({
+    bool isLoading = false,
+    required String productId,
+  }) async {
+    var data = {
+      "productId": productId,
+    };
+    var response = await apiWrapper.makeRequest(
+      EndPoints.postCartProductRemove,
+      Request.post,
+      data,
+      isLoading,
+      Utility.commonHeader(),
+    );
+    return response;
+  }
+
+  Future<ResponseModel> postAddToCart({
+    bool isLoading = false,
+    required String productId,
+    required int quantity,
+    required String description,
+  }) async {
+    var data = {
+      "productId": productId,
+      "quantity": quantity,
+      "description": description,
+    };
+    var response = await apiWrapper.makeRequest(
+      EndPoints.postAddToCart,
       Request.post,
       data,
       isLoading,
@@ -314,9 +371,7 @@ class ConnectHelper {
     return response;
   }
 
-
-
-Future<ResponseModel> postOrderHistory({
+  Future<ResponseModel> postOrderHistory({
     bool isLoading = false,
     required int page,
     required int limit,
@@ -335,7 +390,6 @@ Future<ResponseModel> postOrderHistory({
     return response;
   }
 
-  
   Future<ResponseModel> postOrderGetOne({
     bool isLoading = false,
     required String orderId,

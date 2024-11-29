@@ -1,5 +1,6 @@
+import 'dart:convert';
+
 import 'package:flutter/widgets.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/domain/domain.dart';
@@ -18,7 +19,6 @@ class HomeController extends GetxController {
   late PageController controller;
 
   int itemCounter = 0;
-
 
   /// >>>>>>>>>>>>>> For view all Screen <<<<<<<<<<<<<<<<<<<< ///
 
@@ -57,43 +57,110 @@ class HomeController extends GetxController {
     update();
   }
 
-  final ScrollController scrollProductController = ScrollController();
-  List<ProductsDoc> productDocList = [];
+  final ScrollController scrollArrivalProductController = ScrollController();
+  List<ProductsDoc> productArrivalDocList = [];
 
-  int pageProductCount = 1;
-  bool isProductLastPage = false;
-  bool isProductLoading = false;
+  int pageArrivalProductCount = 1;
+  bool isProductArrivalLastPage = false;
+  bool isProductArrivalLoading = false;
 
   Future<void> postAllProduct(int pageKey) async {
     if (pageKey == 1) {
-      pageProductCount = 1;
+      pageArrivalProductCount = 1;
     }
     var response = await homePresenter.postAllProduct(
       page: pageKey,
       limit: 10,
       search: "",
       category: "",
+      min: "",
+      max: "",
+      productType: "arrival",
       isLoading: false,
     );
     if (response?.data != null) {
       if (pageKey == 1) {
-        isProductLastPage = false;
-        productDocList.clear();
+        isProductArrivalLastPage = false;
+        productArrivalDocList.clear();
       }
       if ((response?.data?.docs?.length ?? 0) < 10) {
-        isProductLastPage = true;
-        productDocList.addAll(response?.data?.docs ?? []);
+        isProductArrivalLastPage = true;
+        productArrivalDocList.addAll(response?.data?.docs ?? []);
       } else {
-        pageProductCount++;
-        productDocList.addAll(response?.data?.docs ?? []);
+        pageArrivalProductCount++;
+        productArrivalDocList.addAll(response?.data?.docs ?? []);
       }
       if (pageKey == 1) {
-        if (scrollProductController.positions.isNotEmpty) {
-          scrollProductController.jumpTo(0);
+        if (scrollArrivalProductController.positions.isNotEmpty) {
+          scrollArrivalProductController.jumpTo(0);
         }
       }
     } else {
       Utility.errorMessage(response?.message ?? "");
+    }
+    update();
+  }
+
+  final ScrollController scrollTrendingController = ScrollController();
+  List<ProductsDoc> productTrendingDocList = [];
+
+  int pageTrendingProductCount = 1;
+  bool isProductTrendingLastPage = false;
+  bool isProductTrendingLoading = false;
+
+  Future<void> postAllTrendingProduct(int pageKey) async {
+    if (pageKey == 1) {
+      pageTrendingProductCount = 1;
+    }
+    var response = await homePresenter.postAllProduct(
+      page: pageKey,
+      limit: 10,
+      search: "",
+      category: "",
+      min: "",
+      max: "",
+      productType: "trending",
+      isLoading: false,
+    );
+    if (response?.data != null) {
+      if (pageKey == 1) {
+        isProductTrendingLastPage = false;
+        productTrendingDocList.clear();
+      }
+      if ((response?.data?.docs?.length ?? 0) < 10) {
+        isProductTrendingLastPage = true;
+        productTrendingDocList.addAll(response?.data?.docs ?? []);
+      } else {
+        pageTrendingProductCount++;
+        productTrendingDocList.addAll(response?.data?.docs ?? []);
+      }
+      if (pageKey == 1) {
+        if (scrollTrendingController.positions.isNotEmpty) {
+          scrollTrendingController.jumpTo(0);
+        }
+      }
+    } else {
+      Utility.errorMessage(response?.message ?? "");
+    }
+    update();
+  }
+
+  Future<void> postAddToCart(
+      ProductsDoc productsDoc, int index, String productType) async {
+    var response = await homePresenter.postAddToCart(
+      productId: productsDoc.id ?? "",
+      quantity: productsDoc.quantity,
+      description: "",
+      isLoading: false,
+    );
+    if (response?.data != null) {
+      if (productType.contains("arrival")) {
+        productArrivalDocList[index].inCart = true;
+      } else {
+        productTrendingDocList[index].inCart = true;
+      }
+    } else {
+      Utility.errorMessage(jsonDecode(response.toString())['Data']['Message']);
     }
     update();
   }

@@ -19,4 +19,7 @@ class EndPoints {
   // Harshil Gopani
   static String getAllCategories = 'user/categories';
   static String postAllProduct = 'user/products';
+  static String postAddToCart = 'user/cart/save';
+  static String postGetAllCartProduct = 'user/cart';
+  static String postCartProductRemove = 'user/cart/remove';
 }

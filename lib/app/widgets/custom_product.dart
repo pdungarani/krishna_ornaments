@@ -15,10 +15,11 @@ class CustomProductView extends StatefulWidget {
     required this.quantity,
     required this.weigth,
     this.isHorizontal = false,
-    required this.onTap,
+    required this.onAddToCard,
     required this.addFavorite,
     required this.increment,
     required this.dincrement,
+    required this.inCart,
     this.height,
   });
   String productName;
@@ -29,7 +30,8 @@ class CustomProductView extends StatefulWidget {
   int quantity;
   bool inWishList;
   bool isHorizontal;
-  void Function()? onTap;
+  bool inCart;
+  void Function()? onAddToCard;
   void Function()? addFavorite;
   void Function()? increment;
   void Function()? dincrement;
@@ -46,7 +48,7 @@ class _CustomProductViewState extends State<CustomProductView> {
         return Padding(
           padding: EdgeInsets.only(left: widget.isHorizontal ? 0 : 0),
           child: InkWell(
-            onTap: widget.onTap,
+            onTap: widget.onAddToCard,
             child: Container(
               width: Get.width / 1.7,
               decoration: BoxDecoration(
@@ -194,7 +196,7 @@ class _CustomProductViewState extends State<CustomProductView> {
                             ),
                             Dimens.boxHeight10,
                             InkWell(
-                              onTap: widget.onTap,
+                              onTap: widget.onAddToCard,
                               child: Container(
                                 alignment: Alignment.center,
                                 padding: Dimens.edgeInsets14_0_14_0,
@@ -206,7 +208,9 @@ class _CustomProductViewState extends State<CustomProductView> {
                                   ),
                                 ),
                                 child: Text(
-                                  'Add To Cart',
+                                  widget.inCart
+                                      ? 'Item In Cart'
+                                      : 'Add To Cart',
                                   style: Styles.colorFBF7F350010,
                                 ),
                               ),
