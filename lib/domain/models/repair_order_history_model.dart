@@ -100,6 +100,7 @@ class RepairOrderHistoryDoc {
   String? user;
   String? orderNumber;
   String? description;
+  String? file;
   int? bagNumber;
   String? orderTracking;
   int? createTimestamp;
@@ -112,6 +113,7 @@ class RepairOrderHistoryDoc {
     this.orderNumber,
     this.description,
     this.bagNumber,
+    this.file,
     this.orderTracking,
     this.createTimestamp,
     this.createdAt,
@@ -125,6 +127,7 @@ class RepairOrderHistoryDoc {
         orderNumber: json["order_number"],
         description: json["description"],
         bagNumber: json["bag_number"],
+        file: json["file"],
         orderTracking: json["order_tracking"],
         createTimestamp: json["create_timestamp"],
         createdAt: json["createdAt"] == null
@@ -139,6 +142,7 @@ class RepairOrderHistoryDoc {
         "order_number": orderNumber,
         "description": description,
         "bag_number": bagNumber,
+        "file": file,
         "order_tracking": orderTracking,
         "create_timestamp": createTimestamp,
         "createdAt": createdAt?.toIso8601String(),

@@ -100,6 +100,7 @@ class SampleOrderHistoryDoc {
   String? user;
   String? orderNumber;
   int? bagNumber;
+  List<Image>? images;
   String? description;
   String? orderTracking;
   int? createTimestamp;
@@ -111,6 +112,7 @@ class SampleOrderHistoryDoc {
     this.user,
     this.orderNumber,
     this.bagNumber,
+    this.images,
     this.description,
     this.orderTracking,
     this.createTimestamp,
@@ -125,6 +127,9 @@ class SampleOrderHistoryDoc {
         orderNumber: json["order_number"],
         bagNumber: json["bag_number"],
         description: json["description"],
+        images: json["images"] == null
+            ? []
+            : List<Image>.from(json["images"]!.map((x) => Image.fromJson(x))),
         orderTracking: json["order_tracking"],
         createTimestamp: json["create_timestamp"],
         createdAt: json["createdAt"] == null
@@ -139,9 +144,32 @@ class SampleOrderHistoryDoc {
         "order_number": orderNumber,
         "bag_number": bagNumber,
         "description": description,
+        "images": images == null
+            ? []
+            : List<dynamic>.from(images!.map((x) => x.toJson())),
         "order_tracking": orderTracking,
         "create_timestamp": createTimestamp,
         "createdAt": createdAt?.toIso8601String(),
         "id": docId,
+      };
+}
+
+class Image {
+  String? fileId;
+  String? path;
+
+  Image({
+    this.fileId,
+    this.path,
+  });
+
+  factory Image.fromJson(Map<String, dynamic> json) => Image(
+        fileId: json["fileId"],
+        path: json["path"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "fileId": fileId,
+        "path": path,
       };
 }

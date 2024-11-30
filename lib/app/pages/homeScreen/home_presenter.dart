@@ -22,6 +22,8 @@ class HomePresenter {
     required String min,
     required String max,
     required String productType,
+    required String sortField,
+    required var sortOption,
   }) async =>
       await homeUseCases.postAllProduct(
         page: page,
@@ -31,6 +33,8 @@ class HomePresenter {
         min: min,
         max: max,
         productType: productType,
+        sortField: sortField,
+        sortOption: sortOption,
         isLoading: isLoading,
       );
 

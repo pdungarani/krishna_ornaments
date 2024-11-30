@@ -27,8 +27,8 @@ abstract class Styles {
     color: Colors.yellow,
   );
 
-  static TextStyle greenW70010 = GoogleFonts.nunito(
-    fontSize: Dimens.ten,
+  static TextStyle greenW70012 = GoogleFonts.nunito(
+    fontSize: Dimens.fourteen,
     fontWeight: FontWeight.w700,
     color: Colors.green,
   );
@@ -36,7 +36,13 @@ abstract class Styles {
   static TextStyle redColorGuj70010 = GoogleFonts.nunito(
     color: ColorsValue.redColor,
     fontWeight: FontWeight.w700,
-    fontSize: Dimens.ten,
+    fontSize: Dimens.fourteen,
+  );
+
+  static TextStyle colorFFA50070012 = GoogleFonts.nunito(
+    color: ColorsValue.colorFFA500,
+    fontWeight: FontWeight.w700,
+    fontSize: Dimens.fourteen,
   );
 
   static TextStyle black50014 = GoogleFonts.montserrat(

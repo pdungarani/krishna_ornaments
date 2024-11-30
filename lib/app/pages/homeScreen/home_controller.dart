@@ -2,9 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:krishna_ornaments/app/app.dart';
-import 'package:krishna_ornaments/data/data.dart';
 import 'package:krishna_ornaments/domain/domain.dart';
 
 class HomeController extends GetxController {
@@ -75,9 +73,11 @@ class HomeController extends GetxController {
       limit: 10,
       search: "",
       category: "",
-      min: "",
-      max: "",
+      min: "1",
+      max: "10",
       productType: "arrival",
+      sortField: "weight",
+      sortOption: 1,
       isLoading: false,
     );
     if (response?.data != null) {
@@ -119,9 +119,11 @@ class HomeController extends GetxController {
       limit: 10,
       search: "",
       category: "",
-      min: "",
-      max: "",
+      min: "1",
+      max: "10",
       productType: "trending",
+      sortField: 'weight',
+      sortOption: 1,
       isLoading: false,
     );
     if (response?.data != null) {

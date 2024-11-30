@@ -303,4 +303,14 @@ class RepairController extends GetxController {
       update();
     }
   }
+
+  List stepperData = [
+    {"title": "Order Placed", "subTitle": "Your order has been placed"},
+    {"title": "Preparing", "subTitle": "Your order is being prepared"},
+    {
+      "title": "On the way",
+      "subTitle": "Our delivery executive is on the way to deliver your item"
+    },
+    {"title": "Delivered", "subTitle": ""}
+  ];
 }

@@ -1,9 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/widgets/custom_product.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -301,8 +301,8 @@ class HomeScreen extends StatelessWidget {
                           productName: item.name ?? "",
                           imageUrl: item.image ?? "",
                           categoryName: item.category?.name ?? "",
-                          quantity: item.quantity ?? 1,
-                          weigth: item.weight ?? "",
+                          quantity: item.quantity,
+                          weigth: item.weight.toString(),
                           inWishList: item.isWishlist,
                           inCart: item.inCart ?? false,
                           onAddToCard: () {
@@ -389,8 +389,8 @@ class HomeScreen extends StatelessWidget {
                           productName: item.name ?? "",
                           imageUrl: item.image ?? "",
                           categoryName: item.category?.name ?? "",
-                          quantity: item.quantity ?? 1,
-                          weigth: item.weight ?? "",
+                          quantity: item.quantity,
+                          weigth: item.weight.toString(),
                           inWishList: item.isWishlist,
                           inCart: item.inCart ?? false,
                           onAddToCard: () {
