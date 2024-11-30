@@ -172,6 +172,8 @@ class Repository {
     required String min,
     required String max,
     required String productType,
+    required String sortField,
+    required var sortOption,
   }) async {
     try {
       var response = await _dataRepository.postAllProduct(
@@ -182,6 +184,8 @@ class Repository {
         min: min,
         max: max,
         productType: productType,
+        sortField: sortField,
+        sortOption: sortOption,
         isLoading: isLoading,
       );
       var loginModel = productsModelFromJson(response.data);

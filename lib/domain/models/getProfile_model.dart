@@ -48,6 +48,7 @@ class GetProfileData {
   String? mobile;
   bool? productVisible;
   String? channelid;
+  String? name;
   bool? status;
   GetProfileCountryWiseContact? countryWiseContact;
 
@@ -60,6 +61,7 @@ class GetProfileData {
     this.productVisible,
     this.channelid,
     this.status,
+    this.name,
     this.countryWiseContact,
   });
 
@@ -72,6 +74,7 @@ class GetProfileData {
         productVisible: json["product_visible"],
         channelid: json["channelid"],
         status: json["status"],
+        name: json["name"],
         countryWiseContact: json["country_wise_contact"] == null
             ? null
             : GetProfileCountryWiseContact.fromJson(
@@ -87,6 +90,7 @@ class GetProfileData {
         "product_visible": productVisible,
         "channelid": channelid,
         "status": status,
+        "name": name,
         "country_wise_contact": countryWiseContact?.toJson(),
       };
 }

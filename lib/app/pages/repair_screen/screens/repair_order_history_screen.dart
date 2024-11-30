@@ -60,32 +60,39 @@ class RepairOrderHistoryScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              padding: Dimens.edgeInsets10,
                               height: Dimens.fifty,
                               width: Dimens.fifty,
                               decoration: BoxDecoration(
-                                color: ColorsValue.appColor,
                                 borderRadius: BorderRadius.circular(
                                   Dimens.five,
                                 ),
+                                border: Border.all(
+                                  width: Dimens.one,
+                                  color: ColorsValue.black343434,
+                                ),
                               ),
-                              child: CachedNetworkImage(
-                                height: Dimens.hundredTen,
-                                width: Dimens.hundredTen,
-                                imageUrl: "",
-                                fit: BoxFit.cover,
-                                placeholder: (context, url) {
-                                  return SvgPicture.asset(
-                                    AssetConstants.usera,
-                                    fit: BoxFit.cover,
-                                  );
-                                },
-                                errorWidget: (context, url, error) {
-                                  return SvgPicture.asset(
-                                    AssetConstants.usera,
-                                    fit: BoxFit.cover,
-                                  );
-                                },
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(
+                                  Dimens.five,
+                                ),
+                                child: CachedNetworkImage(
+                                  imageUrl: item.file ?? '',
+                                  fit: BoxFit.cover,
+                                  height: Dimens.hundredTen,
+                                  width: Dimens.hundredTen,
+                                  placeholder: (context, url) {
+                                    return SvgPicture.asset(
+                                      AssetConstants.usera,
+                                      fit: BoxFit.cover,
+                                    );
+                                  },
+                                  errorWidget: (context, url, error) {
+                                    return SvgPicture.asset(
+                                      AssetConstants.usera,
+                                      fit: BoxFit.cover,
+                                    );
+                                  },
+                                ),
                               ),
                             ),
                             Dimens.boxWidth10,
@@ -137,23 +144,14 @@ class RepairOrderHistoryScreen extends StatelessWidget {
                             ),
                             Text(
                               item.orderTracking?.toCapitalized ?? '',
-                              style: Styles.appColor70014,
+                              style: item.orderTracking == "pending"
+                                  ? Styles.colorFFA50070012
+                                  : item.orderTracking == "completed"
+                                      ? Styles.greenW70012
+                                      : Styles.redColorGuj70010,
                             )
                           ],
                         ),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //   children: [
-                        //     Text(
-                        //       'delivery_date'.tr,
-                        //       style: Styles.grey94A3B850014,
-                        //     ),
-                        //     Text(
-                        //       "02/09/2024",
-                        //       style: Styles.color21212150014,
-                        //     )
-                        //   ],
-                        // ),
                         Dimens.boxHeight5,
                         Text(
                           item.description ?? '',

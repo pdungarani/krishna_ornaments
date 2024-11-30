@@ -83,7 +83,9 @@ class BagDetailScreen extends StatelessWidget {
                                         ),
                                         Dimens.boxHeight5,
                                         Text(
-                                          "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                                          controller.getOneBagData
+                                                  ?.bagDescription ??
+                                              ' - ',
                                           style: Styles.colorA7A7A750012,
                                         ),
                                       ],
@@ -117,7 +119,10 @@ class BagDetailScreen extends StatelessWidget {
                                             ),
                                           ),
                                           child: Text(
-                                            e.bagQuantity.toString(),
+                                            controller.getOneBagData
+                                                    ?.totalQuantityInBag
+                                                    .toString() ??
+                                                ' - ',
                                             style: Styles.whiteW60012,
                                           ),
                                         )

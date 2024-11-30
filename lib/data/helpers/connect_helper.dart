@@ -48,10 +48,9 @@ class ConnectHelper {
   // coverage:ignore-end
 
   /// Device id
-  String? get deviceId =>
-      GetPlatform.isAndroid
-          ? androidDeviceInfo?.id
-          : iosDeviceInfo?.identifierForVendor;
+  String? get deviceId => GetPlatform.isAndroid
+      ? androidDeviceInfo?.id
+      : iosDeviceInfo?.identifierForVendor;
 
   /// Device make brand
   String? get deviceMake =>
@@ -101,6 +100,8 @@ class ConnectHelper {
     required String max,
     required String productType,
     required String category,
+    required String sortField,
+    required var sortOption,
   }) async {
     var data = {
       "page": page,
@@ -110,6 +111,8 @@ class ConnectHelper {
       "min": min,
       "max": max,
       "productType": productType,
+      "sortField": sortField,
+      "sortOption": sortOption
     };
     var response = await apiWrapper.makeRequest(
       EndPoints.postAllProduct,
@@ -482,14 +485,14 @@ class Product {
   Product({this.productId, this.quantity, this.description});
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
-    productId: json["productId"],
-    quantity: json["quantity"],
-    description: json["description"],
-  );
+        productId: json["productId"],
+        quantity: json["quantity"],
+        description: json["description"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "productId": productId,
-    "quantity": quantity,
-    "description": description,
-  };
+        "productId": productId,
+        "quantity": quantity,
+        "description": description,
+      };
 }

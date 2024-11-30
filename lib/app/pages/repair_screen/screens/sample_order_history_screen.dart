@@ -61,32 +61,39 @@ class SampleOrderHistoryScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              padding: Dimens.edgeInsets10,
                               height: Dimens.fifty,
                               width: Dimens.fifty,
                               decoration: BoxDecoration(
-                                color: ColorsValue.appColor,
                                 borderRadius: BorderRadius.circular(
                                   Dimens.five,
                                 ),
+                                border: Border.all(
+                                  width: Dimens.one,
+                                  color: ColorsValue.black343434,
+                                ),
                               ),
-                              child: CachedNetworkImage(
-                                height: Dimens.hundredTen,
-                                width: Dimens.hundredTen,
-                                imageUrl: "",
-                                fit: BoxFit.cover,
-                                placeholder: (context, url) {
-                                  return SvgPicture.asset(
-                                    AssetConstants.usera,
-                                    fit: BoxFit.cover,
-                                  );
-                                },
-                                errorWidget: (context, url, error) {
-                                  return SvgPicture.asset(
-                                    AssetConstants.usera,
-                                    fit: BoxFit.cover,
-                                  );
-                                },
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(
+                                  Dimens.five,
+                                ),
+                                child: CachedNetworkImage(
+                                  imageUrl: item.images?.first.path ?? '',
+                                  fit: BoxFit.cover,
+                                  height: Dimens.hundredTen,
+                                  width: Dimens.hundredTen,
+                                  placeholder: (context, url) {
+                                    return SvgPicture.asset(
+                                      AssetConstants.usera,
+                                      fit: BoxFit.cover,
+                                    );
+                                  },
+                                  errorWidget: (context, url, error) {
+                                    return SvgPicture.asset(
+                                      AssetConstants.usera,
+                                      fit: BoxFit.cover,
+                                    );
+                                  },
+                                ),
                               ),
                             ),
                             Dimens.boxWidth10,
@@ -138,7 +145,12 @@ class SampleOrderHistoryScreen extends StatelessWidget {
                             ),
                             Text(
                               item.orderTracking?.toCapitalized ?? '',
-                              style: Styles.appColor70014,
+                              style: item.orderTracking == "pending"
+                                  ? Styles.colorFFA50070012
+                                  : item.orderTracking == "completed"
+                                      ? Styles.greenW70012
+                                      : Styles.redColorGuj70010,
+                              // style: Styles.appColor70014,
                             )
                           ],
                         ),

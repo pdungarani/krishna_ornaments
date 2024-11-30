@@ -40,7 +40,7 @@ class ProfileScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text(
-                            controller.getProfileModel?.id ?? ' - ',
+                            controller.getProfileModel?.name ?? ' - ',
                             style: Styles.blackW80018,
                           ),
                           Dimens.boxHeight5,
@@ -54,7 +54,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                   Center(
-                    child: InkWell(
+                    child: GestureDetector(
                       onTap: () async {
                         if (await Utility.imagePermissionCheack(context)) {
                           controller.setProfilePic();
@@ -87,7 +87,7 @@ class ProfileScreen extends StatelessWidget {
                                   width: Dimens.hundredTen,
                                   imageUrl:
                                       controller.getProfileModel?.profilePic ??
-                                          "",
+                                          (controller.imageFile?.path ?? ''),
                                   fit: BoxFit.cover,
                                   placeholder: (context, url) {
                                     return SvgPicture.asset(
@@ -118,7 +118,7 @@ class ProfileScreen extends StatelessWidget {
                                 ),
                                 child: Icon(
                                   Icons.edit,
-                                  color: ColorsValue.whiteColor,
+                                  color: ColorsValue.black010101,
                                   size: Dimens.twenty,
                                 ),
                               ),

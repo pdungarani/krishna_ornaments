@@ -42,7 +42,7 @@ class OrderScreen extends StatelessWidget {
               itemBuilder: (context, item, index) {
                 return Padding(
                   padding: Dimens.edgeInsets20_03_20_03,
-                  child: InkWell(
+                  child: GestureDetector(
                     onTap: () {
                       RouteManagement.goToOrderDetalisScreen(item.id ?? '');
                     },
@@ -64,14 +64,14 @@ class OrderScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   "${"total_quentity".tr} ${item.totalQuantity}",
-                                  style: Styles.black221W70010,
+                                  style: Styles.black221W70018,
                                 ),
                                 Text(
                                   item.orderTracking?.capitalize ?? '',
                                   style: item.orderTracking == "pending"
-                                      ? Styles.yellowW70010
+                                      ? Styles.colorFFA50070012
                                       : item.orderTracking == "completed"
-                                          ? Styles.greenW70010
+                                          ? Styles.greenW70012
                                           : Styles.redColorGuj70010,
                                 )
                               ],
@@ -79,14 +79,14 @@ class OrderScreen extends StatelessWidget {
                             Dimens.boxHeight5,
                             Text(
                               "${"total_bag".tr} ${item.totalBags}",
-                              style: Styles.appColor70010,
+                              style: Styles.color212121W70012,
                             ),
                             Dimens.boxHeight5,
                             Text(
                               item.mainDescription ?? '',
                               maxLines: 3,
                               overflow: TextOverflow.ellipsis,
-                              style: Styles.colorA7A7A750010,
+                              style: Styles.colorA7A7A750016,
                             ),
                           ],
                         ),
