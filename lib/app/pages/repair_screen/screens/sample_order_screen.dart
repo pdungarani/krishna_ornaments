@@ -15,7 +15,9 @@ class SampleOrderScreen extends StatelessWidget {
       return Scaffold(
         backgroundColor: ColorsValue.appBg,
         appBar: AppBarWidget(
-          onTapBack: () {},
+          onTapBack: () {
+            Get.back();
+          },
           title: 'sample_order'.tr,
         ),
         bottomNavigationBar: Padding(
@@ -265,7 +267,7 @@ class SampleOrderScreen extends StatelessWidget {
                 Dimens.boxHeight5,
                 Container(
                   child: TextFormField(
-                    style: Styles.whiteW60016,
+                    // style: Styles.whiteW60016,
                     controller: controller.descriptionSampleController,
                     maxLines: 3,
                     autovalidateMode: AutovalidateMode.onUserInteraction,

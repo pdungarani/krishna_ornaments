@@ -93,17 +93,6 @@ class RepairOrderDetalisScreen extends StatelessWidget {
                         '',
                     style: Styles.colorA7A7A750012,
                   ),
-                  Dimens.boxHeight20,
-                  Text(
-                    'bag_number'.tr,
-                    style: Styles.color21212170014,
-                  ),
-                  Dimens.boxHeight5,
-                  Text(
-                    controller.getOneRepairOrderData?.bagNumber.toString() ??
-                        '0',
-                    style: Styles.colorA7A7A750012,
-                  ),
                   Dimens.boxHeight30,
                   Text(
                     'order_status'.tr,

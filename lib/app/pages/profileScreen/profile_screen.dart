@@ -56,7 +56,9 @@ class ProfileScreen extends StatelessWidget {
                   Center(
                     child: InkWell(
                       onTap: () async {
-                        controller.selectProfilePic();
+                        if (await Utility.imagePermissionCheack(context)) {
+                          controller.setProfilePic();
+                        }
                       },
                       child: SizedBox(
                         height: Dimens.hundredTen,

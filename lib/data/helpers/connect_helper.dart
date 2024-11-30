@@ -48,9 +48,10 @@ class ConnectHelper {
   // coverage:ignore-end
 
   /// Device id
-  String? get deviceId => GetPlatform.isAndroid
-      ? androidDeviceInfo?.id
-      : iosDeviceInfo?.identifierForVendor;
+  String? get deviceId =>
+      GetPlatform.isAndroid
+          ? androidDeviceInfo?.id
+          : iosDeviceInfo?.identifierForVendor;
 
   /// Device make brand
   String? get deviceMake =>
@@ -80,9 +81,7 @@ class ConnectHelper {
     return '0.0.0.0';
   }
 
-  Future<ResponseModel> getAllCategories({
-    bool isLoading = false,
-  }) async {
+  Future<ResponseModel> getAllCategories({bool isLoading = false}) async {
     var response = await apiWrapper.makeRequest(
       EndPoints.getAllCategories,
       Request.get,
@@ -122,9 +121,7 @@ class ConnectHelper {
     return response;
   }
 
-  Future<ResponseModel> postGetAllCartProduct({
-    bool isLoading = false,
-  }) async {
+  Future<ResponseModel> postGetAllCartProduct({bool isLoading = false}) async {
     var response = await apiWrapper.makeRequest(
       EndPoints.postGetAllCartProduct,
       Request.post,
@@ -139,9 +136,7 @@ class ConnectHelper {
     bool isLoading = false,
     required String productId,
   }) async {
-    var data = {
-      "productId": productId,
-    };
+    var data = {"productId": productId};
     var response = await apiWrapper.makeRequest(
       EndPoints.postCartProductRemove,
       Request.post,
@@ -179,11 +174,7 @@ class ConnectHelper {
     required String password,
     required String fcm,
   }) async {
-    var data = {
-      "username": mobile,
-      "password": password,
-      "fcm": fcm,
-    };
+    var data = {"username": mobile, "password": password, "fcm": fcm};
     var response = await apiWrapper.makeRequest(
       EndPoints.login,
       Request.post,
@@ -198,9 +189,7 @@ class ConnectHelper {
     bool isLoading = false,
     required String email,
   }) async {
-    var data = {
-      "email": email,
-    };
+    var data = {"email": email};
     var response = await apiWrapper.makeRequest(
       EndPoints.forgotpass,
       Request.post,
@@ -211,9 +200,7 @@ class ConnectHelper {
     return response;
   }
 
-  Future<ResponseModel> getProfile({
-    bool isLoading = false,
-  }) async {
+  Future<ResponseModel> getProfile({bool isLoading = false}) async {
     var response = await apiWrapper.makeRequest(
       EndPoints.getProfile,
       Request.get,
@@ -247,7 +234,7 @@ class ConnectHelper {
         "nationalNumber": "0${mobile}",
         "e164Number": countryCode + mobile,
         "countryCode": PhoneNumber.getISO2CodeByPrefix(countryCode),
-        "dialCode": countryCode
+        "dialCode": countryCode,
       },
       "password": password,
     };
@@ -266,10 +253,7 @@ class ConnectHelper {
     required int page,
     required int limit,
   }) async {
-    var data = {
-      "page": page,
-      "limit": limit,
-    };
+    var data = {"page": page, "limit": limit};
     var response = await apiWrapper.makeRequest(
       EndPoints.repairOrderList,
       Request.post,
@@ -340,10 +324,7 @@ class ConnectHelper {
     required int page,
     required int limit,
   }) async {
-    var data = {
-      "page": page,
-      "limit": limit,
-    };
+    var data = {"page": page, "limit": limit};
     var response = await apiWrapper.makeRequest(
       EndPoints.sampleOrderHistory,
       Request.post,
@@ -358,11 +339,41 @@ class ConnectHelper {
     bool isLoading = false,
     required String sampleOrderId,
   }) async {
-    var data = {
-      "sampleOrderId": sampleOrderId,
-    };
+    var data = {"sampleOrderId": sampleOrderId};
     var response = await apiWrapper.makeRequest(
       EndPoints.getOneSampleOrder,
+      Request.post,
+      data,
+      isLoading,
+      Utility.commonHeader(),
+    );
+    return response;
+  }
+
+  Future<ResponseModel> postGetOnebag({
+    bool isLoading = false,
+    required String orderId,
+    required String bagId,
+  }) async {
+    var data = {"orderId": orderId, "bagId": bagId};
+    var response = await apiWrapper.makeRequest(
+      EndPoints.postGetOnebag,
+      Request.post,
+      data,
+      isLoading,
+      Utility.commonHeader(),
+    );
+    return response;
+  }
+
+  Future<ResponseModel> postOrderCreate({
+    bool isLoading = false,
+    required List<Product> products,
+    required String main_description,
+  }) async {
+    var data = {"products": products, "main_description": main_description};
+    var response = await apiWrapper.makeRequest(
+      EndPoints.postOrderCreate,
       Request.post,
       data,
       isLoading,
@@ -376,10 +387,7 @@ class ConnectHelper {
     required int page,
     required int limit,
   }) async {
-    var data = {
-      "page": page,
-      "limit": limit,
-    };
+    var data = {"page": page, "limit": limit};
     var response = await apiWrapper.makeRequest(
       EndPoints.postOrderHistory,
       Request.post,
@@ -394,9 +402,7 @@ class ConnectHelper {
     bool isLoading = false,
     required String orderId,
   }) async {
-    var data = {
-      "orderId": orderId,
-    };
+    var data = {"orderId": orderId};
     var response = await apiWrapper.makeRequest(
       EndPoints.postOrderGetOne,
       Request.post,
@@ -412,10 +418,7 @@ class ConnectHelper {
     required String file,
     required String description,
   }) async {
-    var data = {
-      "file": file,
-      "description": description,
-    };
+    var data = {"file": file, "description": description};
     var response = await apiWrapper.makeRequest(
       EndPoints.postRepairOrder,
       Request.post,
@@ -430,9 +433,7 @@ class ConnectHelper {
     bool isLoading = false,
     required String repairingOrderId,
   }) async {
-    var data = {
-      "repairingOrderId": repairingOrderId,
-    };
+    var data = {"repairingOrderId": repairingOrderId};
     var response = await apiWrapper.makeRequest(
       EndPoints.getOneRepairOrder,
       Request.post,
@@ -465,19 +466,30 @@ class SmapleUploadDatum {
   String? fileId;
   String? path;
 
-  SmapleUploadDatum({
-    this.fileId,
-    this.path,
-  });
+  SmapleUploadDatum({this.fileId, this.path});
 
   factory SmapleUploadDatum.fromJson(Map<String, dynamic> json) =>
-      SmapleUploadDatum(
-        fileId: json["fileId"],
-        path: json["path"],
-      );
+      SmapleUploadDatum(fileId: json["fileId"], path: json["path"]);
+
+  Map<String, dynamic> toJson() => {"fileId": fileId, "path": path};
+}
+
+class Product {
+  String? productId;
+  int? quantity;
+  String? description;
+
+  Product({this.productId, this.quantity, this.description});
+
+  factory Product.fromJson(Map<String, dynamic> json) => Product(
+    productId: json["productId"],
+    quantity: json["quantity"],
+    description: json["description"],
+  );
 
   Map<String, dynamic> toJson() => {
-        "fileId": fileId,
-        "path": path,
-      };
+    "productId": productId,
+    "quantity": quantity,
+    "description": description,
+  };
 }

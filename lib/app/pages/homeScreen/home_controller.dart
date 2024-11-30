@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
-import 'package:krishna_ornaments/app/app.dart';
 import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:krishna_ornaments/app/app.dart';
+import 'package:krishna_ornaments/data/data.dart';
 import 'package:krishna_ornaments/domain/domain.dart';
 
 class HomeController extends GetxController {
@@ -164,4 +166,24 @@ class HomeController extends GetxController {
     }
     update();
   }
+
+  TextEditingController buyNowDesController = TextEditingController();
+
+  // Future<void> postOrderCreate(productId) async {
+  //   var response = await homePresenter.postOrderCreate(
+  //     productId: [
+  //       Product(
+  //         productId: productId,
+  //         quantity: quantity,
+  //         description: "",
+  //       )
+  //     ],
+  //     main_description: buyNowDesController.text,
+  //     isLoading: true,
+  //   );
+  //   if (response != null) {
+  //     Utility.snacBar("Card added sucessfully...!", ColorsValue.maincolor1);
+  //     update();
+  //   }
+  // }
 }

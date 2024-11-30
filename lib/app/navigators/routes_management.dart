@@ -15,8 +15,8 @@ abstract class RouteManagement {
   static void goToOrderScreen() => Get.toNamed<void>(Routes.orderScreen);
   static void goToOrderDetalisScreen(String orderId) =>
       Get.toNamed<void>(Routes.orderDetalisScreen, arguments: orderId);
-  static void goToBagDetailScreen() =>
-      Get.toNamed<void>(Routes.bagDetailScreen);
+  static void goToBagDetailScreen(String bugId) =>
+      Get.toNamed<void>(Routes.bagDetailScreen, arguments: bugId);
   static void goToRepairScreen() => Get.toNamed<void>(Routes.repairScreen);
   static void goToRepairDetailsScreen() =>
       Get.toNamed<void>(Routes.repairDetailsScreen);

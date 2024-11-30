@@ -468,6 +468,51 @@ class Repository {
     }
   }
 
+  Future<GetOneBagModel?> postGetOnebag({
+    bool isLoading = false,
+    required String orderId,
+    required String bagId,
+  }) async {
+    try {
+      var response = await _dataRepository.postGetOnebag(
+        orderId: orderId,
+        bagId: bagId,
+        isLoading: isLoading,
+      );
+      var getOneBagModel = getOneBagModelFromJson(response.data);
+      if (getOneBagModel.status == 200) {
+        return getOneBagModel;
+      } else {
+        Utility.showMessage(getOneBagModel.message.toString(),
+            MessageType.error, () => null, '');
+        return null;
+      }
+    } catch (_) {
+      Utility.closeDialog();
+      UnimplementedError();
+      return null;
+    }
+  }
+
+  Future<ResponseModel?> postOrderCreate({
+    bool isLoading = false,
+    required List<Product> products,
+    required String main_description,
+  }) async {
+    try {
+      var response = await _dataRepository.postOrderCreate(
+        products: products,
+        main_description: main_description,
+        isLoading: isLoading,
+      );
+      return response;
+    } catch (_) {
+      Utility.closeDialog();
+      UnimplementedError();
+      return null;
+    }
+  }
+
   Future<GetOrderHistoryModel?> postOrderHistory({
     bool isLoading = false,
     required int page,

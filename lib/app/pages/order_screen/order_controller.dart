@@ -54,4 +54,20 @@ class OrderController extends GetxController {
       update();
     }
   }
+
+  GetOneBagData? getOneBagData = GetOneBagData();
+  String? bugId;
+
+  Future<void> postGetOnebag() async {
+    var response = await orderPresenter.postGetOnebag(
+      orderId: orderId,
+      bagId: bugId ?? "",
+      isLoading: false,
+    );
+    getOneBagData = null;
+    if (response != null) {
+      getOneBagData = response.data;
+      update();
+    }
+  }
 }

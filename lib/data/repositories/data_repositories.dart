@@ -221,6 +221,28 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading,
       );
 
+  Future<ResponseModel> postGetOnebag({
+    bool isLoading = false,
+    required String orderId,
+    required String bagId,
+  }) async =>
+      connectHelper.postGetOnebag(
+        orderId: orderId,
+        bagId: bagId,
+        isLoading: isLoading,
+      );
+
+  Future<ResponseModel> postOrderCreate({
+    bool isLoading = false,
+    required List<Product> products,
+    required String main_description,
+  }) async =>
+      connectHelper.postOrderCreate(
+        products: products,
+        main_description: main_description,
+        isLoading: isLoading,
+      );
+
   Future<ResponseModel> postOrderHistory({
     bool isLoading = false,
     required int page,

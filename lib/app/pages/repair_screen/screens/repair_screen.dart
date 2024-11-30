@@ -18,7 +18,7 @@ class RepairScreen extends StatelessWidget {
             Get.back();
           },
           title: '',
-          isTitle: true,
+          isVisible: false,
         ),
         body: Column(
           children: [

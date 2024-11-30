@@ -21,7 +21,9 @@ class OrderDetalisScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: ColorsValue.appBg,
           appBar: AppBarWidget(
-            onTapBack: () {},
+            onTapBack: () {
+              Get.back();
+            },
             title: 'order_details'.tr,
           ),
           body: ListView(
@@ -130,38 +132,40 @@ class OrderDetalisScreen extends StatelessWidget {
                     ),
                     Dimens.boxHeight12,
                     Wrap(
-                      children: controller.getOneOrderData?.bags?.map(
-                            (e) {
-                              return Container(
-                                margin: Dimens.edgeInsetsBottom10,
-                                padding: Dimens.edgeInsets20_00_20_00,
-                                decoration: BoxDecoration(
-                                  color: ColorsValue.colorEEEAEA,
-                                  borderRadius: BorderRadius.circular(
-                                    Dimens.six,
-                                  ),
-                                ),
-                                child: ListTile(
-                                  onTap: () {
-                                    RouteManagement.goToBagDetailScreen();
-                                  },
-                                  contentPadding: Dimens.edgeInsets0,
-                                  title: Text(
-                                    "Bag 01",
-                                    style: Styles.color21212160014,
-                                  ),
-                                  trailing: SvgPicture.asset(
-                                    AssetConstants.ic_right_arrow,
-                                    colorFilter: const ColorFilter.mode(
-                                      ColorsValue.blackColor,
-                                      BlendMode.srcIn,
+                      children:
+                          controller.getOneOrderData?.bags?.asMap().entries.map(
+                                (e) {
+                                  return Container(
+                                    margin: Dimens.edgeInsetsBottom10,
+                                    padding: Dimens.edgeInsets20_00_20_00,
+                                    decoration: BoxDecoration(
+                                      color: ColorsValue.colorEEEAEA,
+                                      borderRadius: BorderRadius.circular(
+                                        Dimens.six,
+                                      ),
                                     ),
-                                  ),
-                                ),
-                              );
-                            },
-                          ).toList() ??
-                          [],
+                                    child: ListTile(
+                                      onTap: () {
+                                        RouteManagement.goToBagDetailScreen(
+                                            e.value.id ?? "");
+                                      },
+                                      contentPadding: Dimens.edgeInsets0,
+                                      title: Text(
+                                        "Bag ${e.value.bagNumber}",
+                                        style: Styles.color21212160014,
+                                      ),
+                                      trailing: SvgPicture.asset(
+                                        AssetConstants.ic_right_arrow,
+                                        colorFilter: const ColorFilter.mode(
+                                          ColorsValue.blackColor,
+                                          BlendMode.srcIn,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ).toList() ??
+                              [],
                     )
                   ],
                 ),

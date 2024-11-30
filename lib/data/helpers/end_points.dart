@@ -15,6 +15,8 @@ class EndPoints {
   static String getOneSampleOrder = 'user/sampleorders/getone';
   static String postOrderHistory = 'user/orders/history';
   static String postOrderGetOne = 'user/orders/getone';
+  static String postGetOnebag = 'user/bags/getone';
+  static String postOrderCreate = 'user/orders/create';
 
   // Harshil Gopani
   static String getAllCategories = 'user/categories';

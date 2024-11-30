@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -69,8 +70,23 @@ class SampleOrderHistoryScreen extends StatelessWidget {
                                   Dimens.five,
                                 ),
                               ),
-                              child: SvgPicture.asset(
-                                AssetConstants.ic_repair,
+                              child: CachedNetworkImage(
+                                height: Dimens.hundredTen,
+                                width: Dimens.hundredTen,
+                                imageUrl: "",
+                                fit: BoxFit.cover,
+                                placeholder: (context, url) {
+                                  return SvgPicture.asset(
+                                    AssetConstants.usera,
+                                    fit: BoxFit.cover,
+                                  );
+                                },
+                                errorWidget: (context, url, error) {
+                                  return SvgPicture.asset(
+                                    AssetConstants.usera,
+                                    fit: BoxFit.cover,
+                                  );
+                                },
                               ),
                             ),
                             Dimens.boxWidth10,
@@ -93,21 +109,6 @@ class SampleOrderHistoryScreen extends StatelessWidget {
                                       )
                                     ],
                                   ),
-                                  Dimens.boxHeight5,
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'bag_number'.tr,
-                                        style: Styles.grey94A3B850014,
-                                      ),
-                                      Text(
-                                        item.bagNumber.toString(),
-                                        style: Styles.color212121W50014,
-                                      )
-                                    ],
-                                  )
                                 ],
                               ),
                             )

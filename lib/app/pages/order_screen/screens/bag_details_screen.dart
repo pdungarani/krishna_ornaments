@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/widgets/appbar_widgets.dart';
@@ -11,16 +10,23 @@ class BagDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<OrderController>(
-      initState: (state) {},
+      initState: (state) {
+        var controller = Get.find<OrderController>();
+        controller.getOneBagData = null;
+        controller.bugId = Get.arguments ?? "";
+        controller.postGetOnebag();
+      },
       builder: (controller) {
         return Scaffold(
             backgroundColor: ColorsValue.appBg,
             appBar: AppBarWidget(
-              onTapBack: () {},
-              title: 'Bag 01',
+              onTapBack: () {
+                Get.back();
+              },
+              title: 'Bag ${controller.getOneBagData?.bagNumber}'.tr,
             ),
             body: Wrap(
-              children: controller.list.map(
+              children: controller.getOneBagData?.products?.map(
                     (e) {
                       return Padding(
                         padding: Dimens.edgeInsets20_10_20_10,
@@ -50,7 +56,7 @@ class BagDetailScreen extends StatelessWidget {
                                         Dimens.five,
                                       ),
                                       child: CachedNetworkImage(
-                                        imageUrl: "",
+                                        imageUrl: e.image ?? '',
                                         fit: BoxFit.cover,
                                         placeholder: (context, url) {
                                           return Image.asset(
@@ -72,7 +78,7 @@ class BagDetailScreen extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "Ring Description",
+                                          e.name ?? '',
                                           style: Styles.color21212170014,
                                         ),
                                         Dimens.boxHeight5,
@@ -111,7 +117,7 @@ class BagDetailScreen extends StatelessWidget {
                                             ),
                                           ),
                                           child: Text(
-                                            '400',
+                                            e.bagQuantity.toString(),
                                             style: Styles.whiteW60012,
                                           ),
                                         )
@@ -139,7 +145,7 @@ class BagDetailScreen extends StatelessWidget {
                                             ),
                                           ),
                                           child: Text(
-                                            '400',
+                                            e.bagQuantity.toString(),
                                             style: Styles.whiteW60012,
                                           ),
                                         )

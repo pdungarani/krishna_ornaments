@@ -171,7 +171,7 @@ class RepairDetailsScreen extends StatelessWidget {
                 Dimens.boxHeight5,
                 Container(
                   child: TextFormField(
-                    style: Styles.whiteW60016,
+                    // style: Styles.whiteW60016,
                     controller: controller.descriptionController,
                     maxLines: 3,
                     autovalidateMode: AutovalidateMode.onUserInteraction,

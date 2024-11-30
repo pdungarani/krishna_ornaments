@@ -5,7 +5,7 @@ class OrderPresenter {
 
   final OrderUsecases orderUsecases;
 
- Future<GetOrderHistoryModel?> postOrderHistory({
+  Future<GetOrderHistoryModel?> postOrderHistory({
     bool isLoading = false,
     required int page,
     required int limit,
@@ -22,6 +22,17 @@ class OrderPresenter {
   }) async =>
       await orderUsecases.postOrderGetOne(
         orderId: orderId,
+        isLoading: isLoading,
+      );
+
+  Future<GetOneBagModel?> postGetOnebag({
+    bool isLoading = false,
+    required String orderId,
+    required String bagId,
+  }) async =>
+      await orderUsecases.postGetOnebag(
+        orderId: orderId,
+        bagId: bagId,
         isLoading: isLoading,
       );
 }

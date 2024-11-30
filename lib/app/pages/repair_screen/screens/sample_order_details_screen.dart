@@ -116,16 +116,6 @@ class SampleOrderDetailsScreen extends StatelessWidget {
                 ),
                 Dimens.boxHeight20,
                 Text(
-                  'bag_number'.tr,
-                  style: Styles.color21212170014,
-                ),
-                Dimens.boxHeight5,
-                Text(
-                  controller.getOneSampleData?.bagNumber.toString() ?? '',
-                  style: Styles.colorA7A7A750012,
-                ),
-                Dimens.boxHeight30,
-                Text(
                   'order_status'.tr,
                   style: Styles.color212121W70024,
                 ),

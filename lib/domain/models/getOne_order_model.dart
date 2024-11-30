@@ -40,7 +40,7 @@ class GetOneOrderModel {
 class GetOneOrderData {
   String? id;
   String? user;
-  List<GetOneOrderProduct>? products;
+  List<DataProduct>? products;
   String? mainDescription;
   int? totalQuantity;
   int? remainingTotalQuantity;
@@ -48,7 +48,7 @@ class GetOneOrderData {
   String? orderTracking;
   int? createTimestamp;
   DateTime? createdAt;
-  List<dynamic>? bags;
+  List<Bag>? bags;
 
   GetOneOrderData({
     this.id,
@@ -70,8 +70,8 @@ class GetOneOrderData {
         user: json["user"],
         products: json["products"] == null
             ? []
-            : List<GetOneOrderProduct>.from(
-                json["products"]!.map((x) => GetOneOrderProduct.fromJson(x))),
+            : List<DataProduct>.from(
+                json["products"]!.map((x) => DataProduct.fromJson(x))),
         mainDescription: json["main_description"],
         totalQuantity: json["totalQuantity"],
         remainingTotalQuantity: json["remainingTotalQuantity"],
@@ -83,7 +83,7 @@ class GetOneOrderData {
             : DateTime.parse(json["createdAt"]),
         bags: json["bags"] == null
             ? []
-            : List<dynamic>.from(json["bags"]!.map((x) => x)),
+            : List<Bag>.from(json["bags"]!.map((x) => Bag.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -99,11 +99,120 @@ class GetOneOrderData {
         "order_tracking": orderTracking,
         "create_timestamp": createTimestamp,
         "createdAt": createdAt?.toIso8601String(),
-        "bags": bags == null ? [] : List<dynamic>.from(bags!.map((x) => x)),
+        "bags": bags == null
+            ? []
+            : List<dynamic>.from(bags!.map((x) => x.toJson())),
       };
 }
 
-class GetOneOrderProduct {
+class Bag {
+  String? id;
+  String? order;
+  int? bagNumber;
+  String? categoryId;
+  String? categoryName;
+  List<GetOneOrderBagProduct>? products;
+  String? bagDescription;
+  int? totalQuantityInBag;
+  DateTime? deliveryDate;
+  int? deliveryTimestamp;
+  bool? status;
+  int? createTimestamp;
+  DateTime? createdAt;
+
+  Bag({
+    this.id,
+    this.order,
+    this.bagNumber,
+    this.categoryId,
+    this.categoryName,
+    this.products,
+    this.bagDescription,
+    this.totalQuantityInBag,
+    this.deliveryDate,
+    this.deliveryTimestamp,
+    this.status,
+    this.createTimestamp,
+    this.createdAt,
+  });
+
+  factory Bag.fromJson(Map<String, dynamic> json) => Bag(
+        id: json["_id"],
+        order: json["order"],
+        bagNumber: json["bag_number"],
+        categoryId: json["categoryId"],
+        categoryName: json["categoryName"],
+        products: json["products"] == null
+            ? []
+            : List<GetOneOrderBagProduct>.from(json["products"]!
+                .map((x) => GetOneOrderBagProduct.fromJson(x))),
+        bagDescription: json["bagDescription"],
+        totalQuantityInBag: json["totalQuantityInBag"],
+        deliveryDate: json["delivery_date"] == null
+            ? null
+            : DateTime.parse(json["delivery_date"]),
+        deliveryTimestamp: json["deliveryTimestamp"],
+        status: json["status"],
+        createTimestamp: json["create_timestamp"],
+        createdAt: json["createdAt"] == null
+            ? null
+            : DateTime.parse(json["createdAt"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "_id": id,
+        "order": order,
+        "bag_number": bagNumber,
+        "categoryId": categoryId,
+        "categoryName": categoryName,
+        "products": products == null
+            ? []
+            : List<dynamic>.from(products!.map((x) => x.toJson())),
+        "bagDescription": bagDescription,
+        "totalQuantityInBag": totalQuantityInBag,
+        "delivery_date":
+            "${deliveryDate!.year.toString().padLeft(4, '0')}-${deliveryDate!.month.toString().padLeft(2, '0')}-${deliveryDate!.day.toString().padLeft(2, '0')}",
+        "deliveryTimestamp": deliveryTimestamp,
+        "status": status,
+        "create_timestamp": createTimestamp,
+        "createdAt": createdAt?.toIso8601String(),
+      };
+}
+
+class GetOneOrderBagProduct {
+  String? productId;
+  String? name;
+  String? image;
+  String? weight;
+  int? bagQuantity;
+
+  GetOneOrderBagProduct({
+    this.productId,
+    this.name,
+    this.image,
+    this.weight,
+    this.bagQuantity,
+  });
+
+  factory GetOneOrderBagProduct.fromJson(Map<String, dynamic> json) =>
+      GetOneOrderBagProduct(
+        productId: json["productId"],
+        name: json["name"],
+        image: json["image"],
+        weight: json["weight"],
+        bagQuantity: json["bag_quantity"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "productId": productId,
+        "name": name,
+        "image": image,
+        "weight": weight,
+        "bag_quantity": bagQuantity,
+      };
+}
+
+class DataProduct {
   String? categoryId;
   String? categoryName;
   String? productId;
@@ -114,7 +223,7 @@ class GetOneOrderProduct {
   int? remainingQuantity;
   String? description;
 
-  GetOneOrderProduct({
+  DataProduct({
     this.categoryId,
     this.categoryName,
     this.productId,
@@ -126,8 +235,7 @@ class GetOneOrderProduct {
     this.description,
   });
 
-  factory GetOneOrderProduct.fromJson(Map<String, dynamic> json) =>
-      GetOneOrderProduct(
+  factory DataProduct.fromJson(Map<String, dynamic> json) => DataProduct(
         categoryId: json["categoryId"],
         categoryName: json["categoryName"],
         productId: json["productId"],

@@ -27,6 +27,8 @@ abstract class Utility {
   static Directory path = Directory('storage/emulated/0/Fanzly');
   static String? coutryCurrency;
 
+  static String? profilePic;
+
   /// common header for All api
   static Map<String, String> commonHeader({
     Map<String, String>? otherHeader,

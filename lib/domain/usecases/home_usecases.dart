@@ -1,3 +1,4 @@
+import 'package:krishna_ornaments/data/data.dart';
 import 'package:krishna_ornaments/domain/domain.dart';
 
 class HomeUseCases {
@@ -43,6 +44,17 @@ class HomeUseCases {
         productId: productId,
         quantity: quantity,
         description: description,
+        isLoading: isLoading,
+      );
+
+  Future<ResponseModel?> postOrderCreate({
+    bool isLoading = false,
+    required List<Product> productId,
+    required String main_description,
+  }) async =>
+      await repository.postOrderCreate(
+        products: productId,
+        main_description: main_description,
         isLoading: isLoading,
       );
 }
