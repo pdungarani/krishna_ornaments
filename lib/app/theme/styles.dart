@@ -311,6 +311,11 @@ abstract class Styles {
     fontWeight: FontWeight.w600,
     color: ColorsValue.whiteColor,
   );
+  static TextStyle lightcccW50010 = GoogleFonts.nunito(
+    fontSize: Dimens.ten,
+    fontWeight: FontWeight.w600,
+    color: ColorsValue.lightccc,
+  );
 
   static TextStyle color212121W80018 = GoogleFonts.nunito(
     fontSize: Dimens.eighteen,

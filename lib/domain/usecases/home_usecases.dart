@@ -13,30 +13,7 @@ class HomeUseCases {
         isLoading: isLoading,
       );
 
-  Future<ProductsModel?> postAllProduct({
-    bool isLoading = false,
-    required int page,
-    required int limit,
-    required String search,
-    required String category,
-    required String min,
-    required String max,
-    required String productType,
-    required String sortField,
-    required var sortOption,
-  }) async =>
-      await repository.postAllProduct(
-        page: page,
-        limit: limit,
-        search: search,
-        category: category,
-        min: min,
-        max: max,
-        productType: productType,
-        sortField: sortField,
-        sortOption: sortOption,
-        isLoading: isLoading,
-      );
+ 
 
   Future<ResponseModel?> postAddToCart({
     bool isLoading = false,
@@ -59,6 +36,26 @@ class HomeUseCases {
       await repository.postOrderCreate(
         products: productId,
         main_description: main_description,
+        isLoading: isLoading,
+      );
+
+  Future<WishlistModel?> postWishlist({
+    bool isLoading = false,
+    required int page,
+    required int limit,
+  }) async =>
+      await repository.postWishlist(
+        page: page,
+        limit: limit,
+        isLoading: isLoading,
+      );
+
+  Future<ResponseModel?> postWishlistAddRemove({
+    bool isLoading = false,
+    required String productId,
+  }) async =>
+      await repository.postWishlistAddRemove(
+        productId: productId,
         isLoading: isLoading,
       );
 }

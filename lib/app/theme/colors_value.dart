@@ -309,6 +309,8 @@ abstract class ColorsValue {
   static Color lightF3F4F6 = const Color(0xFFF3F4F6);
   static Color black010101 = const Color(0xFF010101);
   static Color greyAAA = const Color(0xFFAAAAAA);
-static Color colorFFA500 = const Color(0xFFFFA500);
-  
+  static Color colorFFA500 = const Color(0xFFFFA500);
+  static Color appColorLight = const Color(0xFFFFEAD4);
+  static Color grey9DB2CE = const Color(0xFF9DB2CE);
+  static Color lightccc = const Color.fromARGB(255, 71, 71, 71);
 }

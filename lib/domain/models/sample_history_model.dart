@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:krishna_ornaments/domain/domain.dart';
+
 SampleOrderHistoryModel sampleOrderHistoryModelFromJson(String str) =>
     SampleOrderHistoryModel.fromJson(json.decode(str));
 
@@ -100,7 +102,7 @@ class SampleOrderHistoryDoc {
   String? user;
   String? orderNumber;
   int? bagNumber;
-  List<Image>? images;
+  List<RepairOrderUploadImageData>? images;
   String? description;
   String? orderTracking;
   int? createTimestamp;
@@ -129,7 +131,7 @@ class SampleOrderHistoryDoc {
         description: json["description"],
         images: json["images"] == null
             ? []
-            : List<Image>.from(json["images"]!.map((x) => Image.fromJson(x))),
+            : List<RepairOrderUploadImageData>.from(json["images"]!.map((x) => RepairOrderUploadImageData.fromJson(x))),
         orderTracking: json["order_tracking"],
         createTimestamp: json["create_timestamp"],
         createdAt: json["createdAt"] == null
@@ -151,25 +153,5 @@ class SampleOrderHistoryDoc {
         "create_timestamp": createTimestamp,
         "createdAt": createdAt?.toIso8601String(),
         "id": docId,
-      };
-}
-
-class Image {
-  String? fileId;
-  String? path;
-
-  Image({
-    this.fileId,
-    this.path,
-  });
-
-  factory Image.fromJson(Map<String, dynamic> json) => Image(
-        fileId: json["fileId"],
-        path: json["path"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "fileId": fileId,
-        "path": path,
       };
 }

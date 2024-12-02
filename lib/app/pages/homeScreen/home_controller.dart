@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/domain/domain.dart';
 
@@ -169,23 +170,101 @@ class HomeController extends GetxController {
     update();
   }
 
+  final ScrollController scrollWishListController = ScrollController();
+
+  List<WishlistDoc> wishlistList = [];
+  bool isWishListLastPage = false;
+  bool isWishListLoading = false;
+  int pageWishCount = 1;
+  bool isWishLoading = true;
+
+  Future<void> postWishlist(int pageKey) async {
+    if (pageKey == 1) {
+      pageWishCount = 1;
+    }
+    var response = await homePresenter.postWishlist(
+      page: pageKey,
+      limit: 10,
+      isLoading: true,
+    );
+    if (response?.data != null) {
+      if (pageKey == 1) {
+        isWishListLastPage = false;
+        wishlistList.clear();
+      }
+      if ((response?.data?.docs?.length ?? 0) < 10) {
+        isWishListLastPage = true;
+        wishlistList.addAll(response?.data?.docs ?? []);
+      } else {
+        pageWishCount++;
+        wishlistList.addAll(response?.data?.docs ?? []);
+      }
+      if (pageKey == 1) {
+        if (scrollWishListController.positions.isNotEmpty) {
+          scrollWishListController.jumpTo(0);
+        }
+      }
+      isWishLoading = false;
+    }
+    update();
+  }
+
   TextEditingController buyNowDesController = TextEditingController();
 
-  // Future<void> postOrderCreate(productId) async {
-  //   var response = await homePresenter.postOrderCreate(
-  //     productId: [
-  //       Product(
-  //         productId: productId,
-  //         quantity: quantity,
-  //         description: "",
-  //       )
-  //     ],
-  //     main_description: buyNowDesController.text,
-  //     isLoading: true,
-  //   );
-  //   if (response != null) {
-  //     Utility.snacBar("Card added sucessfully...!", ColorsValue.maincolor1);
-  //     update();
-  //   }
-  // }
+  Future<void> postWishlistAddRemove(String productsDoc) async {
+    var response = await homePresenter.postWishlistAddRemove(
+      productId: productsDoc,
+      isLoading: false,
+    );
+    if (response?.data != null) {
+      postAllProduct(1);
+      postWishlist(1);
+      postAllTrendingProduct(1);
+    }
+    update();
+  }
+
+  final ScrollController scrollViewAllController = ScrollController();
+  List<ProductsDoc> viewAllDocList = [];
+
+  int pageViewAllCount = 1;
+  bool isViewAllLastPage = false;
+  bool isViewAllLoading = false;
+
+  Future<void> postArrivalViewAll(int pageKey, String type) async {
+    if (pageKey == 1) {
+      pageViewAllCount = 1;
+    }
+    var response = await homePresenter.postAllProduct(
+      page: pageKey,
+      limit: 10,
+      search: "",
+      category: "",
+      min: "1",
+      max: "10",
+      productType: type.toLowerCase(),
+      sortField: "weight",
+      sortOption: 1,
+      isLoading: false,
+    );
+    if (response?.data != null) {
+      if (pageKey == 1) {
+        isViewAllLastPage = false;
+        viewAllDocList.clear();
+      }
+      if ((response?.data?.docs?.length ?? 0) < 10) {
+        isViewAllLastPage = true;
+        viewAllDocList.addAll(response?.data?.docs ?? []);
+      } else {
+        pageViewAllCount++;
+        viewAllDocList.addAll(response?.data?.docs ?? []);
+      }
+      if (pageKey == 1) {
+        if (scrollViewAllController.positions.isNotEmpty) {
+          scrollViewAllController.jumpTo(0);
+        }
+      }
+    }
+    update();
+  }
 }

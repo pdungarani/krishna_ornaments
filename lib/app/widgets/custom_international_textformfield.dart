@@ -92,7 +92,7 @@ class CustomInternationalPhoneFild extends StatelessWidget {
               ),
               filled: true,
               fillColor: ColorsValue.colorEEEAEA,
-              errorStyle: Styles.txtRedBold12,
+              errorStyle: Styles.txtRedW50010,
             ),
             validator: validation,
           ),

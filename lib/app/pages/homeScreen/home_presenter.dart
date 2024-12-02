@@ -2,9 +2,10 @@ import 'package:krishna_ornaments/data/data.dart';
 import 'package:krishna_ornaments/domain/domain.dart';
 
 class HomePresenter {
-  HomePresenter(this.homeUseCases);
+  HomePresenter(this.homeUseCases, this.commonUsecases);
 
   final HomeUseCases homeUseCases;
+  final CommonUsecases commonUsecases;
 
   Future<GetCategoriesModel?> getAllCategories({
     bool isLoading = false,
@@ -25,7 +26,7 @@ class HomePresenter {
     required String sortField,
     required var sortOption,
   }) async =>
-      await homeUseCases.postAllProduct(
+      await commonUsecases.postAllProduct(
         page: page,
         limit: limit,
         search: search,
@@ -59,6 +60,26 @@ class HomePresenter {
       await homeUseCases.postOrderCreate(
         productId: productId,
         main_description: main_description,
+        isLoading: isLoading,
+      );
+
+  Future<WishlistModel?> postWishlist({
+    bool isLoading = false,
+    required int page,
+    required int limit,
+  }) async =>
+      await homeUseCases.postWishlist(
+        page: page,
+        limit: limit,
+        isLoading: isLoading,
+      );
+
+  Future<ResponseModel?> postWishlistAddRemove({
+    bool isLoading = false,
+    required String productId,
+  }) async =>
+      await homeUseCases.postWishlistAddRemove(
+        productId: productId,
         isLoading: isLoading,
       );
 }

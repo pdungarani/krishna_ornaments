@@ -21,6 +21,8 @@ abstract class Routes {
   static const sampleOrderDetailsScreen = _Paths.sampleOrderDetailsScreen;
   static const sampleOrderHistoryScreen = _Paths.sampleOrderHistoryScreen;
   static const showFullScareenImage = _Paths.showFullScareenImage;
+  static const wishlistScreen = _Paths.wishlistScreen;
+  static const viewAllProductScreen = _Paths.viewAllProductScreen;
 }
 
 abstract class _Paths {
@@ -41,4 +43,6 @@ abstract class _Paths {
   static const sampleOrderDetailsScreen = '/sampleOrderDetailsScreen';
   static const sampleOrderHistoryScreen = '/sampleOrderHistoryScreen';
   static const showFullScareenImage = '/showFullScareenImage';
+  static const wishlistScreen = '/wishlistScreen';
+  static const viewAllProductScreen = '/viewAllProductScreen';
 }

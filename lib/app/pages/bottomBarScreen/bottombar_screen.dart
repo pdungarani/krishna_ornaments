@@ -40,7 +40,20 @@ class BottomBarScreen extends StatelessWidget {
                 ),
               ),
               TabItem(
-                icon: SvgPicture.asset("assets/icons/Coupen.svg"),
+                icon: SvgPicture.asset(
+                  AssetConstants.ic_repair,
+                  colorFilter: ColorFilter.mode(
+                    ColorsValue.grey9DB2CE,
+                    BlendMode.srcIn,
+                  ),
+                ),
+                activeIcon: SvgPicture.asset(
+                  AssetConstants.ic_repair,
+                  colorFilter: ColorFilter.mode(
+                    ColorsValue.appColor,
+                    BlendMode.srcIn,
+                  ),
+                ),
               ),
               TabItem(
                 icon: SvgPicture.asset("assets/icons/profile.svg"),
