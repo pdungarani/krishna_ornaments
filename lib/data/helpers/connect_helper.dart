@@ -124,7 +124,9 @@ class ConnectHelper {
     return response;
   }
 
-  Future<ResponseModel> postGetAllCartProduct({bool isLoading = false}) async {
+  Future<ResponseModel> postGetAllCartProduct({
+    bool isLoading = false,
+  }) async {
     var response = await apiWrapper.makeRequest(
       EndPoints.postGetAllCartProduct,
       Request.post,

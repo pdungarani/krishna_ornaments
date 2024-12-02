@@ -13,6 +13,7 @@ class HomeScreen extends StatelessWidget {
     return GetBuilder<HomeController>(
       initState: (state) async {
         var controller = Get.find<HomeController>();
+        Get.find<ProfileController>().getProfile();
         await controller.postAllProduct(1);
         await controller.postAllTrendingProduct(1);
       },
@@ -23,7 +24,7 @@ class HomeScreen extends StatelessWidget {
           title: Padding(
             padding: EdgeInsets.all(Dimens.five),
             child: Text(
-              'Full Name',
+              Get.find<ProfileController>().getProfileModel?.name ?? '',
               style: Styles.color01010160018,
             ),
           ),
