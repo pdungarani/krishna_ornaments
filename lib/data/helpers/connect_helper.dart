@@ -126,11 +126,17 @@ class ConnectHelper {
 
   Future<ResponseModel> postGetAllCartProduct({
     bool isLoading = false,
+    required int page,
+    required int limit,
   }) async {
+    var data = {
+      "page": page,
+      "limit": limit,
+    };
     var response = await apiWrapper.makeRequest(
       EndPoints.postGetAllCartProduct,
       Request.post,
-      null,
+      data,
       isLoading,
       Utility.commonHeader(),
     );

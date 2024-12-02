@@ -11,6 +11,8 @@ class ShoppingCartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ShoppingCartController>(initState: (state) {
+      var controller = Get.find<ShoppingCartController>();
+      controller.postGetAllCartProduct(10);
     }, builder: (controller) {
       return Scaffold(
         resizeToAvoidBottomInset: true,
@@ -32,13 +34,6 @@ class ShoppingCartScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(
                           Dimens.five,
                         ),
-                        // boxShadow: const [
-                        //   BoxShadow(
-                        //     color: Colors.black12,
-                        //     blurRadius: 5,
-                        //     offset: Offset(0, 0),
-                        //   ),
-                        // ],
                       ),
                       child: Padding(
                         padding: Dimens.edgeInsets10,
@@ -59,7 +54,7 @@ class ShoppingCartScreen extends StatelessWidget {
                                   Dimens.five,
                                 ),
                                 child: CachedNetworkImage(
-                                  imageUrl: "",
+                                  imageUrl: e.product?.image ?? '',
                                   fit: BoxFit.cover,
                                   placeholder: (context, url) {
                                     return Image.asset(
@@ -85,32 +80,49 @@ class ShoppingCartScreen extends StatelessWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Diamond Ring',
-                                            style: Styles.color212121W70012,
-                                          ),
-                                          Dimens.boxHeight5,
-                                          Text(
-                                            "${'weight'.tr} : ",
-                                            style: Styles.color9C9C9CW50010,
-                                          ),
-                                        ],
+                                      Flexible(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              e.product?.name ?? '',
+                                              style: Styles.color212121W70012,
+                                              softWrap: true,
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                            ),
+                                            Dimens.boxHeight5,
+                                            Text(
+                                              "${'weight'.tr} : ${e.product?.weight}",
+                                              style: Styles.color9C9C9CW50010,
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                      Row(
-                                        children: [
-                                          SvgPicture.asset(
-                                            AssetConstants.ic_delete,
-                                          ),
-                                          Dimens.boxWidth10,
-                                          Text(
-                                            'remove'.tr,
-                                            style: Styles.color212121W70010,
-                                          )
-                                        ],
+                                      GestureDetector(
+                                        onTap: () {
+                                          controller.postCartProductRemove(
+                                            e.product?.id ?? '',
+                                            controller.list.indexWhere(
+                                              (element) =>
+                                                  element.product?.id ==
+                                                  e.product?.id,
+                                            ),
+                                          );
+                                        },
+                                        child: Row(
+                                          children: [
+                                            SvgPicture.asset(
+                                              AssetConstants.ic_delete,
+                                            ),
+                                            Dimens.boxWidth10,
+                                            Text(
+                                              'remove'.tr,
+                                              style: Styles.color212121W70010,
+                                            )
+                                          ],
+                                        ),
                                       )
                                     ],
                                   ),
@@ -122,7 +134,7 @@ class ShoppingCartScreen extends StatelessWidget {
                                       ),
                                       Dimens.boxWidth10,
                                       Text(
-                                        "0",
+                                        e.quantity.toString(),
                                         style: Styles.appColor70010,
                                       ),
                                       Dimens.boxWidth10,
@@ -164,7 +176,7 @@ class ShoppingCartScreen extends StatelessWidget {
                   ),
                   Dimens.boxWidth10,
                   Text(
-                    '02'.tr,
+                    controller.getallCartItem?.totalQuantity.toString() ?? '',
                     style: Styles.colorA7A7A750016,
                   ),
                 ],
@@ -182,7 +194,7 @@ class ShoppingCartScreen extends StatelessWidget {
                   ),
                   Dimens.boxWidth10,
                   Text(
-                    '02'.tr,
+                    controller.getallCartItem.toString(),
                     style: Styles.colorA7A7A750016,
                   ),
                 ],

@@ -223,17 +223,24 @@ class Repository {
     }
   }
 
-  Future<ResponseModel?> postGetAllCartProduct({
+  Future<CartItemModel?> postGetAllCartProduct({
     bool isLoading = false,
-    required String productId,
-    required int quantity,
-    required String description,
+    required int page,
+    required int limit,
   }) async {
     try {
       var response = await _dataRepository.postGetAllCartProduct(
         isLoading: isLoading,
+        limit: limit,
+        page: page,
       );
-      return response;
+      var cartItemModel = cartItemModelFromJson(response.data);
+      if (cartItemModel.data != null) {
+        return cartItemModel;
+      } else {
+        Utility.errorMessage(cartItemModel.message.toString());
+        return null;
+      }
     } catch (_) {
       Utility.closeDialog();
       UnimplementedError();
@@ -241,7 +248,7 @@ class Repository {
     }
   }
 
-  Future<ResponseModel?> postCartProductRemove({
+  Future<CartItemModel?> postCartProductRemove({
     bool isLoading = false,
     required String productId,
   }) async {
@@ -250,7 +257,13 @@ class Repository {
         productId: productId,
         isLoading: isLoading,
       );
-      return response;
+      var cartItemModel = cartItemModelFromJson(response.data);
+      if (cartItemModel.data != null) {
+        return cartItemModel;
+      } else {
+        Utility.errorMessage(cartItemModel.message.toString());
+        return null;
+      }
     } catch (_) {
       Utility.closeDialog();
       UnimplementedError();
