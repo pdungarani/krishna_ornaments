@@ -173,7 +173,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   text: 'Sign Up',
                   onTap: () {
                     if (controller.signUpFormkey.currentState!.validate()) {
-                      controller.registerApi();
+                    controller.registerApi();
                     }
                   },
                 )

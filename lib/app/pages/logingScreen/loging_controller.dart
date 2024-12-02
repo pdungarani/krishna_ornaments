@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/navigators/routes_management.dart';
@@ -70,6 +69,7 @@ class LoginController extends GetxController {
       isLoading: true,
     );
     if (response?.data != null) {
+      Utility.snacBar(response?.message ?? '', Colors.black26);
       update();
     } else {
       Utility.errorMessage(jsonDecode(response?.message ?? ""));
