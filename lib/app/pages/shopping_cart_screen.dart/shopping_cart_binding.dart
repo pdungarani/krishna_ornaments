@@ -15,7 +15,6 @@ class ShoppingCartBinding extends Bindings {
               ),
               permanent: true,
             ),
-            
           ),
         ),
       ),
