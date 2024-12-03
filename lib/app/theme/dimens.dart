@@ -143,22 +143,24 @@ abstract class Dimens {
   static double twoHundredTwentyEight = 228.sp;
   static double twoHundredThirtySix = 236.sp;
   static double twoHundredFourty = 240.sp;
-  static double twoHundredFifty = 250.sp;
   static double twoHundredFiftyFive = 255.sp;
   static double twoHundredSixtySix = 266.sp;
   static double twoHundredSixtyEight = 268.sp;
-  static double twoHundredEighty = 280.sp;
   static double twoHundredSeventyFive = 275.sp;
+  static double twoHundredSeventy = 270;
+  static double twoHundredEighty = 280;
+  static double twoHundredNinety = 290;
   static double twoHundredNintyOne = 291.sp;
   static double twoHundredNintyTwo = 292.sp;
-  static double threeHundred = 300.sp;
+  static double threeHundred = 300;
   static double threeHundredOne = 301.sp;
   static double threeHundredSeventeen = 317.sp;
   static double threeHundredTwentyFour = 324.sp;
   static double threeHundredTwentySix = 326.sp;
   static double threeHundredTwentyEight = 328.sp;
   static double threeHundredTwentyNine = 329.sp;
-  static double threeHundredThirty = 330.sp;
+  static double threeHundredThirty = 330;
+  static double threeHundredTwenty = 320;
   static double threeHundredTwentyTwo = 332.sp;
   static double threeHundredFourty = 340.sp;
   static double threeHundredFourtyThree = 343.sp;
@@ -181,7 +183,6 @@ abstract class Dimens {
   static double hundredFiftyStatic = 150;
   static double twoHundredStatic = 200;
   static double twoHundredFifteen = 215;
-  static double twoHundredNinety = 290;
   static double twoHundredSeventyEight = 278;
 
   static double pointZeroZeroEight = 0.08.sp;
@@ -803,13 +804,6 @@ abstract class Dimens {
     hundredFifty,
     zero,
     hundredFifty,
-    zero,
-  );
-
-  static EdgeInsets edgeInsets250_0_250_0 = EdgeInsets.fromLTRB(
-    twoHundredFifty,
-    zero,
-    twoHundredFifty,
     zero,
   );
 

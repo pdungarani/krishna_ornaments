@@ -143,5 +143,19 @@ class AppPages {
       binding: RepairBinding(),
       transition: Transition.fadeIn,
     ),
+    GetPage<WishlistScreen>(
+      name: _Paths.wishlistScreen,
+      transitionDuration: transitionDuration,
+      page: WishlistScreen.new,
+      binding: HomeBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage<ViewAllProductScreen>(
+      name: _Paths.viewAllProductScreen,
+      transitionDuration: transitionDuration,
+      page: ViewAllProductScreen.new,
+      binding: HomeBinding(),
+      transition: Transition.fadeIn,
+    ),
   ];
 }

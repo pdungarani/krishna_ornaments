@@ -130,6 +130,26 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading,
       );
 
+  Future<ResponseModel> postWishlist({
+    bool isLoading = false,
+    required int page,
+    required int limit,
+  }) async =>
+      await connectHelper.postWishlist(
+        page: page,
+        limit: limit,
+        isLoading: isLoading,
+      );
+
+  Future<ResponseModel> postWishlistAddRemove({
+    bool isLoading = false,
+    required String productId,
+  }) async =>
+      await connectHelper.postWishlistAddRemove(
+        productId: productId,
+        isLoading: isLoading,
+      );
+
   Future<ResponseModel> loginApi({
     bool isLoading = false,
     required String mobile,

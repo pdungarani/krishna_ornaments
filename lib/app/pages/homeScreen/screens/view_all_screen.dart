@@ -1,10 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/widgets/appbar_widgets.dart';
 import 'package:krishna_ornaments/app/widgets/custom_button.dart';
-import 'package:krishna_ornaments/app/widgets/custom_product.dart';
 
 class ViewAllProductScreen extends StatelessWidget {
   const ViewAllProductScreen({super.key});
@@ -13,44 +13,23 @@ class ViewAllProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
       initState: (state) async {
-        // var controller = Get.find<ProductDetailController>();
-        // controller.productType = Get.arguments ?? "";
-        // controller.isLoading = true;
-        // if (controller.productType == "Best Seller") {
-        //   await controller.postBestSellerList(1);
-        //   controller.scrollBestSellerController.addListener(() async {
-        //     if (controller.scrollBestSellerController.position.pixels ==
-        //         controller
-        //             .scrollBestSellerController.position.maxScrollExtent) {
-        //       if (controller.isBestSellerLoading == false) {
-        //         controller.isBestSellerLoading = true;
-        //         controller.update();
-        //         if (controller.isBestSellerLastPage == false) {
-        //           await controller.postBestSellerList(controller.pageCount);
-        //         }
-        //         controller.isBestSellerLoading = false;
-        //         controller.update();
-        //       }
-        //     }
-        //   });
-        // } else {
-        //   await controller.postComboList(1);
-        //   controller.scrollBestSellerController.addListener(() async {
-        //     if (controller.scrollBestSellerController.position.pixels ==
-        //         controller
-        //             .scrollBestSellerController.position.maxScrollExtent) {
-        //       if (controller.isBestSellerLoading == false) {
-        //         controller.isBestSellerLoading = true;
-        //         controller.update();
-        //         if (controller.isBestSellerLastPage == false) {
-        //           await controller.postComboList(controller.pageCount);
-        //         }
-        //         controller.isBestSellerLoading = false;
-        //         controller.update();
-        //       }
-        //     }
-        //   });
-        // }
+        var controller = Get.find<HomeController>();
+        controller.postArrivalViewAll(1, Get.arguments);
+        controller.scrollViewAllController.addListener(() async {
+          if (controller.scrollViewAllController.position.pixels ==
+              controller.scrollViewAllController.position.maxScrollExtent) {
+            if (controller.isViewAllLoading == false) {
+              controller.isViewAllLoading = true;
+              controller.update();
+              if (controller.isViewAllLastPage == false) {
+                await controller.postArrivalViewAll(
+                    controller.pageViewAllCount, Get.arguments);
+              }
+              controller.isViewAllLoading = false;
+              controller.update();
+            }
+          }
+        });
       },
       builder: (controller) {
         return Scaffold(
@@ -59,7 +38,7 @@ class ViewAllProductScreen extends StatelessWidget {
             onTapBack: () {
               Get.back();
             },
-            title: controller.productType,
+            title: Get.arguments,
           ),
           body: Padding(
             padding: Dimens.edgeInsets20,
@@ -302,7 +281,7 @@ class ViewAllProductScreen extends StatelessWidget {
                             ),
                             Dimens.boxWidth10,
                             SvgPicture.asset(
-                              'AssetConstants.ic_down_arrow',
+                              AssetConstants.ic_down_arrow,
                             )
                           ],
                         ),
@@ -862,7 +841,7 @@ class ViewAllProductScreen extends StatelessWidget {
                             ),
                             Dimens.boxWidth10,
                             SvgPicture.asset(
-                              'AssetConstants.ic_filter',
+                              AssetConstants.ic_filter,
                             )
                           ],
                         ),
@@ -871,76 +850,187 @@ class ViewAllProductScreen extends StatelessWidget {
                   ],
                 ),
                 Dimens.boxHeight20,
-                !controller.isLoading
-                    ? Expanded(
-                        child: controller.productList.isNotEmpty
-                            ? RefreshIndicator(
-                                onRefresh: () => Future.sync(
-                                  () async {
-                                    // if (controller.productType ==
-                                    //     "Best Seller") {
-                                    //   return await controller
-                                    //       .postBestSellerList(1);
-                                    // } else {
-                                    //   return await controller.postComboList(1);
-                                    // }
-                                  },
-                                ),
-                                child: GridView.builder(
-                                  controller:
-                                      controller.scrollBestSellerController,
-                                  gridDelegate:
-                                      SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    mainAxisSpacing: Dimens.fifteen,
-                                    crossAxisSpacing: Dimens.ten,
-                                    mainAxisExtent: Dimens.twoHundredSixty,
+                Expanded(
+                  child: controller.viewAllDocList.isNotEmpty
+                      ? RefreshIndicator(
+                          onRefresh: () => Future.sync(
+                            () async {
+                              await controller.postArrivalViewAll(
+                                  1, Get.arguments);
+                            },
+                          ),
+                          child: GridView.builder(
+                            controller: controller.scrollViewAllController,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              mainAxisSpacing: Dimens.fifteen,
+                              crossAxisSpacing: Dimens.ten,
+                              mainAxisExtent: Dimens.threeHundredTwenty,
+                            ),
+                            itemCount: controller.viewAllDocList.length,
+                            itemBuilder: (context, index) {
+                              var item = controller.viewAllDocList[index];
+                              return Container(
+                                decoration: BoxDecoration(
+                                  color: ColorsValue.appColorLight,
+                                  borderRadius: BorderRadius.circular(
+                                    Dimens.six,
                                   ),
-                                  itemCount: controller.productList.length,
-                                  scrollDirection: Axis.vertical,
-                                  itemBuilder: (context, index) {
-                                    return Center();
-                                    // return InkWell(
-                                    //   onTap: () {
-                                    //     // RouteManagement.goToProductDetailScreen(
-                                    //     //     item.id ?? "", "Best Seller");
-                                    //   },
-                                    //   child: CustomProductView(
-                                    //     productName: 'productName',
-                                    //     imageUrl:
-                                    //         'assets/images/Mask group.png',
-                                    //     categoryName: 'categoryName',
-                                    //     inWishList: false,
-                                    //     onTap: () {},
-                                    //     addFavorite: () {},
-                                    //   ),
-                                    // );
-                                  },
                                 ),
-                              )
-                            : Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SvgPicture.asset(
-                                      'AssetConstants.ic_filter_empty',
-                                    ),
-                                    Dimens.boxHeight10,
-                                    Text(
-                                      'search_empty_txt'.tr,
-                                      style: Styles.black64748BW50016,
-                                    )
-                                  ],
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(
+                                    Dimens.six,
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      CachedNetworkImage(
+                                        imageUrl: item.image ?? "",
+                                        fit: BoxFit.cover,
+                                        height: Dimens.hundredSixty,
+                                        width: double.maxFinite,
+                                        placeholder: (context, url) =>
+                                            Image.asset(
+                                          AssetConstants.placeholder,
+                                          fit: BoxFit.cover,
+                                        ),
+                                        errorWidget: (context, url, error) =>
+                                            Image.asset(
+                                          AssetConstants.placeholder,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: Dimens.edgeInsets10,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              item.name ?? "",
+                                              softWrap: true,
+                                              maxLines: 1,
+                                              style: Styles.black60016,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                            Dimens.boxHeight5,
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "Weigth",
+                                                      style: Styles.black50012,
+                                                    ),
+                                                    Text(
+                                                      "${item.weight.toString()} gm",
+                                                      style: Styles.black50012,
+                                                    ),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    InkWell(
+                                                      onTap: () {
+                                                        controller
+                                                            .viewAllDocList[
+                                                                index]
+                                                            .quantity++;
+                                                        controller.update();
+                                                        print("object minus");
+                                                      },
+                                                      child: SvgPicture.asset(
+                                                        AssetConstants.minus,
+                                                        height:
+                                                            Dimens.twentyFour,
+                                                        width:
+                                                            Dimens.twentyFour,
+                                                      ),
+                                                    ),
+                                                    Dimens.boxWidth10,
+                                                    Text(
+                                                      item.quantity.toString(),
+                                                    ),
+                                                    Dimens.boxWidth10,
+                                                    InkWell(
+                                                      onTap: () {
+                                                        // if (controller
+                                                        //         .viewAllDocList[
+                                                        //             index]
+                                                        //         .quantity
+                                                        //         .toDouble() >
+                                                        //     1) {
+                                                        //   controller
+                                                        //       .viewAllDocList[
+                                                        //           index]
+                                                        //       .quantity--;
+                                                        // }
+                                                        // controller.update();
+                                                        print("object");
+                                                      },
+                                                      child: SvgPicture.asset(
+                                                        AssetConstants.plus,
+                                                        height:
+                                                            Dimens.twentyFour,
+                                                        width:
+                                                            Dimens.twentyFour,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            Dimens.boxHeight10,
+                                            Container(
+                                              alignment: Alignment.center,
+                                              padding:
+                                                  Dimens.edgeInsets14_0_14_0,
+                                              height: Dimens.thirty,
+                                              decoration: BoxDecoration(
+                                                color: ColorsValue.colorEDC97D,
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                  Dimens.four,
+                                                ),
+                                              ),
+                                              child: Text(
+                                                'Move To Cart',
+                                                style: Styles.whiteW70014,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
+                              );
+                            },
+                          ),
+                        )
+                      : Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                'AssetConstants.ic_filter_empty',
                               ),
-                      )
-                    : Expanded(
-                        child: Center(
-                          child: CircularProgressIndicator(
-                            color: ColorsValue.appColor,
+                              Dimens.boxHeight10,
+                              Text(
+                                'search_empty_txt'.tr,
+                                style: Styles.black64748BW50016,
+                              )
+                            ],
                           ),
                         ),
-                      ),
+                )
               ],
             ),
           ),

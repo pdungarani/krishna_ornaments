@@ -147,9 +147,47 @@ class ConnectHelper {
     bool isLoading = false,
     required String productId,
   }) async {
-    var data = {"productId": productId};
+    var data = {
+      "productId": productId,
+    };
     var response = await apiWrapper.makeRequest(
       EndPoints.postCartProductRemove,
+      Request.post,
+      data,
+      isLoading,
+      Utility.commonHeader(),
+    );
+    return response;
+  }
+
+  Future<ResponseModel> postWishlist({
+    bool isLoading = false,
+    required int page,
+    required int limit,
+  }) async {
+    var data = {
+      "page": page,
+      "limit": limit,
+    };
+    var response = await apiWrapper.makeRequest(
+      EndPoints.postWishlist,
+      Request.post,
+      data,
+      isLoading,
+      Utility.commonHeader(),
+    );
+    return response;
+  }
+
+  Future<ResponseModel> postWishlistAddRemove({
+    bool isLoading = false,
+    required String productId,
+  }) async {
+    var data = {
+      "productid": productId,
+    };
+    var response = await apiWrapper.makeRequest(
+      EndPoints.postWishlistAddRemove,
       Request.post,
       data,
       isLoading,

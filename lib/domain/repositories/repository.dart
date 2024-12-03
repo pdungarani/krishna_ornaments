@@ -271,6 +271,48 @@ class Repository {
     }
   }
 
+  Future<WishlistModel?> postWishlist({
+    bool isLoading = false,
+    required int page,
+    required int limit,
+  }) async {
+    try {
+      var response = await _dataRepository.postWishlist(
+        page: page,
+        limit: limit,
+        isLoading: isLoading,
+      );
+      var loginModel = wishlistModelFromJson(response.data);
+      if (loginModel.data != null) {
+        return loginModel;
+      } else {
+        Utility.errorMessage(loginModel.message.toString());
+        return loginModel;
+      }
+    } catch (_) {
+      Utility.closeDialog();
+      UnimplementedError();
+      return null;
+    }
+  }
+
+  Future<ResponseModel?> postWishlistAddRemove({
+    bool isLoading = false,
+    required String productId,
+  }) async {
+    try {
+      var response = await _dataRepository.postWishlistAddRemove(
+        productId: productId,
+        isLoading: isLoading,
+      );
+      return response;
+    } catch (_) {
+      Utility.closeDialog();
+      UnimplementedError();
+      return null;
+    }
+  }
+
   Future<LoginModel?> loginApi({
     bool isLoading = false,
     required String mobile,

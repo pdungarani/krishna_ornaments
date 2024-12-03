@@ -135,6 +135,12 @@ class _SignupScreenState extends State<SignupScreen> {
                   controller: controller.cityController,
                   textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.text,
+                  validation: (value) {
+                    if (value!.isEmpty) {
+                      return 'please_enter_city'.tr;
+                    }
+                    return null;
+                  },
                 ),
                 Dimens.boxHeight14,
                 CustomTextFormField(
@@ -173,7 +179,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   text: 'Sign Up',
                   onTap: () {
                     if (controller.signUpFormkey.currentState!.validate()) {
-                    controller.registerApi();
+                      controller.registerApi();
                     }
                   },
                 )

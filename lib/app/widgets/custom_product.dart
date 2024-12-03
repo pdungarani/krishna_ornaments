@@ -47,180 +47,175 @@ class _CustomProductViewState extends State<CustomProductView> {
       builder: (controller) {
         return Padding(
           padding: EdgeInsets.only(left: widget.isHorizontal ? 0 : 0),
-          child: InkWell(
-            onTap: widget.onAddToCard,
-            child: Container(
-              width: Get.width / 1.7,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  Dimens.ten,
-                ),
-                color: ColorsValue.whiteColor,
+          child: Container(
+            width: Get.width / 1.7,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(
+                Dimens.ten,
               ),
-              child: Padding(
-                padding: Dimens.edgeInsets10,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(
-                              Dimens.ten,
-                            ),
-                            color: ColorsValue.appBg,
+              color: ColorsValue.whiteColor,
+            ),
+            child: Padding(
+              padding: Dimens.edgeInsets10,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Stack(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            Dimens.ten,
                           ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(
-                              Dimens.ten,
-                            ),
-                            child: CachedNetworkImage(
-                              imageUrl: widget.imageUrl,
+                          color: ColorsValue.appBg,
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(
+                            Dimens.ten,
+                          ),
+                          child: CachedNetworkImage(
+                            imageUrl: widget.imageUrl,
+                            fit: BoxFit.cover,
+                            height: widget.isHorizontal
+                                ? Get.height / 5.50
+                                : Get.height / 5,
+                            width: Get.width / 1.3,
+                            placeholder: (context, url) => Image.asset(
+                              AssetConstants.placeholder,
                               fit: BoxFit.cover,
-                              height: widget.isHorizontal
-                                  ? Get.height / 5.50
-                                  : Get.height / 5,
-                              width: Get.width / 1.3,
-                              placeholder: (context, url) => Image.asset(
-                                AssetConstants.placeholder,
-                                fit: BoxFit.cover,
+                            ),
+                            errorWidget: (context, url, error) => Image.asset(
+                              AssetConstants.placeholder,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: Dimens.edgeInsets8,
+                        child: Align(
+                          alignment: Alignment.topRight,
+                          child: Container(
+                            height: Dimens.thirty,
+                            width: Dimens.thirty,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(
+                                Dimens.fifty,
                               ),
-                              errorWidget: (context, url, error) => Image.asset(
-                                AssetConstants.placeholder,
-                                fit: BoxFit.cover,
+                              color: ColorsValue.whiteColor,
+                              border: Border.all(
+                                width: Dimens.one,
+                                color: ColorsValue.lightPrimaryColor,
+                              ),
+                            ),
+                            child: Center(
+                              child: InkWell(
+                                onTap: widget.addFavorite,
+                                child: SvgPicture.asset(
+                                  widget.inWishList
+                                      ? AssetConstants.ic_fill_like
+                                      : AssetConstants.ic_like,
+                                ),
                               ),
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: Dimens.edgeInsets8,
-                          child: Align(
-                            alignment: Alignment.topRight,
-                            child: Container(
-                              height: Dimens.thirty,
-                              width: Dimens.thirty,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(
-                                  Dimens.fifty,
-                                ),
-                                color: ColorsValue.whiteColor,
-                                border: Border.all(
-                                  width: Dimens.one,
-                                  color: ColorsValue.lightPrimaryColor,
-                                ),
-                              ),
-                              child: Center(
-                                child: InkWell(
-                                  onTap: widget.addFavorite,
+                      ),
+                    ],
+                  ),
+                  Dimens.boxHeight10,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              softWrap: true,
+                              maxLines: 1,
+                              widget.productName,
+                              style: Styles.black60016,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Dimens.boxHeight10,
+                            Text(
+                              "Weigth",
+                              style: Styles.black70014,
+                            ),
+                            Text(
+                              widget.weigth,
+                              style: Styles.black60012,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Row(
+                            children: [
+                              GestureDetector(
+                                onTap: widget.increment,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                      Dimens.ten,
+                                    ),
+                                    color: ColorsValue.colorDFDFDF,
+                                  ),
                                   child: SvgPicture.asset(
-                                    widget.inWishList
-                                        ? AssetConstants.ic_fill_like
-                                        : AssetConstants.ic_like,
+                                    AssetConstants.minus,
+                                    height: Dimens.twentyFour,
+                                    width: Dimens.twentyFour,
                                   ),
                                 ),
                               ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Dimens.boxHeight10,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
+                              Dimens.boxWidth10,
                               Text(
-                                softWrap: true,
-                                maxLines: 1,
-                                widget.productName,
-                                style: Styles.black60016,
-                                overflow: TextOverflow.ellipsis,
+                                widget.quantity.toString(),
                               ),
-                              Dimens.boxHeight10,
-                              Text(
-                                "Weigth",
-                                style: Styles.black70014,
-                              ),
-                              Text(
-                                widget.weigth,
-                                style: Styles.black60012,
+                              Dimens.boxWidth10,
+                              GestureDetector(
+                                onTap: widget.dincrement,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: ColorsValue.colorDFDFDF,
+                                  ),
+                                  child: SvgPicture.asset(
+                                    AssetConstants.plus,
+                                    height: Dimens.twentyFour,
+                                    width: Dimens.twentyFour,
+                                  ),
+                                ),
                               ),
                             ],
                           ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Row(
-                              children: [
-                                GestureDetector(
-                                  onTap: widget.increment,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(
-                                        Dimens.ten,
-                                      ),
-                                      color: ColorsValue.colorDFDFDF,
-                                    ),
-                                    child: SvgPicture.asset(
-                                      AssetConstants.minus,
-                                      height: Dimens.twentyFour,
-                                      width: Dimens.twentyFour,
-                                    ),
-                                  ),
-                                ),
-                                Dimens.boxWidth10,
-                                Text(
-                                  widget.quantity.toString(),
-                                ),
-                                Dimens.boxWidth10,
-                                GestureDetector(
-                                  onTap: widget.dincrement,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: ColorsValue.colorDFDFDF,
-                                    ),
-                                    child: SvgPicture.asset(
-                                      AssetConstants.plus,
-                                      height: Dimens.twentyFour,
-                                      width: Dimens.twentyFour,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Dimens.boxHeight10,
-                            InkWell(
-                              onTap: widget.onAddToCard,
-                              child: Container(
-                                alignment: Alignment.center,
-                                padding: Dimens.edgeInsets14_0_14_0,
-                                height: Dimens.twentyFive,
-                                decoration: BoxDecoration(
-                                  color: ColorsValue.colorEDC97D,
-                                  borderRadius: BorderRadius.circular(
-                                    Dimens.four,
-                                  ),
-                                ),
-                                child: Text(
-                                  widget.inCart
-                                      ? 'Item In Cart'
-                                      : 'Add To Cart',
-                                  style: Styles.colorFBF7F350010,
+                          Dimens.boxHeight10,
+                          InkWell(
+                            onTap: widget.onAddToCard,
+                            child: Container(
+                              alignment: Alignment.center,
+                              padding: Dimens.edgeInsets14_0_14_0,
+                              height: Dimens.twentyFive,
+                              decoration: BoxDecoration(
+                                color: ColorsValue.colorEDC97D,
+                                borderRadius: BorderRadius.circular(
+                                  Dimens.four,
                                 ),
                               ),
+                              child: Text(
+                                widget.inCart ? 'Item In Cart' : 'Add To Cart',
+                                style: Styles.colorFBF7F350010,
+                              ),
                             ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ],
-                ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ],
               ),
             ),
           ),

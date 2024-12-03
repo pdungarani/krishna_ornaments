@@ -17,3 +17,4 @@ export 'repair_order_image_model.dart';
 export 'response_model.dart';
 export 'sample_history_model.dart';
 export 'sample_oredr_image_mode.dart';
+export 'wishlist_model.dart';
