@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/domain/domain.dart';
 
@@ -21,24 +20,10 @@ class HomeController extends GetxController {
 
   int itemCounter = 0;
 
+  List<String> testList = ["fds", "Fsdf"];
+
   /// >>>>>>>>>>>>>> For view all Screen <<<<<<<<<<<<<<<<<<<< ///
 
-  String productType = "";
-  int radioValue = 0;
-  String radioSortValue = "DLTH";
-  bool isLoading = true;
-  List<String> filterType = [
-    'price'.tr,
-    'customer_rating'.tr,
-  ];
-  int filterValue = 0;
-  double minValue = 2000;
-  double maxValue = 2000;
-  double startValue = 100;
-  double endValue = 2000;
-  int filterRating = 5;
-  bool isFilter = false;
-  List productList = [];
   final ScrollController scrollBestSellerController = ScrollController();
 
   ////Harshil
@@ -151,19 +136,23 @@ class HomeController extends GetxController {
   }
 
   Future<void> postAddToCart(
-      ProductsDoc productsDoc, int index, String productType) async {
+      String productId, int quantity, int index, String productType) async {
     var response = await homePresenter.postAddToCart(
-      productId: productsDoc.id ?? "",
-      quantity: productsDoc.quantity,
+      productId: productId ?? "",
+      quantity: quantity,
       description: "",
       isLoading: false,
     );
     if (response?.data != null) {
       if (productType.contains("arrival")) {
         productArrivalDocList[index].inCart = true;
+      } else if (productType.contains('wishlist')) {
+        wishlistList[index].inCart = true;
       } else {
         productTrendingDocList[index].inCart = true;
       }
+      Utility.snacBar(
+          "Product added in cart successfully...!", ColorsValue.appColor);
     } else {
       Utility.errorMessage(jsonDecode(response.toString())['Data']['Message']);
     }
@@ -220,50 +209,6 @@ class HomeController extends GetxController {
       postAllProduct(1);
       postWishlist(1);
       postAllTrendingProduct(1);
-    }
-    update();
-  }
-
-  final ScrollController scrollViewAllController = ScrollController();
-  List<ProductsDoc> viewAllDocList = [];
-
-  int pageViewAllCount = 1;
-  bool isViewAllLastPage = false;
-  bool isViewAllLoading = false;
-
-  Future<void> postArrivalViewAll(int pageKey, String type) async {
-    if (pageKey == 1) {
-      pageViewAllCount = 1;
-    }
-    var response = await homePresenter.postAllProduct(
-      page: pageKey,
-      limit: 10,
-      search: "",
-      category: "",
-      min: "1",
-      max: "10",
-      productType: type.toLowerCase(),
-      sortField: "weight",
-      sortOption: 1,
-      isLoading: false,
-    );
-    if (response?.data != null) {
-      if (pageKey == 1) {
-        isViewAllLastPage = false;
-        viewAllDocList.clear();
-      }
-      if ((response?.data?.docs?.length ?? 0) < 10) {
-        isViewAllLastPage = true;
-        viewAllDocList.addAll(response?.data?.docs ?? []);
-      } else {
-        pageViewAllCount++;
-        viewAllDocList.addAll(response?.data?.docs ?? []);
-      }
-      if (pageKey == 1) {
-        if (scrollViewAllController.positions.isNotEmpty) {
-          scrollViewAllController.jumpTo(0);
-        }
-      }
     }
     update();
   }

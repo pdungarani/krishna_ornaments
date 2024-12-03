@@ -24,6 +24,7 @@ class CustomTextFormField extends StatefulWidget {
       this.validation,
       this.onChanged,
       this.fillColor,
+      this.textAlign,
       this.textStyle,
       this.onTap})
       : super(key: key);
@@ -47,6 +48,7 @@ class CustomTextFormField extends StatefulWidget {
   final TextInputAction? textInputAction;
   final TextStyle? hintTextStyle;
   final TextStyle? textStyle;
+  final TextAlign? textAlign;
   final Function()? onTap;
 
   @override
@@ -86,6 +88,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           maxLength: widget.maxLength,
           maxLines: widget.maxLines,
           autofocus: widget.autofocus,
+          textAlign: widget.textAlign ??TextAlign.left,
           textInputAction: widget.textInputAction,
           keyboardType: widget.keyboardType,
           validator: widget.validation,

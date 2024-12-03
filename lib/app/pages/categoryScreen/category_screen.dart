@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import 'package:flutter/material.dart';
 import 'package:krishna_ornaments/app/app.dart';
+import 'package:krishna_ornaments/app/navigators/navigators.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
@@ -33,40 +34,46 @@ class CategoryScreen extends StatelessWidget {
             var item = controller.getCategoriesList[index];
             var type =
                 controller.getCategoriesList[index].image?.split(".").last;
-            return Padding(
-              padding: Dimens.edgeInsetsTopt10,
-              child: Container(
-                width: double.maxFinite,
-                height: Dimens.hundredTwenty,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    Dimens.ten,
+            return GestureDetector(
+              onTap: () {
+                RouteManagement.goToViewAllProductScreen(
+                    "", item.id ?? "", item.name ?? "");
+              },
+              child: Padding(
+                padding: Dimens.edgeInsetsTopt10,
+                child: Container(
+                  width: double.maxFinite,
+                  height: Dimens.hundredTwenty,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                      Dimens.ten,
+                    ),
                   ),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(
-                    Dimens.ten,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(
+                      Dimens.ten,
+                    ),
+                    child: type != "svg"
+                        ? CachedNetworkImage(
+                            imageUrl: (item.image ?? ""),
+                            fit: BoxFit.cover,
+                            placeholder: (context, url) {
+                              return Image.asset(
+                                AssetConstants.placeholder,
+                                fit: BoxFit.cover,
+                              );
+                            },
+                            errorWidget: (context, url, error) {
+                              return Image.asset(
+                                AssetConstants.placeholder,
+                                fit: BoxFit.cover,
+                              );
+                            },
+                          )
+                        : SvgPicture.network(
+                            item.image ?? "",
+                          ),
                   ),
-                  child: type != "svg"
-                      ? CachedNetworkImage(
-                          imageUrl: (item.image ?? ""),
-                          fit: BoxFit.cover,
-                          placeholder: (context, url) {
-                            return Image.asset(
-                              AssetConstants.placeholder,
-                              fit: BoxFit.cover,
-                            );
-                          },
-                          errorWidget: (context, url, error) {
-                            return Image.asset(
-                              AssetConstants.placeholder,
-                              fit: BoxFit.cover,
-                            );
-                          },
-                        )
-                      : SvgPicture.network(
-                          item.image ?? "",
-                        ),
                 ),
               ),
             );

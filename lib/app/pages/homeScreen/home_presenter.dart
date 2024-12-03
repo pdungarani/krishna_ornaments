@@ -45,7 +45,7 @@ class HomePresenter {
     required int quantity,
     required String description,
   }) async =>
-      await homeUseCases.postAddToCart(
+      await commonUsecases.postAddToCart(
         productId: productId,
         quantity: quantity,
         description: description,

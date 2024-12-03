@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:krishna_ornaments/app/app.dart';
 
 // ignore: must_be_immutable
@@ -24,7 +25,15 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       leading: Visibility(
         visible: isVisible,
-        child: const SizedBox(),
+        child: Padding(
+          padding: Dimens.edgeInsetsLeft20,
+          child: GestureDetector(
+            onTap: onTapBack,
+            child: SvgPicture.asset(
+              AssetConstants.ic_back_arrow,
+            ),
+          ),
+        ),
       ),
       title: Visibility(
         visible: isTitle,

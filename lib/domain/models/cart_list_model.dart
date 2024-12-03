@@ -20,7 +20,9 @@ class CartItemModel {
 
   factory CartItemModel.fromJson(Map<String, dynamic> json) => CartItemModel(
         message: json["Message"],
-        data: json["Data"] == null ? null : CartItemData.fromJson(json["Data"]),
+        data: json["Data"] == null || json["Data"] == 0
+            ? null
+            : CartItemData.fromJson(json["Data"]),
         status: json["Status"],
         isSuccess: json["IsSuccess"],
       );
@@ -61,13 +63,13 @@ class CartItemData {
 class CartItemProductElement {
   CartItemProductProduct? product;
   Category? category;
-  int? quantity;
+  int quantity;
   String? description;
 
   CartItemProductElement({
     this.product,
     this.category,
-    this.quantity,
+    this.quantity = 0,
     this.description,
   });
 

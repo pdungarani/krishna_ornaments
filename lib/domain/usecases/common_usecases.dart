@@ -29,4 +29,17 @@ class CommonUsecases {
         sortOption: sortOption,
         isLoading: isLoading,
       );
+
+  Future<ResponseModel?> postAddToCart({
+    bool isLoading = false,
+    required String productId,
+    required int quantity,
+    required String description,
+  }) async =>
+      await repository.postAddToCart(
+        productId: productId,
+        quantity: quantity,
+        description: description,
+        isLoading: isLoading,
+      );
 }

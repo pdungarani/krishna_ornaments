@@ -32,5 +32,7 @@ abstract class AssetConstants {
   static const String ic_wishlist = 'assets/icons/ic_wishlist.svg';
   static const String ic_down_arrow = 'assets/svg/ic_down_arrow.svg';
   static const String ic_filter = 'assets/svg/ic_filter.svg';
+  static const String ic_close = 'assets/svg/ic_close.svg';
+  static const String ic_filter_empty = 'assets/svg/ic_filter_empty.svg';
   static const String dwsadsa = '';
 }

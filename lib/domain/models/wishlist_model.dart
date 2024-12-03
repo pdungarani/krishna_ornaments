@@ -94,6 +94,7 @@ class WishlistDoc {
   DateTime? createdAt;
   DateTime? updatedAt;
   int? v;
+  bool? inCart;
 
   WishlistDoc({
     this.id,
@@ -105,6 +106,7 @@ class WishlistDoc {
     this.createdAt,
     this.updatedAt,
     this.v,
+    this.inCart,
   });
 
   factory WishlistDoc.fromJson(Map<String, dynamic> json) => WishlistDoc(
@@ -123,6 +125,7 @@ class WishlistDoc {
             ? null
             : DateTime.parse(json["updatedAt"]),
         v: json["__v"],
+        inCart: json["in_cart"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -135,6 +138,7 @@ class WishlistDoc {
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
         "__v": v,
+        "in_cart": inCart,
       };
 }
 
@@ -168,7 +172,7 @@ class WishlistProductid {
     this.createdAt,
     this.updatedAt,
     this.v,
-    this.quantity =0,
+    this.quantity = 0,
   });
 
   factory WishlistProductid.fromJson(Map<String, dynamic> json) =>

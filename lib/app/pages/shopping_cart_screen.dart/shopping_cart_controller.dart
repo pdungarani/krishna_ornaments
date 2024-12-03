@@ -1,3 +1,7 @@
+// ignore_for_file: deprecated_member_use
+
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -143,56 +147,284 @@ class ShoppingCartController extends GetxController {
     );
   }
 
-  CartItemData? getallCartItem = CartItemData();
-  List<GetOrderHistoryDoc> orderListModel = [];
-  PagingController<int, GetOrderHistoryDoc> orderPagingController =
-      PagingController(firstPageKey: 1);
-  int galleryLimit = 10;
-
-  Future<void> postGetAllCartProduct(int pageKey) async {
-    // var response = await shoppingCartPresenter.postGetAllCartProduct(
-    //   page: pageKey,
-    //   limit: galleryLimit,
-    //   isLoading: false,
-    // );
-    // if (response != null) {
-    //   if (pageKey == 1) {
-    //     orderListModel.clear();
-    //   }
-    //   orderListModel = response.data?. ?? [];
-
-    //   final isLastPage = orderListModel.length < galleryLimit;
-    //   if (isLastPage) {
-    //     orderPagingController.appendLastPage(orderListModel);
-    //   } else {
-    //     var nextPageKey = pageKey + 1;
-    //     orderPagingController.appendPage(orderListModel, nextPageKey);
-    //   }
-    //   update();
-    // }
-    var response = await shoppingCartPresenter.postGetAllCartProduct(
-      isLoading: true,
-      page: 1,
-      limit: 10,
+  showProductDescription(
+      BuildContext context, CartItemProductElement item, int index) {
+    productDesController.clear();
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      barrierColor: Colors.grey.withOpacity(0.5),
+      backgroundColor: ColorsValue.color9C9C9C,
+      builder: (context) {
+        return Padding(
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: StatefulBuilder(
+            builder: (context, setState) {
+              return Form(
+                key: productKey,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                child: Container(
+                  padding: Dimens.edgeInsets20_30_20_30,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(Dimens.twelve),
+                      topRight: Radius.circular(Dimens.twelve),
+                    ),
+                    color: ColorsValue.color9C9C9C,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'product_des'.tr,
+                        style: Styles.whiteW80024,
+                      ),
+                      Dimens.boxHeight20,
+                      Text(
+                        'description'.tr,
+                        style: Styles.whiteW60012,
+                      ),
+                      Dimens.boxHeight5,
+                      Container(
+                        decoration: const BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              offset: Offset(0, 2),
+                              blurRadius: 40,
+                              color: Colors.black12,
+                            ),
+                          ],
+                        ),
+                        child: TextFormField(
+                          style: Styles.txtBlackColorW50014,
+                          controller: productDesController,
+                          maxLines: 3,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'enter_product_des'.tr;
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            counterText: '',
+                            contentPadding: Dimens.edgeInsets10,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(50),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: Dimens.zero, style: BorderStyle.none),
+                              borderRadius: BorderRadius.circular(Dimens.five),
+                            ),
+                            disabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: Dimens.zero, style: BorderStyle.none),
+                              borderRadius: BorderRadius.circular(Dimens.five),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: Dimens.zero, style: BorderStyle.none),
+                              borderRadius: BorderRadius.circular(Dimens.five),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: Dimens.zero, style: BorderStyle.none),
+                              borderRadius: BorderRadius.circular(Dimens.five),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: Dimens.zero, style: BorderStyle.none),
+                              borderRadius: BorderRadius.circular(Dimens.five),
+                            ),
+                            filled: true,
+                            fillColor: ColorsValue.colorDFDFDF,
+                          ),
+                        ),
+                      ),
+                      Dimens.boxHeight30,
+                      ElevatedButton(
+                        onPressed: () {
+                          if (productKey.currentState!.validate()) {
+                            Get.back();
+                            postAddToCart(item.product?.id ?? "", item.quantity,
+                                index, "inCart");
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          fixedSize: Size(
+                            double.maxFinite,
+                            Dimens.fourtyFive,
+                          ),
+                          backgroundColor: ColorsValue.appColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              Dimens.twelve,
+                            ),
+                          ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'save'.tr,
+                            style: Styles.whiteColorW80016,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        );
+      },
     );
-    getallCartItem = null;
-    list.clear();
+  }
+
+  final ScrollController scrollCartController = ScrollController();
+  List<CartItemProductElement> cartList = [];
+
+  int pageCartCount = 1;
+  bool isCartLastPage = false;
+  bool isCartLoading = false;
+
+  bool isLoader = true;
+
+  double cartTotal = 0;
+
+  Future<void> postCartList(int pageKey) async {
+    if (pageKey == 1) {
+      pageCartCount = 1;
+    }
+    var response = await shoppingCartPresenter.postGetAllCartProduct(
+      page: pageKey,
+      limit: 10,
+      isLoading: false,
+    );
     if (response?.data != null) {
-      getallCartItem = response?.data;
-      list.addAll(getallCartItem?.products ?? []);
+      if (pageKey == 1) {
+        isCartLastPage = false;
+        cartList.clear();
+      }
+      if ((response?.data?.products?.length ?? 0) < 10) {
+        isCartLastPage = true;
+        cartList.addAll(response?.data?.products ?? []);
+      } else {
+        pageCartCount++;
+        cartList.addAll(response?.data?.products ?? []);
+      }
+      if (pageKey == 1) {
+        if (scrollCartController.positions.isNotEmpty) {
+          scrollCartController.jumpTo(0);
+        }
+      }
+    } else {
+      Utility.errorMessage(response?.message ?? "");
     }
     update();
   }
 
-  Future<void> postCartProductRemove(String productId, int index) async {
+  Future<void> postCartProductRemove(CartItemProductElement item) async {
     var response = await shoppingCartPresenter.postCartProductRemove(
       isLoading: true,
-      productId: productId,
+      productId: item.product?.id ?? "",
     );
-    if (response?.status == 200 || response?.status == 201) {
-      print("=====>>>> index $index");
-      list.removeAt(index);
-      update();
+    if (response?.data != null) {
+      cartList.remove(item);
+    } else {
+      Utility.errorMessage(jsonDecode(response?.data ?? "")['Message']);
+    }
+    update();
+  }
+
+  TextEditingController minWeightController = TextEditingController();
+  TextEditingController maxWeightController = TextEditingController();
+
+  int radioValue = 0;
+  int radioSortValue = -1;
+  bool isFilter = false;
+
+  int filterValue = 0;
+  double minValue = 0;
+  double maxValue = 1000;
+  double startValue = 0;
+  double endValue = 1000;
+
+  final ScrollController scrollViewAllController = ScrollController();
+  List<ProductsDoc> viewAllDocList = [];
+
+  int pageViewAllCount = 1;
+  bool isViewAllLastPage = false;
+  bool isViewAllLoading = false;
+
+  String productTypeViewAll = "";
+  String category = "";
+  String categoryName = "";
+
+  Future<void> postArrivalViewAll(int pageKey, String type) async {
+    if (pageKey == 1) {
+      pageViewAllCount = 1;
+    }
+    var response = await shoppingCartPresenter.postAllProduct(
+      page: pageKey,
+      limit: 10,
+      search: "",
+      category: category,
+      min: minWeightController.text.isNotEmpty &&
+              minWeightController.text.isNotEmpty
+          ? minWeightController.text
+          : startValue.toString(),
+      max: minWeightController.text.isNotEmpty &&
+              minWeightController.text.isNotEmpty
+          ? maxWeightController.text
+          : endValue.toString(),
+      productType: type.toLowerCase(),
+      sortField: "weight",
+      sortOption: radioSortValue,
+      isLoading: false,
+    );
+    if (response?.data != null) {
+      if (pageKey == 1) {
+        isViewAllLastPage = false;
+        viewAllDocList.clear();
+      }
+      if ((response?.data?.docs?.length ?? 0) < 10) {
+        isViewAllLastPage = true;
+        viewAllDocList.addAll(response?.data?.docs ?? []);
+      } else {
+        pageViewAllCount++;
+        viewAllDocList.addAll(response?.data?.docs ?? []);
+      }
+      if (pageKey == 1) {
+        if (scrollViewAllController.positions.isNotEmpty) {
+          scrollViewAllController.jumpTo(0);
+        }
+      }
+    }
+    update();
+  }
+
+  Future<void> postAddToCart(
+      String productId, int quantity, int index, String productType) async {
+    var response = await shoppingCartPresenter.postAddToCart(
+      productId: productId,
+      quantity: quantity,
+      description: productDesController.text,
+      isLoading: false,
+    );
+    if (response?.data != null) {
+      if (productType.contains("inCart")) {
+        cartList[index].description = productDesController.text;
+      } else {
+        viewAllDocList[index].inCart = true;
+        viewAllDocList[index].quantity = 1;
+        Utility.snacBar(
+            "Product added in cart successfully...!", ColorsValue.appColor);
+      }
+    } else {
+      Utility.errorMessage(jsonDecode(response.toString())['Data']['Message']);
     }
     update();
   }

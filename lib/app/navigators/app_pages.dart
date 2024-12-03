@@ -154,7 +154,7 @@ class AppPages {
       name: _Paths.viewAllProductScreen,
       transitionDuration: transitionDuration,
       page: ViewAllProductScreen.new,
-      binding: HomeBinding(),
+      binding: ShoppingCartBinding(),
       transition: Transition.fadeIn,
     ),
   ];

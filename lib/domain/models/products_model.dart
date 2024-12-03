@@ -18,7 +18,9 @@ class ProductsModel {
 
   factory ProductsModel.fromJson(Map<String, dynamic> json) => ProductsModel(
         message: json["Message"],
-        data: json["Data"] == null ? null : ProductsData.fromJson(json["Data"]),
+        data: json["Data"] == null || json["Data"] == 0
+            ? null
+            : ProductsData.fromJson(json["Data"]),
         status: json["Status"],
         isSuccess: json["IsSuccess"],
       );
@@ -113,7 +115,7 @@ class ProductsDoc {
     this.createdAt,
     this.docId,
     this.inCart,
-    this.quantity = 1,
+    this.quantity = 0,
     this.wishlistStatus,
   });
 
@@ -132,6 +134,7 @@ class ProductsDoc {
             : DateTime.parse(json["createdAt"]),
         docId: json["id"],
         inCart: json["in_cart"],
+        quantity: json["quantity"],
         wishlistStatus: json["wishlist_status"],
       );
 
@@ -146,6 +149,7 @@ class ProductsDoc {
         "createdAt": createdAt?.toIso8601String(),
         "id": docId,
         "in_cart": inCart,
+        "quantity": quantity,
         "wishlist_status": wishlistStatus,
       };
 }

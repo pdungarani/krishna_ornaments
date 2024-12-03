@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/navigators/routes_management.dart';
+import 'package:krishna_ornaments/app/widgets/custom_button.dart';
 import 'package:krishna_ornaments/app/widgets/custom_product.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -125,6 +126,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
+          
           body: SingleChildScrollView(
             child: Padding(
               padding: Dimens.edgeInsets20_20.copyWith(bottom: 30),
@@ -179,7 +181,7 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(
                     height: Dimens.hundredEighty,
                     child: PageView.builder(
-                      itemCount: controller.filterType.length,
+                      itemCount: controller.testList.length,
                       onPageChanged: (value) {
                         controller.selectPage = value;
                         controller.update();
@@ -199,7 +201,7 @@ class HomeScreen extends StatelessWidget {
                   Dimens.boxHeight8,
                   Center(
                     child: Wrap(
-                      children: controller.filterType.asMap().entries.map((e) {
+                      children: controller.testList.asMap().entries.map((e) {
                         return Padding(
                           padding: Dimens.edgeInsetsLeft4,
                           child: Container(
@@ -236,52 +238,59 @@ class HomeScreen extends StatelessWidget {
                           var type = controller.getCategoriesList[index].image
                               ?.split(".")
                               .last;
-                          return Padding(
-                            padding: Dimens.edgeInsetsRight20,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  height: Dimens.seventyFive,
-                                  width: Dimens.seventyFive,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                      Dimens.fiveHundred,
+                          return GestureDetector(
+                            onTap: () {
+                              RouteManagement.goToViewAllProductScreen(
+                                  "", item.id ?? "", item.name ?? "");
+                            },
+                            child: Padding(
+                              padding: Dimens.edgeInsetsRight20,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    height: Dimens.seventyFive,
+                                    width: Dimens.seventyFive,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(
+                                        Dimens.fiveHundred,
+                                      ),
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(
+                                        Dimens.fiveHundred,
+                                      ),
+                                      child: type != "svg"
+                                          ? CachedNetworkImage(
+                                              imageUrl: (item.image ?? ""),
+                                              fit: BoxFit.cover,
+                                              placeholder: (context, url) {
+                                                return Image.asset(
+                                                  AssetConstants.placeholder,
+                                                  fit: BoxFit.cover,
+                                                );
+                                              },
+                                              errorWidget:
+                                                  (context, url, error) {
+                                                return Image.asset(
+                                                  AssetConstants.placeholder,
+                                                  fit: BoxFit.cover,
+                                                );
+                                              },
+                                            )
+                                          : SvgPicture.network(
+                                              item.image ?? "",
+                                            ),
                                     ),
                                   ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(
-                                      Dimens.fiveHundred,
-                                    ),
-                                    child: type != "svg"
-                                        ? CachedNetworkImage(
-                                            imageUrl: (item.image ?? ""),
-                                            fit: BoxFit.cover,
-                                            placeholder: (context, url) {
-                                              return Image.asset(
-                                                AssetConstants.placeholder,
-                                                fit: BoxFit.cover,
-                                              );
-                                            },
-                                            errorWidget: (context, url, error) {
-                                              return Image.asset(
-                                                AssetConstants.placeholder,
-                                                fit: BoxFit.cover,
-                                              );
-                                            },
-                                          )
-                                        : SvgPicture.network(
-                                            item.image ?? "",
-                                          ),
-                                  ),
-                                ),
-                                Dimens.boxHeight10,
-                                Text(
-                                  item.name ?? "",
-                                  style: Styles.blackw60012,
-                                )
-                              ],
+                                  Dimens.boxHeight10,
+                                  Text(
+                                    item.name ?? "",
+                                    style: Styles.blackw60012,
+                                  )
+                                ],
+                              ),
                             ),
                           );
                         },
@@ -298,7 +307,8 @@ class HomeScreen extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          RouteManagement.goToViewAllProductScreen("Arrival");
+                          RouteManagement.goToViewAllProductScreen(
+                              "Arrival", "", "");
                         },
                         child: Text(
                           'View All',
@@ -323,7 +333,7 @@ class HomeScreen extends StatelessWidget {
                             productName: item.name ?? "",
                             imageUrl: item.image ?? "",
                             categoryName: item.category?.name ?? "",
-                            quantity: item.quantity,
+                            quantity: item.quantity ?? 0,
                             weigth: item.weight.toString(),
                             inWishList: item.wishlistStatus ?? false,
                             inCart: item.inCart ?? false,
@@ -333,14 +343,19 @@ class HomeScreen extends StatelessWidget {
                                     .tabController
                                     ?.animateTo(2);
                               } else {
-                                controller.postAddToCart(
-                                    item, index, "arrival");
+                                controller.postAddToCart(item.id ?? "",
+                                    item.quantity, index, "arrival");
                               }
                             },
                             addFavorite: () {
                               controller.postWishlistAddRemove(item.id ?? "");
                             },
                             increment: () {
+                              controller
+                                  .productArrivalDocList[index].quantity++;
+                              controller.update();
+                            },
+                            dincrement: () {
                               if (controller
                                       .productArrivalDocList[index].quantity
                                       .toDouble() >
@@ -348,11 +363,6 @@ class HomeScreen extends StatelessWidget {
                                 controller
                                     .productArrivalDocList[index].quantity--;
                               }
-                              controller.update();
-                            },
-                            dincrement: () {
-                              controller
-                                  .productArrivalDocList[index].quantity++;
                               controller.update();
                             },
                           ),
@@ -387,7 +397,8 @@ class HomeScreen extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          RouteManagement.goToViewAllProductScreen("Trending");
+                          RouteManagement.goToViewAllProductScreen(
+                              "Trending", "", "");
                         },
                         child: Text(
                           'View All',
@@ -422,8 +433,8 @@ class HomeScreen extends StatelessWidget {
                                     .tabController
                                     ?.animateTo(2);
                               } else {
-                                controller.postAddToCart(
-                                    item, index, "trending");
+                                controller.postAddToCart(item.id ?? "",
+                                    item.quantity, index, "trending");
                               }
                             },
                             addFavorite: () {

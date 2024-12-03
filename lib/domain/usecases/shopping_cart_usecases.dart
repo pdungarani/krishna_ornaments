@@ -25,7 +25,7 @@ class ShoppingCartUsecases {
         page: page,
       );
 
-  Future<CartItemModel?> postCartProductRemove({
+  Future<ResponseModel?> postCartProductRemove({
     bool isLoading = false,
     required String productId,
   }) async =>

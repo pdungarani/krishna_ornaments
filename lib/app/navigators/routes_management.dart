@@ -33,6 +33,7 @@ abstract class RouteManagement {
   static void goToShowFullScareenImage(String image, String type) =>
       Get.toNamed<void>(Routes.showFullScareenImage, arguments: [image, type]);
   static void goToWishlistScreen() => Get.toNamed<void>(Routes.wishlistScreen);
-  static void goToViewAllProductScreen(String type) =>
-      Get.toNamed<void>(Routes.viewAllProductScreen, arguments: type);
+  static void goToViewAllProductScreen(String type, String categories,String categoriesName) =>
+      Get.toNamed<void>(Routes.viewAllProductScreen,
+          arguments: [type, categories,categoriesName]);
 }

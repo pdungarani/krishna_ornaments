@@ -248,7 +248,7 @@ class Repository {
     }
   }
 
-  Future<CartItemModel?> postCartProductRemove({
+  Future<ResponseModel?> postCartProductRemove({
     bool isLoading = false,
     required String productId,
   }) async {
@@ -257,13 +257,7 @@ class Repository {
         productId: productId,
         isLoading: isLoading,
       );
-      var cartItemModel = cartItemModelFromJson(response.data);
-      if (cartItemModel.data != null) {
-        return cartItemModel;
-      } else {
-        Utility.errorMessage(cartItemModel.message.toString());
-        return null;
-      }
+      return response;
     } catch (_) {
       Utility.closeDialog();
       UnimplementedError();

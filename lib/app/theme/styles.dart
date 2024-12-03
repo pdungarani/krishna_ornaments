@@ -228,6 +228,12 @@ abstract class Styles {
     fontSize: 16,
   );
 
+  static TextStyle color94A3B8W40010 = GoogleFonts.montserrat(
+    color: ColorsValue.color94A3B8,
+    fontWeight: FontWeight.w400,
+    fontSize: 10,
+  );
+
   static TextStyle color9C9C9C40016 = GoogleFonts.montserrat(
     color: ColorsValue.color9C9C9C,
     fontWeight: FontWeight.w400,

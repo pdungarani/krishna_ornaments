@@ -156,7 +156,7 @@ class _CustomProductViewState extends State<CustomProductView> {
                           Row(
                             children: [
                               GestureDetector(
-                                onTap: widget.increment,
+                                onTap: widget.dincrement,
                                 child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(
@@ -177,7 +177,7 @@ class _CustomProductViewState extends State<CustomProductView> {
                               ),
                               Dimens.boxWidth10,
                               GestureDetector(
-                                onTap: widget.dincrement,
+                                onTap: widget.increment,
                                 child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),

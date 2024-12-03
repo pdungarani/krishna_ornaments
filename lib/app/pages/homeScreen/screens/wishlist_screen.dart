@@ -133,19 +133,30 @@ class WishlistScreen extends StatelessWidget {
                                 style: Styles.lightcccW50010,
                               ),
                               Dimens.boxHeight10,
-                              Container(
-                                alignment: Alignment.center,
-                                padding: Dimens.edgeInsets14_0_14_0,
-                                height: Dimens.thirty,
-                                decoration: BoxDecoration(
-                                  color: ColorsValue.colorEDC97D,
-                                  borderRadius: BorderRadius.circular(
-                                    Dimens.four,
+                              InkWell(
+                                onTap: () {
+                                  controller.postAddToCart(
+                                      item.productid?.id ?? "",
+                                      1,
+                                      index,
+                                      "wishlist");
+                                },
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  padding: Dimens.edgeInsets14_0_14_0,
+                                  height: Dimens.thirty,
+                                  decoration: BoxDecoration(
+                                    color: ColorsValue.colorEDC97D,
+                                    borderRadius: BorderRadius.circular(
+                                      Dimens.four,
+                                    ),
                                   ),
-                                ),
-                                child: Text(
-                                  'Move To Cart',
-                                  style: Styles.whiteW70014,
+                                  child: Text(
+                                    item.inCart ?? false
+                                        ? "Item In Cart"
+                                        : 'Move To Cart',
+                                    style: Styles.whiteW70014,
+                                  ),
                                 ),
                               ),
                             ],

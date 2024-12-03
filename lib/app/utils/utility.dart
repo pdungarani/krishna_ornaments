@@ -973,7 +973,7 @@ abstract class Utility {
     Color backgroundColor,
   ) async {
     Get.rawSnackbar(
-        message: message,
+        message: message ?? "Internal Server error",
         backgroundColor: backgroundColor,
         margin: const EdgeInsets.all(15.0),
         borderRadius: 15,
