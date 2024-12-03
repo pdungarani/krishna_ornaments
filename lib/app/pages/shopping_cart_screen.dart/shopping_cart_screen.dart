@@ -10,29 +10,64 @@ class ShoppingCartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ShoppingCartController>(
-        initState: (state) {},
-        builder: (controller) {
-          return Scaffold(
-            resizeToAvoidBottomInset: true,
-            backgroundColor: ColorsValue.appBg,
-            appBar: AppBarWidget(
-              onTapBack: () {},
-              title: 'cart'.tr,
-              isVisible: false,
-            ),
-            body: ListView(
-              children: [
-                Wrap(
-                  children: controller.list.map(
-                    (e) {
-                      return Padding(
-                        padding: Dimens.edgeInsets20_10_20_10,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: ColorsValue.colorEEEAEA,
-                            borderRadius: BorderRadius.circular(
-                              Dimens.five,
+    return GetBuilder<ShoppingCartController>(initState: (state) {
+      var controller = Get.find<ShoppingCartController>();
+      controller.postGetAllCartProduct(10);
+    }, builder: (controller) {
+      return Scaffold(
+        resizeToAvoidBottomInset: true,
+        backgroundColor: ColorsValue.appBg,
+        appBar: AppBarWidget(
+          onTapBack: () {},
+          title: 'cart'.tr,
+        ),
+        body: ListView(
+          children: [
+            Wrap(
+              children: controller.list.map(
+                (e) {
+                  return Padding(
+                    padding: Dimens.edgeInsets20_10_20_10,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: ColorsValue.colorEEEAEA,
+                        borderRadius: BorderRadius.circular(
+                          Dimens.five,
+                        ),
+                      ),
+                      child: Padding(
+                        padding: Dimens.edgeInsets10,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: Dimens.eighty,
+                              width: Dimens.eighty,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  Dimens.five,
+                                ),
+                                color: Colors.white,
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(
+                                  Dimens.five,
+                                ),
+                                child: CachedNetworkImage(
+                                  imageUrl: e.product?.image ?? '',
+                                  fit: BoxFit.cover,
+                                  placeholder: (context, url) {
+                                    return Image.asset(
+                                        AssetConstants.placeholder,
+                                        fit: BoxFit.cover);
+                                  },
+                                  errorWidget: (context, url, error) {
+                                    return Image.asset(
+                                        AssetConstants.placeholder,
+                                        fit: BoxFit.cover);
+                                  },
+                                ),
+                              ),
                             ),
                             // boxShadow: const [
                             //   BoxShadow(
@@ -144,6 +179,66 @@ class ShoppingCartScreen extends StatelessWidget {
                                           'add_remark'.tr,
                                           style: Styles.appColor70010,
                                         ),
+                                      Flexible(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              e.product?.name ?? '',
+                                              style: Styles.color212121W70012,
+                                              softWrap: true,
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                            ),
+                                            Dimens.boxHeight5,
+                                            Text(
+                                              "${'weight'.tr} : ${e.product?.weight}",
+                                              style: Styles.color9C9C9CW50010,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          controller.postCartProductRemove(
+                                            e.product?.id ?? '',
+                                            controller.list.indexWhere(
+                                              (element) =>
+                                                  element.product?.id ==
+                                                  e.product?.id,
+                                            ),
+                                          );
+                                        },
+                                        child: Row(
+                                          children: [
+                                            SvgPicture.asset(
+                                              AssetConstants.ic_delete,
+                                            ),
+                                            Dimens.boxWidth10,
+                                            Text(
+                                              'remove'.tr,
+                                              style: Styles.color212121W70010,
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  Dimens.boxHeight5,
+                                  Row(
+                                    children: [
+                                      SvgPicture.asset(
+                                        AssetConstants.ic_minus,
+                                      ),
+                                      Dimens.boxWidth10,
+                                      Text(
+                                        e.quantity.toString(),
+                                        style: Styles.appColor70010,
+                                      ),
+                                      Dimens.boxWidth10,
+                                      SvgPicture.asset(
+                                        AssetConstants.ic_plus,
                                       ),
                                     ],
                                   ),
@@ -190,11 +285,37 @@ class ShoppingCartScreen extends StatelessWidget {
                         style: Styles.colorA7A7A750016,
                       ),
                     ],
+                  Dimens.boxWidth10,
+                  Text(
+                    controller.getallCartItem?.totalQuantity.toString() ?? '',
+                    style: Styles.colorA7A7A750016,
                   ),
                 )
               ],
             ),
           );
         });
+            Dimens.boxHeight10,
+            Padding(
+              padding: Dimens.edgeInsets20_0_20_0,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'total_weight'.tr,
+                    style: Styles.colorA7A7A750016,
+                  ),
+                  Dimens.boxWidth10,
+                  Text(
+                    controller.getallCartItem.toString(),
+                    style: Styles.colorA7A7A750016,
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      );
+    });
   }
 }

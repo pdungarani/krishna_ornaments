@@ -112,9 +112,13 @@ class DataRepository extends DomainRepository {
 
   Future<ResponseModel> postGetAllCartProduct({
     bool isLoading = false,
+    required int page,
+    required int limit,
   }) async =>
       await connectHelper.postGetAllCartProduct(
         isLoading: isLoading,
+        limit: limit,
+        page: page,
       );
 
   Future<ResponseModel> postCartProductRemove({

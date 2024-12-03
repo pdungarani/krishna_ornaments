@@ -1,5 +1,6 @@
 //coverage:ignore-file
 
+export 'cart_list_model.dart';
 export 'forgotpass_model.dart';
 export 'getOne_order_model.dart';
 export 'getProfile_model.dart';

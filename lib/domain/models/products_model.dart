@@ -90,7 +90,7 @@ class ProductsData {
 
 class ProductsDoc {
   String? id;
-  Category? category;
+  ProductsCategory? category;
   String? name;
   num? weight;
   String? image;
@@ -121,7 +121,7 @@ class ProductsDoc {
         id: json["_id"],
         category: json["category"] == null
             ? null
-            : Category.fromJson(json["category"]),
+            : ProductsCategory.fromJson(json["category"]),
         name: json["name"],
         weight: json["weight"],
         image: json["image"],
@@ -150,14 +150,14 @@ class ProductsDoc {
       };
 }
 
-class Category {
+class ProductsCategory {
   String? id;
   String? name;
   bool? status;
   int? createTimestamp;
   DateTime? createdAt;
 
-  Category({
+  ProductsCategory({
     this.id,
     this.name,
     this.status,
@@ -165,7 +165,8 @@ class Category {
     this.createdAt,
   });
 
-  factory Category.fromJson(Map<String, dynamic> json) => Category(
+  factory ProductsCategory.fromJson(Map<String, dynamic> json) =>
+      ProductsCategory(
         id: json["_id"],
         name: json["name"],
         status: json["status"],
