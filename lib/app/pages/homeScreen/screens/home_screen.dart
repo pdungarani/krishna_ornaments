@@ -35,6 +35,23 @@ class HomeScreen extends StatelessWidget {
             automaticallyImplyLeading: false,
             actions: [
               Padding(
+                padding: const EdgeInsets.only(right: 20),
+                child: InkWell(
+                  onTap: () {
+                    RouteManagement.goToSearchScreen();
+                  },
+                  child: SvgPicture.asset(
+                    AssetConstants.searchView,
+                    height: Dimens.twentySix,
+                    width: Dimens.twentySix,
+                    colorFilter: const ColorFilter.mode(
+                      ColorsValue.appColor,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
                 padding: const EdgeInsets.only(right: 10),
                 child: InkWell(
                   onTap: () {},
@@ -126,58 +143,12 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
-          
           body: SingleChildScrollView(
             child: Padding(
               padding: Dimens.edgeInsets20_20.copyWith(bottom: 30),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextField(
-                    decoration: InputDecoration(
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: Dimens.fifteen),
-                      filled: true,
-                      fillColor: ColorsValue.whiteColor,
-                      border: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: ColorsValue.transparent,
-                        ),
-                        borderRadius: BorderRadius.circular(
-                          Dimens.ten,
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: ColorsValue.transparent,
-                        ),
-                        borderRadius: BorderRadius.circular(
-                          Dimens.ten,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: ColorsValue.transparent,
-                        ),
-                        borderRadius: BorderRadius.circular(
-                          Dimens.ten,
-                        ),
-                      ),
-                      hintText: 'Search...',
-                      hintStyle: Styles.greyAAA40014,
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.all(12),
-                        child: SvgPicture.asset(AssetConstants.searchView),
-                      ),
-                      suffixIcon: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: SvgPicture.asset(
-                          AssetConstants.voiceView,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Dimens.boxHeight20,
                   SizedBox(
                     height: Dimens.hundredEighty,
                     child: PageView.builder(
@@ -338,33 +309,45 @@ class HomeScreen extends StatelessWidget {
                             inWishList: item.wishlistStatus ?? false,
                             inCart: item.inCart ?? false,
                             onAddToCard: () {
+                              Get.closeCurrentSnackbar();
                               if (item.inCart ?? false) {
                                 Get.find<BottomBarController>()
                                     .tabController
                                     ?.animateTo(2);
                               } else {
-                                controller.postAddToCart(item.id ?? "",
-                                    item.quantity, index, "arrival");
+                                if (controller
+                                        .productArrivalDocList[index].quantity
+                                        .toDouble() >
+                                    0) {
+                                  controller.postAddToCart(item.id ?? "",
+                                      item.quantity, index, "arrival");
+                                } else {
+                                  Utility.errorMessage("Please add one item.");
+                                }
                               }
                             },
                             addFavorite: () {
                               controller.postWishlistAddRemove(item.id ?? "");
                             },
-                            increment: () {
-                              controller
-                                  .productArrivalDocList[index].quantity++;
-                              controller.update();
-                            },
-                            dincrement: () {
-                              if (controller
-                                      .productArrivalDocList[index].quantity
-                                      .toDouble() >
-                                  1) {
-                                controller
-                                    .productArrivalDocList[index].quantity--;
-                              }
-                              controller.update();
-                            },
+                            increment: item.inCart ?? false
+                                ? null
+                                : () {
+                                    controller.productArrivalDocList[index]
+                                        .quantity++;
+                                    controller.update();
+                                  },
+                            dincrement: item.inCart ?? false
+                                ? null
+                                : () {
+                                    if (controller.productArrivalDocList[index]
+                                            .quantity
+                                            .toDouble() >
+                                        0) {
+                                      controller.productArrivalDocList[index]
+                                          .quantity--;
+                                    }
+                                    controller.update();
+                                  },
                           ),
                         );
                       },
@@ -428,33 +411,45 @@ class HomeScreen extends StatelessWidget {
                             inCart: item.inCart ?? false,
                             inWishList: item.wishlistStatus ?? false,
                             onAddToCard: () {
+                              Get.closeCurrentSnackbar();
                               if (item.inCart ?? false) {
                                 Get.find<BottomBarController>()
                                     .tabController
                                     ?.animateTo(2);
                               } else {
-                                controller.postAddToCart(item.id ?? "",
-                                    item.quantity, index, "trending");
+                                if (controller
+                                        .productTrendingDocList[index].quantity
+                                        .toDouble() >
+                                    0) {
+                                  controller.postAddToCart(item.id ?? "",
+                                      item.quantity, index, "trending");
+                                } else {
+                                  Utility.errorMessage("Please add one item.");
+                                }
                               }
                             },
                             addFavorite: () {
                               controller.postWishlistAddRemove(item.id ?? "");
                             },
-                            increment: () {
-                              if (controller
-                                      .productTrendingDocList[index].quantity
-                                      .toDouble() >
-                                  1) {
-                                controller
-                                    .productTrendingDocList[index].quantity--;
-                              }
-                              controller.update();
-                            },
-                            dincrement: () {
-                              controller
-                                  .productTrendingDocList[index].quantity++;
-                              controller.update();
-                            },
+                            increment: item.inCart ?? false
+                                ? null
+                                : () {
+                                    controller.productTrendingDocList[index]
+                                        .quantity++;
+                                    controller.update();
+                                  },
+                            dincrement: item.inCart ?? false
+                                ? null
+                                : () {
+                                    if (controller.productTrendingDocList[index]
+                                            .quantity
+                                            .toDouble() >
+                                        0) {
+                                      controller.productTrendingDocList[index]
+                                          .quantity--;
+                                    }
+                                    controller.update();
+                                  },
                           ),
                         );
                       },

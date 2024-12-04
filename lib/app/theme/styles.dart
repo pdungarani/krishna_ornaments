@@ -165,6 +165,12 @@ abstract class Styles {
     fontSize: Dimens.twelve,
   );
 
+  static TextStyle lightYellow70014 = GoogleFonts.montserrat(
+    color: ColorsValue.lightYellow,
+    fontWeight: FontWeight.w700,
+    fontSize: Dimens.fourteen,
+  );
+
   static TextStyle white14 = GoogleFonts.montserrat(
     color: ColorsValue.whiteColor,
     fontSize: Dimens.fourteen,

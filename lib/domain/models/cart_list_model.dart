@@ -36,15 +36,18 @@ class CartItemModel {
 }
 
 class CartItemData {
+  String? id;
   List<CartItemProductElement>? products;
   int? totalQuantity;
 
   CartItemData({
+    this.id,
     this.products,
     this.totalQuantity,
   });
 
   factory CartItemData.fromJson(Map<String, dynamic> json) => CartItemData(
+        id: json["_id"],
         products: json["products"] == null
             ? []
             : List<CartItemProductElement>.from(json["products"]!
@@ -53,6 +56,7 @@ class CartItemData {
       );
 
   Map<String, dynamic> toJson() => {
+        "_id": id,
         "products": products == null
             ? []
             : List<dynamic>.from(products!.map((x) => x.toJson())),
@@ -171,5 +175,25 @@ class CartItemProductProduct {
         "status": status,
         "create_timestamp": createTimestamp,
         "createdAt": createdAt?.toIso8601String(),
+      };
+}
+
+class Product {
+  String? productId;
+  int? quantity;
+  String? description;
+
+  Product({this.productId, this.quantity, this.description});
+
+  factory Product.fromJson(Map<String, dynamic> json) => Product(
+        productId: json["productId"],
+        quantity: json["quantity"],
+        description: json["description"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "productId": productId,
+        "quantity": quantity,
+        "description": description,
       };
 }

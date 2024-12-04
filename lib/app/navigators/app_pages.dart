@@ -157,5 +157,12 @@ class AppPages {
       binding: ShoppingCartBinding(),
       transition: Transition.fadeIn,
     ),
+    GetPage<SearchScreen>(
+      name: _Paths.searchProductScreen,
+      transitionDuration: transitionDuration,
+      page: SearchScreen.new,
+      binding: HomeBinding(),
+      transition: Transition.fadeIn,
+    ),
   ];
 }

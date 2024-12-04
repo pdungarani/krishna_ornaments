@@ -36,4 +36,5 @@ abstract class RouteManagement {
   static void goToViewAllProductScreen(String type, String categories,String categoriesName) =>
       Get.toNamed<void>(Routes.viewAllProductScreen,
           arguments: [type, categories,categoriesName]);
+  static void goToSearchScreen() => Get.toNamed<void>(Routes.searchProductScreen);
 }

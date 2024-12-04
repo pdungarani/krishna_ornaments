@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http_parser/src/media_type.dart' as mediaType;
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
@@ -417,10 +418,15 @@ class ConnectHelper {
 
   Future<ResponseModel> postOrderCreate({
     bool isLoading = false,
+    required String cartId,
     required List<Product> products,
     required String main_description,
   }) async {
-    var data = {"products": products, "main_description": main_description};
+    var data = {
+      "products": products,
+      "main_description": main_description,
+      "cartid": cartId,
+    };
     var response = await apiWrapper.makeRequest(
       EndPoints.postOrderCreate,
       Request.post,
@@ -521,24 +527,4 @@ class SmapleUploadDatum {
       SmapleUploadDatum(fileId: json["fileId"], path: json["path"]);
 
   Map<String, dynamic> toJson() => {"fileId": fileId, "path": path};
-}
-
-class Product {
-  String? productId;
-  int? quantity;
-  String? description;
-
-  Product({this.productId, this.quantity, this.description});
-
-  factory Product.fromJson(Map<String, dynamic> json) => Product(
-        productId: json["productId"],
-        quantity: json["quantity"],
-        description: json["description"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "productId": productId,
-        "quantity": quantity,
-        "description": description,
-      };
 }

@@ -126,47 +126,52 @@ class OrderDetalisScreen extends StatelessWidget {
                           [],
                     ),
                     Dimens.boxHeight20,
-                    Text(
-                      "${"total_bag".tr} ${controller.getOneOrderData?.totalBags ?? ""}",
-                      style: Styles.appColor70014,
-                    ),
-                    Dimens.boxHeight12,
-                    Wrap(
-                      children:
-                          controller.getOneOrderData?.bags?.asMap().entries.map(
-                                (e) {
-                                  return Container(
-                                    margin: Dimens.edgeInsetsBottom10,
-                                    padding: Dimens.edgeInsets20_00_20_00,
-                                    decoration: BoxDecoration(
-                                      color: ColorsValue.colorEEEAEA,
-                                      borderRadius: BorderRadius.circular(
-                                        Dimens.six,
+                    if (controller.getOneOrderData?.bags?.isNotEmpty ??
+                        false) ...[
+                      Text(
+                        "${"total_bag".tr} ${controller.getOneOrderData?.totalBags ?? ""}",
+                        style: Styles.appColor70014,
+                      ),
+                      Dimens.boxHeight12,
+                      Wrap(
+                        children: controller.getOneOrderData?.bags
+                                ?.asMap()
+                                .entries
+                                .map(
+                              (e) {
+                                return Container(
+                                  margin: Dimens.edgeInsetsBottom10,
+                                  padding: Dimens.edgeInsets20_00_20_00,
+                                  decoration: BoxDecoration(
+                                    color: ColorsValue.colorEEEAEA,
+                                    borderRadius: BorderRadius.circular(
+                                      Dimens.six,
+                                    ),
+                                  ),
+                                  child: ListTile(
+                                    onTap: () {
+                                      RouteManagement.goToBagDetailScreen(
+                                          e.value.id ?? "");
+                                    },
+                                    contentPadding: Dimens.edgeInsets0,
+                                    title: Text(
+                                      "Bag ${e.value.bagNumber}",
+                                      style: Styles.color21212160014,
+                                    ),
+                                    trailing: SvgPicture.asset(
+                                      AssetConstants.ic_right_arrow,
+                                      colorFilter: const ColorFilter.mode(
+                                        ColorsValue.blackColor,
+                                        BlendMode.srcIn,
                                       ),
                                     ),
-                                    child: ListTile(
-                                      onTap: () {
-                                        RouteManagement.goToBagDetailScreen(
-                                            e.value.id ?? "");
-                                      },
-                                      contentPadding: Dimens.edgeInsets0,
-                                      title: Text(
-                                        "Bag ${e.value.bagNumber}",
-                                        style: Styles.color21212160014,
-                                      ),
-                                      trailing: SvgPicture.asset(
-                                        AssetConstants.ic_right_arrow,
-                                        colorFilter: const ColorFilter.mode(
-                                          ColorsValue.blackColor,
-                                          BlendMode.srcIn,
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },
-                              ).toList() ??
-                              [],
-                    )
+                                  ),
+                                );
+                              },
+                            ).toList() ??
+                            [],
+                      )
+                    ],
                   ],
                 ),
               ),

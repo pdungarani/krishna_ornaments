@@ -4,8 +4,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:krishna_ornaments/app/app.dart';
+import 'package:krishna_ornaments/app/navigators/navigators.dart';
+import 'package:krishna_ornaments/data/data.dart';
 import 'package:krishna_ornaments/domain/models/models.dart';
 
 class ShoppingCartController extends GetxController {
@@ -52,9 +53,19 @@ class ShoppingCartController extends GetxController {
                         style: Styles.whiteW80024,
                       ),
                       Dimens.boxHeight20,
-                      Text(
-                        'description'.tr,
-                        style: Styles.whiteW60012,
+                      Row(
+                        children: [
+                          Text(
+                            'description'.tr,
+                            style: Styles.whiteW60012,
+                          ),
+                          Dimens.boxWidth3,
+                          Text(
+                            "*",
+                            textAlign: TextAlign.start,
+                            style: Styles.whiteW60012,
+                          )
+                        ],
                       ),
                       Dimens.boxHeight5,
                       Container(
@@ -68,7 +79,7 @@ class ShoppingCartController extends GetxController {
                           ],
                         ),
                         child: TextFormField(
-                          style: Styles.whiteW60016,
+                          style: Styles.txtBlackColorW50014,
                           controller: finalDesController,
                           maxLines: 3,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -116,7 +127,12 @@ class ShoppingCartController extends GetxController {
                       ),
                       Dimens.boxHeight30,
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          if (finalKey.currentState!.validate()) {
+                            Get.back();
+                            postOrderCreate();
+                          }
+                        },
                         style: ElevatedButton.styleFrom(
                           fixedSize: Size(
                             double.maxFinite,
@@ -285,6 +301,7 @@ class ShoppingCartController extends GetxController {
 
   final ScrollController scrollCartController = ScrollController();
   List<CartItemProductElement> cartList = [];
+  CartItemData? cartItemModel = CartItemData();
 
   int pageCartCount = 1;
   bool isCartLastPage = false;
@@ -303,7 +320,9 @@ class ShoppingCartController extends GetxController {
       limit: 10,
       isLoading: false,
     );
+    cartItemModel = null;
     if (response?.data != null) {
+      cartItemModel = response?.data;
       if (pageKey == 1) {
         isCartLastPage = false;
         cartList.clear();
@@ -423,6 +442,30 @@ class ShoppingCartController extends GetxController {
         Utility.snacBar(
             "Product added in cart successfully...!", ColorsValue.appColor);
       }
+    } else {
+      Utility.errorMessage(jsonDecode(response.toString())['Data']['Message']);
+    }
+    update();
+  }
+
+  Future<void> postOrderCreate() async {
+    var response = await shoppingCartPresenter.postOrderCreate(
+      cartId: cartItemModel?.id ?? '',
+      products: cartList.map(
+        (e) {
+          return Product(
+            productId: e.product?.id ?? "",
+            quantity: e.quantity,
+            description: e.description,
+          );
+        },
+      ).toList(),
+      main_description: finalDesController.text,
+      isLoading: false,
+    );
+    if (response?.data != null) {
+      RouteManagement.goToBottomBarView();
+      postCartList(1);
     } else {
       Utility.errorMessage(jsonDecode(response.toString())['Data']['Message']);
     }

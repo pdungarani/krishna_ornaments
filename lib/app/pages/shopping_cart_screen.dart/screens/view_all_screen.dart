@@ -649,20 +649,24 @@ class ViewAllProductScreen extends StatelessWidget {
                                                 Row(
                                                   children: [
                                                     InkWell(
-                                                      onTap: () {
-                                                        if (controller
-                                                                .viewAllDocList[
-                                                                    index]
-                                                                .quantity
-                                                                .toDouble() >
-                                                            1) {
-                                                          controller
-                                                              .viewAllDocList[
-                                                                  index]
-                                                              .quantity--;
-                                                        }
-                                                        controller.update();
-                                                      },
+                                                      onTap:
+                                                          item.inCart ?? false
+                                                              ? null
+                                                              : () {
+                                                                  if (controller
+                                                                          .viewAllDocList[
+                                                                              index]
+                                                                          .quantity
+                                                                          .toDouble() >
+                                                                      0) {
+                                                                    controller
+                                                                        .viewAllDocList[
+                                                                            index]
+                                                                        .quantity--;
+                                                                  }
+                                                                  controller
+                                                                      .update();
+                                                                },
                                                       child: SvgPicture.asset(
                                                         AssetConstants.minus,
                                                         height:
@@ -677,13 +681,17 @@ class ViewAllProductScreen extends StatelessWidget {
                                                     ),
                                                     Dimens.boxWidth10,
                                                     InkWell(
-                                                      onTap: () {
-                                                        controller
-                                                            .viewAllDocList[
-                                                                index]
-                                                            .quantity++;
-                                                        controller.update();
-                                                      },
+                                                      onTap:
+                                                          item.inCart ?? false
+                                                              ? null
+                                                              : () {
+                                                                  controller
+                                                                      .viewAllDocList[
+                                                                          index]
+                                                                      .quantity++;
+                                                                  controller
+                                                                      .update();
+                                                                },
                                                       child: SvgPicture.asset(
                                                         AssetConstants.plus,
                                                         height:
@@ -699,13 +707,26 @@ class ViewAllProductScreen extends StatelessWidget {
                                             Dimens.boxHeight10,
                                             InkWell(
                                               onTap: () {
-                                                controller.postAddToCart(
-                                                  item.id??"",
-                                                  item.quantity,
-                                                  index,
-                                                  controller.productTypeViewAll
-                                                      .toLowerCase(),
-                                                );
+                                                if (item.inCart ?? false) {
+                                                } else {
+                                                  if (controller
+                                                          .viewAllDocList[index]
+                                                          .quantity
+                                                          .toDouble() >
+                                                      0) {
+                                                    controller.postAddToCart(
+                                                      item.id ?? "",
+                                                      item.quantity,
+                                                      index,
+                                                      controller
+                                                          .productTypeViewAll
+                                                          .toLowerCase(),
+                                                    );
+                                                  } else {
+                                                    Utility.errorMessage(
+                                                        "Please add one item.");
+                                                  }
+                                                }
                                               },
                                               child: Container(
                                                 alignment: Alignment.center,

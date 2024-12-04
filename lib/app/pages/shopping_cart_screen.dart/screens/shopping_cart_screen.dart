@@ -38,23 +38,25 @@ class ShoppingCartScreen extends StatelessWidget {
             title: 'cart'.tr,
             isVisible: false,
           ),
-          bottomNavigationBar: Padding(
-            padding: Dimens.edgeInsets20,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                CustomButton(
-                  height: Dimens.fourtyFive,
-                  text: 'Checkout',
-                  style: Styles.whiteW80014,
-                  onTap: () {
-                    controller.showFinalDescription(context);
-                  },
-                ),
-                Dimens.boxHeight10,
-              ],
-            ),
-          ),
+          bottomNavigationBar: controller.cartList.isNotEmpty
+              ? Padding(
+                  padding: Dimens.edgeInsets20,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CustomButton(
+                        height: Dimens.fourtyFive,
+                        text: 'Checkout',
+                        style: Styles.whiteW80014,
+                        onTap: () {
+                          controller.showFinalDescription(context);
+                        },
+                      ),
+                      Dimens.boxHeight10,
+                    ],
+                  ),
+                )
+              : const SizedBox.shrink(),
           body: controller.cartList.isNotEmpty
               ? SingleChildScrollView(
                   child: Column(
@@ -180,7 +182,9 @@ class ShoppingCartScreen extends StatelessWidget {
                                               ),
                                               Dimens.boxWidth10,
                                               Text(
-                                                "0",
+                                                controller
+                                                    .cartList[index].quantity
+                                                    .toString(),
                                                 style: Styles.appColor70010,
                                               ),
                                               Dimens.boxWidth10,
@@ -245,7 +249,12 @@ class ShoppingCartScreen extends StatelessWidget {
                     ],
                   ),
                 )
-              : Center(),
+              : Center(
+                  child: Text(
+                    "Cart list not found....!",
+                    style: Styles.txtBlackColorW60014,
+                  ),
+                ),
         );
       },
     );

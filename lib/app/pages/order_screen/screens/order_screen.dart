@@ -64,7 +64,7 @@ class OrderScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   "${"total_quentity".tr} ${item.totalQuantity}",
-                                  style: Styles.black221W70018,
+                                  style: Styles.color21212170014,
                                 ),
                                 Text(
                                   item.orderTracking?.capitalize ?? '',
@@ -79,7 +79,7 @@ class OrderScreen extends StatelessWidget {
                             Dimens.boxHeight5,
                             Text(
                               "${"total_bag".tr} ${item.totalBags}",
-                              style: Styles.color212121W70012,
+                              style: Styles.lightYellow70014,
                             ),
                             Dimens.boxHeight5,
                             Text(

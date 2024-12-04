@@ -135,6 +135,48 @@ class HomeController extends GetxController {
     update();
   }
 
+  List<ProductsDoc> getAllProductDocList = [];
+  final ScrollController scrollViewAllController = ScrollController();
+
+  Future<void> postGetAllProduct(int pageKey, String search) async {
+    if (pageKey == 1) {
+      pageTrendingProductCount = 1;
+    }
+    var response = await homePresenter.postAllProduct(
+      page: pageKey,
+      limit: 10,
+      search: search,
+      category: "",
+      min: "",
+      max: "",
+      productType: "",
+      sortField: '_id',
+      sortOption: 1,
+      isLoading: false,
+    );
+    if (response?.data != null) {
+      if (pageKey == 1) {
+        isProductTrendingLastPage = false;
+        getAllProductDocList.clear();
+      }
+      if ((response?.data?.docs?.length ?? 0) < 10) {
+        isProductTrendingLastPage = true;
+        getAllProductDocList.addAll(response?.data?.docs ?? []);
+      } else {
+        pageTrendingProductCount++;
+        getAllProductDocList.addAll(response?.data?.docs ?? []);
+      }
+      if (pageKey == 1) {
+        if (scrollTrendingController.positions.isNotEmpty) {
+          scrollTrendingController.jumpTo(0);
+        }
+      }
+    } else {
+      Utility.errorMessage(response?.message ?? "");
+    }
+    update();
+  }
+
   Future<void> postAddToCart(
       String productId, int quantity, int index, String productType) async {
     var response = await homePresenter.postAddToCart(

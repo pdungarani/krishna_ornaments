@@ -23,6 +23,7 @@ abstract class Routes {
   static const showFullScareenImage = _Paths.showFullScareenImage;
   static const wishlistScreen = _Paths.wishlistScreen;
   static const viewAllProductScreen = _Paths.viewAllProductScreen;
+  static const searchProductScreen = _Paths.searchProductScreen;
 }
 
 abstract class _Paths {
@@ -45,4 +46,5 @@ abstract class _Paths {
   static const showFullScareenImage = '/showFullScareenImage';
   static const wishlistScreen = '/wishlistScreen';
   static const viewAllProductScreen = '/viewAllProductScreen';
+  static const searchProductScreen = '/searchProductScreen';
 }
