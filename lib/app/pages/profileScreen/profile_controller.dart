@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:krishna_ornaments/app/app.dart';
@@ -46,6 +47,12 @@ class ProfileController extends GetxController {
   //   }
   //   update();
   // }
+
+  TextEditingController holderName = TextEditingController();
+  TextEditingController bankName = TextEditingController();
+  TextEditingController branchName = TextEditingController();
+  TextEditingController acNumber = TextEditingController();
+  TextEditingController IFSCcode = TextEditingController();
 
   File? imageFile;
   String? profileImage;
