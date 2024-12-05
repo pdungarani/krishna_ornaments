@@ -1,4 +1,3 @@
-import 'package:krishna_ornaments/data/helpers/connect_helper.dart';
 import 'package:krishna_ornaments/domain/domain.dart';
 
 class ShoppingCartPresenter {

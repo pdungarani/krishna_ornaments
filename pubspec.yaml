@@ -44,7 +44,6 @@ dependencies:
   dio: ^5.3.2
   email_validator: ^2.1.17
   geocoding: ^2.1.0
-  image_gallery_saver_plus: ^3.0.5 
   internet_connection_checker: ^1.0.0+1
   intl: ^0.18.1
   geolocator: ^10.0.1

@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:intl/intl.dart';
 import 'package:krishna_ornaments/app/app.dart';
@@ -795,11 +794,11 @@ abstract class Utility {
       );
 
       if (GetPlatform.isIOS) {
-        dynamic result = await ImageGallerySaverPlus.saveImage(
-            Uint8List.fromList(response.data as List<int>),
-            quality: 60,
-            name: name);
-        printILog(result);
+        // dynamic result = await ImageGallerySaverPlus.saveImage(
+        //     Uint8List.fromList(response.data as List<int>),
+        //     quality: 60,
+        //     name: name);
+        // printILog(result);
       } else {
         final d = response.data as List<int>;
 
