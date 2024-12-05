@@ -51,47 +51,47 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(right: 10),
-                child: InkWell(
-                  onTap: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          AssetConstants.ic_notification,
-                          height: Dimens.twentySix,
-                          width: Dimens.twentySix,
-                        ),
-                        Positioned(
-                          right: 0,
-                          top: 0,
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: Dimens.fifteen,
-                            width: Dimens.fifteen,
-                            decoration: BoxDecoration(
-                              color: ColorsValue.appColor,
-                              borderRadius: BorderRadius.circular(
-                                Dimens.hundred,
-                              ),
-                            ),
-                            child: Text(
-                              "10",
-                              style: GoogleFonts.montserrat(
-                                fontSize: Dimens.eight,
-                                color: ColorsValue.whiteColor,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(right: 10),
+              //   child: InkWell(
+              //     onTap: () {},
+              //     child: Padding(
+              //       padding: const EdgeInsets.only(right: 10),
+              //       child: Stack(
+              //         alignment: Alignment.center,
+              //         children: [
+              //           SvgPicture.asset(
+              //             AssetConstants.ic_notification,
+              //             height: Dimens.twentySix,
+              //             width: Dimens.twentySix,
+              //           ),
+              //           Positioned(
+              //             right: 0,
+              //             top: 0,
+              //             child: Container(
+              //               alignment: Alignment.center,
+              //               height: Dimens.fifteen,
+              //               width: Dimens.fifteen,
+              //               decoration: BoxDecoration(
+              //                 color: ColorsValue.appColor,
+              //                 borderRadius: BorderRadius.circular(
+              //                   Dimens.hundred,
+              //                 ),
+              //               ),
+              //               child: Text(
+              //                 "10",
+              //                 style: GoogleFonts.montserrat(
+              //                   fontSize: Dimens.eight,
+              //                   color: ColorsValue.whiteColor,
+              //                 ),
+              //               ),
+              //             ),
+              //           ),
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // ),
               Padding(
                 padding: EdgeInsets.only(
                   right: Dimens.ten,
@@ -290,7 +290,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   Dimens.boxHeight10,
                   SizedBox(
-                    height: Dimens.twoHundredNinety,
+                    height: Dimens.threeHundredFifteen,
                     child: ListView.builder(
                       controller: controller.scrollBestSellerController,
                       padding: Dimens.edgeInsets0,
@@ -304,7 +304,7 @@ class HomeScreen extends StatelessWidget {
                             productName: item.name ?? "",
                             imageUrl: item.image ?? "",
                             categoryName: item.category?.name ?? "",
-                            quantity: item.quantity ?? 0,
+                            quantity: item.quantity,
                             weigth: item.weight.toString(),
                             inWishList: item.wishlistStatus ?? false,
                             inCart: item.inCart ?? false,

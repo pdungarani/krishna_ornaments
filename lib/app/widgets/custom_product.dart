@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
+import 'package:krishna_ornaments/app/navigators/navigators.dart';
 
 // ignore: must_be_immutable
 class CustomProductView extends StatefulWidget {
@@ -62,31 +63,37 @@ class _CustomProductViewState extends State<CustomProductView> {
                 children: [
                   Stack(
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(
-                            Dimens.ten,
-                          ),
-                          color: ColorsValue.appBg,
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(
-                            Dimens.ten,
-                          ),
-                          child: CachedNetworkImage(
-                            imageUrl: widget.imageUrl,
-                            fit: BoxFit.cover,
-                            height: widget.isHorizontal
-                                ? Get.height / 5.50
-                                : Get.height / 5,
-                            width: Get.width / 1.3,
-                            placeholder: (context, url) => Image.asset(
-                              AssetConstants.placeholder,
-                              fit: BoxFit.cover,
+                      GestureDetector(
+                        onTap: () {
+                          RouteManagement.goToShowFullScareenImage(
+                              widget.imageUrl, "image");
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                              Dimens.ten,
                             ),
-                            errorWidget: (context, url, error) => Image.asset(
-                              AssetConstants.placeholder,
+                            color: ColorsValue.appBg,
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(
+                              Dimens.ten,
+                            ),
+                            child: CachedNetworkImage(
+                              imageUrl: widget.imageUrl,
                               fit: BoxFit.cover,
+                              height: widget.isHorizontal
+                                  ? Get.height / 5.50
+                                  : Get.height / 5,
+                              width: Get.width / 1.3,
+                              placeholder: (context, url) => Image.asset(
+                                AssetConstants.placeholder,
+                                fit: BoxFit.cover,
+                              ),
+                              errorWidget: (context, url, error) => Image.asset(
+                                AssetConstants.placeholder,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
@@ -124,94 +131,96 @@ class _CustomProductViewState extends State<CustomProductView> {
                     ],
                   ),
                   Dimens.boxHeight10,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Wrap(
+                        children: [
+                          Text(
+                            widget.productName,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            softWrap: true,
+                            style: Styles.black60016,
+                          ),
+                        ],
+                      ),
+                      // Dimens.boxHeight10,
+                      Row(
+                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Weigth : ",
+                            style: Styles.black70014,
+                          ),
+                          Text(
+                            "${widget.weigth} gm",
+                            style: Styles.black60012,
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              softWrap: true,
-                              maxLines: 1,
-                              widget.productName,
-                              style: Styles.black60016,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            Dimens.boxHeight10,
-                            Text(
-                              "Weigth",
-                              style: Styles.black70014,
-                            ),
-                            Text(
-                              widget.weigth,
-                              style: Styles.black60012,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                      Row(
                         children: [
-                          Row(
-                            children: [
-                              GestureDetector(
-                                onTap: widget.dincrement,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                      Dimens.ten,
-                                    ),
-                                    color: ColorsValue.colorDFDFDF,
-                                  ),
-                                  child: SvgPicture.asset(
-                                    AssetConstants.minus,
-                                    height: Dimens.twentyFour,
-                                    width: Dimens.twentyFour,
-                                  ),
-                                ),
-                              ),
-                              Dimens.boxWidth10,
-                              Text(
-                                widget.quantity.toString(),
-                              ),
-                              Dimens.boxWidth10,
-                              GestureDetector(
-                                onTap: widget.increment,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: ColorsValue.colorDFDFDF,
-                                  ),
-                                  child: SvgPicture.asset(
-                                    AssetConstants.plus,
-                                    height: Dimens.twentyFour,
-                                    width: Dimens.twentyFour,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Dimens.boxHeight10,
-                          InkWell(
-                            onTap: widget.onAddToCard,
+                          GestureDetector(
+                            onTap: widget.dincrement,
                             child: Container(
-                              alignment: Alignment.center,
-                              padding: Dimens.edgeInsets14_0_14_0,
-                              height: Dimens.twentyFive,
                               decoration: BoxDecoration(
-                                color: ColorsValue.colorEDC97D,
                                 borderRadius: BorderRadius.circular(
-                                  Dimens.four,
+                                  Dimens.ten,
                                 ),
+                                color: ColorsValue.colorDFDFDF,
                               ),
-                              child: Text(
-                                widget.inCart ? 'Item In Cart' : 'Add To Cart',
-                                style: Styles.colorFBF7F350010,
+                              child: SvgPicture.asset(
+                                AssetConstants.minus,
+                                height: Dimens.twentyFour,
+                                width: Dimens.twentyFour,
+                              ),
+                            ),
+                          ),
+                          Dimens.boxWidth10,
+                          Text(
+                            widget.quantity.toString(),
+                          ),
+                          Dimens.boxWidth10,
+                          GestureDetector(
+                            onTap: widget.increment,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: ColorsValue.colorDFDFDF,
+                              ),
+                              child: SvgPicture.asset(
+                                AssetConstants.plus,
+                                height: Dimens.twentyFour,
+                                width: Dimens.twentyFour,
                               ),
                             ),
                           ),
                         ],
+                      ),
+                      Dimens.boxHeight10,
+                      InkWell(
+                        onTap: widget.onAddToCard,
+                        child: Container(
+                          alignment: Alignment.center,
+                          padding: Dimens.edgeInsets14_0_14_0,
+                          height: Dimens.twentyFive,
+                          decoration: BoxDecoration(
+                            color: ColorsValue.colorEDC97D,
+                            borderRadius: BorderRadius.circular(
+                              Dimens.four,
+                            ),
+                          ),
+                          child: Text(
+                            widget.inCart ? 'Item In Cart' : 'Add To Cart',
+                            style: Styles.colorFBF7F350010,
+                          ),
+                        ),
                       )
                     ],
                   ),

@@ -161,6 +161,7 @@ abstract class Dimens {
   static double threeHundredTwentyNine = 329.sp;
   static double threeHundredThirty = 330;
   static double threeHundredTwenty = 320;
+  static double threeHundredFifteen = 315;
   static double threeHundredTwentyTwo = 332.sp;
   static double threeHundredFourty = 340.sp;
   static double threeHundredFourtyThree = 343.sp;

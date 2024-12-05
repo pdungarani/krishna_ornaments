@@ -2,6 +2,7 @@
 
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:get/get.dart';
+import 'package:krishna_ornaments/app/pages/profileScreen/screen/bank_detail_screen.dart';
 
 part 'app_routes.dart';
 
@@ -162,6 +163,13 @@ class AppPages {
       transitionDuration: transitionDuration,
       page: SearchScreen.new,
       binding: HomeBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage<BankDetailScreen>(
+      name: _Paths.bankDetailScreen,
+      transitionDuration: transitionDuration,
+      page: BankDetailScreen.new,
+      binding: ProfileBinding(),
       transition: Transition.fadeIn,
     ),
   ];

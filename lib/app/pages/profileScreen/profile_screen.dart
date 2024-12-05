@@ -196,9 +196,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   Dimens.boxHeight20,
                   InkWell(
-                    onTap: () {
-                      RouteManagement.goToRepairOrderHistoryScreen();
-                    },
+                    onTap: () => RouteManagement.goToRepairOrderHistoryScreen(),
                     child: Container(
                       height: Dimens.sixty,
                       decoration: BoxDecoration(
@@ -227,7 +225,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   Dimens.boxHeight20,
                   InkWell(
-                    onTap: () {},
+                    onTap: () => RouteManagement.goToBankDetailScreen(),
                     child: Container(
                       height: Dimens.sixty,
                       decoration: BoxDecoration(
