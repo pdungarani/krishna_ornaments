@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/navigators/routes_management.dart';
-import 'package:krishna_ornaments/app/widgets/custom_button.dart';
 import 'package:krishna_ornaments/app/widgets/custom_product.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -392,7 +391,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   Dimens.boxHeight10,
                   SizedBox(
-                    height: Dimens.twoHundredNinety,
+                    height: Dimens.threeHundredFifteen,
                     child: ListView.builder(
                       controller: controller.scrollTrendingController,
                       padding: Dimens.edgeInsets0,
