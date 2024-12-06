@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:another_stepper/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -55,7 +56,6 @@ class ProfileController extends GetxController {
   TextEditingController IFSCcode = TextEditingController();
 
   File? imageFile;
-  String? profileImage;
   final pickerProfile = ImagePicker();
 
   Future setProfilePic() async {
@@ -64,10 +64,12 @@ class ProfileController extends GetxController {
 
     if (pickedFile != null) {
       imageFile = File(pickedFile.path);
-      profileImage = await profilePresenter.postUploadProfile(
-        filePath: imageFile?.path ?? "",
+      print(">>>>>>>>>>>>>> File Path ${imageFile?.path}");
+      print(
+          ">>>>>>>>>>>>>> Splited File Path ${imageFile?.path.split("/").last}");
+      final profileImage = await profilePresenter.postUploadProfile(
+        filePath: imageFile?.path ?? '',
       );
-      Utility.profilePic = profileImage;
     }
     update();
   }

@@ -1,6 +1,7 @@
 import 'package:another_stepper/another_stepper.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/widgets/appbar_widgets.dart';
@@ -99,59 +100,237 @@ class RepairOrderDetalisScreen extends StatelessWidget {
                     style: Styles.color212121W70024,
                   ),
                   AnotherStepper(
-                    stepperList: [
-                      StepperData(
-                        title: StepperText(
-                          "order_pending".tr,
-                          textStyle: Styles.grey94A3B860012,
-                        ),
-                        subtitle: StepperText(
-                          "03 Sep 2023",
-                          textStyle: Styles.appColor70012,
-                        ),
-                        iconWidget: Container(
-                          height: Dimens.fourtyEight,
-                          width: Dimens.fourtyEight,
-                          padding: Dimens.edgeInsets8,
-                          decoration: BoxDecoration(
-                            color: ColorsValue.appColor,
-                            borderRadius: BorderRadius.circular(
-                              Dimens.hundred,
-                            ),
-                          ),
-                          child: const Icon(
-                            Icons.done,
-                            color: ColorsValue.whiteColor,
-                          ),
-                        ),
-                      ),
-                      StepperData(
-                        title: StepperText(
-                          "order_pending".tr,
-                          textStyle: Styles.grey94A3B860012,
-                        ),
-                        subtitle: StepperText(
-                          "03 Sep 2023",
-                          textStyle: Styles.appColor70012,
-                        ),
-                        iconWidget: Container(
-                          height: Dimens.fourtyEight,
-                          width: Dimens.fourtyEight,
-                          padding: Dimens.edgeInsets8,
-                          decoration: BoxDecoration(
-                            color: ColorsValue.appColor,
-                            borderRadius: BorderRadius.circular(
-                              Dimens.hundred,
-                            ),
-                          ),
-                          child: const Icon(
-                            Icons.done,
-                            color: ColorsValue.whiteColor,
-                          ),
-                        ),
-                      ),
-                    ],
-                    activeIndex: 1,
+                    //  pending
+                    // processing
+                    // completed
+                    // cancelled
+                    stepperList:
+                        controller.getOneRepairOrderData?.orderTracking ==
+                                "pending"
+                            ? [
+                                StepperData(
+                                  title: StepperText(
+                                    "order_pending".tr,
+                                    textStyle: Styles.grey94A3B860012,
+                                  ),
+                                  subtitle: StepperText(
+                                    controller.getOneRepairOrderData?.createdAt
+                                            ?.dateFormate ??
+                                        " - ",
+                                    textStyle: Styles.appColor70012,
+                                  ),
+                                  iconWidget: Container(
+                                    height: Dimens.fourtyEight,
+                                    width: Dimens.fourtyEight,
+                                    padding: Dimens.edgeInsets8,
+                                    decoration: BoxDecoration(
+                                      color: ColorsValue.appColor,
+                                      borderRadius: BorderRadius.circular(
+                                        Dimens.hundred,
+                                      ),
+                                    ),
+                                    child: const Icon(
+                                      Icons.done,
+                                      color: ColorsValue.whiteColor,
+                                    ),
+                                  ),
+                                ),
+                                StepperData(
+                                  title: StepperText(
+                                    "Processing Order".tr,
+                                    textStyle: Styles.grey94A3B860012,
+                                  ),
+                                  subtitle: StepperText(
+                                    controller.getOneRepairOrderData?.createdAt
+                                            ?.dateFormate ??
+                                        " - ",
+                                    textStyle: Styles.appColor70012,
+                                  ),
+                                  iconWidget: Container(
+                                    height: Dimens.fourtyEight,
+                                    width: Dimens.fourtyEight,
+                                    padding: Dimens.edgeInsets8,
+                                    decoration: BoxDecoration(
+                                      color: ColorsValue.grey94A3B8,
+                                      borderRadius: BorderRadius.circular(
+                                        Dimens.hundred,
+                                      ),
+                                    ),
+                                    child: const Icon(
+                                      Icons.done,
+                                      color: ColorsValue.whiteColor,
+                                    ),
+                                  ),
+                                ),
+                                StepperData(
+                                  title: StepperText(
+                                    "Completed Order".tr,
+                                    textStyle: Styles.grey94A3B860012,
+                                  ),
+                                  subtitle: StepperText(
+                                    controller.getOneRepairOrderData?.createdAt
+                                            ?.dateFormate ??
+                                        " - ",
+                                    textStyle: Styles.appColor70012,
+                                  ),
+                                  iconWidget: Container(
+                                    height: Dimens.fourtyEight,
+                                    width: Dimens.fourtyEight,
+                                    padding: Dimens.edgeInsets8,
+                                    decoration: BoxDecoration(
+                                      color: ColorsValue.grey94A3B8,
+                                      borderRadius: BorderRadius.circular(
+                                        Dimens.hundred,
+                                      ),
+                                    ),
+                                    child: const Icon(
+                                      Icons.done,
+                                      color: ColorsValue.whiteColor,
+                                    ),
+                                  ),
+                                ),
+                                StepperData(
+                                  title: StepperText(
+                                    "cancelled Order".tr,
+                                    textStyle: Styles.grey94A3B860012,
+                                  ),
+                                  subtitle: StepperText(
+                                    controller.getOneRepairOrderData?.createdAt
+                                            ?.dateFormate ??
+                                        " - ",
+                                    textStyle: Styles.appColor70012,
+                                  ),
+                                  iconWidget: Container(
+                                    height: Dimens.fourtyEight,
+                                    width: Dimens.fourtyEight,
+                                    padding: Dimens.edgeInsets8,
+                                    decoration: BoxDecoration(
+                                      color: ColorsValue.grey94A3B8,
+                                      borderRadius: BorderRadius.circular(
+                                        Dimens.hundred,
+                                      ),
+                                    ),
+                                    child: const Icon(
+                                      Icons.done,
+                                      color: ColorsValue.whiteColor,
+                                    ),
+                                  ),
+                                ),
+                              ]
+                            : controller.getOneRepairOrderData?.orderTracking ==
+                                    "processing"
+                                ? [
+                                    StepperData(
+                                      title: StepperText(
+                                        "order_pending".tr,
+                                        textStyle: Styles.grey94A3B860012,
+                                      ),
+                                      subtitle: StepperText(
+                                        controller.getOneRepairOrderData
+                                                ?.createdAt?.dateFormate ??
+                                            " - ",
+                                        textStyle: Styles.appColor70012,
+                                      ),
+                                      iconWidget: Container(
+                                        height: Dimens.fourtyEight,
+                                        width: Dimens.fourtyEight,
+                                        padding: Dimens.edgeInsets8,
+                                        decoration: BoxDecoration(
+                                          color: ColorsValue.appColor,
+                                          borderRadius: BorderRadius.circular(
+                                            Dimens.hundred,
+                                          ),
+                                        ),
+                                        child: const Icon(
+                                          Icons.done,
+                                          color: ColorsValue.whiteColor,
+                                        ),
+                                      ),
+                                    ),
+                                    StepperData(
+                                      title: StepperText(
+                                        "Processing Order".tr,
+                                        textStyle: Styles.grey94A3B860012,
+                                      ),
+                                      subtitle: StepperText(
+                                        controller.getOneRepairOrderData
+                                                ?.createdAt?.dateFormate ??
+                                            " - ",
+                                        textStyle: Styles.appColor70012,
+                                      ),
+                                      iconWidget: Container(
+                                        height: Dimens.fourtyEight,
+                                        width: Dimens.fourtyEight,
+                                        padding: Dimens.edgeInsets8,
+                                        decoration: BoxDecoration(
+                                          color: ColorsValue.appColor,
+                                          borderRadius: BorderRadius.circular(
+                                            Dimens.hundred,
+                                          ),
+                                        ),
+                                        child: const Icon(
+                                          Icons.done,
+                                          color: ColorsValue.greyAAAAAA,
+                                        ),
+                                      ),
+                                    ),
+                                    StepperData(
+                                      title: StepperText(
+                                        "Completed Order".tr,
+                                        textStyle: Styles.grey94A3B860012,
+                                      ),
+                                      subtitle: StepperText(
+                                        controller.getOneRepairOrderData
+                                                ?.createdAt?.dateFormate ??
+                                            " - ",
+                                        textStyle: Styles.appColor70012,
+                                      ),
+                                      iconWidget: Container(
+                                        height: Dimens.fourtyEight,
+                                        width: Dimens.fourtyEight,
+                                        padding: Dimens.edgeInsets8,
+                                        decoration: BoxDecoration(
+                                          color: ColorsValue.grey94A3B8,
+                                          borderRadius: BorderRadius.circular(
+                                            Dimens.hundred,
+                                          ),
+                                        ),
+                                        child: const Icon(
+                                          Icons.done,
+                                          color: ColorsValue.whiteColor,
+                                        ),
+                                      ),
+                                    ),
+                                    StepperData(
+                                      title: StepperText(
+                                        "cancelled Order".tr,
+                                        textStyle: Styles.grey94A3B860012,
+                                      ),
+                                      subtitle: StepperText(
+                                        controller.getOneRepairOrderData
+                                                ?.createdAt?.dateFormate ??
+                                            " - ",
+                                        textStyle: Styles.appColor70012,
+                                      ),
+                                      iconWidget: Container(
+                                        height: Dimens.fourtyEight,
+                                        width: Dimens.fourtyEight,
+                                        padding: Dimens.edgeInsets8,
+                                        decoration: BoxDecoration(
+                                          color: ColorsValue.grey94A3B8,
+                                          borderRadius: BorderRadius.circular(
+                                            Dimens.hundred,
+                                          ),
+                                        ),
+                                        child: const Icon(
+                                          Icons.done,
+                                          color: ColorsValue.whiteColor,
+                                        ),
+                                      ),
+                                    ),
+                                  ]
+                                : [],
+                    activeIndex: 5,
                     stepperDirection: Axis.vertical,
                     iconWidth: Dimens.fourty,
                     iconHeight: Dimens.fourty,

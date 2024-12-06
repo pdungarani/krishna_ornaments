@@ -13,6 +13,7 @@ ThemeData themeData(BuildContext context) => ThemeData(
         fillColor: MaterialStateProperty.all<Color>(const Color(0xFFEA6F00)),
         side: BorderSide.none,
       ),
+      canvasColor: ColorsValue.greyAAA,
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.white,
         titleTextStyle: TextStyle(

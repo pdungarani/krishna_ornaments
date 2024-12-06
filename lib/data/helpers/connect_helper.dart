@@ -499,19 +499,33 @@ class ConnectHelper {
     return response;
   }
 
+  // Future<ResponseModel> postUploadProfile({
+  //   bool isLoading = false,
+  //   required String filePath,
+  // }) async {
+  //   var type = lookupMimeType(filePath)!.split('/');
+
+  //   var response = await apiWrapper.makeRequest(
+  //     EndPoints.postUploadProfile,
+  //     Request.awsUpload,
+  //     filePath,
+  //     isLoading,
+  //     Utility.commonHeader(),
+  //     mediaType: mediaType.MediaType(type[0], type[1]),
+  //   );
+  //   return response;
+  // }
+
   Future<ResponseModel> postUploadProfile({
     bool isLoading = false,
     required String filePath,
   }) async {
-    var type = lookupMimeType(filePath)!.split('/');
-
     var response = await apiWrapper.makeRequest(
       EndPoints.postUploadProfile,
       Request.awsUpload,
       filePath,
       isLoading,
       Utility.commonHeader(),
-      mediaType: mediaType.MediaType(type[0], type[1]),
     );
     return response;
   }

@@ -388,9 +388,10 @@ class Repository {
         filePath: filePath,
       );
       if (response.statusCode == 200) {
-        return json.decode(response.data)['Data']['profile_pic'];
+        return json.decode(response.data)['Data']['path'];
       } else {
-        Utility.errorMessage(json.decode(response.data)['Message'].toString());
+        Utility.showMessage(json.decode(response.data)['Message'].toString(),
+            MessageType.error, () => null, '');
         return null;
       }
     } catch (_) {
