@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:another_stepper/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -64,12 +63,14 @@ class ProfileController extends GetxController {
 
     if (pickedFile != null) {
       imageFile = File(pickedFile.path);
-      print(">>>>>>>>>>>>>> File Path ${imageFile?.path}");
-      print(
-          ">>>>>>>>>>>>>> Splited File Path ${imageFile?.path.split("/").last}");
-      final profileImage = await profilePresenter.postUploadProfile(
-        filePath: imageFile?.path ?? '',
-      );
+      if (Utility.getImageSizeMB(imageFile?.path ?? '') <= 5) {
+        await profilePresenter.postUploadProfile(
+          filePath: imageFile?.path ?? '',
+        );
+        getProfile();
+      } else {
+        Utility.errorMessage("max_5_mb_img_error".tr);
+      }
     }
     update();
   }
