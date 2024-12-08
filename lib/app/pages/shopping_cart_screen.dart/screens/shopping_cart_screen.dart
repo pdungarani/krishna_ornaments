@@ -252,78 +252,11 @@ class ShoppingCartScreen extends StatelessWidget {
               : Center(
                   child: Text(
                     "Cart list not found....!",
-                    style: Styles.txtBlackColorW60014,
+                    style: Styles.black60016,
                   ),
                 ),
         );
       },
     );
-
-    //           Dimens.boxHeight10,
-    //           Padding(
-    //             padding: Dimens.edgeInsets20_0_20_0,
-    //             child: Row(
-    //               crossAxisAlignment: CrossAxisAlignment.start,
-    //               children: [
-    //                 Text(
-    //                   'total_product'.tr,
-    //                   style: Styles.colorA7A7A750016,
-    //                 ),
-    //                 Dimens.boxWidth10,
-    //                 Text(
-    //                   '02'.tr,
-    //                   style: Styles.colorA7A7A750016,
-    //                 ),
-    //               ],
-    //             ),
-    //           ),
-    //           Dimens.boxHeight10,
-    //           Padding(
-    //             padding: Dimens.edgeInsets20_0_20_0,
-    //             child: Row(
-    //               crossAxisAlignment: CrossAxisAlignment.start,
-    //               children: [
-    //                 Text(
-    //                   'total_weight'.tr,
-    //                   style: Styles.colorA7A7A750016,
-    //                 ),
-    //                 Dimens.boxWidth10,
-    //                 Text(
-    //                   '02'.tr,
-    //                   style: Styles.colorA7A7A750016,
-    //                 ),
-    //               ],
-    //             Dimens.boxWidth10,
-    //             Text(
-    //               controller.getallCartItem?.totalQuantity.toString() ?? '',
-    //               style: Styles.colorA7A7A750016,
-    //             ),
-    //           )
-    //         ],
-    //       ),
-    //     );
-    //   });
-    //       Dimens.boxHeight10,
-    //       Padding(
-    //         padding: Dimens.edgeInsets20_0_20_0,
-    //         child: Row(
-    //           crossAxisAlignment: CrossAxisAlignment.start,
-    //           children: [
-    //             Text(
-    //               'total_weight'.tr,
-    //               style: Styles.colorA7A7A750016,
-    //             ),
-    //             Dimens.boxWidth10,
-    //             Text(
-    //               controller.getallCartItem.toString(),
-    //               style: Styles.colorA7A7A750016,
-    //             ),
-    //           ],
-    //         ),
-    //       )
-    //     ],
-    //   ),
-    // );
-    // });
   }
 }

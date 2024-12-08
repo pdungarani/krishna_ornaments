@@ -8,7 +8,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/navigators/navigators.dart';
-import 'package:krishna_ornaments/domain/models/models.dart';
+import 'package:krishna_ornaments/app/widgets/custom_stepper.dart';
+import 'package:krishna_ornaments/domain/domain.dart';
 
 class RepairController extends GetxController {
   RepairController(this.repairPresenter);
@@ -16,6 +17,78 @@ class RepairController extends GetxController {
   final RepairPresenter repairPresenter;
 
   int selectedValue = 0;
+
+  List<CustomStepperView> pendingStepper = [
+    CustomStepperView(
+      title: 'Pending Order',
+      subTitle: '20-07-2024',
+      isActivate: true,
+    ),
+    CustomStepperView(
+      title: 'Processing Order',
+      subTitle: '20-07-2024',
+      isActivate: false,
+    ),
+    CustomStepperView(
+      title: 'Completed Order',
+      subTitle: '20-07-2024',
+      isActivate: false,
+    ),
+  ];
+
+  List<CustomStepperView> completStepper = [
+    CustomStepperView(
+      title: 'Pending Order',
+      subTitle: '20-07-2024',
+      isActivate: true,
+    ),
+    CustomStepperView(
+      title: 'Processing Order',
+      subTitle: '20-07-2024',
+      isActivate: true,
+    ),
+    CustomStepperView(
+      title: 'Completed Order',
+      subTitle: '20-07-2024',
+      isActivate: true,
+    ),
+  ];
+
+  List<CustomStepperView> pocessingStepper = [
+    CustomStepperView(
+      title: 'Pending Order',
+      subTitle: '20-07-2024',
+      isActivate: true,
+    ),
+    CustomStepperView(
+      title: 'Processing Order',
+      subTitle: '20-07-2024',
+      isActivate: true,
+    ),
+    CustomStepperView(
+      title: 'Completed Order',
+      subTitle: '20-07-2024',
+      isActivate: false,
+    ),
+  ];
+
+  List<CustomStepperView> cancelledStepper = [
+    CustomStepperView(
+      title: 'Pending Order',
+      subTitle: '20-07-2024',
+      isActivate: true,
+    ),
+    CustomStepperView(
+      title: 'Processing Order',
+      subTitle: '20-07-2024',
+      isActivate: true,
+    ),
+    CustomStepperView(
+      title: 'Cancelled Order',
+      subTitle: '20-07-2024',
+      isActivate: true,
+    ),
+  ];
 
   selectImage(BuildContext context, bool isSample) {
     showModalBottomSheet(
@@ -139,7 +212,7 @@ class RepairController extends GetxController {
       } else {
         Utility.errorMessage("max_10_mb_img".tr);
       }
-    }
+    } 
     update();
   }
 

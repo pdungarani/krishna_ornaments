@@ -36,6 +36,7 @@ abstract class AssetConstants {
   static const String ic_filter_empty = 'assets/svg/ic_filter_empty.svg';
   static const String dwsadsa = '';
 
-  static const String copyIcon = 'assets/icons/copy.svg';
   
+  static const String copyIcon = 'assets/icons/copy.svg';
+  static const String app_logo = 'assets/images/app_logo.jpg';
 }

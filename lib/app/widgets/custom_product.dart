@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/navigators/navigators.dart';
 
@@ -44,123 +43,115 @@ class CustomProductView extends StatefulWidget {
 class _CustomProductViewState extends State<CustomProductView> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomeController>(
-      builder: (controller) {
-        return Padding(
-          padding: EdgeInsets.only(left: widget.isHorizontal ? 0 : 0),
-          child: Container(
-            width: Get.width / 1.7,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(
-                Dimens.ten,
+    return Container(
+      padding: Dimens.edgeInsets10,
+      height: Dimens.ten,
+      width: Dimens.twoHundredTen,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(
+          Dimens.ten,
+        ),
+        color: ColorsValue.whiteColor,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Stack(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  RouteManagement.goToShowFullScareenImage(
+                      widget.imageUrl, "image");
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                      Dimens.ten,
+                    ),
+                    color: ColorsValue.appBg,
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(
+                      Dimens.ten,
+                    ),
+                    child: CachedNetworkImage(
+                      imageUrl: widget.imageUrl,
+                      fit: BoxFit.cover,
+                      height: Dimens.hundredSixty,
+                      width: double.maxFinite,
+                      placeholder: (context, url) => Image.asset(
+                        AssetConstants.placeholder,
+                        fit: BoxFit.cover,
+                      ),
+                      errorWidget: (context, url, error) => Image.asset(
+                        AssetConstants.placeholder,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
               ),
-              color: ColorsValue.whiteColor,
-            ),
-            child: Padding(
-              padding: Dimens.edgeInsets10,
+              Padding(
+                padding: Dimens.edgeInsets8,
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: Container(
+                    height: Dimens.thirty,
+                    width: Dimens.thirty,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        Dimens.fifty,
+                      ),
+                      color: ColorsValue.whiteColor,
+                      border: Border.all(
+                        width: Dimens.one,
+                        color: ColorsValue.lightPrimaryColor,
+                      ),
+                    ),
+                    child: Center(
+                      child: InkWell(
+                        onTap: widget.addFavorite,
+                        child: SvgPicture.asset(
+                          widget.inWishList
+                              ? AssetConstants.ic_fill_like
+                              : AssetConstants.ic_like,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Dimens.boxHeight10,
+          Text(
+            widget.productName,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            softWrap: true,
+            style: Styles.blackW60014,
+          ),
+          Dimens.boxHeight10,
+          Expanded(
+            child: Align(
+              alignment: Alignment.bottomCenter,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Stack(
+                  Row(
                     children: [
-                      GestureDetector(
-                        onTap: () {
-                          RouteManagement.goToShowFullScareenImage(
-                              widget.imageUrl, "image");
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(
-                              Dimens.ten,
-                            ),
-                            color: ColorsValue.appBg,
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(
-                              Dimens.ten,
-                            ),
-                            child: CachedNetworkImage(
-                              imageUrl: widget.imageUrl,
-                              fit: BoxFit.cover,
-                              height: widget.isHorizontal
-                                  ? Get.height / 5.50
-                                  : Get.height / 5,
-                              width: Get.width / 1.3,
-                              placeholder: (context, url) => Image.asset(
-                                AssetConstants.placeholder,
-                                fit: BoxFit.cover,
-                              ),
-                              errorWidget: (context, url, error) => Image.asset(
-                                AssetConstants.placeholder,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                        ),
+                      Text(
+                        "Weigth : ",
+                        style: Styles.blackW60014,
                       ),
-                      Padding(
-                        padding: Dimens.edgeInsets8,
-                        child: Align(
-                          alignment: Alignment.topRight,
-                          child: Container(
-                            height: Dimens.thirty,
-                            width: Dimens.thirty,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                Dimens.fifty,
-                              ),
-                              color: ColorsValue.whiteColor,
-                              border: Border.all(
-                                width: Dimens.one,
-                                color: ColorsValue.lightPrimaryColor,
-                              ),
-                            ),
-                            child: Center(
-                              child: InkWell(
-                                onTap: widget.addFavorite,
-                                child: SvgPicture.asset(
-                                  widget.inWishList
-                                      ? AssetConstants.ic_fill_like
-                                      : AssetConstants.ic_like,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                      Text(
+                        "${widget.weigth} gm",
+                        style: Styles.black60012,
                       ),
                     ],
                   ),
-                  Dimens.boxHeight10,
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Wrap(
-                        children: [
-                          Text(
-                            widget.productName,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            softWrap: true,
-                            style: Styles.black60016,
-                          ),
-                        ],
-                      ),
-                      // Dimens.boxHeight10,
-                      Row(
-                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Weigth : ",
-                            style: Styles.black70014,
-                          ),
-                          Text(
-                            "${widget.weigth} gm",
-                            style: Styles.black60012,
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
+                  Dimens.boxHeight5,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -227,9 +218,9 @@ class _CustomProductViewState extends State<CustomProductView> {
                 ],
               ),
             ),
-          ),
-        );
-      },
+          )
+        ],
+      ),
     );
   }
 }

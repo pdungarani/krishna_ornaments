@@ -1,8 +1,8 @@
+import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
-import 'package:flutter/material.dart';
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 
 class BottomBarScreen extends StatelessWidget {
   const BottomBarScreen({super.key});
@@ -49,7 +49,7 @@ class BottomBarScreen extends StatelessWidget {
                 ),
                 activeIcon: SvgPicture.asset(
                   AssetConstants.ic_repair,
-                  colorFilter: ColorFilter.mode(
+                  colorFilter: const ColorFilter.mode(
                     ColorsValue.appColor,
                     BlendMode.srcIn,
                   ),
@@ -67,12 +67,12 @@ class BottomBarScreen extends StatelessWidget {
           body: TabBarView(
             controller: controller.tabController,
             physics: const NeverScrollableScrollPhysics(),
-            children: [
-              const HomeScreen(),
-              const CategoryScreen(),
-              const ShoppingCartScreen(),
-              const RepairScreen(),
-              const ProfileScreen(),
+            children: const [
+              HomeScreen(),
+              CategoryScreen(),
+              ShoppingCartScreen(),
+              RepairScreen(),
+              ProfileScreen(),
             ],
           ),
         ),

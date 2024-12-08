@@ -73,7 +73,7 @@ class WishlistScreen extends StatelessWidget {
                                 GestureDetector(
                                   onTap: () {
                                     controller.postWishlistAddRemove(
-                                        item.productid?.id ?? "");
+                                        item.productid?.id ?? "", index, true);
                                   },
                                   child: SizedBox(
                                     width: Dimens.hundredSixty,

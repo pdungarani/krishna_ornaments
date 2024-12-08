@@ -1,11 +1,10 @@
-import 'package:another_stepper/dto/stepper_data.dart';
-import 'package:another_stepper/widgets/another_stepper.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/navigators/routes_management.dart';
 import 'package:krishna_ornaments/app/widgets/appbar_widgets.dart';
+import 'package:krishna_ornaments/app/widgets/custom_stepper.dart';
 
 class SampleOrderDetailsScreen extends StatelessWidget {
   const SampleOrderDetailsScreen({super.key});
@@ -119,73 +118,29 @@ class SampleOrderDetailsScreen extends StatelessWidget {
                   'order_status'.tr,
                   style: Styles.color212121W70024,
                 ),
-                AnotherStepper(
-                  stepperList: [
-                    StepperData(
-                      title: StepperText(
-                        "order_pending".tr,
-                        textStyle: Styles.grey94A3B860012,
-                      ),
-                      subtitle: StepperText(
-                        "03 Sep 2023",
-                        textStyle: Styles.appColor70012,
-                      ),
-                      iconWidget: Container(
-                        height: Dimens.fourtyEight,
-                        width: Dimens.fourtyEight,
-                        padding: Dimens.edgeInsets8,
-                        decoration: BoxDecoration(
-                          color: ColorsValue.appColor,
-                          borderRadius: BorderRadius.circular(
-                            Dimens.hundred,
-                          ),
-                        ),
-                        child: const Icon(
-                          Icons.done,
-                          color: ColorsValue.whiteColor,
-                        ),
-                      ),
-                    ),
-                    StepperData(
-                      title: StepperText(
-                        "order_pending".tr,
-                        textStyle: Styles.grey94A3B860012,
-                      ),
-                      subtitle: StepperText(
-                        "03 Sep 2023",
-                        textStyle: Styles.appColor70012,
-                      ),
-                      iconWidget: Container(
-                        height: Dimens.fourtyEight,
-                        width: Dimens.fourtyEight,
-                        padding: Dimens.edgeInsets8,
-                        decoration: BoxDecoration(
-                          color: ColorsValue.appColor,
-                          borderRadius: BorderRadius.circular(
-                            Dimens.hundred,
-                          ),
-                        ),
-                        child: const Icon(
-                          Icons.done,
-                          color: ColorsValue.whiteColor,
-                        ),
-                      ),
-                    ),
-                  ],
-                  activeIndex: 1,
-                  stepperDirection: Axis.vertical,
-                  iconWidth: Dimens.fourty,
-                  iconHeight: Dimens.fourty,
-                  activeBarColor: ColorsValue.appColor,
-                  inActiveBarColor: ColorsValue.whiteColor,
-                  verticalGap: Dimens.thirty,
-                  barThickness: Dimens.five,
-                )
+                CustomStepper(
+                  customStepper: getStepperType(
+                      (controller.getOneSampleData?.orderTracking ?? ""),
+                      controller),
+                ),
               ],
             ),
           ),
         ),
       );
     });
+  }
+
+  List<CustomStepperView> getStepperType(
+      String element, RepairController controller) {
+    return element == 'pending'
+        ? controller.pendingStepper
+        : element == 'processing'
+            ? controller.pendingStepper
+            : element == "completed"
+                ? controller.completStepper
+                : element == "cancelled"
+                    ? controller.cancelledStepper
+                    : [];
   }
 }

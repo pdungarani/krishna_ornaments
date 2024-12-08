@@ -415,9 +415,7 @@ class Repository {
       if (repairOrderUploadImageModel.status == 200) {
         return repairOrderUploadImageModel;
       } else {
-        Utility.showMessage(repairOrderUploadImageModel.message.toString(),
-            MessageType.error, () => null, '');
-        return null;
+        return repairOrderUploadImageModel;
       }
     } catch (_) {
       Utility.closeDialog();

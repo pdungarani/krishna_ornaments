@@ -113,28 +113,30 @@ class HomeScreen extends StatelessWidget {
                             BlendMode.srcIn,
                           ),
                         ),
-                        Positioned(
-                          right: 0,
-                          top: 0,
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: Dimens.fifteen,
-                            width: Dimens.fifteen,
-                            decoration: BoxDecoration(
-                              color: ColorsValue.appColor,
-                              borderRadius: BorderRadius.circular(
-                                Dimens.hundred,
+                        if (controller.wishlistCount.isNotEmpty) ...[
+                          Positioned(
+                            right: 0,
+                            top: 0,
+                            child: Container(
+                              alignment: Alignment.center,
+                              height: Dimens.fifteen,
+                              width: Dimens.fifteen,
+                              decoration: BoxDecoration(
+                                color: ColorsValue.appColor,
+                                borderRadius: BorderRadius.circular(
+                                  Dimens.hundred,
+                                ),
                               ),
-                            ),
-                            child: Text(
-                              "10",
-                              style: GoogleFonts.montserrat(
-                                fontSize: Dimens.eight,
-                                color: ColorsValue.whiteColor,
+                              child: Text(
+                                controller.wishlistCount.length.toString(),
+                                style: GoogleFonts.montserrat(
+                                  fontSize: Dimens.eight,
+                                  color: ColorsValue.whiteColor,
+                                ),
                               ),
                             ),
                           ),
-                        ),
+                        ]
                       ],
                     ),
                   ),
@@ -289,7 +291,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   Dimens.boxHeight10,
                   SizedBox(
-                    height: Dimens.threeHundredFifteen,
+                    height: Dimens.twoHundredNinety,
                     child: ListView.builder(
                       controller: controller.scrollBestSellerController,
                       padding: Dimens.edgeInsets0,
@@ -326,7 +328,8 @@ class HomeScreen extends StatelessWidget {
                               }
                             },
                             addFavorite: () {
-                              controller.postWishlistAddRemove(item.id ?? "");
+                              controller.postWishlistAddRemove(
+                                  item.id ?? "", index, false);
                             },
                             increment: item.inCart ?? false
                                 ? null
@@ -400,7 +403,7 @@ class HomeScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         var item = controller.productTrendingDocList[index];
                         return Padding(
-                          padding: Dimens.edgeInsetsRight10,
+                          padding: Dimens.edgeInsetsRight20,
                           child: CustomProductView(
                             productName: item.name ?? "",
                             imageUrl: item.image ?? "",
@@ -428,7 +431,8 @@ class HomeScreen extends StatelessWidget {
                               }
                             },
                             addFavorite: () {
-                              controller.postWishlistAddRemove(item.id ?? "");
+                              controller.postWishlistAddRemove(
+                                  item.id ?? "", index, false);
                             },
                             increment: item.inCart ?? false
                                 ? null

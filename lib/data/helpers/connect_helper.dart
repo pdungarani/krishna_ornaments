@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http_parser/src/media_type.dart' as mediaType;
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
@@ -522,7 +521,7 @@ class ConnectHelper {
   }) async {
     var response = await apiWrapper.makeRequest(
       EndPoints.postUploadProfile,
-      Request.awsUpload,
+      Request.filePath,
       filePath,
       isLoading,
       Utility.commonHeader(),
