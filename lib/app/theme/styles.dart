@@ -51,6 +51,12 @@ abstract class Styles {
     fontSize: Dimens.fourteen,
   );
 
+  static TextStyle blackW60014 = GoogleFonts.montserrat(
+    color: ColorsValue.blackColor,
+    fontWeight: FontWeight.w600,
+    fontSize: Dimens.fourteen,
+  );
+
   static TextStyle txtBlackColorW70018 = GoogleFonts.outfit(
     color: ColorsValue.txtBlackColor,
     fontSize: Dimens.eighteen,
@@ -224,7 +230,7 @@ abstract class Styles {
 
   static TextStyle txtRedW50010 = GoogleFonts.montserrat(
     color: ColorsValue.redColor,
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.w500,
     fontSize: Dimens.ten,
   );
 

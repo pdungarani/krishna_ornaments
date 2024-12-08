@@ -12,6 +12,7 @@ enum Request {
   awsFileUpload,
   awsUpload,
   getApiWithoutBaseURL,
+  filePath,
 }
 
 /// MQTT Enums

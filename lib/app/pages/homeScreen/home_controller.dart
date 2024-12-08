@@ -14,6 +14,7 @@ class HomeController extends GetxController {
   onInit() {
     super.onInit();
     getAllCategories();
+    postWishlist(1);
   }
 
   late PageController controller;
@@ -204,6 +205,7 @@ class HomeController extends GetxController {
   final ScrollController scrollWishListController = ScrollController();
 
   List<WishlistDoc> wishlistList = [];
+  List<WishlistDoc> wishlistCount = [];
   bool isWishListLastPage = false;
   bool isWishListLoading = false;
   int pageWishCount = 1;
@@ -218,11 +220,14 @@ class HomeController extends GetxController {
       limit: 10,
       isLoading: true,
     );
+    wishlistCount.clear();
     if (response?.data != null) {
       if (pageKey == 1) {
         isWishListLastPage = false;
         wishlistList.clear();
       }
+
+      wishlistCount.addAll(response?.data?.docs ?? []);
       if ((response?.data?.docs?.length ?? 0) < 10) {
         isWishListLastPage = true;
         wishlistList.addAll(response?.data?.docs ?? []);
@@ -242,12 +247,14 @@ class HomeController extends GetxController {
 
   TextEditingController buyNowDesController = TextEditingController();
 
-  Future<void> postWishlistAddRemove(String productsDoc) async {
+  Future<void> postWishlistAddRemove(
+      String productsDoc, int index, bool isRemove) async {
     var response = await homePresenter.postWishlistAddRemove(
       productId: productsDoc,
       isLoading: false,
     );
     if (response?.data != null) {
+      if (isRemove) wishlistList.removeAt(index);
       postAllProduct(1);
       postWishlist(1);
       postAllTrendingProduct(1);

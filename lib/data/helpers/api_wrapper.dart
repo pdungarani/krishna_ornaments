@@ -237,6 +237,40 @@ class ApiWrapper {
                   data: '{"message":"Request timed out"}', hasError: true);
             }
           }
+        case Request.filePath:
+          {
+            var uri = _baseUrl + url;
+
+            try {
+              if (isLoading) {
+                if (Get.isSnackbarOpen) {
+                  await Get.closeCurrentSnackbar();
+                }
+                Utility.showLoader();
+              }
+              var request = http.MultipartRequest('POST', Uri.parse(uri));
+              request.files.add(await http.MultipartFile.fromPath(
+                  'image', data ?? '',
+                  contentType:
+                      mediaType ?? media_type.MediaType("image", "jpeg")));
+              request.headers.addAll(headers);
+
+              http.StreamedResponse response =
+                  await request.send().timeout(const Duration(seconds: 120));
+              if (isLoading) Utility.closeDialog();
+              var bytesToString = await response.stream.bytesToString();
+              var res = ResponseModel(
+                  data: bytesToString, hasError: false, statusCode: 200);
+              log(
+                'URL :- $uri\nData :- $data\nHeaders :- $headers\nResponse :-\nStatus Code :- ${res.statusCode}\nResponse Data :- ${res.data}',
+              );
+              return res;
+            } on TimeoutException catch (_) {
+              if (isLoading) Utility.closeDialog();
+              return ResponseModel(
+                  data: '{"message":"Request timed out"}', hasError: true);
+            }
+          }
         case Request.awsFileUpload:
 
           /// Method to make the Put type request
