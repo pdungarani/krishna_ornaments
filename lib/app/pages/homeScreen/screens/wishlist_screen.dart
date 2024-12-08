@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
+import 'package:krishna_ornaments/app/navigators/navigators.dart';
 import 'package:krishna_ornaments/app/widgets/appbar_widgets.dart';
 
 class WishlistScreen extends StatelessWidget {
@@ -38,143 +39,168 @@ class WishlistScreen extends StatelessWidget {
             title: "wishlist".tr,
           ),
           body: RefreshIndicator(
-              onRefresh: () => Future.sync(
-                    () async {
-                      await controller.postWishlist(1);
-                    },
-                  ),
-              child: GridView.builder(
-                controller: controller.scrollWishListController,
-                padding: Dimens.edgeInsets20,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: Dimens.fifteen,
-                  crossAxisSpacing: Dimens.ten,
-                  mainAxisExtent: Dimens.twoHundredNinety,
-                ),
-                itemCount: controller.wishlistList.length,
-                itemBuilder: (context, index) {
-                  var item = controller.wishlistList[index];
-                  return controller.wishlistList.isNotEmpty
-                      ? Container(
-                          decoration: BoxDecoration(
-                            color: ColorsValue.appColorLight,
-                            borderRadius: BorderRadius.circular(
-                              Dimens.six,
-                            ),
+            onRefresh: () => Future.sync(
+              () async {
+                await controller.postWishlist(1);
+              },
+            ),
+            child: controller.wishlistList.isNotEmpty
+                ? GridView.builder(
+                    controller: controller.scrollWishListController,
+                    padding: Dimens.edgeInsets20,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: Dimens.fifteen,
+                      crossAxisSpacing: Dimens.ten,
+                      mainAxisExtent: Dimens.twoHundredEighty,
+                    ),
+                    itemCount: controller.wishlistList.length,
+                    itemBuilder: (context, index) {
+                      var item = controller.wishlistList[index];
+                      return Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            Dimens.ten,
                           ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(
-                              Dimens.six,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    controller.postWishlistAddRemove(
-                                        item.productid?.id ?? "", index, true);
-                                  },
-                                  child: SizedBox(
-                                    width: Dimens.hundredSixty,
-                                    height: Dimens.hundredSixty,
-                                    child: Stack(
-                                      children: [
-                                        CachedNetworkImage(
-                                          imageUrl: item.productid?.image ?? "",
+                          color: ColorsValue.appColorLight,
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(
+                            Dimens.ten,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Stack(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      RouteManagement.goToShowFullScareenImage(
+                                          item.productid?.image ?? "", "image");
+                                    },
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(Dimens.ten),
+                                        topRight: Radius.circular(Dimens.ten),
+                                      ),
+                                      child: CachedNetworkImage(
+                                        imageUrl: item.productid?.image ?? "",
+                                        fit: BoxFit.cover,
+                                        height: Dimens.hundredSixty,
+                                        width: double.maxFinite,
+                                        placeholder: (context, url) =>
+                                            Image.asset(
+                                          AssetConstants.placeholder,
                                           fit: BoxFit.cover,
-                                          height: Dimens.hundredSixty,
-                                          width: double.maxFinite,
-                                          placeholder: (context, url) =>
-                                              Image.asset(
-                                            AssetConstants.placeholder,
-                                            fit: BoxFit.cover,
-                                          ),
-                                          errorWidget: (context, url, error) =>
-                                              Image.asset(
-                                            AssetConstants.placeholder,
-                                            fit: BoxFit.cover,
-                                          ),
                                         ),
-                                        Positioned(
-                                          right: 0,
-                                          child: Container(
-                                            margin: Dimens.edgeInsets10,
-                                            height: Dimens.thirty,
-                                            width: Dimens.thirty,
-                                            decoration: BoxDecoration(
-                                              color: ColorsValue.whiteColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                Dimens.fiveHundred,
-                                              ),
-                                            ),
-                                            child: const Icon(
-                                              Icons.close,
-                                              color: ColorsValue.redColor,
-                                            ),
-                                          ),
+                                        errorWidget: (context, url, error) =>
+                                            Image.asset(
+                                          AssetConstants.placeholder,
+                                          fit: BoxFit.cover,
                                         ),
-                                      ],
+                                      ),
                                     ),
                                   ),
+                                  Positioned(
+                                    right: 0,
+                                    child: InkWell(
+                                      onTap: () {
+                                        controller.postWishlistAddRemove(
+                                            item.productid?.id ?? "",
+                                            index,
+                                            true);
+                                      },
+                                      child: Container(
+                                        margin: Dimens.edgeInsets10,
+                                        height: Dimens.thirty,
+                                        width: Dimens.thirty,
+                                        decoration: BoxDecoration(
+                                          color: ColorsValue.whiteColor,
+                                          borderRadius: BorderRadius.circular(
+                                            Dimens.fiveHundred,
+                                          ),
+                                        ),
+                                        child: const Icon(
+                                          Icons.close,
+                                          color: ColorsValue.redColor,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Dimens.boxHeight10,
+                              Padding(
+                                padding: Dimens.edgeInsets10_0_10_0,
+                                child: Text(
+                                  item.productid?.name ?? "",
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  softWrap: true,
+                                  style: Styles.blackW60014,
                                 ),
-                                Padding(
-                                  padding: Dimens.edgeInsets10,
+                              ),
+                              Expanded(
+                                child: Align(
+                                  alignment: Alignment.bottomCenter,
                                   child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        item.productid?.name ?? "",
-                                        softWrap: true,
-                                        maxLines: 1,
-                                        style: Styles.black60016,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      Text(
-                                        "Weigth ${item.productid?.weight.toString() ?? ""}",
-                                        style: Styles.lightcccW50010,
-                                      ),
-                                      Dimens.boxHeight10,
-                                      InkWell(
-                                        onTap: () {
-                                          controller.postAddToCart(
-                                              item.productid?.id ?? "",
-                                              1,
-                                              index,
-                                              "wishlist");
-                                        },
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          padding: Dimens.edgeInsets14_0_14_0,
-                                          height: Dimens.thirty,
-                                          decoration: BoxDecoration(
-                                            color: ColorsValue.colorEDC97D,
-                                            borderRadius: BorderRadius.circular(
-                                              Dimens.four,
-                                            ),
-                                          ),
-                                          child: Text(
-                                            item.inCart ?? false
-                                                ? "Item In Cart"
-                                                : 'Move To Cart',
-                                            style: Styles.whiteW70014,
-                                          ),
+                                      Padding(
+                                        padding: Dimens.edgeInsets10_0_10_0,
+                                        child: Text(
+                                          "Weigth : ${item.productid?.weight} gm",
+                                          style: Styles.black010101W40014,
                                         ),
                                       ),
+                                      Dimens.boxHeight10,
+                                      Padding(
+                                        padding: Dimens.edgeInsets10_0_10_10,
+                                        child: InkWell(
+                                          onTap: () {
+                                            if (item.inCart ?? false) {
+                                            } else {}
+                                          },
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            padding: Dimens.edgeInsets14_0_14_0,
+                                            height: Dimens.thirty,
+                                            decoration: BoxDecoration(
+                                              color: ColorsValue.colorEDC97D,
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                Dimens.four,
+                                              ),
+                                            ),
+                                            child: Text(
+                                              item.inCart ?? false
+                                                  ? 'Item In Cart'
+                                                  : 'Add To Cart',
+                                              style: Styles.colorFBF7F350010,
+                                            ),
+                                          ),
+                                        ),
+                                      )
                                     ],
                                   ),
                                 ),
-                              ],
-                            ),
+                              )
+                            ],
                           ),
-                        )
-                      : const Center(
-                          child: Text("WhisList is Empty!"),
-                        );
-                },
-              )),
+                        ),
+                      );
+                    },
+                  )
+                : Center(
+                    child: Text(
+                      "Wishlist data not found...!",
+                      style: Styles.black60016,
+                    ),
+                  ),
+          ),
         );
       },
     );
