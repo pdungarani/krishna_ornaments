@@ -40,17 +40,13 @@ class LoginScreen extends StatelessWidget {
                         ),
                         Dimens.boxHeight30,
                         CustomTextFormField(
-                          text: 'Email',
-                          hintText: "Enter Your Email",
+                          text: 'Username',
+                          hintText: "Enter Your Username",
                           fillColor: ColorsValue.colorEEEAEA,
                           controller: controller.emailController,
                           validation: (value) {
-                            if (value!.isNotEmpty) {
-                              if (validateEmail(value) != null) {
-                                return 'Please enter valid email';
-                              }
-                            } else {
-                              return 'Please enter valid email';
+                            if (value!.isEmpty) {
+                              return 'Please enter username';
                             }
                             return null;
                           },

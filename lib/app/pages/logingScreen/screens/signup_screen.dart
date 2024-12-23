@@ -148,7 +148,6 @@ class _SignupScreenState extends State<SignupScreen> {
                   hintText: 'enter_new_password'.tr,
                   controller: controller.newPasswordController,
                   textInputAction: TextInputAction.next,
-                  keyboardType: TextInputType.number,
                   validation: (value) {
                     if (value!.isEmpty) {
                       return 'please_enter_new_password'.tr;
@@ -162,7 +161,6 @@ class _SignupScreenState extends State<SignupScreen> {
                   hintText: 'enter_confirm_password'.tr,
                   controller: controller.confirmPasswordController,
                   textInputAction: TextInputAction.next,
-                  keyboardType: TextInputType.number,
                   validation: (value) {
                     if (value!.isEmpty) {
                       return 'please_enter_confirm_password'.tr;

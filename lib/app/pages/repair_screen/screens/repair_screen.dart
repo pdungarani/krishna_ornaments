@@ -127,7 +127,7 @@ class RepairScreen extends StatelessWidget {
             ] else ...[
               InkWell(
                 onTap: () {
-                  controller.sampleOrderImage();
+                  controller.sampleOrderImage(context);
                 },
                 child: SizedBox(
                   height: 394,

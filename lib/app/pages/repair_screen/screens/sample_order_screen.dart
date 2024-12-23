@@ -97,7 +97,7 @@ class SampleOrderScreen extends StatelessWidget {
                       onTap: () async {
                         var data = await Utility.imagePermissionCheack(context);
                         if (data) {
-                          controller.sampleOrderImage();
+                          controller.sampleOrderImage(context);
                         }
                       },
                       child: Container(

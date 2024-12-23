@@ -229,7 +229,7 @@ class ConnectHelper {
       Request.post,
       data,
       isLoading,
-      Utility.commonHeader(),
+      Utility.commonHeader(isDefaultAuthorizationKeyAdd: false),
     );
     return response;
   }
@@ -292,7 +292,7 @@ class ConnectHelper {
       Request.post,
       data,
       isLoading,
-      Utility.commonHeader(),
+      Utility.commonHeader(isDefaultAuthorizationKeyAdd: false),
     );
     return response;
   }

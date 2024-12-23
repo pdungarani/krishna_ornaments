@@ -212,7 +212,7 @@ class RepairController extends GetxController {
       } else {
         Utility.errorMessage("max_10_mb_img".tr);
       }
-    } 
+    }
     update();
   }
 
@@ -220,23 +220,147 @@ class RepairController extends GetxController {
   List<SampleOrderImageDatum> imageList = [];
   final picker = ImagePicker();
 
-  Future sampleOrderImage() async {
-    final List<XFile> selectedImages =
-        await picker.pickMultiImage(imageQuality: 5);
+  Future sampleOrderImage(BuildContext context) async {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      barrierColor: Colors.grey.withOpacity(0.5),
+      builder: (context) {
+        return Padding(
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: StatefulBuilder(
+            builder: (context, setState) {
+              return Container(
+                width: double.maxFinite,
+                padding: Dimens.edgeInsets20_05_20_30,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(Dimens.twelve),
+                    topRight: Radius.circular(Dimens.twelve),
+                  ),
+                  color: ColorsValue.color9C9C9C,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      width: Dimens.seventy,
+                      height: Dimens.four,
+                      decoration: BoxDecoration(
+                        color: ColorsValue.whiteColor,
+                        borderRadius: BorderRadius.circular(
+                          Dimens.three,
+                        ),
+                      ),
+                    ),
+                    Dimens.boxHeight30,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            if (await Utility.imagePermissionCheack(context)) {
+                              postImage("gallery");
+                              Get.back();
+                            }
+                          },
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                AssetConstants.ic_gallery,
+                              ),
+                              Dimens.boxHeight10,
+                              Text(
+                                'gallery'.tr,
+                                style: Styles.whiteW60012,
+                              )
+                            ],
+                          ),
+                        ),
+                        Dimens.boxWidth50,
+                        InkWell(
+                          onTap: () async {
+                            if (await Utility.cameraPermissionCheack(context)) {
+                              postImage("camera");
+                              Get.back();
+                            }
+                          },
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                AssetConstants.ic_camera,
+                              ),
+                              Dimens.boxHeight10,
+                              Text(
+                                'camera'.tr,
+                                style: Styles.whiteW60012,
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                    Dimens.boxHeight30,
+                  ],
+                ),
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
 
-    if (selectedImages.isNotEmpty) {
-      for (var images in selectedImages) {
-        if (Utility.getImageSizeMB(images.path) <= 10) {
+  void postImage(String imageSource) async {
+    if (imageSource == "gallery") {
+      final List<XFile> selectedImages =
+          await picker.pickMultiImage(imageQuality: 5);
+
+      if (selectedImages.isNotEmpty) {
+        for (var images in selectedImages) {
+          if (Utility.getImageSizeMB(images.path) <= 10) {
+            if (imageList.length < 5) {
+              var response = await repairPresenter.sampleOrderImage(
+                filePath: images.path,
+                isLoading: true,
+              );
+              if (response != null) {
+                imageList.addAll(response.data ?? []);
+                RouteManagement.goToSampleOrderScreen();
+              }
+              update();
+            } else {
+              Utility.errorMessage('Maximum 5 Photos Upload'.tr);
+            }
+          } else {
+            Utility.errorMessage("max_10_mb_img".tr);
+          }
+        }
+      }
+    } else {
+      final pickedFile = await pickerProfile.pickImage(
+        source: ImageSource.camera,
+      );
+
+      if (pickedFile != null) {
+        if (Utility.getImageSizeMB(pickedFile.path) <= 10) {
           if (imageList.length < 5) {
-            var response = await repairPresenter.sampleOrderImage(
-              filePath: images.path,
+            imageFile = File(pickedFile.path);
+            var response = await repairPresenter.repairOrderImage(
+              filePath: pickedFile.path,
               isLoading: true,
             );
-            if (response != null) {
-              imageList.addAll(response.data ?? []);
+            if (response?.data != null) {
+              imageList
+                  .add(SampleOrderImageDatum(path: response?.data?.path ?? ""));
               RouteManagement.goToSampleOrderScreen();
             }
-            update();
           } else {
             Utility.errorMessage('Maximum 5 Photos Upload'.tr);
           }

@@ -471,4 +471,16 @@ class ShoppingCartController extends GetxController {
     }
     update();
   }
+
+  Future<void> postWishlistAddRemove(
+      String productsDoc, int index, bool isRemove) async {
+    var response = await shoppingCartPresenter.postWishlistAddRemove(
+      productId: productsDoc,
+      isLoading: false,
+    );
+    if (response?.data != null) {
+      postArrivalViewAll(1, productTypeViewAll);
+    }
+    update();
+  }
 }

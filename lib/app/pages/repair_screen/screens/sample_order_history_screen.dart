@@ -60,39 +60,45 @@ class SampleOrderHistoryScreen extends StatelessWidget {
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
-                              height: Dimens.fifty,
-                              width: Dimens.fifty,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(
-                                  Dimens.five,
+                            InkWell(
+                              onTap: () {
+                                RouteManagement.goToShowFullScareenImage(
+                                    item.images?.first.path ?? '', "Image");
+                              },
+                              child: Container(
+                                height: Dimens.fifty,
+                                width: Dimens.fifty,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                    Dimens.five,
+                                  ),
+                                  border: Border.all(
+                                    width: Dimens.one,
+                                    color: ColorsValue.black343434,
+                                  ),
                                 ),
-                                border: Border.all(
-                                  width: Dimens.one,
-                                  color: ColorsValue.black343434,
-                                ),
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(
-                                  Dimens.five,
-                                ),
-                                child: CachedNetworkImage(
-                                  imageUrl: item.images?.first.path ?? '',
-                                  fit: BoxFit.cover,
-                                  height: Dimens.hundredTen,
-                                  width: Dimens.hundredTen,
-                                  placeholder: (context, url) {
-                                    return SvgPicture.asset(
-                                      AssetConstants.usera,
-                                      fit: BoxFit.cover,
-                                    );
-                                  },
-                                  errorWidget: (context, url, error) {
-                                    return SvgPicture.asset(
-                                      AssetConstants.usera,
-                                      fit: BoxFit.cover,
-                                    );
-                                  },
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(
+                                    Dimens.five,
+                                  ),
+                                  child: CachedNetworkImage(
+                                    imageUrl: item.images?.first.path ?? '',
+                                    fit: BoxFit.cover,
+                                    height: Dimens.hundredTen,
+                                    width: Dimens.hundredTen,
+                                    placeholder: (context, url) {
+                                      return SvgPicture.asset(
+                                        AssetConstants.usera,
+                                        fit: BoxFit.cover,
+                                      );
+                                    },
+                                    errorWidget: (context, url, error) {
+                                      return SvgPicture.asset(
+                                        AssetConstants.usera,
+                                        fit: BoxFit.cover,
+                                      );
+                                    },
+                                  ),
                                 ),
                               ),
                             ),

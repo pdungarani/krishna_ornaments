@@ -10,8 +10,9 @@ abstract class RouteManagement {
   static void goToLoginView() => Get.offAllNamed<void>(Routes.loginScreen);
   static void goToForgotView() => Get.toNamed<void>(Routes.forgotScreen);
   static void goToSignupView() => Get.toNamed<void>(Routes.signUpScreen);
-  static void goToHomeView() => Get.offAllNamed<void>(Routes.homeScreen);
-  static void goToBottomBarView() => Get.toNamed<void>(Routes.bottomBarScreen);
+  static void goToHomeView() => Get.toNamed<void>(Routes.homeScreen);
+  static void goToBottomBarView() =>
+      Get.offAllNamed<void>(Routes.bottomBarScreen);
   static void goToOrderScreen() => Get.toNamed<void>(Routes.orderScreen);
   static void goToOrderDetalisScreen(String orderId) =>
       Get.toNamed<void>(Routes.orderDetalisScreen, arguments: orderId);

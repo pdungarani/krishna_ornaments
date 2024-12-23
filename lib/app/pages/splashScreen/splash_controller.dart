@@ -11,7 +11,7 @@ class SplashController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    Future.delayed(const Duration(seconds: 2)).then(
+    Future.delayed(const Duration(seconds: 5)).then(
       (value) {
         final result =
             Get.find<Repository>().getStringValue(LocalKeys.authToken).isEmpty;

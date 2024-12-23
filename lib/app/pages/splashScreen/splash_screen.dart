@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gif_view/gif_view.dart';
 import 'package:krishna_ornaments/app/app.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -9,12 +10,13 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<SplashController>(
       builder: (controller) => Scaffold(
-        backgroundColor: ColorsValue.whiteColor,
+        backgroundColor: ColorsValue.appBg,
         body: Center(
-          child: Image.asset(
-            AssetConstants.app_logo,
-            height: Dimens.hundred,
-            width: Dimens.hundred,
+          child: GifView.asset(
+            AssetConstants.kirshina,
+            height: double.infinity,
+            width: double.infinity,
+            frameRate: 30,
           ),
         ),
       ),

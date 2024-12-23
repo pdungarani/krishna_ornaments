@@ -25,7 +25,7 @@ class ShowFullScareenImage extends StatelessWidget {
             color: ColorsValue.appColor,
             child: PhotoViewGallery.builder(
               backgroundDecoration: BoxDecoration(
-                color: ColorsValue.blackColor,
+                color: ColorsValue.appBg,
               ),
               builder: (BuildContext context, int index) {
                 switch (Get.arguments[1]) {

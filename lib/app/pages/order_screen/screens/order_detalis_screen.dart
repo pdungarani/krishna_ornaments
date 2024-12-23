@@ -63,32 +63,41 @@ class OrderDetalisScreen extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Container(
-                                        height: Dimens.eighty,
-                                        width: Dimens.eighty,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(
-                                            Dimens.five,
+                                      InkWell(
+                                        onTap: () {
+                                          RouteManagement
+                                              .goToShowFullScareenImage(
+                                                  e.productImage ?? '',
+                                                  "Image");
+                                        },
+                                        child: Container(
+                                          height: Dimens.eighty,
+                                          width: Dimens.eighty,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                              Dimens.five,
+                                            ),
+                                            color: ColorsValue.whiteColor,
                                           ),
-                                          color: ColorsValue.whiteColor,
-                                        ),
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(
-                                            Dimens.five,
-                                          ),
-                                          child: CachedNetworkImage(
-                                            imageUrl: e.productImage ?? '',
-                                            fit: BoxFit.cover,
-                                            placeholder: (context, url) {
-                                              return Image.asset(
-                                                  AssetConstants.placeholder,
-                                                  fit: BoxFit.cover);
-                                            },
-                                            errorWidget: (context, url, error) {
-                                              return Image.asset(
-                                                  AssetConstants.placeholder,
-                                                  fit: BoxFit.cover);
-                                            },
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(
+                                              Dimens.five,
+                                            ),
+                                            child: CachedNetworkImage(
+                                              imageUrl: e.productImage ?? '',
+                                              fit: BoxFit.cover,
+                                              placeholder: (context, url) {
+                                                return Image.asset(
+                                                    AssetConstants.placeholder,
+                                                    fit: BoxFit.cover);
+                                              },
+                                              errorWidget:
+                                                  (context, url, error) {
+                                                return Image.asset(
+                                                    AssetConstants.placeholder,
+                                                    fit: BoxFit.cover);
+                                              },
+                                            ),
                                           ),
                                         ),
                                       ),

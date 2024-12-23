@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
+import 'package:krishna_ornaments/app/navigators/navigators.dart';
 import 'package:krishna_ornaments/app/widgets/appbar_widgets.dart';
 import 'package:krishna_ornaments/app/widgets/custom_stepper.dart';
 
@@ -36,7 +37,11 @@ class RepairOrderDetalisScreen extends StatelessWidget {
                   ),
                   Dimens.boxHeight5,
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      RouteManagement.goToShowFullScareenImage(
+                          controller.getOneRepairOrderData?.file ?? '',
+                          "Image");
+                    },
                     child: Container(
                       height: Dimens.hundred,
                       width: Dimens.hundred,

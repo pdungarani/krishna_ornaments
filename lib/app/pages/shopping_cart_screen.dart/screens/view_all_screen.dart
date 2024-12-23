@@ -603,37 +603,83 @@ class ViewAllProductScreen extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          RouteManagement
-                                              .goToShowFullScareenImage(
-                                                  item.image ?? "", "image");
-                                        },
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.only(
-                                            topLeft:
-                                                Radius.circular(Dimens.ten),
-                                            topRight:
-                                                Radius.circular(Dimens.ten),
-                                          ),
-                                          child: CachedNetworkImage(
-                                            imageUrl: item.image ?? "",
-                                            fit: BoxFit.cover,
-                                            height: Dimens.hundredSixty,
-                                            width: double.maxFinite,
-                                            placeholder: (context, url) =>
-                                                Image.asset(
-                                              AssetConstants.placeholder,
-                                              fit: BoxFit.cover,
-                                            ),
-                                            errorWidget:
-                                                (context, url, error) =>
+                                      Stack(
+                                        children: [
+                                          GestureDetector(
+                                            onTap: () {
+                                              RouteManagement
+                                                  .goToShowFullScareenImage(
+                                                      item.image ?? "",
+                                                      "image");
+                                            },
+                                            child: ClipRRect(
+                                              borderRadius: BorderRadius.only(
+                                                topLeft:
+                                                    Radius.circular(Dimens.ten),
+                                                topRight:
+                                                    Radius.circular(Dimens.ten),
+                                              ),
+                                              child: CachedNetworkImage(
+                                                imageUrl: item.image ?? "",
+                                                fit: BoxFit.cover,
+                                                height: Dimens.hundredSixty,
+                                                width: double.maxFinite,
+                                                placeholder: (context, url) =>
                                                     Image.asset(
-                                              AssetConstants.placeholder,
-                                              fit: BoxFit.cover,
+                                                  AssetConstants.placeholder,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        Image.asset(
+                                                  AssetConstants.placeholder,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
                                             ),
                                           ),
-                                        ),
+                                          Padding(
+                                            padding: Dimens.edgeInsets8,
+                                            child: Align(
+                                              alignment: Alignment.topRight,
+                                              child: Container(
+                                                height: Dimens.thirty,
+                                                width: Dimens.thirty,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                    Dimens.fifty,
+                                                  ),
+                                                  color: ColorsValue.whiteColor,
+                                                  border: Border.all(
+                                                    width: Dimens.one,
+                                                    color: ColorsValue
+                                                        .lightPrimaryColor,
+                                                  ),
+                                                ),
+                                                child: Center(
+                                                  child: InkWell(
+                                                    onTap: () {
+                                                      controller
+                                                          .postWishlistAddRemove(
+                                                              item.id ?? "",
+                                                              index,
+                                                              false);
+                                                    },
+                                                    child: SvgPicture.asset(
+                                                      item.wishlistStatus ??
+                                                              false
+                                                          ? AssetConstants
+                                                              .ic_fill_like
+                                                          : AssetConstants
+                                                              .ic_like,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                       Dimens.boxHeight10,
                                       Padding(

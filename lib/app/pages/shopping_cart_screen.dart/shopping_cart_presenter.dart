@@ -76,4 +76,13 @@ class ShoppingCartPresenter {
         main_description: main_description,
         isLoading: isLoading,
       );
+
+  Future<ResponseModel?> postWishlistAddRemove({
+    bool isLoading = false,
+    required String productId,
+  }) async =>
+      await shoppingCartUsecases.postWishlistAddRemove(
+        productId: productId,
+        isLoading: isLoading,
+      );
 }
