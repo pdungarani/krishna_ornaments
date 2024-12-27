@@ -12,11 +12,12 @@ class SplashScreen extends StatelessWidget {
       builder: (controller) => Scaffold(
         backgroundColor: ColorsValue.appBg,
         body: Center(
-          child: GifView.asset(
+          child: Image.asset(
             AssetConstants.kirshina,
             height: double.infinity,
             width: double.infinity,
-            frameRate: 30,
+            repeat: ImageRepeat.repeat,
+
           ),
         ),
       ),

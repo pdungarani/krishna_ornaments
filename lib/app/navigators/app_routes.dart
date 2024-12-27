@@ -25,6 +25,7 @@ abstract class Routes {
   static const viewAllProductScreen = _Paths.viewAllProductScreen;
   static const searchProductScreen = _Paths.searchProductScreen;
   static const bankDetailScreen = _Paths.bankDetailScreen;
+  static const contactUsScreen = _Paths.contactUsScreen;
 }
 
 abstract class _Paths {
@@ -49,4 +50,5 @@ abstract class _Paths {
   static const viewAllProductScreen = '/viewAllProductScreen';
   static const searchProductScreen = '/searchProductScreen';
   static const bankDetailScreen = '/bankDetailScreen';
+  static const contactUsScreen = '/contactUsScreen';
 }

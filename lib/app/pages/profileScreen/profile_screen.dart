@@ -254,6 +254,35 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   Dimens.boxHeight20,
                   InkWell(
+                    onTap: () => RouteManagement.goToContactUsScreen(),
+                    child: Container(
+                      height: Dimens.sixty,
+                      decoration: BoxDecoration(
+                        color: ColorsValue.blackEEEAEA,
+                        borderRadius: BorderRadius.circular(
+                          Dimens.sixteen,
+                        ),
+                      ),
+                      child: Center(
+                        child: ListTile(
+                          contentPadding: Dimens.edgeInsets20_00_20_00,
+                          trailing: const Icon(
+                            Icons.arrow_forward_ios_sharp,
+                            color: ColorsValue.colorA7A7A7,
+                          ),
+                          leading: SvgPicture.asset(
+                            AssetConstants.ic_bank,
+                          ),
+                          title: Text(
+                            "Contact Us",
+                            style: Styles.color21212160014,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Dimens.boxHeight20,
+                  InkWell(
                     onTap: () {
                       RouteManagement.goToSampleOrderHistoryScreen();
                     },

@@ -14,6 +14,7 @@ import 'package:krishna_ornaments/domain/domain.dart';
 /// API WRAPPER to call all the APIs and handle the error status codes
 class ApiWrapper {
   final String _baseUrl = 'https://api.krishnaornaments.com/';
+  static String baseUrl = 'https://api.krishnaornaments.com/';
   static String imageUrl = 'https://krishna.s3.ap-south-1.amazonaws.com/';
 
   /// Method to make all the requests inside the app like GET, POST, PUT, Delete

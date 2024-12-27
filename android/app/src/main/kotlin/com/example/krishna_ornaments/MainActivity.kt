@@ -1,4 +1,4 @@
-package com.example.krishna_ornaments
+package com.krishna.krishna_ornaments
 
 import io.flutter.embedding.android.FlutterActivity
 

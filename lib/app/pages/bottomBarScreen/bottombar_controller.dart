@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:krishna_ornaments/app/pages/bottomBarScreen/bottombar_page.dart';
+import 'package:krishna_ornaments/app/app.dart';
+import 'package:krishna_ornaments/domain/domain.dart';
 
 class BottomBarController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -15,6 +16,28 @@ class BottomBarController extends GetxController
   void onInit() {
     tabController = TabController(vsync: this, length: 5);
     tabController?.addListener(update);
+    getProfile();
+
     super.onInit();
+
+    SocketConnection.initSocket();
+    // FirebaseApi().initNotification();
+  }
+
+  GetProfileData? getProfileModel;
+
+  Future<void> getProfile() async {
+    var response = await bottomBarPresenter.getProfile(
+      isLoading: true,
+    );
+    getProfileModel = null;
+    if (response != null) {
+      getProfileModel = response.data;
+      Get.find<Repository>()
+          .saveValue(LocalKeys.chanelId, getProfileModel?.channelid ?? "");
+      update();
+    } else {
+      Utility.errorMessage(response?.message ?? "");
+    }
   }
 }

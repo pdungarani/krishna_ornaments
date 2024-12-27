@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:another_stepper/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -21,6 +19,8 @@ class ProfileController extends GetxController {
     getProfileModel = null;
     if (response != null) {
       getProfileModel = response.data;
+      Get.find<Repository>()
+          .saveValue(LocalKeys.chanelId, getProfileModel?.channelid ?? "");
       update();
     } else {
       Utility.errorMessage(response?.message ?? "");

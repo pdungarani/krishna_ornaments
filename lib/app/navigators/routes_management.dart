@@ -42,4 +42,6 @@ abstract class RouteManagement {
       Get.toNamed<void>(Routes.searchProductScreen);
   static void goToBankDetailScreen() =>
       Get.toNamed<void>(Routes.bankDetailScreen);
+  static void goToContactUsScreen() =>
+      Get.toNamed<void>(Routes.contactUsScreen);
 }

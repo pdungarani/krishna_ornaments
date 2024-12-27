@@ -22,6 +22,11 @@ class HomeScreen extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           backgroundColor: ColorsValue.primaryColor,
+          floatingActionButton: FloatingActionButton(
+                  backgroundColor: ColorsValue.appColor,
+            onPressed: () {},
+            shape: const CircleBorder(),
+          ),
           appBar: AppBar(
             backgroundColor: ColorsValue.primaryColor,
             title: Padding(

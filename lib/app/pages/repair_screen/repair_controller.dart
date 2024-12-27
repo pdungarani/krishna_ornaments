@@ -352,13 +352,12 @@ class RepairController extends GetxController {
         if (Utility.getImageSizeMB(pickedFile.path) <= 10) {
           if (imageList.length < 5) {
             imageFile = File(pickedFile.path);
-            var response = await repairPresenter.repairOrderImage(
+            var response = await repairPresenter.sampleOrderImage(
               filePath: pickedFile.path,
               isLoading: true,
             );
             if (response?.data != null) {
-              imageList
-                  .add(SampleOrderImageDatum(path: response?.data?.path ?? ""));
+              imageList.addAll(response?.data ?? []);
               RouteManagement.goToSampleOrderScreen();
             }
           } else {
