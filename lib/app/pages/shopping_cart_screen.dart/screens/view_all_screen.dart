@@ -304,7 +304,6 @@ class ViewAllProductScreen extends StatelessWidget {
                                           Expanded(
                                             flex: 6,
                                             child: Container(
-                                              alignment: Alignment.topLeft,
                                               padding: Dimens.edgeInsetsTopt10,
                                               height: MediaQuery.of(context)
                                                       .size
@@ -319,109 +318,262 @@ class ViewAllProductScreen extends StatelessWidget {
                                                       Dimens.six),
                                                 ),
                                               ),
-                                              child: Container(
-                                                padding:
-                                                    Dimens.edgeInsetsLeft20,
-                                                alignment: Alignment.centerLeft,
-                                                height: Dimens.thirtySix,
-                                                width: double.maxFinite,
-                                                decoration: const BoxDecoration(
-                                                  color: ColorsValue.whiteColor,
-                                                ),
-                                                child: Text(
-                                                  "Weight",
-                                                  style: Styles
-                                                      .txtBlackColorW60016,
-                                                ),
+                                              child: Wrap(
+                                                crossAxisAlignment:
+                                                    WrapCrossAlignment.start,
+                                                runAlignment:
+                                                    WrapAlignment.start,
+                                                children: controller.filterType
+                                                    .asMap()
+                                                    .entries
+                                                    .map((e) {
+                                                  var index = e.key;
+                                                  return InkWell(
+                                                    onTap: () {
+                                                      controller.filterStock =
+                                                          index;
+                                                      setState(() {});
+                                                    },
+                                                    child: Padding(
+                                                      padding: Dimens
+                                                          .edgeInsetsBottom10,
+                                                      child: Container(
+                                                        padding: Dimens
+                                                            .edgeInsetsLeft20,
+                                                        alignment: Alignment
+                                                            .centerLeft,
+                                                        height:
+                                                            Dimens.thirtySix,
+                                                        width: double.maxFinite,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: controller
+                                                                      .filterStock ==
+                                                                  index
+                                                              ? ColorsValue
+                                                                  .whiteColor
+                                                              : Colors
+                                                                  .transparent,
+                                                        ),
+                                                        child: Text(
+                                                          controller.filterType[
+                                                              index],
+                                                          style: Styles
+                                                              .txtBlackColorW60016,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                }).toList(),
                                               ),
                                             ),
                                           ),
                                           Expanded(
                                             flex: 8,
-                                            child: Padding(
-                                              padding: Dimens.edgeInsets16,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Weight Range',
-                                                    style: Styles
-                                                        .txtBlackColorW60014,
-                                                  ),
-                                                  Dimens.boxHeight10,
-                                                  Row(
-                                                    children: [
-                                                      Expanded(
-                                                        child:
-                                                            CustomTextFormField(
-                                                          controller: controller
-                                                              .minWeightController,
-                                                          isShowText: false,
-                                                          hintText:
-                                                              'Min Weight',
-                                                          hintTextStyle: Styles
-                                                              .color94A3B8W40010,
-                                                          text: '',
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .number,
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                        ),
+                                            child: ListView.builder(
+                                              itemCount: 1,
+                                              shrinkWrap: true,
+                                              padding: Dimens.edgeInsets0,
+                                              physics:
+                                                  const NeverScrollableScrollPhysics(),
+                                              itemBuilder: (context, index) {
+                                                switch (
+                                                    controller.filterStock) {
+                                                  case 0:
+                                                    return Padding(
+                                                      padding:
+                                                          Dimens.edgeInsets16,
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            'Weight Range',
+                                                            style: Styles
+                                                                .txtBlackColorW60014,
+                                                          ),
+                                                          Dimens.boxHeight10,
+                                                          Row(
+                                                            children: [
+                                                              Expanded(
+                                                                child:
+                                                                    CustomTextFormField(
+                                                                  controller:
+                                                                      controller
+                                                                          .minWeightController,
+                                                                  isShowText:
+                                                                      false,
+                                                                  hintText:
+                                                                      'Min Weight',
+                                                                  hintTextStyle:
+                                                                      Styles
+                                                                          .color94A3B8W40010,
+                                                                  text: '',
+                                                                  keyboardType:
+                                                                      TextInputType
+                                                                          .number,
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                ),
+                                                              ),
+                                                              Dimens.boxWidth10,
+                                                              Expanded(
+                                                                child:
+                                                                    CustomTextFormField(
+                                                                  controller:
+                                                                      controller
+                                                                          .maxWeightController,
+                                                                  isShowText:
+                                                                      false,
+                                                                  hintText:
+                                                                      'Max Weight',
+                                                                  hintTextStyle:
+                                                                      Styles
+                                                                          .color94A3B8W40010,
+                                                                  text: '',
+                                                                  keyboardType:
+                                                                      TextInputType
+                                                                          .number,
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                          Dimens.boxHeight12,
+                                                          Text(
+                                                            "${controller.startValue.toStringAsFixed(0)}gm   -   ${controller.endValue.toStringAsFixed(0)}gm",
+                                                            style: Styles
+                                                                .txtBlackColorW50014,
+                                                          ),
+                                                          Dimens.boxHeight10,
+                                                          RangeSlider(
+                                                            min: controller
+                                                                .minValue,
+                                                            max: controller
+                                                                .maxValue,
+                                                            activeColor:
+                                                                ColorsValue
+                                                                    .appColor,
+                                                            inactiveColor:
+                                                                ColorsValue
+                                                                    .lightE2E8F0,
+                                                            values: RangeValues(
+                                                              controller
+                                                                  .startValue,
+                                                              controller
+                                                                  .endValue,
+                                                            ),
+                                                            onChanged:
+                                                                (newValues) {
+                                                              controller
+                                                                      .startValue =
+                                                                  newValues
+                                                                      .start;
+                                                              controller
+                                                                      .endValue =
+                                                                  newValues.end;
+                                                              controller
+                                                                  .update();
+                                                              setState(() {});
+                                                            },
+                                                          ),
+                                                        ],
                                                       ),
-                                                      Dimens.boxWidth10,
-                                                      Expanded(
-                                                        child:
-                                                            CustomTextFormField(
-                                                          controller: controller
-                                                              .maxWeightController,
-                                                          isShowText: false,
-                                                          hintText:
-                                                              'Max Weight',
-                                                          hintTextStyle: Styles
-                                                              .color94A3B8W40010,
-                                                          text: '',
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .number,
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                  Dimens.boxHeight12,
-                                                  Text(
-                                                    "${controller.startValue.toStringAsFixed(0)}gm   -   ${controller.endValue.toStringAsFixed(0)}gm",
-                                                    style: Styles
-                                                        .txtBlackColorW50014,
-                                                  ),
-                                                  Dimens.boxHeight10,
-                                                  RangeSlider(
-                                                    min: controller.minValue,
-                                                    max: controller.maxValue,
-                                                    activeColor:
-                                                        ColorsValue.appColor,
-                                                    inactiveColor:
-                                                        ColorsValue.lightE2E8F0,
-                                                    values: RangeValues(
-                                                      controller.startValue,
-                                                      controller.endValue,
-                                                    ),
-                                                    onChanged: (newValues) {
-                                                      controller.startValue =
-                                                          newValues.start;
-                                                      controller.endValue =
-                                                          newValues.end;
-                                                      controller.update();
-                                                      setState(() {});
-                                                    },
-                                                  ),
-                                                ],
-                                              ),
+                                                    );
+                                                  case 1:
+                                                    return Padding(
+                                                      padding:
+                                                          Dimens.edgeInsets16,
+                                                      child: Column(
+                                                        children: [
+                                                          RadioListTile<int>(
+                                                            dense: false,
+                                                            visualDensity: const VisualDensity(
+                                                                horizontal:
+                                                                    VisualDensity
+                                                                        .minimumDensity,
+                                                                vertical:
+                                                                    VisualDensity
+                                                                        .minimumDensity),
+                                                            controlAffinity:
+                                                                ListTileControlAffinity
+                                                                    .trailing,
+                                                            contentPadding:
+                                                                EdgeInsets.zero,
+                                                            activeColor:
+                                                                ColorsValue
+                                                                    .txtBlackColor,
+                                                            title: Text(
+                                                              "In Stock",
+                                                              style: Styles
+                                                                  .txtBlackColorW60014,
+                                                            ),
+                                                            value: 0,
+                                                            groupValue:
+                                                                controller
+                                                                    .radioValue,
+                                                            onChanged: (value) {
+                                                              setState(
+                                                                () {
+                                                                  controller
+                                                                          .radioValue =
+                                                                      value!;
+                                                                  controller
+                                                                      .radioSortValue = -1;
+                                                                },
+                                                              );
+                                                            },
+                                                          ),
+                                                          RadioListTile<int>(
+                                                            visualDensity: const VisualDensity(
+                                                                horizontal:
+                                                                    VisualDensity
+                                                                        .minimumDensity,
+                                                                vertical:
+                                                                    VisualDensity
+                                                                        .minimumDensity),
+                                                            controlAffinity:
+                                                                ListTileControlAffinity
+                                                                    .trailing,
+                                                            contentPadding:
+                                                                EdgeInsets.zero,
+                                                            activeColor:
+                                                                ColorsValue
+                                                                    .txtBlackColor,
+                                                            title: Text(
+                                                              'Out Of Stock'.tr,
+                                                              style: Styles
+                                                                  .txtBlackColorW60014,
+                                                            ),
+                                                            value: 1,
+                                                            groupValue:
+                                                                controller
+                                                                    .radioValue,
+                                                            onChanged:
+                                                                (int? value) {
+                                                              setState(
+                                                                () {
+                                                                  controller
+                                                                          .radioValue =
+                                                                      value!;
+                                                                  controller
+                                                                      .radioSortValue = 1;
+                                                                },
+                                                              );
+                                                            },
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    );
+                                                }
+                                                return null;
+                                              },
                                             ),
-                                          )
+                                          ),
                                         ],
                                       ),
                                     ],

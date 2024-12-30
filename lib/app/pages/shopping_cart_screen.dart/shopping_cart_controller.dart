@@ -21,6 +21,13 @@ class ShoppingCartController extends GetxController {
 
   List<CartItemProductElement> list = [];
 
+  List<String> filterType = [
+    'Weight'.tr,
+    'Stock'.tr,
+  ];
+
+  int filterStock = 0;
+
   showFinalDescription(BuildContext context) {
     showModalBottomSheet(
       isScrollControlled: true,

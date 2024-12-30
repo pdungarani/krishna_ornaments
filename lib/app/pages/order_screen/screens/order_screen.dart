@@ -76,11 +76,11 @@ class OrderScreen extends StatelessWidget {
                                 )
                               ],
                             ),
-                            Dimens.boxHeight5,
-                            Text(
-                              "${"total_bag".tr} ${item.totalBags}",
-                              style: Styles.lightYellow70014,
-                            ),
+                            // Dimens.boxHeight5,
+                            // Text(
+                            //   "${"total_bag".tr} ${item.totalBags}",
+                            //   style: Styles.lightYellow70014,
+                            // ),
                             Dimens.boxHeight5,
                             Text(
                               item.mainDescription ?? '',
