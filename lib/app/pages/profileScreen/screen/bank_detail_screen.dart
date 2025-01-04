@@ -73,7 +73,9 @@ class BankDetailScreen extends StatelessWidget {
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(right: 10),
-                    child: SvgPicture.asset(AssetConstants.copyIcon),
+                    child: SvgPicture.asset(
+                      AssetConstants.copyIcon,
+                    ),
                   ),
                 ),
                 controller: controller.branchName,

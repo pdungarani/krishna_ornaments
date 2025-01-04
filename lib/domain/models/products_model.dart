@@ -95,13 +95,15 @@ class ProductsDoc {
   ProductsCategory? category;
   String? name;
   num? weight;
+  int? quantity;
+  List<String>? productType;
   String? image;
   bool? status;
   int? createTimestamp;
   DateTime? createdAt;
   String? docId;
   bool? inCart;
-  int quantity;
+  int cartQuantity;
   bool? wishlistStatus;
 
   ProductsDoc({
@@ -109,13 +111,15 @@ class ProductsDoc {
     this.category,
     this.name,
     this.weight,
+    this.quantity,
+    this.productType,
     this.image,
     this.status,
     this.createTimestamp,
     this.createdAt,
     this.docId,
     this.inCart,
-    this.quantity = 0,
+    this.cartQuantity = 0,
     this.wishlistStatus,
   });
 
@@ -126,6 +130,10 @@ class ProductsDoc {
             : ProductsCategory.fromJson(json["category"]),
         name: json["name"],
         weight: json["weight"],
+        quantity: json["quantity"],
+        productType: json["productType"] == null
+            ? []
+            : List<String>.from(json["productType"]!.map((x) => x)),
         image: json["image"],
         status: json["status"],
         createTimestamp: json["create_timestamp"],
@@ -134,7 +142,7 @@ class ProductsDoc {
             : DateTime.parse(json["createdAt"]),
         docId: json["id"],
         inCart: json["in_cart"],
-        quantity: json["quantity"],
+        cartQuantity: json["cartquantity"],
         wishlistStatus: json["wishlist_status"],
       );
 
@@ -143,13 +151,17 @@ class ProductsDoc {
         "category": category?.toJson(),
         "name": name,
         "weight": weight,
+        "quantity": quantity,
+        "productType": productType == null
+            ? []
+            : List<dynamic>.from(productType!.map((x) => x)),
         "image": image,
         "status": status,
         "create_timestamp": createTimestamp,
         "createdAt": createdAt?.toIso8601String(),
         "id": docId,
         "in_cart": inCart,
-        "quantity": quantity,
+        "cartquantity": cartQuantity,
         "wishlist_status": wishlistStatus,
       };
 }

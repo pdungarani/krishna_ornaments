@@ -49,7 +49,7 @@ class ShoppingCartScreen extends StatelessWidget {
                         text: 'Checkout',
                         style: Styles.whiteW80014,
                         onTap: () {
-                          controller.showFinalDescription(context);
+                          controller.postOrderCreate();
                         },
                       ),
                       Dimens.boxHeight10,

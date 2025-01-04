@@ -16,25 +16,16 @@ class OrderController extends GetxController {
   List<GetOrderHistoryDoc> orderListModel = [];
   int galleryLimit = 10;
 
-  Future<void> postOrderHistory(int pageKey) async {
+  Future<void> postOrderHistory() async {
     var response = await orderPresenter.postOrderHistory(
-      page: pageKey,
+      page: 1,
       limit: galleryLimit,
       isLoading: false,
     );
+    orderListModel.clear();
     if (response != null) {
-      if (pageKey == 1) {
-        orderListModel.clear();
-      }
       orderListModel = response.data?.docs ?? [];
 
-      final isLastPage = orderListModel.length < galleryLimit;
-      if (isLastPage) {
-        orderPagingController.appendLastPage(orderListModel);
-      } else {
-        var nextPageKey = pageKey + 1;
-        orderPagingController.appendPage(orderListModel, nextPageKey);
-      }
       update();
     }
   }

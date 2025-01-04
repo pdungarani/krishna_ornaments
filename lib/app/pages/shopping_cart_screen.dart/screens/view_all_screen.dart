@@ -889,12 +889,12 @@ class ViewAllProductScreen extends StatelessWidget {
                                                                   : () {
                                                                       if (controller
                                                                               .viewAllDocList[index]
-                                                                              .quantity
+                                                                              .cartQuantity
                                                                               .toDouble() >
                                                                           0) {
                                                                         controller
                                                                             .viewAllDocList[index]
-                                                                            .quantity--;
+                                                                            .cartQuantity--;
                                                                       }
                                                                       controller
                                                                           .update();
@@ -923,7 +923,7 @@ class ViewAllProductScreen extends StatelessWidget {
                                                         ),
                                                         Dimens.boxWidth10,
                                                         Text(
-                                                          item.quantity
+                                                          item.cartQuantity
                                                               .toString(),
                                                         ),
                                                         Dimens.boxWidth10,
@@ -935,7 +935,7 @@ class ViewAllProductScreen extends StatelessWidget {
                                                                   controller
                                                                       .viewAllDocList[
                                                                           index]
-                                                                      .quantity++;
+                                                                      .cartQuantity++;
                                                                   controller
                                                                       .update();
                                                                 },
@@ -976,13 +976,13 @@ class ViewAllProductScreen extends StatelessWidget {
                                                       if (controller
                                                               .viewAllDocList[
                                                                   index]
-                                                              .quantity
+                                                              .cartQuantity
                                                               .toDouble() >
                                                           0) {
                                                         controller
                                                             .postAddToCart(
                                                           item.id ?? "",
-                                                          item.quantity,
+                                                          item.cartQuantity,
                                                           index,
                                                           controller
                                                               .productTypeViewAll

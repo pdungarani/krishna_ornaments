@@ -137,7 +137,7 @@ class ShoppingCartController extends GetxController {
                         onPressed: () {
                           if (finalKey.currentState!.validate()) {
                             Get.back();
-                            postOrderCreate();
+                       
                           }
                         },
                         style: ElevatedButton.styleFrom(

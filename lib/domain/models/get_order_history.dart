@@ -99,7 +99,6 @@ class GetOrderHistoryDoc {
   String? id;
   String? user;
   List<GetOrderHistoryProduct>? products;
-  String? mainDescription;
   int? totalQuantity;
   int? totalBags;
   String? orderTracking;
@@ -111,7 +110,6 @@ class GetOrderHistoryDoc {
     this.id,
     this.user,
     this.products,
-    this.mainDescription,
     this.totalQuantity,
     this.totalBags,
     this.orderTracking,
@@ -128,7 +126,6 @@ class GetOrderHistoryDoc {
             ? []
             : List<GetOrderHistoryProduct>.from(json["products"]!
                 .map((x) => GetOrderHistoryProduct.fromJson(x))),
-        mainDescription: json["main_description"],
         totalQuantity: json["totalQuantity"],
         totalBags: json["totalBags"],
         orderTracking: json["order_tracking"],
@@ -145,7 +142,6 @@ class GetOrderHistoryDoc {
         "products": products == null
             ? []
             : List<dynamic>.from(products!.map((x) => x.toJson())),
-        "main_description": mainDescription,
         "totalQuantity": totalQuantity,
         "totalBags": totalBags,
         "order_tracking": orderTracking,
@@ -165,6 +161,8 @@ class GetOrderHistoryProduct {
   int? quantity;
   int? remainingQuantity;
   String? description;
+  String? manufactureid;
+  String? productOrderTracking;
 
   GetOrderHistoryProduct({
     this.categoryId,
@@ -176,6 +174,8 @@ class GetOrderHistoryProduct {
     this.quantity,
     this.remainingQuantity,
     this.description,
+    this.manufactureid,
+    this.productOrderTracking,
   });
 
   factory GetOrderHistoryProduct.fromJson(Map<String, dynamic> json) =>
@@ -189,6 +189,8 @@ class GetOrderHistoryProduct {
         quantity: json["quantity"],
         remainingQuantity: json["remaining_quantity"],
         description: json["description"],
+        manufactureid: json["manufactureid"],
+        productOrderTracking: json["product_order_tracking"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -201,5 +203,7 @@ class GetOrderHistoryProduct {
         "quantity": quantity,
         "remaining_quantity": remainingQuantity,
         "description": description,
+        "manufactureid": manufactureid,
+        "product_order_tracking": productOrderTracking,
       };
 }

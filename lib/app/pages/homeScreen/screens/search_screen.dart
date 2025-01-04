@@ -215,13 +215,13 @@ class _SearchScreenState extends State<SearchScreen> {
                                                                 : () {
                                                                     if (controller
                                                                             .getAllProductDocList[index]
-                                                                            .quantity
+                                                                            .cartQuantity
                                                                             .toDouble() >
                                                                         0) {
                                                                       controller
                                                                           .getAllProductDocList[
                                                                               index]
-                                                                          .quantity--;
+                                                                          .cartQuantity--;
                                                                     }
                                                                     controller
                                                                         .update();
@@ -250,7 +250,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                                       ),
                                                       Dimens.boxWidth10,
                                                       Text(
-                                                        item.quantity
+                                                        item.cartQuantity
                                                             .toString(),
                                                       ),
                                                       Dimens.boxWidth10,
@@ -262,7 +262,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                                                     controller
                                                                         .getAllProductDocList[
                                                                             index]
-                                                                        .quantity++;
+                                                                        .cartQuantity++;
                                                                     controller
                                                                         .update();
                                                                   },
@@ -302,12 +302,12 @@ class _SearchScreenState extends State<SearchScreen> {
                                                     if (controller
                                                             .getAllProductDocList[
                                                                 index]
-                                                            .quantity
+                                                            .cartQuantity
                                                             .toDouble() >
                                                         0) {
                                                       controller.postAddToCart(
                                                         item.id ?? "",
-                                                        item.quantity,
+                                                        item.cartQuantity,
                                                         index,
                                                         "",
                                                       );

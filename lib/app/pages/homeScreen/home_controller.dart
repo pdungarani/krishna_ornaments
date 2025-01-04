@@ -84,8 +84,6 @@ class HomeController extends GetxController {
           scrollArrivalProductController.jumpTo(0);
         }
       }
-    } else {
-      Utility.errorMessage(response?.message ?? "");
     }
     update();
   }
@@ -181,12 +179,12 @@ class HomeController extends GetxController {
   Future<void> postAddToCart(
       String productId, int quantity, int index, String productType) async {
     var response = await homePresenter.postAddToCart(
-      productId: productId ?? "",
+      productId: productId,
       quantity: quantity,
       description: "",
       isLoading: false,
     );
-    if (response?.data != null) {
+    if (response?.statusCode == 200) {
       if (productType.contains("arrival")) {
         productArrivalDocList[index].inCart = true;
       } else if (productType.contains('wishlist')) {
@@ -197,7 +195,12 @@ class HomeController extends GetxController {
       Utility.snacBar(
           "Product added in cart successfully...!", ColorsValue.appColor);
     } else {
-      Utility.errorMessage(jsonDecode(response.toString())['Data']['Message']);
+      if (productType.contains("arrival")) {
+        productArrivalDocList[index].cartQuantity = 0;
+      } else {
+        productTrendingDocList[index].cartQuantity = 0;
+      }
+      Utility.errorMessage(jsonDecode(response?.data ?? "")["Message"]);
     }
     update();
   }

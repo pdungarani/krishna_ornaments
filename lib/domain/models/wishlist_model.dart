@@ -18,7 +18,7 @@ class WishlistModel {
 
   factory WishlistModel.fromJson(Map<String, dynamic> json) => WishlistModel(
         message: json["Message"],
-        data: json["Data"] == null ? null : WishlistData.fromJson(json["Data"]),
+        data: json["Data"] == null || json["Data"] == 0 ? null : WishlistData.fromJson(json["Data"]),
         status: json["Status"],
         isSuccess: json["IsSuccess"],
       );

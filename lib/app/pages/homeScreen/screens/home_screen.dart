@@ -22,11 +22,11 @@ class HomeScreen extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           backgroundColor: ColorsValue.primaryColor,
-          floatingActionButton: FloatingActionButton(
-                  backgroundColor: ColorsValue.appColor,
-            onPressed: () {},
-            shape: const CircleBorder(),
-          ),
+          // floatingActionButton: FloatingActionButton(
+          //   backgroundColor: ColorsValue.appColor,
+          //   onPressed: () {},
+          //   shape: const CircleBorder(),
+          // ),
           appBar: AppBar(
             backgroundColor: ColorsValue.primaryColor,
             title: Padding(
@@ -156,7 +156,8 @@ class HomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: Dimens.hundredEighty,
+                    width: double.maxFinite,
+                    height: Dimens.twoHundred,
                     child: PageView.builder(
                       itemCount: controller.testList.length,
                       onPageChanged: (value) {
@@ -310,7 +311,7 @@ class HomeScreen extends StatelessWidget {
                             productName: item.name ?? "",
                             imageUrl: item.image ?? "",
                             categoryName: item.category?.name ?? "",
-                            quantity: item.quantity,
+                            quantity: item.cartQuantity ?? 0,
                             weigth: item.weight.toString(),
                             inWishList: item.wishlistStatus ?? false,
                             inCart: item.inCart ?? false,
@@ -321,12 +322,12 @@ class HomeScreen extends StatelessWidget {
                                     .tabController
                                     ?.animateTo(2);
                               } else {
-                                if (controller
-                                        .productArrivalDocList[index].quantity
+                                if (controller.productArrivalDocList[index]
+                                        .cartQuantity
                                         .toDouble() >
                                     0) {
                                   controller.postAddToCart(item.id ?? "",
-                                      item.quantity, index, "arrival");
+                                      item.cartQuantity, index, "arrival");
                                 } else {
                                   Utility.errorMessage("Please add one item.");
                                 }
@@ -340,18 +341,18 @@ class HomeScreen extends StatelessWidget {
                                 ? null
                                 : () {
                                     controller.productArrivalDocList[index]
-                                        .quantity++;
+                                        .cartQuantity++;
                                     controller.update();
                                   },
                             dincrement: item.inCart ?? false
                                 ? null
                                 : () {
                                     if (controller.productArrivalDocList[index]
-                                            .quantity
+                                            .cartQuantity
                                             .toDouble() >
                                         0) {
                                       controller.productArrivalDocList[index]
-                                          .quantity--;
+                                          .cartQuantity--;
                                     }
                                     controller.update();
                                   },
@@ -413,7 +414,7 @@ class HomeScreen extends StatelessWidget {
                             productName: item.name ?? "",
                             imageUrl: item.image ?? "",
                             categoryName: item.category?.name ?? "",
-                            quantity: item.quantity,
+                            quantity: item.cartQuantity,
                             weigth: item.weight.toString(),
                             inCart: item.inCart ?? false,
                             inWishList: item.wishlistStatus ?? false,
@@ -424,12 +425,12 @@ class HomeScreen extends StatelessWidget {
                                     .tabController
                                     ?.animateTo(2);
                               } else {
-                                if (controller
-                                        .productTrendingDocList[index].quantity
+                                if (controller.productTrendingDocList[index]
+                                        .cartQuantity
                                         .toDouble() >
                                     0) {
                                   controller.postAddToCart(item.id ?? "",
-                                      item.quantity, index, "trending");
+                                      item.cartQuantity, index, "trending");
                                 } else {
                                   Utility.errorMessage("Please add one item.");
                                 }
@@ -443,18 +444,18 @@ class HomeScreen extends StatelessWidget {
                                 ? null
                                 : () {
                                     controller.productTrendingDocList[index]
-                                        .quantity++;
+                                        .cartQuantity++;
                                     controller.update();
                                   },
                             dincrement: item.inCart ?? false
                                 ? null
                                 : () {
                                     if (controller.productTrendingDocList[index]
-                                            .quantity
+                                            .cartQuantity
                                             .toDouble() >
                                         0) {
                                       controller.productTrendingDocList[index]
-                                          .quantity--;
+                                          .cartQuantity--;
                                     }
                                     controller.update();
                                   },
