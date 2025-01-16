@@ -423,7 +423,7 @@ class ConnectHelper {
   }) async {
     var data = {
       "products": products,
-      "main_description": main_description,
+      // "main_description": main_description,
       "cartid": cartId,
     };
     var response = await apiWrapper.makeRequest(

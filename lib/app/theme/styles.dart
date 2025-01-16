@@ -26,6 +26,23 @@ abstract class Styles {
     fontWeight: FontWeight.w700,
     color: Colors.yellow,
   );
+  static TextStyle orangeW70010 = GoogleFonts.nunito(
+    fontSize: Dimens.ten,
+    fontWeight: FontWeight.w700,
+    color: Colors.orange,
+  );
+
+  static TextStyle redColorW70010 = GoogleFonts.nunito(
+    fontSize: Dimens.ten,
+    fontWeight: FontWeight.w700,
+    color: Colors.red,
+  );
+
+  static TextStyle greenW70010 = GoogleFonts.nunito(
+    fontSize: Dimens.ten,
+    fontWeight: FontWeight.w700,
+    color: Colors.green,
+  );
 
   static TextStyle greenW70012 = GoogleFonts.nunito(
     fontSize: Dimens.fourteen,
@@ -367,6 +384,12 @@ abstract class Styles {
 
   static TextStyle color212121W90010 = GoogleFonts.nunito(
     fontSize: Dimens.ten,
+    fontWeight: FontWeight.w900,
+    color: ColorsValue.color212121,
+  );
+
+  static TextStyle color212121W90012 = GoogleFonts.nunito(
+    fontSize: Dimens.twelve,
     fontWeight: FontWeight.w900,
     color: ColorsValue.color212121,
   );

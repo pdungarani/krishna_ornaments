@@ -4,7 +4,6 @@ import 'package:krishna_ornaments/data/helpers/api_wrapper.dart';
 import 'package:krishna_ornaments/domain/domain.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
-
 abstract class SocketConnection {
   static IO.Socket? socket;
 
@@ -31,9 +30,9 @@ abstract class SocketConnection {
       //   Get.find<Repository>().saveValue(
       //       LocalKeys.productVisible, data['data']['product_visible']);
       //   Get.forceAppUpdate();
-      // } else 
+      // } else
       if (data['event'] == 'orderApproved') {
-        Get.find<OrderController>().orderPagingController.refresh();
+        Get.find<OrderController>().postOrderHistory();
         Get.forceAppUpdate();
       } else if (data['event'] == 'orderCancelled') {
         Get.find<OrderController>().orderPagingController.refresh();

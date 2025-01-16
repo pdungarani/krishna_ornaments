@@ -8,11 +8,14 @@ import 'package:krishna_ornaments/app/navigators/navigators.dart';
 import 'package:krishna_ornaments/data/data.dart';
 import 'package:krishna_ornaments/device/device.dart';
 import 'package:krishna_ornaments/domain/domain.dart';
+import 'package:no_screenshot/no_screenshot.dart';
+
+final noScreenshot = NoScreenshot.instance;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initServices();
-
+  Utility.disableScreenshot(noScreenshot);
   runApp(
     MyApp(),
   );

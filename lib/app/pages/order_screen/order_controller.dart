@@ -13,8 +13,25 @@ class OrderController extends GetxController {
   PagingController<int, GetOrderHistoryDoc> orderPagingController =
       PagingController(firstPageKey: 1);
 
-  List<GetOrderHistoryDoc> orderListModel = [];
   int galleryLimit = 10;
+
+  // Future<void> postOrderHistory() async {
+  //   var response = await orderPresenter.postOrderHistory(
+  //     page: 1,
+  //     limit: galleryLimit,
+  //     isLoading: false,
+  //   );
+
+  //   // orderListModel.clear();
+  //   if (response != null) {
+  //     getOrderHistoryDetail = response.data!.docs![0];
+  //     // orderListModel1 = orderListModel[0];
+  //     update();
+  //   }
+  // }
+
+  List<GetOrderHistoryProduct> orderListModel = [];
+  GetOrderHistoryDoc? getOrderHistoryDoc;
 
   Future<void> postOrderHistory() async {
     var response = await orderPresenter.postOrderHistory(
@@ -24,7 +41,9 @@ class OrderController extends GetxController {
     );
     orderListModel.clear();
     if (response != null) {
-      orderListModel = response.data?.docs ?? [];
+      print(response.data?.docs?[0].products?.length);
+      getOrderHistoryDoc = response.data?.docs![0];
+      orderListModel.addAll(response.data?.docs?.first.products ?? []);
 
       update();
     }

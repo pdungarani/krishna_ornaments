@@ -102,6 +102,11 @@ abstract class Utility {
     return mb;
   }
 
+  static void disableScreenshot(noScreenshot) async {
+    bool result = await noScreenshot.screenshotOff();
+    debugPrint('Screenshot Off: $result');
+  }
+
   static Future<bool> imagePermissionCheack(BuildContext context) async {
     bool status = false;
     bool statusVideos = false;
@@ -210,6 +215,8 @@ abstract class Utility {
       return true;
     }
   }
+
+  static String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
 
   // coverage:ignore-start
   static void printDLog(String message) {
