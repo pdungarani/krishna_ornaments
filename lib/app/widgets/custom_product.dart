@@ -1,11 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/navigators/navigators.dart';
 
 // ignore: must_be_immutable
-class CustomProductView extends StatefulWidget {
+class CustomProductView extends StatelessWidget {
   CustomProductView({
     super.key,
     required this.productName,
@@ -21,6 +22,7 @@ class CustomProductView extends StatefulWidget {
     required this.dincrement,
     required this.inCart,
     this.height,
+    this.inOutStock = false,
   });
   String productName;
   double? height;
@@ -31,16 +33,12 @@ class CustomProductView extends StatefulWidget {
   bool inWishList;
   bool isHorizontal;
   bool inCart;
+  bool inOutStock;
   void Function()? onAddToCard;
   void Function()? addFavorite;
   void Function()? increment;
   void Function()? dincrement;
 
-  @override
-  State<CustomProductView> createState() => _CustomProductViewState();
-}
-
-class _CustomProductViewState extends State<CustomProductView> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -60,8 +58,7 @@ class _CustomProductViewState extends State<CustomProductView> {
             children: [
               GestureDetector(
                 onTap: () {
-                  RouteManagement.goToShowFullScareenImage(
-                      widget.imageUrl, "image");
+                  RouteManagement.goToShowFullScareenImage(imageUrl, "image");
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -75,7 +72,7 @@ class _CustomProductViewState extends State<CustomProductView> {
                       Dimens.ten,
                     ),
                     child: CachedNetworkImage(
-                      imageUrl: widget.imageUrl,
+                      imageUrl: imageUrl,
                       fit: BoxFit.cover,
                       height: Dimens.hundredSixty,
                       width: double.maxFinite,
@@ -110,9 +107,9 @@ class _CustomProductViewState extends State<CustomProductView> {
                     ),
                     child: Center(
                       child: InkWell(
-                        onTap: widget.addFavorite,
+                        onTap: addFavorite,
                         child: SvgPicture.asset(
-                          widget.inWishList
+                          inWishList
                               ? AssetConstants.ic_fill_like
                               : AssetConstants.ic_like,
                         ),
@@ -125,7 +122,7 @@ class _CustomProductViewState extends State<CustomProductView> {
           ),
           Dimens.boxHeight10,
           Text(
-            widget.productName,
+            productName,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             softWrap: true,
@@ -146,75 +143,97 @@ class _CustomProductViewState extends State<CustomProductView> {
                         style: Styles.blackW60014,
                       ),
                       Text(
-                        "${widget.weigth} gm",
+                        "$weigth gm",
                         style: Styles.black60012,
                       ),
                     ],
                   ),
                   Dimens.boxHeight5,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          GestureDetector(
-                            onTap: widget.dincrement,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(
-                                  Dimens.ten,
-                                ),
-                                color: ColorsValue.colorDFDFDF,
-                              ),
-                              child: SvgPicture.asset(
-                                AssetConstants.minus,
-                                height: Dimens.twentyFour,
-                                width: Dimens.twentyFour,
-                              ),
-                            ),
-                          ),
-                          Dimens.boxWidth10,
-                          Text(
-                            widget.quantity.toString(),
-                          ),
-                          Dimens.boxWidth10,
-                          GestureDetector(
-                            onTap: widget.increment,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: ColorsValue.colorDFDFDF,
-                              ),
-                              child: SvgPicture.asset(
-                                AssetConstants.plus,
-                                height: Dimens.twentyFour,
-                                width: Dimens.twentyFour,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Dimens.boxHeight10,
-                      InkWell(
-                        onTap: widget.onAddToCard,
-                        child: Container(
-                          alignment: Alignment.center,
-                          padding: Dimens.edgeInsets14_0_14_0,
-                          height: Dimens.twentyFive,
-                          decoration: BoxDecoration(
-                            color: ColorsValue.colorEDC97D,
-                            borderRadius: BorderRadius.circular(
-                              Dimens.four,
-                            ),
-                          ),
-                          child: Text(
-                            widget.inCart ? 'Item In Cart' : 'Add To Cart',
-                            style: Styles.colorFBF7F350010,
-                          ),
+                  if (inOutStock) ...[
+                    Container(
+                      alignment: Alignment.center,
+                      padding: Dimens.edgeInsets14_0_14_0,
+                      height: Dimens.twentyFive,
+                      decoration: BoxDecoration(
+                        color: ColorsValue.transparent,
+                        border: Border.all(
+                          width: Dimens.one,
+                          color: ColorsValue.redColor,
                         ),
-                      )
-                    ],
-                  ),
+                        borderRadius: BorderRadius.circular(
+                          Dimens.four,
+                        ),
+                      ),
+                      child: Text(
+                        "out_of_stock".tr,
+                        style: Styles.txtRedBold12,
+                      ),
+                    )
+                  ] else ...[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            GestureDetector(
+                              onTap: dincrement,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                    Dimens.ten,
+                                  ),
+                                  color: ColorsValue.colorDFDFDF,
+                                ),
+                                child: SvgPicture.asset(
+                                  AssetConstants.minus,
+                                  height: Dimens.twentyFour,
+                                  width: Dimens.twentyFour,
+                                ),
+                              ),
+                            ),
+                            Dimens.boxWidth10,
+                            Text(
+                              quantity.toString(),
+                            ),
+                            Dimens.boxWidth10,
+                            GestureDetector(
+                              onTap: increment,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: ColorsValue.colorDFDFDF,
+                                ),
+                                child: SvgPicture.asset(
+                                  AssetConstants.plus,
+                                  height: Dimens.twentyFour,
+                                  width: Dimens.twentyFour,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Dimens.boxHeight10,
+                        InkWell(
+                          onTap: onAddToCard,
+                          child: Container(
+                            alignment: Alignment.center,
+                            padding: Dimens.edgeInsets14_0_14_0,
+                            height: Dimens.twentyFive,
+                            decoration: BoxDecoration(
+                              color: ColorsValue.colorEDC97D,
+                              borderRadius: BorderRadius.circular(
+                                Dimens.four,
+                              ),
+                            ),
+                            child: Text(
+                              inCart ? 'Item In Cart' : 'Add To Cart',
+                              style: Styles.colorFBF7F350010,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
                 ],
               ),
             ),

@@ -10,7 +10,7 @@ ThemeData themeData(BuildContext context) => ThemeData(
       dialogBackgroundColor: ColorsValue.whiteColor,
       shadowColor: const Color(0xFFDDE3FD),
       checkboxTheme: CheckboxThemeData(
-        fillColor: MaterialStateProperty.all<Color>(const Color(0xFFEA6F00)),
+        fillColor: WidgetStateProperty.all<Color>(const Color(0xFFEA6F00)),
         side: BorderSide.none,
       ),
       canvasColor: ColorsValue.greyAAA,
@@ -37,10 +37,9 @@ ThemeData themeData(BuildContext context) => ThemeData(
       fontFamily: 'Product Sans',
       brightness: Brightness.light,
       scaffoldBackgroundColor: ColorsValue.transparent,
-      colorScheme: ColorScheme.light(
-        surface: Colors.black.withOpacity(.16),
-        onInverseSurface: const Color.fromRGBO(0, 0, 0, 0.12),
-        primary: const Color(0xFFEA6F00),
+      colorScheme: const ColorScheme.light(
+        surface: Colors.white,
+        primary: Color(0xFFEA6F00),
       ),
       iconTheme: const IconThemeData(
         color: Colors.black,

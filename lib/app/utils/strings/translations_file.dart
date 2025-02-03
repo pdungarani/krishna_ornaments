@@ -89,6 +89,7 @@ class TranslationsFile extends Translations {
           'pass_validation':'Confirm Password and new password must be same',
           'wishlist':'Wishlist',
           'sort_by':'Sort By',
+          'out_of_stock':'Out Of Stock',
           '':'',
           '':'',
           '':'',
