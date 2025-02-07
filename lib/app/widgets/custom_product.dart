@@ -118,6 +118,25 @@ class CustomProductView extends StatelessWidget {
                   ),
                 ),
               ),
+              if (inOutStock) ...[
+                Container(
+                  alignment: Alignment.center,
+                  padding: Dimens.edgeInsets12_0_12_0,
+                  margin: Dimens.edgeInsetsTop10,
+                  height: Dimens.twentyFive,
+                  width: Dimens.hundred,
+                  decoration: BoxDecoration(
+                    color: ColorsValue.redColor,
+                    borderRadius: BorderRadius.circular(
+                      Dimens.four,
+                    ),
+                  ),
+                  child: Text(
+                    "out_of_stock".tr,
+                    style: Styles.whiteColorW60012,
+                  ),
+                )
+              ],
             ],
           ),
           Dimens.boxHeight10,
@@ -149,91 +168,69 @@ class CustomProductView extends StatelessWidget {
                     ],
                   ),
                   Dimens.boxHeight5,
-                  if (inOutStock) ...[
-                    Container(
-                      alignment: Alignment.center,
-                      padding: Dimens.edgeInsets14_0_14_0,
-                      height: Dimens.twentyFive,
-                      decoration: BoxDecoration(
-                        color: ColorsValue.transparent,
-                        border: Border.all(
-                          width: Dimens.one,
-                          color: ColorsValue.redColor,
-                        ),
-                        borderRadius: BorderRadius.circular(
-                          Dimens.four,
-                        ),
-                      ),
-                      child: Text(
-                        "out_of_stock".tr,
-                        style: Styles.txtRedBold12,
-                      ),
-                    )
-                  ] else ...[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            GestureDetector(
-                              onTap: dincrement,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                    Dimens.ten,
-                                  ),
-                                  color: ColorsValue.colorDFDFDF,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          GestureDetector(
+                            onTap: dincrement,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  Dimens.ten,
                                 ),
-                                child: SvgPicture.asset(
-                                  AssetConstants.minus,
-                                  height: Dimens.twentyFour,
-                                  width: Dimens.twentyFour,
-                                ),
+                                color: ColorsValue.colorDFDFDF,
                               ),
-                            ),
-                            Dimens.boxWidth10,
-                            Text(
-                              quantity.toString(),
-                            ),
-                            Dimens.boxWidth10,
-                            GestureDetector(
-                              onTap: increment,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: ColorsValue.colorDFDFDF,
-                                ),
-                                child: SvgPicture.asset(
-                                  AssetConstants.plus,
-                                  height: Dimens.twentyFour,
-                                  width: Dimens.twentyFour,
-                                ),
+                              child: SvgPicture.asset(
+                                AssetConstants.minus,
+                                height: Dimens.twentyFour,
+                                width: Dimens.twentyFour,
                               ),
-                            ),
-                          ],
-                        ),
-                        Dimens.boxHeight10,
-                        InkWell(
-                          onTap: onAddToCard,
-                          child: Container(
-                            alignment: Alignment.center,
-                            padding: Dimens.edgeInsets14_0_14_0,
-                            height: Dimens.twentyFive,
-                            decoration: BoxDecoration(
-                              color: ColorsValue.colorEDC97D,
-                              borderRadius: BorderRadius.circular(
-                                Dimens.four,
-                              ),
-                            ),
-                            child: Text(
-                              inCart ? 'Item In Cart' : 'Add To Cart',
-                              style: Styles.colorFBF7F350010,
                             ),
                           ),
-                        )
-                      ],
-                    ),
-                  ],
+                          Dimens.boxWidth10,
+                          Text(
+                            quantity.toString(),
+                          ),
+                          Dimens.boxWidth10,
+                          GestureDetector(
+                            onTap: increment,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: ColorsValue.colorDFDFDF,
+                              ),
+                              child: SvgPicture.asset(
+                                AssetConstants.plus,
+                                height: Dimens.twentyFour,
+                                width: Dimens.twentyFour,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Dimens.boxHeight10,
+                      InkWell(
+                        onTap: onAddToCard,
+                        child: Container(
+                          alignment: Alignment.center,
+                          padding: Dimens.edgeInsets14_0_14_0,
+                          height: Dimens.twentyFive,
+                          decoration: BoxDecoration(
+                            color: ColorsValue.colorEDC97D,
+                            borderRadius: BorderRadius.circular(
+                              Dimens.four,
+                            ),
+                          ),
+                          child: Text(
+                            inCart ? 'Item In Cart' : 'Add To Cart',
+                            style: Styles.colorFBF7F350010,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ],
               ),
             ),

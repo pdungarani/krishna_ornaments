@@ -304,7 +304,7 @@ class ViewAllProductScreen extends StatelessWidget {
                                           Expanded(
                                             flex: 6,
                                             child: Container(
-                                              padding: Dimens.edgeInsetsTopt10,
+                                              padding: Dimens.edgeInsetsTop10,
                                               height: MediaQuery.of(context)
                                                       .size
                                                       .height *
@@ -831,6 +831,27 @@ class ViewAllProductScreen extends StatelessWidget {
                                               ),
                                             ),
                                           ),
+                                          if ((item.quantity ?? 0) == 0) ...[
+                                            Container(
+                                              alignment: Alignment.center,
+                                              padding:
+                                                  Dimens.edgeInsets12_0_12_0,
+                                              margin: Dimens.edgeInsetsTop10,
+                                              height: Dimens.twentyFive,
+                                              width: Dimens.hundred,
+                                              decoration: BoxDecoration(
+                                                color: ColorsValue.redColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                  Dimens.four,
+                                                ),
+                                              ),
+                                              child: Text(
+                                                "out_of_stock".tr,
+                                                style: Styles.whiteColorW60012,
+                                              ),
+                                            )
+                                          ]
                                         ],
                                       ),
                                       Dimens.boxHeight10,
@@ -879,176 +900,147 @@ class ViewAllProductScreen extends StatelessWidget {
                                                         ),
                                                       ],
                                                     ),
-                                                    if ((item.quantity ?? 0) !=
-                                                        0) ...[
-                                                      Row(
-                                                        children: [
-                                                          GestureDetector(
-                                                            onTap:
-                                                                item.inCart ??
-                                                                        false
-                                                                    ? null
-                                                                    : () {
-                                                                        if (controller.viewAllDocList[index].cartQuantity.toDouble() >
-                                                                            0) {
-                                                                          controller
+                                                    Row(
+                                                      children: [
+                                                        GestureDetector(
+                                                          onTap:
+                                                              item.inCart ??
+                                                                      false
+                                                                  ? null
+                                                                  : () {
+                                                                      if (controller
                                                                               .viewAllDocList[index]
-                                                                              .cartQuantity--;
-                                                                        }
-                                                                        controller
-                                                                            .update();
-                                                                      },
-                                                            child: Container(
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                  Dimens.ten,
-                                                                ),
-                                                                color: ColorsValue
-                                                                    .colorDFDFDF,
-                                                              ),
-                                                              child: SvgPicture
-                                                                  .asset(
-                                                                AssetConstants
-                                                                    .minus,
-                                                                height: Dimens
-                                                                    .twentyFour,
-                                                                width: Dimens
-                                                                    .twentyFour,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Dimens.boxWidth10,
-                                                          Text(
-                                                            item.cartQuantity
-                                                                .toString(),
-                                                          ),
-                                                          Dimens.boxWidth10,
-                                                          GestureDetector(
-                                                            onTap:
-                                                                item.inCart ??
-                                                                        false
-                                                                    ? null
-                                                                    : () {
+                                                                              .cartQuantity
+                                                                              .toDouble() >
+                                                                          1) {
                                                                         controller
                                                                             .viewAllDocList[index]
-                                                                            .cartQuantity++;
-                                                                        controller
-                                                                            .update();
-                                                                      },
-                                                            child: Container(
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            10),
-                                                                color: ColorsValue
-                                                                    .colorDFDFDF,
+                                                                            .cartQuantity--;
+                                                                      }
+                                                                      controller
+                                                                          .update();
+                                                                    },
+                                                          child: Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                Dimens.ten,
                                                               ),
-                                                              child: SvgPicture
-                                                                  .asset(
-                                                                AssetConstants
-                                                                    .plus,
-                                                                height: Dimens
-                                                                    .twentyFour,
-                                                                width: Dimens
-                                                                    .twentyFour,
-                                                              ),
+                                                              color: ColorsValue
+                                                                  .colorDFDFDF,
+                                                            ),
+                                                            child: SvgPicture
+                                                                .asset(
+                                                              AssetConstants
+                                                                  .minus,
+                                                              height: Dimens
+                                                                  .twentyFour,
+                                                              width: Dimens
+                                                                  .twentyFour,
                                                             ),
                                                           ),
-                                                        ],
-                                                      ),
-                                                    ],
+                                                        ),
+                                                        Dimens.boxWidth10,
+                                                        Text(
+                                                          item.cartQuantity
+                                                              .toString(),
+                                                        ),
+                                                        Dimens.boxWidth10,
+                                                        GestureDetector(
+                                                          onTap: item.inCart ??
+                                                                  false
+                                                              ? null
+                                                              : () {
+                                                                  controller
+                                                                      .viewAllDocList[
+                                                                          index]
+                                                                      .cartQuantity++;
+                                                                  controller
+                                                                      .update();
+                                                                },
+                                                          child: Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10),
+                                                              color: ColorsValue
+                                                                  .colorDFDFDF,
+                                                            ),
+                                                            child: SvgPicture
+                                                                .asset(
+                                                              AssetConstants
+                                                                  .plus,
+                                                              height: Dimens
+                                                                  .twentyFour,
+                                                              width: Dimens
+                                                                  .twentyFour,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ],
                                                 ),
                                               ),
                                               Dimens.boxHeight5,
-                                              if ((item.quantity ?? 0) ==
-                                                  0) ...[
-                                                Container(
-                                                  alignment: Alignment.center,
-                                                  padding: Dimens
-                                                      .edgeInsets14_0_14_0,
-                                                  margin: Dimens
-                                                      .edgeInsets10_0_10_10,
-                                                  height: Dimens.thirty,
-                                                  decoration: BoxDecoration(
-                                                    color:
-                                                        ColorsValue.transparent,
-                                                    border: Border.all(
-                                                      width: Dimens.one,
-                                                      color:
-                                                          ColorsValue.redColor,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                      Dimens.four,
-                                                    ),
-                                                  ),
-                                                  child: Text(
-                                                    "out_of_stock".tr,
-                                                    style: Styles.txtRedBold12,
-                                                  ),
-                                                )
-                                              ] else ...[
-                                                Padding(
-                                                  padding: Dimens
-                                                      .edgeInsets10_0_10_10,
-                                                  child: InkWell(
-                                                    onTap: () {
-                                                      if (item.inCart ??
-                                                          false) {
-                                                      } else {
-                                                        if (controller
-                                                                .viewAllDocList[
-                                                                    index]
-                                                                .cartQuantity
-                                                                .toDouble() >
-                                                            0) {
+                                              Padding(
+                                                padding:
+                                                    Dimens.edgeInsets10_0_10_10,
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    if (item.inCart ?? false) {
+                                                      RouteManagement
+                                                          .goToShoppingCartScreen(
+                                                              true);
+                                                    } else {
+                                                      if (controller
+                                                              .viewAllDocList[
+                                                                  index]
+                                                              .cartQuantity
+                                                              .toDouble() >
+                                                          0) {
+                                                        controller
+                                                            .postAddToCart(
+                                                          item.id ?? "",
+                                                          item.cartQuantity,
+                                                          index,
                                                           controller
-                                                              .postAddToCart(
-                                                            item.id ?? "",
-                                                            item.cartQuantity,
-                                                            index,
-                                                            controller
-                                                                .productTypeViewAll
-                                                                .toLowerCase(),
-                                                          );
-                                                        } else {
-                                                          Utility.errorMessage(
-                                                              "Please add one item.");
-                                                        }
+                                                              .productTypeViewAll
+                                                              .toLowerCase(),
+                                                        );
+                                                      } else {
+                                                        Utility.errorMessage(
+                                                            "Please add one item.");
                                                       }
-                                                    },
-                                                    child: Container(
-                                                      alignment:
-                                                          Alignment.center,
-                                                      padding: Dimens
-                                                          .edgeInsets14_0_14_0,
-                                                      height: Dimens.thirty,
-                                                      decoration: BoxDecoration(
-                                                        color: ColorsValue
-                                                            .colorEDC97D,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                          Dimens.four,
-                                                        ),
-                                                      ),
-                                                      child: Text(
-                                                        item.inCart ?? false
-                                                            ? 'Item In Cart'
-                                                            : 'Add To Cart',
-                                                        style: Styles
-                                                            .colorFBF7F350010,
+                                                    }
+                                                  },
+                                                  child: Container(
+                                                    alignment: Alignment.center,
+                                                    padding: Dimens
+                                                        .edgeInsets14_0_14_0,
+                                                    height: Dimens.thirty,
+                                                    decoration: BoxDecoration(
+                                                      color: ColorsValue
+                                                          .colorEDC97D,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                        Dimens.four,
                                                       ),
                                                     ),
+                                                    child: Text(
+                                                      item.inCart ?? false
+                                                          ? 'Item In Cart'
+                                                          : 'Add To Cart',
+                                                      style: Styles
+                                                          .colorFBF7F350010,
+                                                    ),
                                                   ),
-                                                )
-                                              ],
+                                                ),
+                                              )
                                             ],
                                           ),
                                         ),

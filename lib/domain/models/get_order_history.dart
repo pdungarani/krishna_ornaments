@@ -163,6 +163,8 @@ class GetOrderHistoryProduct {
   String? description;
   String? manufactureid;
   String? productOrderTracking;
+  int? orderCreated;
+  int? orderProcessing;
 
   GetOrderHistoryProduct({
     this.categoryId,
@@ -176,6 +178,8 @@ class GetOrderHistoryProduct {
     this.description,
     this.manufactureid,
     this.productOrderTracking,
+    this.orderCreated,
+    this.orderProcessing,
   });
 
   factory GetOrderHistoryProduct.fromJson(Map<String, dynamic> json) =>
@@ -191,6 +195,8 @@ class GetOrderHistoryProduct {
         description: json["description"],
         manufactureid: json["manufactureid"],
         productOrderTracking: json["product_order_tracking"],
+        orderCreated: json["order_created"],
+        orderProcessing: json["order_processing"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -205,5 +211,7 @@ class GetOrderHistoryProduct {
         "description": description,
         "manufactureid": manufactureid,
         "product_order_tracking": productOrderTracking,
+        "order_created": orderCreated,
+        "order_processing": orderProcessing,
       };
 }

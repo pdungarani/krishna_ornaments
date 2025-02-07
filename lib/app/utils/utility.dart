@@ -1371,6 +1371,11 @@ abstract class Utility {
     }
   }
 
+  static String getFormatedDateTime(int datea) {
+    var date = DateTime.fromMillisecondsSinceEpoch(datea);
+    return DateFormat('dd/MM/yyyy').format(date);
+  }
+
   static String timeAgo(String d) {
     DateTime dateTime = DateTime.parse(d);
     Duration diff = DateTime.now().difference(dateTime);

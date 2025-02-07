@@ -34,9 +34,11 @@ class ShoppingCartScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: ColorsValue.appBg,
           appBar: AppBarWidget(
-            onTapBack: () {},
+            onTapBack: () {
+              Get.back();
+            },
             title: 'cart'.tr,
-            isVisible: false,
+            isVisible: Get.arguments ?? false ? true : false,
           ),
           bottomNavigationBar: controller.cartList.isNotEmpty
               ? Padding(

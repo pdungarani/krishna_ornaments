@@ -1,7 +1,7 @@
 // coverage:ignore-file
 
-import 'package:krishna_ornaments/app/app.dart';
 import 'package:get/get.dart';
+import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/pages/profileScreen/screen/contact_us.dart';
 
 part 'app_routes.dart';
@@ -177,6 +177,13 @@ class AppPages {
       transitionDuration: transitionDuration,
       page: ContactUsScreen.new,
       binding: ProfileBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage<ShoppingCartScreen>(
+      name: _Paths.shoppingCartScreen,
+      transitionDuration: transitionDuration,
+      page: ShoppingCartScreen.new,
+      binding: ShoppingCartBinding(),
       transition: Transition.fadeIn,
     ),
   ];

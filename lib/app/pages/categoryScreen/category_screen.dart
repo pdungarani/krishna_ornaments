@@ -41,7 +41,7 @@ class CategoryScreen extends StatelessWidget {
                           "", item.id ?? "", item.name ?? "");
                     },
                     child: Padding(
-                      padding: Dimens.edgeInsetsTopt10,
+                      padding: Dimens.edgeInsetsTop10,
                       child: Container(
                         width: double.maxFinite,
                         height: Dimens.hundredTwenty,

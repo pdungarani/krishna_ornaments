@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/navigators/navigators.dart';
-import 'package:krishna_ornaments/data/data.dart';
 import 'package:krishna_ornaments/domain/models/models.dart';
 
 class ShoppingCartController extends GetxController {
@@ -137,7 +136,6 @@ class ShoppingCartController extends GetxController {
                         onPressed: () {
                           if (finalKey.currentState!.validate()) {
                             Get.back();
-                       
                           }
                         },
                         style: ElevatedButton.styleFrom(
@@ -440,17 +438,17 @@ class ShoppingCartController extends GetxController {
       description: productDesController.text,
       isLoading: false,
     );
-    if (response?.data != null) {
+    if (response?.statusCode == 200) {
       if (productType.contains("inCart")) {
         cartList[index].description = productDesController.text;
       } else {
         viewAllDocList[index].inCart = true;
-        viewAllDocList[index].quantity = 1;
         Utility.snacBar(
             "Product added in cart successfully...!", ColorsValue.appColor);
       }
     } else {
-      Utility.errorMessage(jsonDecode(response.toString())['Data']['Message']);
+      Utility.errorMessage(
+          jsonDecode(response?.data.toString() ?? "")['Message']);
     }
     update();
   }
@@ -470,7 +468,7 @@ class ShoppingCartController extends GetxController {
       main_description: finalDesController.text,
       isLoading: false,
     );
-    if (response?.data != null) {
+    if (response?.statusCode == 200) {
       RouteManagement.goToBottomBarView();
       postCartList(1);
     } else {

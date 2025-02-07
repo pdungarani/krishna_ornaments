@@ -204,7 +204,7 @@ class OrderScreen extends StatelessWidget {
                                       ),
                                       Dimens.boxHeight5,
                                       Text(
-                                        "${"order_date".tr} 12/02/2024",
+                                        "${"order_date".tr} ${Utility.getFormatedDateTime(e.orderCreated ?? 0)}",
                                         style: Styles.appColor70012,
                                       ),
                                       Dimens.boxHeight5,

@@ -352,7 +352,7 @@ class HomeScreen extends StatelessWidget {
                                     if (controller.productArrivalDocList[index]
                                             .cartQuantity
                                             .toDouble() >
-                                        0) {
+                                        1) {
                                       controller.productArrivalDocList[index]
                                           .cartQuantity--;
                                     }
@@ -457,7 +457,7 @@ class HomeScreen extends StatelessWidget {
                                     if (controller.productTrendingDocList[index]
                                             .cartQuantity
                                             .toDouble() >
-                                        0) {
+                                        1) {
                                       controller.productTrendingDocList[index]
                                           .cartQuantity--;
                                     }
