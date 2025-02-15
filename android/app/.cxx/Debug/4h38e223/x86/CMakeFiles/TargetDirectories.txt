@@ -1,0 +1,2 @@
+/Users/parthivdungarani/Documents/Harshil/krishna_ornaments/android/app/.cxx/Debug/4h38e223/x86/CMakeFiles/edit_cache.dir
+/Users/parthivdungarani/Documents/Harshil/krishna_ornaments/android/app/.cxx/Debug/4h38e223/x86/CMakeFiles/rebuild_cache.dir

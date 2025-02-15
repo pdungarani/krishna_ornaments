@@ -5,26 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9793261e-0475-4b67-8bd4-a99542b48c23" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/migrations.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/other.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/com/example/krishna_ornaments/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/com/example/krishna_ornaments/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/bottomBarScreen/bottombar_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/bottomBarScreen/bottombar_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/bottomBarScreen/bottombar_presenter.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/bottomBarScreen/bottombar_presenter.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/profileScreen/profile_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/profileScreen/profile_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/repair_screen/repair_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/repair_screen/repair_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/splashScreen/splash_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/splashScreen/splash_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/splashScreen/splash_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/splashScreen/splash_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/utils/strings/string_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/utils/strings/string_constants.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/data/helpers/api_wrapper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/data/helpers/api_wrapper.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/domain/repositories/local_storage_keys.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/domain/repositories/local_storage_keys.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/domain/services/services.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/domain/services/services.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/domain/usecases/bottomBar_usecases.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/domain/usecases/bottomBar_usecases.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../linux/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../linux/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flutter_01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flutter_02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flutter_03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flutter_04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/app/utils/utility.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/utils/utility.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/../windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../windows/flutter/generated_plugins.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,10 +65,11 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "BundleExportedModule": "android.app",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "android.gradle.sync.needed": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "dart.analysis.tool.window.visible": "false",
