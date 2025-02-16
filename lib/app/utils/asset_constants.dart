@@ -37,7 +37,7 @@ abstract class AssetConstants {
   static const String kirshina = 'assets/icons/kirshina.gif';
   static const String dwsadsa = '';
 
-  
   static const String copyIcon = 'assets/icons/copy.svg';
   static const String app_logo = 'assets/images/app_logo.jpg';
+  static const String app_update_lottie = 'assets/images/app_update_lottie.json';
 }

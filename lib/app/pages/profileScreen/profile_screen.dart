@@ -346,7 +346,7 @@ class ProfileScreen extends StatelessWidget {
                                               MainAxisAlignment.start,
                                           children: [
                                             SvgPicture.asset(
-                                              'AssetConstants.ic_logout',
+                                              AssetConstants.ic_logout,
                                               height: Dimens.sixtyFour,
                                               width: Dimens.sixtyFour,
                                               colorFilter:

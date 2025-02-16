@@ -14,12 +14,14 @@ class LoginScreen extends StatelessWidget {
     return GetBuilder<LoginController>(
       builder: (controller) => Scaffold(
         backgroundColor: ColorsValue.primaryColor,
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Form(
+        body: Stack(
+          children: [
+            Form(
               key: controller.logingFormkey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              child: ListView(
+                padding: Dimens.edgeInsetsTop30,
+                physics: ClampingScrollPhysics(),
                 children: [
                   SizedBox(
                     width: context.width,
@@ -66,18 +68,17 @@ class LoginScreen extends StatelessWidget {
                         ),
                         Dimens.boxHeight20,
                         CustomButton(
-                            height: Dimens.fourtyFive,
-                            text: 'LOG IN',
-                            onTap: () {
-                              if (controller.logingFormkey.currentState!
-                                  .validate())
-                                controller.loginApi(
-                                  emailController:
-                                      controller.emailController.text,
-                                  passwordController:
-                                      controller.passwordController.text,
-                                );
-                            }),
+                          height: Dimens.fourtyFive,
+                          text: 'LOG IN',
+                          onTap: () {
+                            if (controller.logingFormkey.currentState!
+                                .validate()) {
+                              controller.isLoginLoading = true;
+                              controller.update();
+                              controller.loginApi();
+                            }
+                          },
+                        ),
                         Dimens.boxHeight10,
                         Center(
                           child: Text.rich(
@@ -127,7 +128,17 @@ class LoginScreen extends StatelessWidget {
                 ],
               ),
             ),
-          ),
+            if (controller.isLoginLoading) ...[
+              Container(
+                height: Get.height,
+                width: Get.width,
+                color: Colors.black12.withValues(alpha: 0.5),
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              )
+            ]
+          ],
         ),
       ),
     );

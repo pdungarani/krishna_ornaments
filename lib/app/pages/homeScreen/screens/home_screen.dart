@@ -22,11 +22,6 @@ class HomeScreen extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           backgroundColor: ColorsValue.primaryColor,
-          // floatingActionButton: FloatingActionButton(
-          //   backgroundColor: ColorsValue.appColor,
-          //   onPressed: () {},
-          //   shape: const CircleBorder(),
-          // ),
           appBar: AppBar(
             backgroundColor: ColorsValue.primaryColor,
             title: Padding(
@@ -55,47 +50,6 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              // Padding(
-              //   padding: const EdgeInsets.only(right: 10),
-              //   child: InkWell(
-              //     onTap: () {},
-              //     child: Padding(
-              //       padding: const EdgeInsets.only(right: 10),
-              //       child: Stack(
-              //         alignment: Alignment.center,
-              //         children: [
-              //           SvgPicture.asset(
-              //             AssetConstants.ic_notification,
-              //             height: Dimens.twentySix,
-              //             width: Dimens.twentySix,
-              //           ),
-              //           Positioned(
-              //             right: 0,
-              //             top: 0,
-              //             child: Container(
-              //               alignment: Alignment.center,
-              //               height: Dimens.fifteen,
-              //               width: Dimens.fifteen,
-              //               decoration: BoxDecoration(
-              //                 color: ColorsValue.appColor,
-              //                 borderRadius: BorderRadius.circular(
-              //                   Dimens.hundred,
-              //                 ),
-              //               ),
-              //               child: Text(
-              //                 "10",
-              //                 style: GoogleFonts.montserrat(
-              //                   fontSize: Dimens.eight,
-              //                   color: ColorsValue.whiteColor,
-              //                 ),
-              //               ),
-              //             ),
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //   ),
-              // ),
               Padding(
                 padding: EdgeInsets.only(
                   right: Dimens.ten,
@@ -275,94 +229,98 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                   ],
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        'New Arrival',
-                        style: Styles.color01010170020,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          RouteManagement.goToViewAllProductScreen(
-                              "Arrival", "", "");
-                        },
-                        child: Text(
-                          'View All',
-                          style: Styles.primary50014,
+                  if (controller.productArrivalDocList.isNotEmpty) ...[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'New Arrival',
+                          style: Styles.color01010170020,
                         ),
-                      ),
-                    ],
-                  ),
-                  Dimens.boxHeight10,
-                  SizedBox(
-                    height: Dimens.twoHundredNinety,
-                    child: ListView.builder(
-                      controller: controller.scrollBestSellerController,
-                      padding: Dimens.edgeInsets0,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: controller.productArrivalDocList.length,
-                      itemBuilder: (context, index) {
-                        var item = controller.productArrivalDocList[index];
-                        return Padding(
-                          padding: Dimens.edgeInsetsRight20,
-                          child: CustomProductView(
-                            inOutStock:
-                                (item.quantity ?? 0) == 0 ? true : false,
-                            productName: item.name ?? "",
-                            imageUrl: item.image ?? "",
-                            categoryName: item.category?.name ?? "",
-                            quantity: item.cartQuantity ?? 0,
-                            weigth: item.weight.toString(),
-                            inWishList: item.wishlistStatus ?? false,
-                            inCart: item.inCart ?? false,
-                            onAddToCard: () {
-                              Get.closeCurrentSnackbar();
-                              if (item.inCart ?? false) {
-                                Get.find<BottomBarController>()
-                                    .tabController
-                                    ?.animateTo(2);
-                              } else {
-                                if (controller.productArrivalDocList[index]
-                                        .cartQuantity
-                                        .toDouble() >
-                                    0) {
-                                  controller.postAddToCart(item.id ?? "",
-                                      item.cartQuantity, index, "arrival");
-                                } else {
-                                  Utility.errorMessage("Please add one item.");
-                                }
-                              }
-                            },
-                            addFavorite: () {
-                              controller.postWishlistAddRemove(
-                                  item.id ?? "", index, false);
-                            },
-                            increment: item.inCart ?? false
-                                ? null
-                                : () {
-                                    controller.productArrivalDocList[index]
-                                        .cartQuantity++;
-                                    controller.update();
-                                  },
-                            dincrement: item.inCart ?? false
-                                ? null
-                                : () {
-                                    if (controller.productArrivalDocList[index]
-                                            .cartQuantity
-                                            .toDouble() >
-                                        1) {
-                                      controller.productArrivalDocList[index]
-                                          .cartQuantity--;
-                                    }
-                                    controller.update();
-                                  },
+                        GestureDetector(
+                          onTap: () {
+                            RouteManagement.goToViewAllProductScreen(
+                                "Arrival", "", "");
+                          },
+                          child: Text(
+                            'View All',
+                            style: Styles.primary50014,
                           ),
-                        );
-                      },
+                        ),
+                      ],
                     ),
-                  ),
+                    Dimens.boxHeight10,
+                    SizedBox(
+                      height: Dimens.twoHundredNinety,
+                      child: ListView.builder(
+                        controller: controller.scrollBestSellerController,
+                        padding: Dimens.edgeInsets0,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: controller.productArrivalDocList.length,
+                        itemBuilder: (context, index) {
+                          var item = controller.productArrivalDocList[index];
+                          return Padding(
+                            padding: Dimens.edgeInsetsRight20,
+                            child: CustomProductView(
+                              inOutStock:
+                                  (item.quantity ?? 0) == 0 ? true : false,
+                              productName: item.name ?? "",
+                              imageUrl: item.image ?? "",
+                              categoryName: item.category?.name ?? "",
+                              quantity: item.cartQuantity ?? 0,
+                              weigth: item.weight.toString(),
+                              inWishList: item.wishlistStatus ?? false,
+                              inCart: item.inCart ?? false,
+                              onAddToCard: () {
+                                Get.closeCurrentSnackbar();
+                                if (item.inCart ?? false) {
+                                  Get.find<BottomBarController>()
+                                      .tabController
+                                      ?.animateTo(2);
+                                } else {
+                                  if (controller.productArrivalDocList[index]
+                                          .cartQuantity
+                                          .toDouble() >
+                                      0) {
+                                    controller.postAddToCart(item.id ?? "",
+                                        item.cartQuantity, index, "arrival");
+                                  } else {
+                                    Utility.errorMessage(
+                                        "Please add one item.");
+                                  }
+                                }
+                              },
+                              addFavorite: () {
+                                controller.postWishlistAddRemove(
+                                    item.id ?? "", index, false);
+                              },
+                              increment: item.inCart ?? false
+                                  ? null
+                                  : () {
+                                      controller.productArrivalDocList[index]
+                                          .cartQuantity++;
+                                      controller.update();
+                                    },
+                              dincrement: item.inCart ?? false
+                                  ? null
+                                  : () {
+                                      if (controller
+                                              .productArrivalDocList[index]
+                                              .cartQuantity
+                                              .toDouble() >
+                                          1) {
+                                        controller.productArrivalDocList[index]
+                                            .cartQuantity--;
+                                      }
+                                      controller.update();
+                                    },
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
                   Dimens.boxHeight20,
                   ListView.builder(
                     shrinkWrap: true,
@@ -380,94 +338,98 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Trending Product',
-                        style: Styles.color01010170020,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          RouteManagement.goToViewAllProductScreen(
-                              "Trending", "", "");
-                        },
-                        child: Text(
-                          'View All',
-                          style: Styles.primary50014,
+                  if (controller.productTrendingDocList.isNotEmpty) ...[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Trending Product',
+                          style: Styles.color01010170020,
                         ),
-                      ),
-                    ],
-                  ),
-                  Dimens.boxHeight10,
-                  SizedBox(
-                    height: Dimens.threeHundredFifteen,
-                    child: ListView.builder(
-                      controller: controller.scrollTrendingController,
-                      padding: Dimens.edgeInsets0,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: controller.productTrendingDocList.length,
-                      itemBuilder: (context, index) {
-                        var item = controller.productTrendingDocList[index];
-                        return Padding(
-                          padding: Dimens.edgeInsetsRight20,
-                          child: CustomProductView(
-                            inOutStock:
-                                (item.quantity ?? 0) == 0 ? true : false,
-                            productName: item.name ?? "",
-                            imageUrl: item.image ?? "",
-                            categoryName: item.category?.name ?? "",
-                            quantity: item.cartQuantity,
-                            weigth: item.weight.toString(),
-                            inCart: item.inCart ?? false,
-                            inWishList: item.wishlistStatus ?? false,
-                            onAddToCard: () {
-                              Get.closeCurrentSnackbar();
-                              if (item.inCart ?? false) {
-                                Get.find<BottomBarController>()
-                                    .tabController
-                                    ?.animateTo(2);
-                              } else {
-                                if (controller.productTrendingDocList[index]
-                                        .cartQuantity
-                                        .toDouble() >
-                                    0) {
-                                  controller.postAddToCart(item.id ?? "",
-                                      item.cartQuantity, index, "trending");
-                                } else {
-                                  Utility.errorMessage("Please add one item.");
-                                }
-                              }
-                            },
-                            addFavorite: () {
-                              controller.postWishlistAddRemove(
-                                  item.id ?? "", index, false);
-                            },
-                            increment: item.inCart ?? false
-                                ? null
-                                : () {
-                                    controller.productTrendingDocList[index]
-                                        .cartQuantity++;
-                                    controller.update();
-                                  },
-                            dincrement: item.inCart ?? false
-                                ? null
-                                : () {
-                                    if (controller.productTrendingDocList[index]
-                                            .cartQuantity
-                                            .toDouble() >
-                                        1) {
-                                      controller.productTrendingDocList[index]
-                                          .cartQuantity--;
-                                    }
-                                    controller.update();
-                                  },
+                        GestureDetector(
+                          onTap: () {
+                            RouteManagement.goToViewAllProductScreen(
+                                "Trending", "", "");
+                          },
+                          child: Text(
+                            'View All',
+                            style: Styles.primary50014,
                           ),
-                        );
-                      },
+                        ),
+                      ],
                     ),
-                  ),
+                    Dimens.boxHeight10,
+                    SizedBox(
+                      height: Dimens.threeHundredFifteen,
+                      child: ListView.builder(
+                        controller: controller.scrollTrendingController,
+                        padding: Dimens.edgeInsets0,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: controller.productTrendingDocList.length,
+                        itemBuilder: (context, index) {
+                          var item = controller.productTrendingDocList[index];
+                          return Padding(
+                            padding: Dimens.edgeInsetsRight20,
+                            child: CustomProductView(
+                              inOutStock:
+                                  (item.quantity ?? 0) == 0 ? true : false,
+                              productName: item.name ?? "",
+                              imageUrl: item.image ?? "",
+                              categoryName: item.category?.name ?? "",
+                              quantity: item.cartQuantity,
+                              weigth: item.weight.toString(),
+                              inCart: item.inCart ?? false,
+                              inWishList: item.wishlistStatus ?? false,
+                              onAddToCard: () {
+                                Get.closeCurrentSnackbar();
+                                if (item.inCart ?? false) {
+                                  Get.find<BottomBarController>()
+                                      .tabController
+                                      ?.animateTo(2);
+                                } else {
+                                  if (controller.productTrendingDocList[index]
+                                          .cartQuantity
+                                          .toDouble() >
+                                      0) {
+                                    controller.postAddToCart(item.id ?? "",
+                                        item.cartQuantity, index, "trending");
+                                  } else {
+                                    Utility.errorMessage(
+                                        "Please add one item.");
+                                  }
+                                }
+                              },
+                              addFavorite: () {
+                                controller.postWishlistAddRemove(
+                                    item.id ?? "", index, false);
+                              },
+                              increment: item.inCart ?? false
+                                  ? null
+                                  : () {
+                                      controller.productTrendingDocList[index]
+                                          .cartQuantity++;
+                                      controller.update();
+                                    },
+                              dincrement: item.inCart ?? false
+                                  ? null
+                                  : () {
+                                      if (controller
+                                              .productTrendingDocList[index]
+                                              .cartQuantity
+                                              .toDouble() >
+                                          1) {
+                                        controller.productTrendingDocList[index]
+                                            .cartQuantity--;
+                                      }
+                                      controller.update();
+                                    },
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
                 ],
               ),
             ),

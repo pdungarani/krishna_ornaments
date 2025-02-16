@@ -10,6 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_in_store_app_version_checker/flutter_in_store_app_version_checker.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -27,6 +28,10 @@ abstract class Utility {
   static String? coutryCurrency;
 
   static String? profilePic;
+
+  static InStoreAppVersionChecker checker = InStoreAppVersionChecker(
+    appId: 'com.krishna.krishna_ornaments',
+  );
 
   /// common header for All api
   static Map<String, String> commonHeader({
@@ -105,6 +110,15 @@ abstract class Utility {
   static void disableScreenshot(noScreenshot) async {
     bool result = await noScreenshot.screenshotOff();
     debugPrint('Screenshot Off: $result');
+  }
+
+  static void launchLinkURL(String url) async {
+    await launchUrl(Uri.parse(url)).onError(
+      (error, stackTrace) {
+        print("Url is not valid!");
+        return false;
+      },
+    );
   }
 
   static Future<bool> imagePermissionCheack(BuildContext context) async {

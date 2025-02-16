@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
@@ -12,6 +13,18 @@ class LoginController extends GetxController {
 
   final LoginPresenter loginPresenter;
 
+  var firebaseMessaging = FirebaseMessaging.instance;
+
+  String? facmToken;
+
+  @override
+  onInit() async {
+    super.onInit();
+    await firebaseMessaging.getToken().then((token) async {
+      facmToken = token;
+    });
+  }
+
   ///// =========== >>>>> Login Screen <<<<< =========== /////
 
   TextEditingController emailController = TextEditingController();
@@ -21,15 +34,14 @@ class LoginController extends GetxController {
 
   LoginModel? loginData;
 
-  Future<void> loginApi({
-    required String emailController,
-    required String passwordController,
-  }) async {
+  bool isLoginLoading = false;
+
+  Future<void> loginApi() async {
     var response = await loginPresenter.loginApi(
-      mobile: emailController,
-      password: passwordController,
-      fcm: '',
-      isLoading: true,
+      mobile: emailController.text,
+      password: passwordController.text,
+      fcm: facmToken ?? "",
+      isLoading: false,
     );
     loginData = null;
     if (response?.data != null) {
@@ -37,10 +49,12 @@ class LoginController extends GetxController {
       Get.find<Repository>()
           .saveValue(LocalKeys.authToken, response?.data?.accessToken);
       RouteManagement.goToBottomBarView();
-      update();
+      isLoginLoading = false;
     } else {
+      isLoginLoading = false;
       Utility.errorMessage('Oops something went wrong');
     }
+    update();
   }
 
   ///// =========== >>>>> Signup Screen <<<<< =========== /////

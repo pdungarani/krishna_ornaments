@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/navigators/navigators.dart';
@@ -10,19 +12,39 @@ class SplashController extends GetxController {
 
   @override
   void onInit() {
+    startTimer();
     super.onInit();
-    Future.delayed(
-      const Duration(seconds: 5),
-    ).then(
-      (value) {
-        final result =
-            Get.find<Repository>().getStringValue(LocalKeys.authToken).isEmpty;
-        if (result) {
-          RouteManagement.goToLoginView();
-        } else {
-          RouteManagement.goToBottomBarView();
-        }
-      },
-    );
+  }
+
+  String? appUrl;
+
+  void startTimer() async {
+    final result = await Utility.checker.checkUpdate();
+    Future.delayed(const Duration(seconds: 3)).then((value) {
+      // if (Platform.isAndroid) {
+      //   if (result.currentVersion != result.newVersion) {
+      //     appUrl = result.appURL ?? "";
+      //     RouteManagement.goToInAppUpdateScreen(result.appURL ?? "");
+      //   } else {
+      //     final result = Get.find<Repository>()
+      //         .getStringValue(LocalKeys.authToken)
+      //         .isEmpty;
+      //     if (result) {
+      //       RouteManagement.goToLoginView();
+      //     } else {
+      //       RouteManagement.goToBottomBarView();
+      //     }
+      //   }
+      // } else {
+      final result =
+          Get.find<Repository>().getStringValue(LocalKeys.authToken).isEmpty;
+      if (result) {
+        RouteManagement.goToLoginView();
+      } else {
+        RouteManagement.goToBottomBarView();
+      }
+      // }
+    });
+    update();
   }
 }

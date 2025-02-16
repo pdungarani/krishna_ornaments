@@ -186,5 +186,12 @@ class AppPages {
       binding: ShoppingCartBinding(),
       transition: Transition.fadeIn,
     ),
+    GetPage<InAppUpdateScreen>(
+      name: _Paths.inAppUpdateScreen,
+      transitionDuration: transitionDuration,
+      page: InAppUpdateScreen.new,
+      binding: SplashBinding(),
+      transition: Transition.fadeIn,
+    ),
   ];
 }

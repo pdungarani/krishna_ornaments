@@ -46,4 +46,6 @@ abstract class RouteManagement {
       Get.toNamed<void>(Routes.contactUsScreen);
   static void goToShoppingCartScreen(bool isBack) =>
       Get.toNamed<void>(Routes.shoppingCartScreen, arguments: isBack);
+  static void goToInAppUpdateScreen(String appUrl) =>
+      Get.offAllNamed<void>(Routes.inAppUpdateScreen, arguments: appUrl);
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gif_view/gif_view.dart';
 import 'package:krishna_ornaments/app/app.dart';
 
 class SplashScreen extends StatelessWidget {

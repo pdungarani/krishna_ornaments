@@ -80,7 +80,9 @@ class ConnectHelper {
     return '0.0.0.0';
   }
 
-  Future<ResponseModel> getAllCategories({bool isLoading = false}) async {
+  Future<ResponseModel> getAllCategories({
+    bool isLoading = false,
+  }) async {
     var response = await apiWrapper.makeRequest(
       EndPoints.getAllCategories,
       Request.get,
