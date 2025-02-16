@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/domain/domain.dart';
+import 'package:krishna_ornaments/domain/services/firebase_api.dart';
 
 class BottomBarController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -21,7 +22,7 @@ class BottomBarController extends GetxController
     super.onInit();
 
     SocketConnection.initSocket();
-    // FirebaseApi().initNotification();
+    FirebaseApi().initNotification();
   }
 
   GetProfileData? getProfileModel;

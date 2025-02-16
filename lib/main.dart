@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,13 +9,21 @@ import 'package:krishna_ornaments/app/navigators/navigators.dart';
 import 'package:krishna_ornaments/data/data.dart';
 import 'package:krishna_ornaments/device/device.dart';
 import 'package:krishna_ornaments/domain/domain.dart';
+import 'package:krishna_ornaments/domain/services/firebase_api.dart';
 import 'package:no_screenshot/no_screenshot.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 final noScreenshot = NoScreenshot.instance;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initServices();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await FirebaseMessaging.instance.setAutoInitEnabled(true);
+  FirebaseApi.initilizeNotification();
   Utility.disableScreenshot(noScreenshot);
   runApp(
     MyApp(),
@@ -54,7 +63,7 @@ class DbService extends GetxService {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({
+  const MyApp({
     Key? key,
   }) : super(key: key);
 

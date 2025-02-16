@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "633045384708",
+    "project_id": "krishna-ornaments-4ecb9",
+    "storage_bucket": "krishna-ornaments-4ecb9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:633045384708:android:103e2f910a9397c3cdbf51",
+        "android_client_info": {
+          "package_name": "com.krishna.krishna_ornaments"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9l1Ul1fTqbPX74v72B2l-qbzbC_Bqe9A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

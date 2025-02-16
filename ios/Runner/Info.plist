@@ -32,6 +32,12 @@
 	<string>App uses a camera to take and upload pictures to set profile picture.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>App use photos to upload pictures to create events and offers.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>processing</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
