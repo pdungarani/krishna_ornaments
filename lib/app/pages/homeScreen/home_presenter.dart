@@ -1,4 +1,3 @@
-import 'package:krishna_ornaments/data/data.dart';
 import 'package:krishna_ornaments/domain/domain.dart';
 
 class HomePresenter {
@@ -81,6 +80,13 @@ class HomePresenter {
   }) async =>
       await homeUseCases.postWishlistAddRemove(
         productId: productId,
+        isLoading: isLoading,
+      );
+
+  Future<GetProfileModel?> getProfile({
+    bool isLoading = false,
+  }) async =>
+      await homeUseCases.getProfile(
         isLoading: isLoading,
       );
 }

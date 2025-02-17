@@ -426,6 +426,10 @@ class ShoppingCartController extends GetxController {
           scrollViewAllController.jumpTo(0);
         }
       }
+
+      isViewAllLoading = false;
+    } else {
+      isViewAllLoading = false;
     }
     update();
   }

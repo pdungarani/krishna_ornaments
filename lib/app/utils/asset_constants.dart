@@ -15,6 +15,7 @@ abstract class AssetConstants {
   static const String ic_plus = 'assets/svg/ic_plus.svg';
   static const String ic_delete = 'assets/svg/ic_delete.svg';
   static const String ic_bank = 'assets/svg/ic_bank.svg';
+  static const String contact_us = 'assets/svg/contact_us.svg';
   static const String ic_block = 'assets/svg/ic_block.svg';
   static const String ic_call = 'assets/svg/ic_call.svg';
   static const String ic_repair = 'assets/svg/ic_repair.svg';
@@ -35,9 +36,14 @@ abstract class AssetConstants {
   static const String ic_close = 'assets/svg/ic_close.svg';
   static const String ic_filter_empty = 'assets/svg/ic_filter_empty.svg';
   static const String kirshina = 'assets/icons/kirshina.gif';
+  static const String email = 'assets/images/email.png';
+  static const String location = 'assets/images/location.png';
+  static const String phone = 'assets/images/phone.png';
+  static const String whatsapp = 'assets/images/whatsapp.png';
   static const String dwsadsa = '';
 
   static const String copyIcon = 'assets/icons/copy.svg';
   static const String app_logo = 'assets/images/app_logo.jpg';
-  static const String app_update_lottie = 'assets/images/app_update_lottie.json';
+  static const String app_update_lottie =
+      'assets/images/app_update_lottie.json';
 }

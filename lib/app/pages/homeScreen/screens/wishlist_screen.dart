@@ -13,7 +13,7 @@ class WishlistScreen extends StatelessWidget {
     return GetBuilder<HomeController>(
       initState: (state) async {
         var controller = Get.find<HomeController>();
-        await controller.postWishlist(1);
+        controller.postWishlist(1);
         controller.scrollWishListController.addListener(() async {
           if (controller.scrollWishListController.position.pixels ==
               controller.scrollWishListController.position.maxScrollExtent) {

@@ -13,8 +13,24 @@ class HomeController extends GetxController {
   @override
   onInit() {
     super.onInit();
-    getAllCategories();
-    postWishlist(1);
+    getProfile();
+  }
+
+  GetProfileData? getProfileModel;
+
+  Future<void> getProfile() async {
+    var response = await homePresenter.getProfile(
+      isLoading: true,
+    );
+    getProfileModel = null;
+    if (response != null) {
+      getProfileModel = response.data;
+      Get.find<Repository>()
+          .saveValue(LocalKeys.chanelId, getProfileModel?.channelid ?? "");
+      update();
+    } else {
+      Utility.errorMessage(response?.message ?? "");
+    }
   }
 
   late PageController controller;
@@ -24,10 +40,6 @@ class HomeController extends GetxController {
   List<String> testList = ["fds", "Fsdf"];
 
   /// >>>>>>>>>>>>>> For view all Screen <<<<<<<<<<<<<<<<<<<< ///
-
-  final ScrollController scrollBestSellerController = ScrollController();
-
-  ////Harshil
 
   int selectPage = 0;
 
@@ -60,12 +72,12 @@ class HomeController extends GetxController {
       limit: 10,
       search: "",
       category: "",
-      min: "1",
-      max: "10",
+      min: "",
+      max: "",
       productType: "arrival",
       sortField: "weight",
       sortOption: 1,
-      isLoading: false,
+      isLoading: true,
     );
     if (response?.data != null) {
       if (pageKey == 1) {
@@ -104,12 +116,12 @@ class HomeController extends GetxController {
       limit: 10,
       search: "",
       category: "",
-      min: "1",
-      max: "10",
+      min: "",
+      max: "",
       productType: "trending",
       sortField: 'weight',
       sortOption: 1,
-      isLoading: false,
+      isLoading: true,
     );
     if (response?.data != null) {
       if (pageKey == 1) {
@@ -128,6 +140,7 @@ class HomeController extends GetxController {
           scrollTrendingController.jumpTo(0);
         }
       }
+      postWishlist(1);
     } else {
       Utility.errorMessage(response?.message ?? "");
     }
@@ -136,6 +149,8 @@ class HomeController extends GetxController {
 
   List<ProductsDoc> getAllProductDocList = [];
   final ScrollController scrollViewAllController = ScrollController();
+
+  bool isSearchLoading = false;
 
   Future<void> postGetAllProduct(int pageKey, String search) async {
     if (pageKey == 1) {
@@ -170,7 +185,9 @@ class HomeController extends GetxController {
           scrollTrendingController.jumpTo(0);
         }
       }
+      isSearchLoading = false;
     } else {
+      isSearchLoading = false;
       Utility.errorMessage(response?.message ?? "");
     }
     update();

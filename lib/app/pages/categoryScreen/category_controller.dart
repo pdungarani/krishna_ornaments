@@ -9,13 +9,16 @@ class CategoryController extends GetxController {
 
   List<GetCategoriesData> getCategoriesList = [];
 
+  bool isLoading = true;
+
   Future<void> getAllCategories() async {
     var response = await categoryPresenter.getAllCategories(
-      isLoading: true,
+      isLoading: false,
     );
     getCategoriesList.clear();
     if (response?.data != null) {
       getCategoriesList.addAll(response?.data ?? []);
+      isLoading = false;
     }
     update();
   }

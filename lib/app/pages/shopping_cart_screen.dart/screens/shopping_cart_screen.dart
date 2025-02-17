@@ -14,7 +14,7 @@ class ShoppingCartScreen extends StatelessWidget {
     return GetBuilder<ShoppingCartController>(
       initState: (state) async {
         var controller = Get.find<ShoppingCartController>();
-        await controller.postCartList(1);
+        controller.postCartList(1);
         controller.scrollCartController.addListener(() async {
           if (controller.scrollCartController.position.pixels ==
               controller.scrollCartController.position.maxScrollExtent) {

@@ -13,11 +13,11 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
-      initState: (state) async {
+      initState: (state) {
         var controller = Get.find<HomeController>();
-        Get.find<ProfileController>().getProfile();
-        await controller.postAllProduct(1);
-        await controller.postAllTrendingProduct(1);
+        controller.getAllCategories();
+        controller.postAllProduct(1);
+        controller.postAllTrendingProduct(1);
       },
       builder: (controller) {
         return Scaffold(
@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget {
             title: Padding(
               padding: EdgeInsets.all(Dimens.five),
               child: Text(
-                "Hi, ${Get.find<ProfileController>().getProfileModel?.name ?? ''}",
+                "Hi, ${Get.find<ProfileController>().getProfileModel?.name ?? 'User'}",
                 style: Styles.color01010160018,
               ),
             ),
@@ -254,7 +254,7 @@ class HomeScreen extends StatelessWidget {
                     SizedBox(
                       height: Dimens.twoHundredNinety,
                       child: ListView.builder(
-                        controller: controller.scrollBestSellerController,
+                        controller: controller.scrollArrivalProductController,
                         padding: Dimens.edgeInsets0,
                         scrollDirection: Axis.horizontal,
                         itemCount: controller.productArrivalDocList.length,

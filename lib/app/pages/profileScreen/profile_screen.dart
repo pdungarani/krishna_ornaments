@@ -271,7 +271,7 @@ class ProfileScreen extends StatelessWidget {
                             color: ColorsValue.colorA7A7A7,
                           ),
                           leading: SvgPicture.asset(
-                            AssetConstants.ic_bank,
+                            AssetConstants.contact_us,
                           ),
                           title: Text(
                             "Contact Us",
