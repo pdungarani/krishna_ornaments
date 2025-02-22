@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -10,21 +11,30 @@ class ProfileController extends GetxController {
 
   final ProfilePresenter profilePresenter;
 
+  @override
+  onInit() {
+    super.onInit();
+    getProfile();
+  }
+
+  bool isProfileLoading = true;
   GetProfileData? getProfileModel;
 
   Future<void> getProfile() async {
     var response = await profilePresenter.getProfile(
-      isLoading: true,
+      isLoading: false,
     );
     getProfileModel = null;
     if (response != null) {
       getProfileModel = response.data;
       Get.find<Repository>()
           .saveValue(LocalKeys.chanelId, getProfileModel?.channelid ?? "");
-      update();
+      isProfileLoading = false;
     } else {
+      isProfileLoading = false;
       Utility.errorMessage(response?.message ?? "");
     }
+    update();
   }
 
   // String? profileImage;

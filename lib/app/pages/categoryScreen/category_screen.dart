@@ -13,7 +13,6 @@ class CategoryScreen extends StatelessWidget {
     return GetBuilder<CategoryController>(
       initState: (state) async {
         var controller = Get.find<CategoryController>();
-        controller.isLoading = true;
         controller.getAllCategories();
       },
       builder: (controller) => Scaffold(
@@ -45,8 +44,8 @@ class CategoryScreen extends StatelessWidget {
                         child: Padding(
                           padding: Dimens.edgeInsetsTop10,
                           child: Container(
+                            height: Dimens.ninty,
                             width: double.maxFinite,
-                            height: Dimens.hundredTwenty,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(
                                 Dimens.ten,

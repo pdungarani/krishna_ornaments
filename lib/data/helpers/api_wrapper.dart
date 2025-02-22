@@ -16,6 +16,7 @@ class ApiWrapper {
   final String _baseUrl = 'https://api.krishnaornaments.com/';
   static String baseUrl = 'https://api.krishnaornaments.com/';
   static String imageUrl = 'https://krishna.s3.ap-south-1.amazonaws.com/';
+  static var client = http.Client();
 
   /// Method to make all the requests inside the app like GET, POST, PUT, Delete
   Future<ResponseModel> makeRequest(
@@ -42,7 +43,7 @@ class ApiWrapper {
             }
 
             try {
-              final response = await http
+              final response = await client
                   .get(
                     Uri.parse(uri),
                     headers: headers,
@@ -76,7 +77,7 @@ class ApiWrapper {
                 }
                 Utility.showLoader();
               }
-              final response = await http
+              final response = await client
                   .post(
                     Uri.parse(uri),
                     body: jsonEncode(data),

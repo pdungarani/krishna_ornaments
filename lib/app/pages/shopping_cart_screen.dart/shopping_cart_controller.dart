@@ -4,9 +4,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/navigators/navigators.dart';
-import 'package:krishna_ornaments/domain/models/models.dart';
+import 'package:krishna_ornaments/domain/domain.dart';
 
 class ShoppingCartController extends GetxController {
   ShoppingCartController(this.shoppingCartPresenter);
@@ -315,38 +316,75 @@ class ShoppingCartController extends GetxController {
   bool isLoader = true;
 
   double cartTotal = 0;
+  var client = http.Client();
 
   Future<void> postCartList(int pageKey) async {
     if (pageKey == 1) {
       pageCartCount = 1;
     }
-    var response = await shoppingCartPresenter.postGetAllCartProduct(
-      page: pageKey,
-      limit: 10,
-      isLoading: false,
+    var response = await client.post(
+      Uri.parse("https://api.krishnaornaments.com/user/cart"),
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization':
+            'Token ${Get.find<Repository>().getStringValue(LocalKeys.authToken)}',
+      },
+      body: jsonEncode({
+        "page": pageKey,
+        "limit": 10,
+      }),
     );
-    cartItemModel = null;
-    if (response?.data != null) {
-      cartItemModel = response?.data;
+    var cartItemModel = cartItemModelFromJson(response.body);
+    if (cartItemModel.data != null) {
       if (pageKey == 1) {
         isCartLastPage = false;
         cartList.clear();
       }
-      if ((response?.data?.products?.length ?? 0) < 10) {
+      if ((cartItemModel.data?.products?.length ?? 0) < 10) {
         isCartLastPage = true;
-        cartList.addAll(response?.data?.products ?? []);
+        cartList.addAll(cartItemModel.data?.products ?? []);
       } else {
         pageCartCount++;
-        cartList.addAll(response?.data?.products ?? []);
+        cartList.addAll(cartItemModel.data?.products ?? []);
       }
       if (pageKey == 1) {
         if (scrollCartController.positions.isNotEmpty) {
           scrollCartController.jumpTo(0);
         }
       }
+      isLoader = false;
     } else {
-      Utility.errorMessage(response?.message ?? "");
+      isLoader = false;
+      Utility.errorMessage(cartItemModel.message.toString());
     }
+
+    // var response = await shoppingCartPresenter.postGetAllCartProduct(
+    //   page: pageKey,
+    //   limit: 10,
+    //   isLoading: true,
+    // );
+    // cartItemModel = null;
+    // if (response?.data != null) {
+    //   cartItemModel = response?.data;
+    //   if (pageKey == 1) {
+    //     isCartLastPage = false;
+    //     cartList.clear();
+    //   }
+    //   if ((response?.data?.products?.length ?? 0) < 10) {
+    //     isCartLastPage = true;
+    //     cartList.addAll(response?.data?.products ?? []);
+    //   } else {
+    //     pageCartCount++;
+    //     cartList.addAll(response?.data?.products ?? []);
+    //   }
+    //   if (pageKey == 1) {
+    //     if (scrollCartController.positions.isNotEmpty) {
+    //       scrollCartController.jumpTo(0);
+    //     }
+    //   }
+    // } else {
+    //   Utility.errorMessage(response?.message ?? "");
+    // }
     update();
   }
 
