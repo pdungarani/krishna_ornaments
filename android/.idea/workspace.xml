@@ -5,23 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9793261e-0475-4b67-8bd4-a99542b48c23" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.cxx/Debug/4h38e223/x86/configure_fingerprint.bin" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/Debug/4h38e223/x86/configure_fingerprint.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.cxx/RelWithDebInfo/1a2v6j2w/arm64-v8a/configure_fingerprint.bin" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/RelWithDebInfo/1a2v6j2w/arm64-v8a/configure_fingerprint.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.cxx/RelWithDebInfo/1a2v6j2w/armeabi-v7a/configure_fingerprint.bin" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/RelWithDebInfo/1a2v6j2w/armeabi-v7a/configure_fingerprint.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.cxx/RelWithDebInfo/1a2v6j2w/x86/configure_fingerprint.bin" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/RelWithDebInfo/1a2v6j2w/x86/configure_fingerprint.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.cxx/RelWithDebInfo/1a2v6j2w/x86_64/configure_fingerprint.bin" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/RelWithDebInfo/1a2v6j2w/x86_64/configure_fingerprint.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/release/app-release.aab" beforeDir="false" afterPath="$PROJECT_DIR$/app/release/app-release.aab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/navigators/app_pages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/navigators/app_pages.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/navigators/app_routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/navigators/app_routes.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/navigators/routes_management.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/navigators/routes_management.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/homeScreen/screens/home_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/homeScreen/screens/home_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/logingScreen/loging_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/logingScreen/loging_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/logingScreen/loging_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/logingScreen/loging_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/profileScreen/profile_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/profileScreen/profile_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/splashScreen/splash_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/splashScreen/splash_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/splashScreen/splash_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/splashScreen/splash_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/splashScreen/splash_screen.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/theme/dimens.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/theme/dimens.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/utils/asset_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/utils/asset_constants.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/utils/utility.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/utils/utility.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/data/helpers/connect_helper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/data/helpers/connect_helper.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/app/pages/repair_screen/repair_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/repair_screen/repair_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/app/pages/repair_screen/screens/sample_order_history_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/repair_screen/screens/sample_order_history_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../pubspec.yaml" afterDir="false" />
     </list>
@@ -33,7 +27,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=/Users/parthivdungarani/.android/avd/Medium_Phone_API_35.avd)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=/Users/parthivdungarani/.android/avd/flutter_emulator.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />

@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:krishna_ornaments/app/app.dart';
@@ -414,17 +415,30 @@ class RepairController extends GetxController {
   List<RepairOrderHistoryDoc> repairOrderList = [];
   int repairLimit = 10;
 
+  var client = http.Client();
+
+  bool isRepairLoad = true;
+
   Future<void> repairOrderListData(pageKey) async {
-    var response = await repairPresenter.repairOrderList(
-      page: pageKey,
-      limit: repairLimit,
-      isLoading: true,
+    var response = await client.post(
+      Uri.parse("https://api.krishnaornaments.com/user/repairingorders"),
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization':
+            'Token ${Get.find<Repository>().getStringValue(LocalKeys.authToken)}',
+      },
+      body: jsonEncode({
+        "page": pageKey,
+        "limit": 10,
+      }),
     );
-    if (response != null) {
+
+    var repairOrderModel = repairOrderHistoryModelFromJson(response.body);
+    if (repairOrderModel.data != null) {
       if (pageKey == 1) {
         repairOrderList.clear();
       }
-      repairOrderList = response.data?.docs ?? [];
+      repairOrderList = repairOrderModel.data?.docs ?? [];
 
       final isLastPage = repairOrderList.length < repairLimit;
       if (isLastPage) {
@@ -433,8 +447,31 @@ class RepairController extends GetxController {
         var nextPageKey = pageKey + 1;
         repairOrderPagingController.appendPage(repairOrderList, nextPageKey);
       }
-      update();
+      isRepairLoad = false;
+    } else {
+      isRepairLoad = false;
+      Utility.errorMessage(repairOrderModel.message.toString());
     }
+    update();
+
+    // var response = await repairPresenter.repairOrderList(
+    //   page: pageKey,
+    //   limit: repairLimit,
+    //   isLoading: true,
+    // );
+    // if (response != null) {
+    //   if (pageKey == 1) {
+    //     repairOrderList.clear();
+    //   }
+    //   repairOrderList = response.data?.docs ?? [];
+    //   final isLastPage = repairOrderList.length < repairLimit;
+    //   if (isLastPage) {
+    //     repairOrderPagingController.appendLastPage(repairOrderList);
+    //   } else {
+    //     var nextPageKey = pageKey + 1;
+    //     repairOrderPagingController.appendPage(repairOrderList, nextPageKey);
+    //   }
+    // }
   }
 
   GetOneRepairOrderData? getOneRepairOrderData;
@@ -460,18 +497,29 @@ class RepairController extends GetxController {
 
   List<SampleOrderHistoryDoc> smapleListModel = [];
   int smapleLimit = 10;
+  bool isSampleLoad = true;
 
   Future<void> postSampleOrderHistory(int pageKey) async {
-    var response = await repairPresenter.postSampleOrderHistory(
-      page: pageKey,
-      limit: smapleLimit,
-      isLoading: false,
+    var response = await client.post(
+      Uri.parse("https://api.krishnaornaments.com/user/sampleorders"),
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization':
+            'Token ${Get.find<Repository>().getStringValue(LocalKeys.authToken)}',
+      },
+      body: jsonEncode({
+        "page": pageKey,
+        "limit": 10,
+      }),
     );
-    if (response != null) {
+
+    var sampleOrderHistoryModel =
+        sampleOrderHistoryModelFromJson(response.body);
+    if (sampleOrderHistoryModel.status == 200) {
       if (pageKey == 1) {
         smapleListModel.clear();
       }
-      smapleListModel = response.data?.docs ?? [];
+      smapleListModel = sampleOrderHistoryModel.data?.docs ?? [];
 
       final isLastPage = smapleListModel.length < smapleLimit;
       if (isLastPage) {
@@ -480,8 +528,32 @@ class RepairController extends GetxController {
         var nextPageKey = pageKey + 1;
         smaplePagingController.appendPage(smapleListModel, nextPageKey);
       }
-      update();
+      isSampleLoad = false;
+    } else {
+      isSampleLoad = false;
+      Utility.showMessage(sampleOrderHistoryModel.message.toString(),
+          MessageType.error, () => null, '');
     }
+    update();
+
+    // var response = await repairPresenter.postSampleOrderHistory(
+    //   page: pageKey,
+    //   limit: smapleLimit,
+    //   isLoading: false,
+    // );
+    // if (response != null) {
+    //   if (pageKey == 1) {
+    //     smapleListModel.clear();
+    //   }
+    //   smapleListModel = response.data?.docs ?? [];
+
+    //   final isLastPage = smapleListModel.length < smapleLimit;
+    //   if (isLastPage) {
+    //     smaplePagingController.appendLastPage(smapleListModel);
+    //   } else {
+    //     var nextPageKey = pageKey + 1;
+    //     smaplePagingController.appendPage(smapleListModel, nextPageKey);
+    //   }
   }
 
   GetOneSampleData? getOneSampleData = GetOneSampleData();

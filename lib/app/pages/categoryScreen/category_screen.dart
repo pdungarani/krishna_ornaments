@@ -44,7 +44,6 @@ class CategoryScreen extends StatelessWidget {
                         child: Padding(
                           padding: Dimens.edgeInsetsTop10,
                           child: Container(
-                            height: Dimens.ninty,
                             width: double.maxFinite,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(
