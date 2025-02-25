@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -113,7 +114,7 @@ class HomeScreen extends StatelessWidget {
                         width: double.maxFinite,
                         height: Dimens.twoHundred,
                         child: PageView.builder(
-                          itemCount: controller.testList.length,
+                          itemCount: controller.bnnerList.length,
                           onPageChanged: (value) {
                             controller.selectPage = value;
                             controller.update();
@@ -124,7 +125,8 @@ class HomeScreen extends StatelessWidget {
                                 Dimens.ten,
                               ),
                               child: Image.asset(
-                                AssetConstants.banner,
+                                controller.bnnerList[index],
+                                fit: BoxFit.cover,
                               ),
                             );
                           },
@@ -134,7 +136,7 @@ class HomeScreen extends StatelessWidget {
                       Center(
                         child: Wrap(
                           children:
-                              controller.testList.asMap().entries.map((e) {
+                              controller.bnnerList.asMap().entries.map((e) {
                             return Padding(
                               padding: Dimens.edgeInsetsLeft4,
                               child: Container(
@@ -161,6 +163,7 @@ class HomeScreen extends StatelessWidget {
                           'Categories',
                           style: Styles.color01010170020,
                         ),
+                        Dimens.boxHeight10,
                         SizedBox(
                           height: Dimens.hundredThirty,
                           child: ListView.builder(
@@ -179,56 +182,62 @@ class HomeScreen extends StatelessWidget {
                                 },
                                 child: Padding(
                                   padding: Dimens.edgeInsetsRight20,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        height: Dimens.seventyFive,
-                                        width: Dimens.seventyFive,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(
-                                            Dimens.fiveHundred,
+                                  child: SizedBox(
+                                    width: Dimens.hundredTen,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          alignment: Alignment.center,
+                                          width: Dimens.seventyFive,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                              Dimens.fiveHundred,
+                                            ),
+                                            color: ColorsValue.whiteColor,
                                           ),
-                                          color: ColorsValue.whiteColor,
-                                        ),
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(
-                                            Dimens.fiveHundred,
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(
+                                              Dimens.fiveHundred,
+                                            ),
+                                            child: type != "svg"
+                                                ? CachedNetworkImage(
+                                                    imageUrl: (item.icon ?? ""),
+                                                    height: Dimens.seventyFive,
+                                                    width: Dimens.seventyFive,
+                                                    placeholder:
+                                                        (context, url) {
+                                                      return Image.asset(
+                                                        AssetConstants.ring,
+                                                      );
+                                                    },
+                                                    errorWidget:
+                                                        (context, url, error) {
+                                                      return Image.asset(
+                                                        AssetConstants.ring,
+                                                      );
+                                                    },
+                                                  )
+                                                : SvgPicture.network(
+                                                    item.image ?? "",
+                                                    height: Dimens.seventyFive,
+                                                    width: Dimens.seventyFive,
+                                                  ),
                                           ),
-                                          child: type != "svg"
-                                              ? Image.asset(
-                                                  AssetConstants.ring,
-                                                )
-                                              // CachedNetworkImage(
-                                              //     imageUrl: (item.image ?? ""),
-                                              //     fit: BoxFit.cover,
-                                              //     placeholder: (context, url) {
-                                              //       return Image.asset(
-                                              //         AssetConstants.ring,
-                                              //         fit: BoxFit.cover,
-                                              //       );
-                                              //     },
-                                              //     errorWidget:
-                                              //         (context, url, error) {
-                                              //       return Image.asset(
-                                              //         AssetConstants.ring,
-                                              //         fit: BoxFit.cover,
-                                              //       );
-                                              //     },
-                                              //   )
-                                              : SvgPicture.network(
-                                                  item.image ?? "",
-                                                ),
                                         ),
-                                      ),
-                                      Dimens.boxHeight10,
-                                      Text(
-                                        item.name ?? "",
-                                        style: Styles.blackw60012,
-                                      )
-                                    ],
+                                        Dimens.boxHeight10,
+                                        Text(
+                                          item.name ?? "",
+                                          style: Styles.blackw60012,
+                                          maxLines: 2,
+                                          textAlign: TextAlign.center,
+                                          overflow: TextOverflow.ellipsis,
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               );
@@ -340,7 +349,7 @@ class HomeScreen extends StatelessWidget {
                       ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 2,
+                        itemCount: controller.bannerHomeList.length,
                         itemBuilder: (context, index) => Padding(
                           padding: Dimens.edgeInsetsBottom10,
                           child: ClipRRect(
@@ -348,7 +357,8 @@ class HomeScreen extends StatelessWidget {
                               Dimens.ten,
                             ),
                             child: Image.asset(
-                              AssetConstants.banner,
+                              controller.bannerHomeList[index],
+                              fit: BoxFit.cover,
                             ),
                           ),
                         ),
