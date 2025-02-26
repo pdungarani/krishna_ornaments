@@ -51,6 +51,7 @@ class ShoppingCartScreen extends StatelessWidget {
                         text: 'Checkout',
                         style: Styles.whiteW80014,
                         onTap: () {
+                          Utility.showLoader();
                           controller.postOrderCreate();
                         },
                       ),
@@ -137,7 +138,8 @@ class ShoppingCartScreen extends StatelessWidget {
                                                             .start,
                                                     children: [
                                                       Text(
-                                                        'Diamond Ring',
+                                                        item.product?.name ??
+                                                            "",
                                                         style: Styles
                                                             .color212121W70012,
                                                       ),
@@ -151,6 +153,7 @@ class ShoppingCartScreen extends StatelessWidget {
                                                   ),
                                                   InkWell(
                                                     onTap: () {
+                                                      Utility.showLoader();
                                                       controller
                                                           .postCartProductRemove(
                                                               item);

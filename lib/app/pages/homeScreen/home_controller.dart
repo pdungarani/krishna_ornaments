@@ -118,6 +118,7 @@ class HomeController extends GetxController {
       }),
     );
     var loginModel = productsModelFromJson(response.body);
+    productArrivalDocList.clear();
     if (loginModel.data != null) {
       productArrivalDocList.addAll(loginModel.data?.docs ?? []);
     } else {
@@ -154,6 +155,7 @@ class HomeController extends GetxController {
       }),
     );
     var loginModel = productsModelFromJson(response.body);
+    productTrendingDocList.clear();
     if (loginModel.data != null) {
       productTrendingDocList.addAll(loginModel.data?.docs ?? []);
     } else {
@@ -241,15 +243,58 @@ class HomeController extends GetxController {
     update();
   }
 
+  // Future<void> postAddToCart(
+  //     String productId, int quantity, int index, String productType) async {
+  //   var response = await homePresenter.postAddToCart(
+  //     productId: productId,
+  //     quantity: quantity,
+  //     description: "",
+  //     isLoading: false,
+  //   );
+  //   if (response?.statusCode == 200) {
+  //     if (productType.contains("arrival")) {
+  //       productArrivalDocList[index].inCart = true;
+  //     } else if (productType.contains('wishlist')) {
+  //       wishlistList[index].inCart = true;
+  //     } else {
+  //       productTrendingDocList[index].inCart = true;
+  //     }
+  //     Utility.snacBar(
+  //         "Product added in cart successfully...!", ColorsValue.appColor);
+  //   } else {
+  //     if (productType.contains("arrival")) {
+  //       productArrivalDocList[index].cartQuantity = 0;
+  //     } else {
+  //       productTrendingDocList[index].cartQuantity = 0;
+  //     }
+  //     Utility.errorMessage(jsonDecode(response?.data ?? "")["Message"]);
+  //   }
+  //   update();
+  // }
+
   Future<void> postAddToCart(
       String productId, int quantity, int index, String productType) async {
-    var response = await homePresenter.postAddToCart(
-      productId: productId,
-      quantity: quantity,
-      description: "",
-      isLoading: false,
+    var response = await client.post(
+      Uri.parse("https://api.krishnaornaments.com/user/cart/save"),
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization':
+            'Token ${Get.find<Repository>().getStringValue(LocalKeys.authToken)}',
+      },
+      body: jsonEncode({
+        "productId": productId,
+        "quantity": quantity,
+        "description": "",
+      }),
     );
-    if (response?.statusCode == 200) {
+    // var loginModel = productsModelFromJson(response.body);
+    // productArrivalDocList.clear();
+    // if (loginModel.data != null) {
+    //   productArrivalDocList.addAll(loginModel.data?.docs ?? []);
+    // } else {
+    //   Utility.errorMessage(loginModel.message.toString());
+    // }
+    if (response.statusCode == 200) {
       if (productType.contains("arrival")) {
         productArrivalDocList[index].inCart = true;
       } else if (productType.contains('wishlist')) {
@@ -265,7 +310,7 @@ class HomeController extends GetxController {
       } else {
         productTrendingDocList[index].cartQuantity = 0;
       }
-      Utility.errorMessage(jsonDecode(response?.data ?? "")["Message"]);
+      Utility.errorMessage(jsonDecode(response.body ?? "")["Message"]);
     }
     update();
   }
@@ -283,25 +328,33 @@ class HomeController extends GetxController {
     if (pageKey == 1) {
       pageWishCount = 1;
     }
-    var response = await homePresenter.postWishlist(
-      page: pageKey,
-      limit: 10,
-      isLoading: true,
+
+    var response = await client.post(
+      Uri.parse("https://api.krishnaornaments.com/user/wishlist"),
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization':
+            'Token ${Get.find<Repository>().getStringValue(LocalKeys.authToken)}',
+      },
+      body: jsonEncode({
+        "page": pageKey,
+        "limit": 10,
+      }),
     );
-    wishlistCount.clear();
-    if (response?.data != null) {
+    var loginModel = wishlistModelFromJson(response.body);
+    if (loginModel.data != null) {
       if (pageKey == 1) {
         isWishListLastPage = false;
         wishlistList.clear();
       }
 
-      wishlistCount.addAll(response?.data?.docs ?? []);
-      if ((response?.data?.docs?.length ?? 0) < 10) {
+      wishlistCount.addAll(loginModel.data?.docs ?? []);
+      if ((loginModel.data?.docs?.length ?? 0) < 10) {
         isWishListLastPage = true;
-        wishlistList.addAll(response?.data?.docs ?? []);
+        wishlistList.addAll(loginModel.data?.docs ?? []);
       } else {
         pageWishCount++;
-        wishlistList.addAll(response?.data?.docs ?? []);
+        wishlistList.addAll(loginModel.data?.docs ?? []);
       }
       if (pageKey == 1) {
         if (scrollWishListController.positions.isNotEmpty) {
@@ -315,13 +368,35 @@ class HomeController extends GetxController {
 
   TextEditingController buyNowDesController = TextEditingController();
 
+  // Future<void> postWishlistAddRemove(
+  //     String productsDoc, int index, bool isRemove) async {
+  //   var response = await homePresenter.postWishlistAddRemove(
+  //     productId: productsDoc,
+  //     isLoading: false,
+  //   );
+  //   if (response?.data != null) {
+  //     if (isRemove) wishlistList.removeAt(index);
+  //     postAllProduct();
+  //     postWishlist(1);
+  //     postAllTrendingProduct(1);
+  //   }
+  //   update();
+  // }
+
   Future<void> postWishlistAddRemove(
       String productsDoc, int index, bool isRemove) async {
-    var response = await homePresenter.postWishlistAddRemove(
-      productId: productsDoc,
-      isLoading: false,
+    var response = await client.post(
+      Uri.parse("https://api.krishnaornaments.com/user/wishlist/add"),
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization':
+            'Token ${Get.find<Repository>().getStringValue(LocalKeys.authToken)}',
+      },
+      body: jsonEncode({
+        "productid": productsDoc,
+      }),
     );
-    if (response?.data != null) {
+    if (response.body.isNotEmpty) {
       if (isRemove) wishlistList.removeAt(index);
       postAllProduct();
       postWishlist(1);

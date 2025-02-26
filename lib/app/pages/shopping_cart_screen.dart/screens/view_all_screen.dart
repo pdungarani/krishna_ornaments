@@ -821,6 +821,7 @@ class ViewAllProductScreen extends StatelessWidget {
                                                     child: Center(
                                                       child: InkWell(
                                                         onTap: () {
+                                                          Utility.showLoader();
                                                           controller
                                                               .postWishlistAddRemove(
                                                                   item.id ?? "",
@@ -840,8 +841,7 @@ class ViewAllProductScreen extends StatelessWidget {
                                                   ),
                                                 ),
                                               ),
-                                              if ((item.quantity ?? 0) ==
-                                                  0) ...[
+                                              if ((item.quantity ?? 0) < 0) ...[
                                                 Container(
                                                   alignment: Alignment.center,
                                                   padding: Dimens
@@ -901,7 +901,7 @@ class ViewAllProductScreen extends StatelessWidget {
                                                                   .start,
                                                           children: [
                                                             Text(
-                                                              "Weigth",
+                                                              "Weight",
                                                               style: Styles
                                                                   .blackW60014,
                                                             ),

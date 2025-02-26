@@ -282,7 +282,7 @@ class HomeScreen extends StatelessWidget {
                                 padding: Dimens.edgeInsetsRight20,
                                 child: CustomProductView(
                                   inOutStock:
-                                      (item.quantity ?? 0) == 0 ? true : false,
+                                      (item.quantity ?? 0) < 0 ? true : false,
                                   productName: item.name ?? "",
                                   imageUrl: item.image ?? "",
                                   categoryName: item.category?.name ?? "",
@@ -399,7 +399,7 @@ class HomeScreen extends StatelessWidget {
                                 padding: Dimens.edgeInsetsRight20,
                                 child: CustomProductView(
                                   inOutStock:
-                                      (item.quantity ?? 0) == 0 ? true : false,
+                                      (item.quantity ?? 0) < 0 ? true : false,
                                   productName: item.name ?? "",
                                   imageUrl: item.image ?? "",
                                   categoryName: item.category?.name ?? "",

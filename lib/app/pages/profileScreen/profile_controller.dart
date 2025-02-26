@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/domain/domain.dart';
@@ -14,28 +15,55 @@ class ProfileController extends GetxController {
   @override
   onInit() {
     super.onInit();
+    Utility.showLoader();
     getProfile();
   }
 
   bool isProfileLoading = true;
   GetProfileData? getProfileModel;
+  var client = http.Client();
 
   Future<void> getProfile() async {
-    var response = await profilePresenter.getProfile(
-      isLoading: false,
+    var response = await client.get(
+      Uri.parse("https://api.krishnaornaments.com/user/profile"),
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization':
+            'Token ${Get.find<Repository>().getStringValue(LocalKeys.authToken)}',
+      },
     );
-    getProfileModel = null;
-    if (response != null) {
-      getProfileModel = response.data;
+    var profileModel = getProfileModelFromJson(response.body);
+
+    if (profileModel.data != null) {
+      Utility.closeLoader();
+      getProfileModel = profileModel.data;
       Get.find<Repository>()
           .saveValue(LocalKeys.chanelId, getProfileModel?.channelid ?? "");
       isProfileLoading = false;
     } else {
+      Utility.closeLoader();
       isProfileLoading = false;
-      Utility.errorMessage(response?.message ?? "");
+      Utility.errorMessage(profileModel.message ?? "");
     }
     update();
   }
+
+  // Future<void> getProfile() async {
+  //   var response = await profilePresenter.getProfile(
+  //     isLoading: false,
+  //   );
+  //   getProfileModel = null;
+  //   if (response != null) {
+  //     getProfileModel = response.data;
+  //     Get.find<Repository>()
+  //         .saveValue(LocalKeys.chanelId, getProfileModel?.channelid ?? "");
+  //     isProfileLoading = false;
+  //   } else {
+  //     isProfileLoading = false;
+  //     Utility.errorMessage(response?.message ?? "");
+  //   }
+  //   update();
+  // }
 
   // String? profileImage;
   // final picker = ImagePicker();
