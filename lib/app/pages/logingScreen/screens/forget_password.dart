@@ -15,20 +15,20 @@ class ForgetPasswordView extends StatelessWidget {
         body: SafeArea(
           child: Form(
             key: controller.forgotPassFormkey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: context.width,
-                  height: context.height * 0.5,
-                  child: SvgPicture.asset(
-                    AssetConstants.forgotMainView,
-                    fit: BoxFit.cover,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: context.width,
+                    height: context.height * 0.4,
+                    child: SvgPicture.asset(
+                      AssetConstants.forgotMainView,
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                ),
-                Dimens.boxHeight40,
-                Expanded(
-                  child: Padding(
+                  Dimens.boxHeight40,
+                  Padding(
                     padding: Dimens.edgeInsets20_0_20_0,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,28 +59,23 @@ class ForgetPasswordView extends StatelessWidget {
                             return null;
                           },
                         ),
-                        const Spacer(),
-                        Expanded(
-                          child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: CustomButton(
-                              height: Dimens.fourtyFive,
-                              text: StringConstants.recover_password,
-                              onTap: () {
-                                if (controller.forgotPassFormkey.currentState!
-                                    .validate()) {
-                                  controller.forgotPass();
-                                }
-                              },
-                            ),
-                          ),
+                        Dimens.boxHeight30,
+                        CustomButton(
+                          height: Dimens.fourtyFive,
+                          text: StringConstants.recover_password,
+                          onTap: () {
+                            if (controller.forgotPassFormkey.currentState!
+                                .validate()) {
+                              Utility.showLoader();
+                              controller.forgotPass();
+                            }
+                          },
                         ),
-                        Dimens.boxHeight10,
                       ],
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

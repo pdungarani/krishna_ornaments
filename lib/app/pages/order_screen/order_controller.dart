@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:krishna_ornaments/app/app.dart';
-import 'package:krishna_ornaments/domain/models/models.dart';
+import 'package:krishna_ornaments/domain/domain.dart';
 
 class OrderController extends GetxController {
   OrderController(this.orderPresenter);
@@ -33,20 +36,51 @@ class OrderController extends GetxController {
   List<GetOrderHistoryProduct> orderListModel = [];
   GetOrderHistoryDoc? getOrderHistoryDoc;
 
-  Future<void> postOrderHistory() async {
-    var response = await orderPresenter.postOrderHistory(
-      page: 1,
-      limit: galleryLimit,
-      isLoading: false,
-    );
-    orderListModel.clear();
-    if (response != null) {
-      print(response.data?.docs?[0].products?.length);
-      getOrderHistoryDoc = response.data?.docs![0];
-      orderListModel.addAll(response.data?.docs?.first.products ?? []);
+  var client = http.Client();
 
-      update();
+  bool isLoading = true;
+
+  Future<void> postOrderHistory() async {
+    // var response = await orderPresenter.postOrderHistory(
+    //   page: 1,
+    //   limit: galleryLimit,
+    //   isLoading: true,
+    // );
+    // orderListModel.clear();
+    // if (response != null) {
+    //   print(response.data?.docs?[0].products?.length);
+    //   getOrderHistoryDoc = response.data?.docs![0];
+    //   orderListModel.addAll(response.data?.docs?.first.products ?? []);
+
+    //   update();
+    // }
+
+    var response = await client.post(
+      Uri.parse("https://api.krishnaornaments.com/user/orders/history"),
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization':
+            'Token ${Get.find<Repository>().getStringValue(LocalKeys.authToken)}',
+      },
+      body: jsonEncode({
+        "page": 1,
+        "limit": 10,
+      }),
+    );
+
+    var getOrderHistoryModel = getOrderHistoryModelFromJson(response.body);
+    if (getOrderHistoryModel.status == 200) {
+      getOrderHistoryDoc = getOrderHistoryModel.data?.docs![0];
+      orderListModel
+          .addAll(getOrderHistoryModel.data?.docs?.first.products ?? []);
+      isLoading = false;
+    } else {
+      Utility.showMessage(getOrderHistoryModel.message.toString(),
+          MessageType.error, () => null, '');
+      isLoading = false;
     }
+
+    update();
   }
 
   GetOneOrderData? getOneOrderData = GetOneOrderData();

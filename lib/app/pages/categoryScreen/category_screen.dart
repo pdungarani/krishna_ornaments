@@ -13,7 +13,7 @@ class CategoryScreen extends StatelessWidget {
     return GetBuilder<CategoryController>(
       initState: (state) async {
         var controller = Get.find<CategoryController>();
-        await controller.getAllCategories();
+        controller.getAllCategories();
       },
       builder: (controller) => Scaffold(
         backgroundColor: ColorsValue.primaryColor,
@@ -26,65 +26,68 @@ class CategoryScreen extends StatelessWidget {
             style: Styles.color01010170020,
           ),
         ),
-        body: controller.getCategoriesList.isNotEmpty
-            ? ListView.builder(
-                padding: Dimens.edgeInsets20_0_20_20,
-                itemCount: controller.getCategoriesList.length,
-                itemBuilder: (context, index) {
-                  var item = controller.getCategoriesList[index];
-                  var type = controller.getCategoriesList[index].image
-                      ?.split(".")
-                      .last;
-                  return GestureDetector(
-                    onTap: () {
-                      RouteManagement.goToViewAllProductScreen(
-                          "", item.id ?? "", item.name ?? "");
+        body: !controller.isLoading
+            ? controller.getCategoriesList.isNotEmpty
+                ? ListView.builder(
+                    padding: Dimens.edgeInsets20_0_20_20,
+                    itemCount: controller.getCategoriesList.length,
+                    itemBuilder: (context, index) {
+                      var item = controller.getCategoriesList[index];
+                      var type = controller.getCategoriesList[index].image
+                          ?.split(".")
+                          .last;
+                      return GestureDetector(
+                        onTap: () {
+                          RouteManagement.goToViewAllProductScreen(
+                              "", item.id ?? "", item.name ?? "");
+                        },
+                        child: Padding(
+                          padding: Dimens.edgeInsetsTop10,
+                          child: Container(
+                            width: double.maxFinite,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(
+                                Dimens.ten,
+                              ),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(
+                                Dimens.ten,
+                              ),
+                              child: type != "svg"
+                                  ? CachedNetworkImage(
+                                      imageUrl: (item.image ?? ""),
+                                      fit: BoxFit.cover,
+                                      placeholder: (context, url) {
+                                        return Image.asset(
+                                          AssetConstants.placeholder,
+                                          fit: BoxFit.cover,
+                                        );
+                                      },
+                                      errorWidget: (context, url, error) {
+                                        return Image.asset(
+                                          AssetConstants.placeholder,
+                                          fit: BoxFit.cover,
+                                        );
+                                      },
+                                    )
+                                  : SvgPicture.network(
+                                      item.image ?? "",
+                                    ),
+                            ),
+                          ),
+                        ),
+                      );
                     },
-                    child: Padding(
-                      padding: Dimens.edgeInsetsTop10,
-                      child: Container(
-                        width: double.maxFinite,
-                        height: Dimens.hundredTwenty,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(
-                            Dimens.ten,
-                          ),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(
-                            Dimens.ten,
-                          ),
-                          child: type != "svg"
-                              ? CachedNetworkImage(
-                                  imageUrl: (item.image ?? ""),
-                                  fit: BoxFit.cover,
-                                  placeholder: (context, url) {
-                                    return Image.asset(
-                                      AssetConstants.placeholder,
-                                      fit: BoxFit.cover,
-                                    );
-                                  },
-                                  errorWidget: (context, url, error) {
-                                    return Image.asset(
-                                      AssetConstants.placeholder,
-                                      fit: BoxFit.cover,
-                                    );
-                                  },
-                                )
-                              : SvgPicture.network(
-                                  item.image ?? "",
-                                ),
-                        ),
-                      ),
+                  )
+                : Center(
+                    child: Text(
+                      "Categories data not found...!",
+                      style: Styles.black60016,
                     ),
-                  );
-                },
-              )
+                  )
             : Center(
-                child: Text(
-                  "Categories data not found...!",
-                  style: Styles.black60016,
-                ),
+                child: CircularProgressIndicator(),
               ),
       ),
     );

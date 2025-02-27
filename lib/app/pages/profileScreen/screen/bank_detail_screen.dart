@@ -12,11 +12,11 @@ class BankDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<ProfileController>(initState: (state) {
       var controller = Get.find<ProfileController>();
-      controller.holderName.text = 'Daenerys Targaryen';
-      controller.bankName.text = 'Kotak Mahindra Bank ';
-      controller.branchName.text = "King's Landing";
-      controller.acNumber.text = '4515009979545046';
-      controller.IFSCcode.text = 'AUBL0002160';
+      controller.holderName.text = 'KRISHNA ORNAMENTS';
+      controller.bankName.text = 'HDFC';
+      controller.branchName.text = "MANDVI BRANCH";
+      controller.acNumber.text = '50200034149231';
+      controller.IFSCcode.text = 'HDFC0002031';
     }, builder: (controller) {
       return Scaffold(
         backgroundColor: ColorsValue.appBg,

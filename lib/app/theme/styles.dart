@@ -424,6 +424,12 @@ abstract class Styles {
     color: ColorsValue.appColor,
   );
 
+  static TextStyle appColor70020 = GoogleFonts.nunito(
+    fontSize: Dimens.twenty,
+    fontWeight: FontWeight.w700,
+    color: ColorsValue.appColor,
+  );
+
   static TextStyle colorA7A7A750016 = GoogleFonts.nunito(
     fontSize: Dimens.sixteen,
     fontWeight: FontWeight.w500,

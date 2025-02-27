@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/domain/domain.dart';
 
@@ -13,35 +14,80 @@ class HomeController extends GetxController {
   @override
   onInit() {
     super.onInit();
+    getProfile();
+    isLoading = true;
     getAllCategories();
-    postWishlist(1);
+  }
+
+  GetProfileData? getProfileModel;
+
+  Future<void> getProfile() async {
+    var response = await homePresenter.getProfile(
+      isLoading: true,
+    );
+    getProfileModel = null;
+    if (response != null) {
+      getProfileModel = response.data;
+      Get.find<Repository>()
+          .saveValue(LocalKeys.chanelId, getProfileModel?.channelid ?? "");
+      update();
+    } else {
+      Utility.errorMessage(response?.message ?? "");
+    }
   }
 
   late PageController controller;
 
   int itemCounter = 0;
 
-  List<String> testList = ["fds", "Fsdf"];
+  List<String> bnnerList = [
+    AssetConstants.banner1,
+    AssetConstants.banner2,
+    AssetConstants.banner3,
+  ];
+
+  List<String> bannerHomeList = [
+    AssetConstants.home_banner1,
+    AssetConstants.home_banner2,
+    AssetConstants.home_banner3,
+  ];
 
   /// >>>>>>>>>>>>>> For view all Screen <<<<<<<<<<<<<<<<<<<< ///
-
-  final ScrollController scrollBestSellerController = ScrollController();
-
-  ////Harshil
 
   int selectPage = 0;
 
   List<GetCategoriesData> getCategoriesList = [];
 
+  var client = http.Client();
+
+  bool isLoading = false;
+
   Future<void> getAllCategories() async {
-    var response = await homePresenter.getAllCategories(
-      isLoading: true,
+    var response = await client.get(
+      Uri.parse("https://api.krishnaornaments.com/user/categories"),
+      headers: {
+        'Authorization':
+            'Token ${Get.find<Repository>().getStringValue(LocalKeys.authToken)}',
+      },
     );
-    getCategoriesList.clear();
-    if (response?.data != null) {
-      getCategoriesList.addAll(response?.data ?? []);
+
+    var loginModel = getCategoriesModelFromJson(response.body);
+    if (loginModel.data != null) {
+      isLoading = false;
+      getCategoriesList = loginModel.data ?? [];
+    } else {
+      isLoading = false;
+      Utility.errorMessage(loginModel.message.toString());
     }
     update();
+
+    // var response = await homePresenter.getAllCategories(
+    //   isLoading: true,
+    // );
+    // getCategoriesList.clear();
+    // if (response?.data != null) {
+    //   getCategoriesList.addAll(response?.data ?? []);
+    // }
   }
 
   final ScrollController scrollArrivalProductController = ScrollController();
@@ -51,39 +97,32 @@ class HomeController extends GetxController {
   bool isProductArrivalLastPage = false;
   bool isProductArrivalLoading = false;
 
-  Future<void> postAllProduct(int pageKey) async {
-    if (pageKey == 1) {
-      pageArrivalProductCount = 1;
-    }
-    var response = await homePresenter.postAllProduct(
-      page: pageKey,
-      limit: 10,
-      search: "",
-      category: "",
-      min: "1",
-      max: "10",
-      productType: "arrival",
-      sortField: "weight",
-      sortOption: 1,
-      isLoading: false,
+  Future<void> postAllProduct() async {
+    var response = await client.post(
+      Uri.parse("https://api.krishnaornaments.com/user/products"),
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization':
+            'Token ${Get.find<Repository>().getStringValue(LocalKeys.authToken)}',
+      },
+      body: jsonEncode({
+        "page": 1,
+        "limit": 10,
+        "search": "",
+        "category": "",
+        "min": "",
+        "max": "",
+        "productType": "arrival",
+        "sortField": "_id",
+        "sortOption": -1
+      }),
     );
-    if (response?.data != null) {
-      if (pageKey == 1) {
-        isProductArrivalLastPage = false;
-        productArrivalDocList.clear();
-      }
-      if ((response?.data?.docs?.length ?? 0) < 10) {
-        isProductArrivalLastPage = true;
-        productArrivalDocList.addAll(response?.data?.docs ?? []);
-      } else {
-        pageArrivalProductCount++;
-        productArrivalDocList.addAll(response?.data?.docs ?? []);
-      }
-      if (pageKey == 1) {
-        if (scrollArrivalProductController.positions.isNotEmpty) {
-          scrollArrivalProductController.jumpTo(0);
-        }
-      }
+    var loginModel = productsModelFromJson(response.body);
+    productArrivalDocList.clear();
+    if (loginModel.data != null) {
+      productArrivalDocList.addAll(loginModel.data?.docs ?? []);
+    } else {
+      Utility.errorMessage(loginModel.message.toString());
     }
     update();
   }
@@ -96,46 +135,72 @@ class HomeController extends GetxController {
   bool isProductTrendingLoading = false;
 
   Future<void> postAllTrendingProduct(int pageKey) async {
-    if (pageKey == 1) {
-      pageTrendingProductCount = 1;
-    }
-    var response = await homePresenter.postAllProduct(
-      page: pageKey,
-      limit: 10,
-      search: "",
-      category: "",
-      min: "1",
-      max: "10",
-      productType: "trending",
-      sortField: 'weight',
-      sortOption: 1,
-      isLoading: false,
+    var response = await client.post(
+      Uri.parse("https://api.krishnaornaments.com/user/products"),
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization':
+            'Token ${Get.find<Repository>().getStringValue(LocalKeys.authToken)}',
+      },
+      body: jsonEncode({
+        "page": 1,
+        "limit": 10,
+        "search": "",
+        "category": "",
+        "min": "",
+        "max": "",
+        "productType": "trending",
+        "sortField": "_id",
+        "sortOption": -1
+      }),
     );
-    if (response?.data != null) {
-      if (pageKey == 1) {
-        isProductTrendingLastPage = false;
-        productTrendingDocList.clear();
-      }
-      if ((response?.data?.docs?.length ?? 0) < 10) {
-        isProductTrendingLastPage = true;
-        productTrendingDocList.addAll(response?.data?.docs ?? []);
-      } else {
-        pageTrendingProductCount++;
-        productTrendingDocList.addAll(response?.data?.docs ?? []);
-      }
-      if (pageKey == 1) {
-        if (scrollTrendingController.positions.isNotEmpty) {
-          scrollTrendingController.jumpTo(0);
-        }
-      }
+    var loginModel = productsModelFromJson(response.body);
+    productTrendingDocList.clear();
+    if (loginModel.data != null) {
+      productTrendingDocList.addAll(loginModel.data?.docs ?? []);
     } else {
-      Utility.errorMessage(response?.message ?? "");
+      Utility.errorMessage(loginModel.message.toString());
     }
+    // var response = await homePresenter.postAllProduct(
+    //   page: pageKey,
+    //   limit: 10,
+    //   search: "",
+    //   category: "",
+    //   min: "",
+    //   max: "",
+    //   productType: "trending",
+    //   sortField: 'weight',
+    //   sortOption: 1,
+    //   isLoading: true,
+    // );
+    // if (response?.data != null) {
+    //   if (pageKey == 1) {
+    //     isProductTrendingLastPage = false;
+    //     productTrendingDocList.clear();
+    //   }
+    //   if ((response?.data?.docs?.length ?? 0) < 10) {
+    //     isProductTrendingLastPage = true;
+    //     productTrendingDocList.addAll(response?.data?.docs ?? []);
+    //   } else {
+    //     pageTrendingProductCount++;
+    //     productTrendingDocList.addAll(response?.data?.docs ?? []);
+    //   }
+    //   if (pageKey == 1) {
+    //     if (scrollTrendingController.positions.isNotEmpty) {
+    //       scrollTrendingController.jumpTo(0);
+    //     }
+    //   }
+    //   postWishlist(1);
+    // } else {
+    //   Utility.errorMessage(response?.message ?? "");
+    // }
     update();
   }
 
   List<ProductsDoc> getAllProductDocList = [];
   final ScrollController scrollViewAllController = ScrollController();
+
+  bool isSearchLoading = false;
 
   Future<void> postGetAllProduct(int pageKey, String search) async {
     if (pageKey == 1) {
@@ -170,21 +235,66 @@ class HomeController extends GetxController {
           scrollTrendingController.jumpTo(0);
         }
       }
+      isSearchLoading = false;
     } else {
+      isSearchLoading = false;
       Utility.errorMessage(response?.message ?? "");
     }
     update();
   }
 
+  // Future<void> postAddToCart(
+  //     String productId, int quantity, int index, String productType) async {
+  //   var response = await homePresenter.postAddToCart(
+  //     productId: productId,
+  //     quantity: quantity,
+  //     description: "",
+  //     isLoading: false,
+  //   );
+  //   if (response?.statusCode == 200) {
+  //     if (productType.contains("arrival")) {
+  //       productArrivalDocList[index].inCart = true;
+  //     } else if (productType.contains('wishlist')) {
+  //       wishlistList[index].inCart = true;
+  //     } else {
+  //       productTrendingDocList[index].inCart = true;
+  //     }
+  //     Utility.snacBar(
+  //         "Product added in cart successfully...!", ColorsValue.appColor);
+  //   } else {
+  //     if (productType.contains("arrival")) {
+  //       productArrivalDocList[index].cartQuantity = 0;
+  //     } else {
+  //       productTrendingDocList[index].cartQuantity = 0;
+  //     }
+  //     Utility.errorMessage(jsonDecode(response?.data ?? "")["Message"]);
+  //   }
+  //   update();
+  // }
+
   Future<void> postAddToCart(
       String productId, int quantity, int index, String productType) async {
-    var response = await homePresenter.postAddToCart(
-      productId: productId,
-      quantity: quantity,
-      description: "",
-      isLoading: false,
+    var response = await client.post(
+      Uri.parse("https://api.krishnaornaments.com/user/cart/save"),
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization':
+            'Token ${Get.find<Repository>().getStringValue(LocalKeys.authToken)}',
+      },
+      body: jsonEncode({
+        "productId": productId,
+        "quantity": quantity,
+        "description": "",
+      }),
     );
-    if (response?.statusCode == 200) {
+    // var loginModel = productsModelFromJson(response.body);
+    // productArrivalDocList.clear();
+    // if (loginModel.data != null) {
+    //   productArrivalDocList.addAll(loginModel.data?.docs ?? []);
+    // } else {
+    //   Utility.errorMessage(loginModel.message.toString());
+    // }
+    if (response.statusCode == 200) {
       if (productType.contains("arrival")) {
         productArrivalDocList[index].inCart = true;
       } else if (productType.contains('wishlist')) {
@@ -200,7 +310,7 @@ class HomeController extends GetxController {
       } else {
         productTrendingDocList[index].cartQuantity = 0;
       }
-      Utility.errorMessage(jsonDecode(response?.data ?? "")["Message"]);
+      Utility.errorMessage(jsonDecode(response.body ?? "")["Message"]);
     }
     update();
   }
@@ -218,25 +328,33 @@ class HomeController extends GetxController {
     if (pageKey == 1) {
       pageWishCount = 1;
     }
-    var response = await homePresenter.postWishlist(
-      page: pageKey,
-      limit: 10,
-      isLoading: true,
+
+    var response = await client.post(
+      Uri.parse("https://api.krishnaornaments.com/user/wishlist"),
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization':
+            'Token ${Get.find<Repository>().getStringValue(LocalKeys.authToken)}',
+      },
+      body: jsonEncode({
+        "page": pageKey,
+        "limit": 10,
+      }),
     );
-    wishlistCount.clear();
-    if (response?.data != null) {
+    var loginModel = wishlistModelFromJson(response.body);
+    if (loginModel.data != null) {
       if (pageKey == 1) {
         isWishListLastPage = false;
         wishlistList.clear();
       }
 
-      wishlistCount.addAll(response?.data?.docs ?? []);
-      if ((response?.data?.docs?.length ?? 0) < 10) {
+      wishlistCount.addAll(loginModel.data?.docs ?? []);
+      if ((loginModel.data?.docs?.length ?? 0) < 10) {
         isWishListLastPage = true;
-        wishlistList.addAll(response?.data?.docs ?? []);
+        wishlistList.addAll(loginModel.data?.docs ?? []);
       } else {
         pageWishCount++;
-        wishlistList.addAll(response?.data?.docs ?? []);
+        wishlistList.addAll(loginModel.data?.docs ?? []);
       }
       if (pageKey == 1) {
         if (scrollWishListController.positions.isNotEmpty) {
@@ -250,15 +368,37 @@ class HomeController extends GetxController {
 
   TextEditingController buyNowDesController = TextEditingController();
 
+  // Future<void> postWishlistAddRemove(
+  //     String productsDoc, int index, bool isRemove) async {
+  //   var response = await homePresenter.postWishlistAddRemove(
+  //     productId: productsDoc,
+  //     isLoading: false,
+  //   );
+  //   if (response?.data != null) {
+  //     if (isRemove) wishlistList.removeAt(index);
+  //     postAllProduct();
+  //     postWishlist(1);
+  //     postAllTrendingProduct(1);
+  //   }
+  //   update();
+  // }
+
   Future<void> postWishlistAddRemove(
       String productsDoc, int index, bool isRemove) async {
-    var response = await homePresenter.postWishlistAddRemove(
-      productId: productsDoc,
-      isLoading: false,
+    var response = await client.post(
+      Uri.parse("https://api.krishnaornaments.com/user/wishlist/add"),
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization':
+            'Token ${Get.find<Repository>().getStringValue(LocalKeys.authToken)}',
+      },
+      body: jsonEncode({
+        "productid": productsDoc,
+      }),
     );
-    if (response?.data != null) {
+    if (response.body.isNotEmpty) {
       if (isRemove) wishlistList.removeAt(index);
-      postAllProduct(1);
+      postAllProduct();
       postWishlist(1);
       postAllTrendingProduct(1);
     }

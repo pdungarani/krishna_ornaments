@@ -13,8 +13,6 @@ class HomeUseCases {
         isLoading: isLoading,
       );
 
- 
-
   Future<ResponseModel?> postAddToCart({
     bool isLoading = false,
     required String productId,
@@ -58,6 +56,13 @@ class HomeUseCases {
   }) async =>
       await repository.postWishlistAddRemove(
         productId: productId,
+        isLoading: isLoading,
+      );
+
+  Future<GetProfileModel?> getProfile({
+    bool isLoading = false,
+  }) async =>
+      await repository.getProfile(
         isLoading: isLoading,
       );
 }
