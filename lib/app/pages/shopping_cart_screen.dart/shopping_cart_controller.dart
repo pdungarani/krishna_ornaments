@@ -542,11 +542,24 @@ class ShoppingCartController extends GetxController {
 
   Future<void> postAddToCart(
       String productId, int quantity, int index, String productType) async {
-    var response = await shoppingCartPresenter.postAddToCart(
-      productId: productId,
-      quantity: quantity,
-      description: productDesController.text,
-      isLoading: false,
+    // var response = await shoppingCartPresenter.postAddToCart(
+    //   productId: productId,
+    //   quantity: quantity,
+    //   description: productDesController.text,
+    //   isLoading: false,
+    // );
+    var response = await client.post(
+      Uri.parse("https://api.krishnaornaments.com/user/cart/save"),
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization':
+            'Token ${Get.find<Repository>().getStringValue(LocalKeys.authToken)}',
+      },
+      body: jsonEncode({
+        "productId": productId,
+        "quantity": quantity,
+        "description": "",
+      }),
     );
     if (response?.statusCode == 200) {
       if (productType.contains("inCart")) {
@@ -558,7 +571,7 @@ class ShoppingCartController extends GetxController {
       }
     } else {
       Utility.errorMessage(
-          jsonDecode(response?.data.toString() ?? "")['Message']);
+          jsonDecode(response?.body.toString() ?? "")['Message']);
     }
     update();
   }

@@ -135,6 +135,7 @@ class RepairController extends GetxController {
                         InkWell(
                           onTap: () async {
                             if (await Utility.imagePermissionCheack(context)) {
+                              Utility.showLoader();
                               selectPic(ImageSource.gallery);
                               Get.back();
                             }
@@ -157,6 +158,7 @@ class RepairController extends GetxController {
                         InkWell(
                           onTap: () async {
                             if (await Utility.cameraPermissionCheack(context)) {
+                              Utility.showLoader();
                               selectPic(ImageSource.camera);
                               Get.back();
                             }
@@ -203,16 +205,21 @@ class RepairController extends GetxController {
         imageFile = File(pickedFile.path);
         var response = await repairPresenter.repairOrderImage(
           filePath: pickedFile.path,
-          isLoading: true,
+          isLoading: false,
         );
         reapirUploadData = null;
         if (response?.data != null) {
+          Utility.closeLoader();
           reapirUploadData = response?.data;
           RouteManagement.goToRepairDetailsScreen();
         }
       } else {
+        Utility.closeLoader();
+
         Utility.errorMessage("max_10_mb_img".tr);
       }
+    } else {
+      Utility.closeLoader();
     }
     update();
   }
@@ -267,6 +274,7 @@ class RepairController extends GetxController {
                             if (await Utility.imagePermissionCheack(context)) {
                               postImage("gallery");
                               Get.back();
+                              Utility.showLoader();
                             }
                           },
                           child: Column(
@@ -289,6 +297,7 @@ class RepairController extends GetxController {
                             if (await Utility.cameraPermissionCheack(context)) {
                               postImage("camera");
                               Get.back();
+                              Utility.showLoader();
                             }
                           },
                           child: Column(
@@ -329,17 +338,20 @@ class RepairController extends GetxController {
             if (imageList.length < 5) {
               var response = await repairPresenter.sampleOrderImage(
                 filePath: images.path,
-                isLoading: true,
+                isLoading: false,
               );
               if (response != null) {
                 imageList.addAll(response.data ?? []);
                 RouteManagement.goToSampleOrderScreen();
+                Utility.closeLoader();
               }
               update();
             } else {
+              Utility.closeLoader();
               Utility.errorMessage('Maximum 5 Photos Upload'.tr);
             }
           } else {
+            Utility.closeLoader();
             Utility.errorMessage("max_10_mb_img".tr);
           }
         }
@@ -355,16 +367,19 @@ class RepairController extends GetxController {
             imageFile = File(pickedFile.path);
             var response = await repairPresenter.sampleOrderImage(
               filePath: pickedFile.path,
-              isLoading: true,
+              isLoading: false,
             );
             if (response?.data != null) {
+              Utility.closeLoader();
               imageList.addAll(response?.data ?? []);
               RouteManagement.goToSampleOrderScreen();
             }
           } else {
+            Utility.closeLoader();
             Utility.errorMessage('Maximum 5 Photos Upload'.tr);
           }
         } else {
+          Utility.closeLoader();
           Utility.errorMessage("max_10_mb_img".tr);
         }
       }
@@ -378,12 +393,14 @@ class RepairController extends GetxController {
       images: imageList,
       totalQuantity: selectQuantity,
       description: descriptionSampleController.text,
-      isLoading: true,
+      isLoading: false,
     );
     if (response?.statusCode == 200) {
+      Utility.closeLoader();
       RouteManagement.goToBottomBarView();
       update();
     } else {
+      Utility.closeLoader();
       Utility.errorMessage(
           jsonDecode(response?.data.toString() ?? "")["Message"]);
     }
@@ -393,11 +410,14 @@ class RepairController extends GetxController {
     var response = await repairPresenter.postRepairOrder(
       file: reapirUploadData?.fileId ?? "",
       description: descriptionController.text,
-      isLoading: true,
+      isLoading: false,
     );
     if (response?.statusCode == 200) {
+      Utility.closeLoader();
       RouteManagement.goToBottomBarView();
       update();
+    } else {
+      Utility.closeLoader();
     }
   }
 

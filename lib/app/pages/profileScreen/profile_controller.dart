@@ -15,8 +15,6 @@ class ProfileController extends GetxController {
   @override
   onInit() {
     super.onInit();
-    Utility.showLoader();
-    getProfile();
   }
 
   bool isProfileLoading = true;

@@ -47,7 +47,7 @@ abstract class AssetConstants {
   static const String ring = 'assets/images/ring.png';
   static const String app_update_lottie =
       'assets/images/app_update_lottie.json';
-  static const String banner1 = 'assets/images/banner1.jpg';
+  static const String banner1 = 'assets/images/banner1.png';
   static const String banner2 = 'assets/images/banner2.jpg';
   static const String banner3 = 'assets/images/banner3.jpg';
   static const String home_banner1 = 'assets/images/home_banner1.jpg';

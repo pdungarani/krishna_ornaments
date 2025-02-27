@@ -57,6 +57,7 @@ class SampleOrderScreen extends StatelessWidget {
                   onPressed: () {
                     if (controller.sampleKey.currentState!.validate()) {
                       controller.postSampleOrder();
+                      Utility.showLoader();
                     }
                   },
                   style: ElevatedButton.styleFrom(

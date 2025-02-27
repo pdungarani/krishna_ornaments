@@ -35,10 +35,10 @@ abstract class SocketConnection {
         Get.find<OrderController>().postOrderHistory();
         Get.forceAppUpdate();
       } else if (data['event'] == 'orderCancelled') {
-        Get.find<OrderController>().orderPagingController.refresh();
+        Get.find<OrderController>().postOrderHistory();
         Get.forceAppUpdate();
       } else if (data['event'] == 'orderCompleted') {
-        Get.find<OrderController>().orderPagingController.refresh();
+        Get.find<OrderController>().postOrderHistory();
         Get.forceAppUpdate();
       } else if (data['event'] == 'repairingOrderApproved') {
         Get.put<RepairController>(
