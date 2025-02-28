@@ -576,61 +576,61 @@ class ShoppingCartController extends GetxController {
     update();
   }
 
-  // Future<void> postOrderCreate() async {
-  //   var response = await shoppingCartPresenter.postOrderCreate(
-  //     cartId: cartsItemModel?.id ?? '',
-  //     products: cartList.map(
-  //       (e) {
-  //         return Product(
-  //           productId: e.product?.id ?? "",
-  //           quantity: e.quantity,
-  //           description: e.description,
-  //         );
-  //       },
-  //     ).toList(),
-  //     main_description: finalDesController.text,
-  //     isLoading: false,
-  //   );
-  //   if (response?.statusCode == 200) {
-  //     RouteManagement.goToBottomBarView();
-  //     postCartList(1);
-  //   } else {
-  //     Utility.errorMessage(jsonDecode(response.toString())['Data']['Message']);
-  //   }
-  //   update();
-  // }
-
   Future<void> postOrderCreate() async {
-    var response = await client.post(
-      Uri.parse("https://api.krishnaornaments.com/user/orders/create"),
-      headers: {
-        "Content-Type": "application/json",
-        'Authorization':
-            'Token ${Get.find<Repository>().getStringValue(LocalKeys.authToken)}',
-      },
-      body: jsonEncode({
-        "cartid": cartsItemModel?.id ?? '',
-        "products": cartList.map(
-          (e) {
-            return Product(
-              productId: e.product?.id ?? "",
-              quantity: e.quantity,
-              description: e.description,
-            );
-          },
-        ).toList(),
-      }),
+    var response = await shoppingCartPresenter.postOrderCreate(
+      cartId: cartsItemModel?.id ?? '',
+      products: cartList.map(
+        (e) {
+          return Product(
+            productId: e.product?.id ?? "",
+            quantity: e.quantity,
+            description: e.description,
+          );
+        },
+      ).toList(),
+      main_description: finalDesController.text,
+      isLoading: false,
     );
-    if (response.statusCode == 200) {
-      Utility.closeLoader();
+    if (response?.statusCode == 200) {
       RouteManagement.goToBottomBarView();
       postCartList(1);
     } else {
-      Utility.closeLoader();
       Utility.errorMessage(jsonDecode(response.toString())['Data']['Message']);
     }
     update();
   }
+
+  // Future<void> postOrderCreate() async {
+  //   var response = await client.post(
+  //     Uri.parse("https://api.krishnaornaments.com/user/orders/create"),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       'Authorization':
+  //           'Token ${Get.find<Repository>().getStringValue(LocalKeys.authToken)}',
+  //     },
+  //     body: jsonEncode({
+  //       "cartid": cartsItemModel?.id ?? '',
+  //       "products": cartList.map(
+  //         (e) {
+  //           return Product(
+  //             productId: e.product?.id ?? "",
+  //             quantity: e.quantity,
+  //             description: e.description,
+  //           );
+  //         },
+  //       ).toList(),
+  //     }),
+  //   );
+  //   if (response.statusCode == 200) {
+  //     Utility.closeLoader();
+  //     RouteManagement.goToBottomBarView();
+  //     postCartList(1);
+  //   } else {
+  //     Utility.closeLoader();
+  //     Utility.errorMessage(jsonDecode(response.toString())['Data']['Message']);
+  //   }
+  //   update();
+  // }
 
   Future<void> postWishlistAddRemove(
       String productsDoc, int index, bool isRemove) async {

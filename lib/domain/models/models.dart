@@ -18,3 +18,4 @@ export 'response_model.dart';
 export 'sample_history_model.dart';
 export 'sample_oredr_image_mode.dart';
 export 'wishlist_model.dart';
+export 'upload_profile_model.dart';

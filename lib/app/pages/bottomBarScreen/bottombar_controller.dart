@@ -15,14 +15,12 @@ class BottomBarController extends GetxController
 
   @override
   void onInit() {
+    super.onInit();
+    SocketConnection.initSocket();
+    FirebaseApi().initNotification();
     tabController = TabController(vsync: this, length: 5);
     tabController?.addListener(update);
     getProfile();
-
-    super.onInit();
-
-    SocketConnection.initSocket();
-    FirebaseApi().initNotification();
   }
 
   GetProfileData? getProfileModel;

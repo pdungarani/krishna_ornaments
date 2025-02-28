@@ -5,14 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:http_parser/src/media_type.dart' as mediaType;
 import 'package:image_picker/image_picker.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/navigators/navigators.dart';
 import 'package:krishna_ornaments/app/widgets/custom_stepper.dart';
 import 'package:krishna_ornaments/domain/domain.dart';
+import 'package:mime/mime.dart';
 
-class RepairController extends GetxController {
+class   RepairController extends GetxController {
   RepairController(this.repairPresenter);
 
   final RepairPresenter repairPresenter;
@@ -95,7 +97,7 @@ class RepairController extends GetxController {
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,
-      barrierColor: Colors.grey.withOpacity(0.5),
+      barrierColor: Colors.grey.withValues(alpha: 0.5),
       builder: (context) {
         return Padding(
           padding:
@@ -135,9 +137,10 @@ class RepairController extends GetxController {
                         InkWell(
                           onTap: () async {
                             if (await Utility.imagePermissionCheack(context)) {
-                              Utility.showLoader();
                               selectPic(ImageSource.gallery);
                               Get.back();
+                              isLoading = true;
+                              update();
                             }
                           },
                           child: Column(
@@ -158,9 +161,9 @@ class RepairController extends GetxController {
                         InkWell(
                           onTap: () async {
                             if (await Utility.cameraPermissionCheack(context)) {
-                              Utility.showLoader();
                               selectPic(ImageSource.camera);
                               Get.back();
+                              Utility.showLoader();
                             }
                           },
                           child: Column(
@@ -195,6 +198,8 @@ class RepairController extends GetxController {
   String profileImage = "";
   RepairOrderUploadImageData? reapirUploadData;
 
+  bool isLoading = false;
+
   Future selectPic(ImageSource sourcePic) async {
     final pickedFile = await pickerProfile.pickImage(
       source: sourcePic,
@@ -203,23 +208,42 @@ class RepairController extends GetxController {
     if (pickedFile != null) {
       if (Utility.getImageSizeMB(pickedFile.path) <= 10) {
         imageFile = File(pickedFile.path);
-        var response = await repairPresenter.repairOrderImage(
-          filePath: pickedFile.path,
-          isLoading: false,
+
+        var request = http.MultipartRequest(
+            'POST',
+            Uri.parse(
+                "https://api.krishnaornaments.com/user/repairingorders/upload"));
+        var type = lookupMimeType(pickedFile.path)!.split('/');
+
+        request.files.add(
+          await http.MultipartFile.fromPath(
+            'file',
+            pickedFile.path,
+            contentType: mediaType.MediaType(type[0], type[1]),
+          ),
         );
+        request.headers.addAll({
+          "Content-Type": "application/json",
+          'Authorization':
+              'Token ${Get.find<Repository>().getStringValue(LocalKeys.authToken)}',
+        });
+
+        var response = await request.send();
+        var bytesToString = await response.stream.bytesToString();
+        var repairOrderUploadImageModel =
+            repairOrderUploadImageApiFromJson(bytesToString);
         reapirUploadData = null;
-        if (response?.data != null) {
-          Utility.closeLoader();
-          reapirUploadData = response?.data;
+        if (repairOrderUploadImageModel.data != null) {
+          isLoading = false;
+          reapirUploadData = repairOrderUploadImageModel.data;
           RouteManagement.goToRepairDetailsScreen();
         }
       } else {
-        Utility.closeLoader();
-
+        isLoading = false;
         Utility.errorMessage("max_10_mb_img".tr);
       }
     } else {
-      Utility.closeLoader();
+      isLoading = false;
     }
     update();
   }
@@ -229,10 +253,11 @@ class RepairController extends GetxController {
   final picker = ImagePicker();
 
   Future sampleOrderImage(BuildContext context) async {
+    imageList.clear();
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,
-      barrierColor: Colors.grey.withOpacity(0.5),
+      barrierColor: Colors.grey.withValues(alpha: 0.5),
       builder: (context) {
         return Padding(
           padding:
@@ -331,18 +356,39 @@ class RepairController extends GetxController {
     if (imageSource == "gallery") {
       final List<XFile> selectedImages =
           await picker.pickMultiImage(imageQuality: 5);
-
       if (selectedImages.isNotEmpty) {
         for (var images in selectedImages) {
           if (Utility.getImageSizeMB(images.path) <= 10) {
             if (imageList.length < 5) {
-              var response = await repairPresenter.sampleOrderImage(
-                filePath: images.path,
-                isLoading: false,
+              var request = http.MultipartRequest(
+                  'POST',
+                  Uri.parse(
+                      "https://api.krishnaornaments.com/user/sampleorders/upload"));
+              var type = lookupMimeType(images.path)!.split('/');
+
+              request.files.add(
+                await http.MultipartFile.fromPath(
+                  'file',
+                  images.path,
+                  contentType: mediaType.MediaType(type[0], type[1]),
+                ),
               );
-              if (response != null) {
-                imageList.addAll(response.data ?? []);
+              request.headers.addAll({
+                "Content-Type": "application/json",
+                'Authorization':
+                    'Token ${Get.find<Repository>().getStringValue(LocalKeys.authToken)}',
+              });
+
+              var response = await request.send();
+              var bytesToString = await response.stream.bytesToString();
+              var sampleOrderUploadImageModel =
+                  sampleOrderImageFromJson(bytesToString);
+
+              if (sampleOrderUploadImageModel.data != null) {
+                Utility.closeLoader();
+                imageList.addAll(sampleOrderUploadImageModel.data ?? []);
                 RouteManagement.goToSampleOrderScreen();
+              } else {
                 Utility.closeLoader();
               }
               update();

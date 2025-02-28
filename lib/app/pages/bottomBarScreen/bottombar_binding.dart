@@ -104,5 +104,20 @@ class BottomBarBinding extends Bindings {
         ),
       ),
     );
+
+    Get.put<OrderController>(
+      OrderController(
+        Get.put(
+          OrderPresenter(
+            Get.put(
+              OrderUsecases(
+                Get.find(),
+              ),
+              permanent: true,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

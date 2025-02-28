@@ -162,7 +162,16 @@ class WishlistScreen extends StatelessWidget {
                                         child: InkWell(
                                           onTap: () {
                                             if (item.inCart ?? false) {
-                                            } else {}
+                                              RouteManagement
+                                                  .goToShoppingCartScreen(true);
+                                            } else {
+                                              controller.postAddToCart(
+                                                item.productid?.id ?? "",
+                                                1,
+                                                index,
+                                                "wishlist",
+                                              );
+                                            }
                                           },
                                           child: Container(
                                             alignment: Alignment.center,

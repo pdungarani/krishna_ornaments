@@ -12,7 +12,7 @@ class ProfilePresenter {
         isLoading: isLoading,
       );
 
-  Future<String?> postUploadProfile({
+  Future<UploadProfileModel?> postUploadProfile({
     bool isLoading = false,
     required String filePath,
   }) async =>

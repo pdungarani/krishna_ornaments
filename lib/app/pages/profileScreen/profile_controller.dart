@@ -12,11 +12,6 @@ class ProfileController extends GetxController {
 
   final ProfilePresenter profilePresenter;
 
-  @override
-  onInit() {
-    super.onInit();
-  }
-
   bool isProfileLoading = true;
   GetProfileData? getProfileModel;
   var client = http.Client();
@@ -37,6 +32,7 @@ class ProfileController extends GetxController {
       getProfileModel = profileModel.data;
       Get.find<Repository>()
           .saveValue(LocalKeys.chanelId, getProfileModel?.channelid ?? "");
+      profileImage = getProfileModel?.profilePic ?? "";
       isProfileLoading = false;
     } else {
       Utility.closeLoader();
@@ -93,19 +89,29 @@ class ProfileController extends GetxController {
 
   File? imageFile;
   final pickerProfile = ImagePicker();
+  String? profileImage;
 
   Future setProfilePic() async {
-    final pickedFile =
-        await pickerProfile.pickImage(source: ImageSource.gallery);
+    isProfileLoading = true;
+    final pickedFile = await pickerProfile.pickImage(
+      source: ImageSource.gallery,
+    );
 
     if (pickedFile != null) {
       imageFile = File(pickedFile.path);
-      print(">>>>>>>>>>>>>> File Path ${imageFile?.path}");
-      print(
-          ">>>>>>>>>>>>>> Splited File Path ${imageFile?.path.split("/").last}");
-      final profileImage = await profilePresenter.postUploadProfile(
+      var respnse = await profilePresenter.postUploadProfile(
         filePath: imageFile?.path ?? '',
+        isLoading: false,
       );
+      if (respnse?.data != null) {
+        isProfileLoading = false;
+        profileImage = respnse?.data?.profilePic ?? "";
+      } else {
+        isProfileLoading = false;
+        Utility.errorMessage(respnse?.message ?? "");
+      }
+    } else {
+      isProfileLoading = false;
     }
     update();
   }

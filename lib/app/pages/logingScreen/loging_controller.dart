@@ -62,6 +62,7 @@ class LoginController extends GetxController {
     loginData = null;
     if (loginModel.data != null) {
       loginData = loginModel;
+      print("Fcm:-$facmToken");
       Get.find<Repository>()
           .saveValue(LocalKeys.authToken, loginModel.data?.accessToken);
       RouteManagement.goToBottomBarView();

@@ -61,6 +61,8 @@ class ProfileScreen extends StatelessWidget {
                           onTap: () async {
                             if (await Utility.imagePermissionCheack(context)) {
                               controller.setProfilePic();
+                              controller.isProfileLoading = true;
+                              controller.update();
                             }
                           },
                           child: SizedBox(
@@ -88,9 +90,7 @@ class ProfileScreen extends StatelessWidget {
                                     child: CachedNetworkImage(
                                       height: Dimens.hundredTen,
                                       width: Dimens.hundredTen,
-                                      imageUrl: controller
-                                              .getProfileModel?.profilePic ??
-                                          (controller.imageFile?.path ?? ''),
+                                      imageUrl: controller.profileImage ?? (''),
                                       fit: BoxFit.cover,
                                       placeholder: (context, url) {
                                         return Image.asset(

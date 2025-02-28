@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -20,67 +22,71 @@ class SampleOrderScreen extends StatelessWidget {
           },
           title: 'sample_order'.tr,
         ),
-        bottomNavigationBar: Padding(
-          padding: Dimens.edgeInsets15_20_15_30,
-          child: Row(
-            children: [
-              Expanded(
-                  child: InkWell(
-                onTap: () {
-                  controller.profileImage = "";
-                  Get.back();
-                },
-                child: Container(
-                  height: Dimens.fourtyFive,
-                  width: double.maxFinite,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      Dimens.twelve,
-                    ),
-                    color: Colors.white,
-                    border: Border.all(
-                      width: Dimens.one,
-                      color: ColorsValue.colorA7A7A7,
-                    ),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'cancle'.tr,
-                      style: Styles.colorA7A7A780014,
-                    ),
-                  ),
-                ),
-              )),
-              Dimens.boxWidth10,
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (controller.sampleKey.currentState!.validate()) {
-                      controller.postSampleOrder();
-                      Utility.showLoader();
-                    }
+        bottomNavigationBar: SafeArea(
+          child: Padding(
+            padding: Platform.isAndroid
+                ? Dimens.edgeInsets15_20_15_20
+                : Dimens.edgeInsets15_20_15_0,
+            child: Row(
+              children: [
+                Expanded(
+                    child: InkWell(
+                  onTap: () {
+                    controller.profileImage = "";
+                    Get.back();
                   },
-                  style: ElevatedButton.styleFrom(
-                    fixedSize: Size(
-                      double.maxFinite,
-                      Dimens.fourtyFive,
-                    ),
-                    backgroundColor: ColorsValue.appColor,
-                    shape: RoundedRectangleBorder(
+                  child: Container(
+                    height: Dimens.fourtyFive,
+                    width: double.maxFinite,
+                    decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(
                         Dimens.twelve,
                       ),
+                      color: Colors.white,
+                      border: Border.all(
+                        width: Dimens.one,
+                        color: ColorsValue.colorA7A7A7,
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'cancle'.tr,
+                        style: Styles.colorA7A7A780014,
+                      ),
                     ),
                   ),
-                  child: Center(
-                    child: Text(
-                      'sample_order'.tr,
-                      style: Styles.whiteW70016,
+                )),
+                Dimens.boxWidth10,
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (controller.sampleKey.currentState!.validate()) {
+                        controller.postSampleOrder();
+                        Utility.showLoader();
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      fixedSize: Size(
+                        double.maxFinite,
+                        Dimens.fourtyFive,
+                      ),
+                      backgroundColor: ColorsValue.appColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                          Dimens.twelve,
+                        ),
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'sample_order'.tr,
+                        style: Styles.whiteW70016,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         body: Form(

@@ -378,7 +378,7 @@ class Repository {
     }
   }
 
-  Future<String?> postUploadProfile({
+  Future<UploadProfileModel?> postUploadProfile({
     bool isLoading = false,
     required String filePath,
   }) async {
@@ -387,11 +387,11 @@ class Repository {
         isLoading: isLoading,
         filePath: filePath,
       );
-      if (response.statusCode == 200) {
-        return json.decode(response.data)['Data']['path'];
+      var profileModel = uploadProfileModelFromJson(response.data);
+      if (profileModel.data != null) {
+        return profileModel;
       } else {
-        Utility.showMessage(json.decode(response.data)['Message'].toString(),
-            MessageType.error, () => null, '');
+        Utility.errorMessage(profileModel.message.toString());
         return null;
       }
     } catch (_) {

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -19,67 +21,71 @@ class RepairDetailsScreen extends StatelessWidget {
           },
           title: 'repair_order'.tr,
         ),
-        bottomNavigationBar: Padding(
-          padding: Dimens.edgeInsets15_20_15_30,
-          child: Row(
-            children: [
-              Expanded(
-                  child: InkWell(
-                onTap: () {
-                  controller.profileImage = "";
-                  Get.back();
-                },
-                child: Container(
-                  height: Dimens.fourtyFive,
-                  width: double.maxFinite,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      Dimens.twelve,
-                    ),
-                    color: Colors.white,
-                    border: Border.all(
-                      width: Dimens.one,
-                      color: ColorsValue.colorA7A7A7,
-                    ),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'cancle'.tr,
-                      style: Styles.colorA7A7A780014,
-                    ),
-                  ),
-                ),
-              )),
-              Dimens.boxWidth10,
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (controller.desKey.currentState!.validate()) {
-                      Utility.showLoader();
-                      controller.postRepairOrder();
-                    }
+        bottomNavigationBar: SafeArea(
+          child: Padding(
+            padding: Platform.isAndroid
+                ? Dimens.edgeInsets15_20_15_20
+                : Dimens.edgeInsets15_20_15_0,
+            child: Row(
+              children: [
+                Expanded(
+                    child: InkWell(
+                  onTap: () {
+                    controller.profileImage = "";
+                    Get.back();
                   },
-                  style: ElevatedButton.styleFrom(
-                    fixedSize: Size(
-                      double.maxFinite,
-                      Dimens.fourtyFive,
-                    ),
-                    backgroundColor: ColorsValue.appColor,
-                    shape: RoundedRectangleBorder(
+                  child: Container(
+                    height: Dimens.fourtyFive,
+                    width: double.maxFinite,
+                    decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(
                         Dimens.twelve,
                       ),
+                      color: Colors.white,
+                      border: Border.all(
+                        width: Dimens.one,
+                        color: ColorsValue.colorA7A7A7,
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'cancle'.tr,
+                        style: Styles.colorA7A7A780014,
+                      ),
                     ),
                   ),
-                  child: Center(
-                    child: Text(
-                      'repair_order'.tr,
-                      style: Styles.whiteW70016,
+                )),
+                Dimens.boxWidth10,
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (controller.desKey.currentState!.validate()) {
+                        Utility.showLoader();
+                        controller.postRepairOrder();
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      fixedSize: Size(
+                        double.maxFinite,
+                        Dimens.fourtyFive,
+                      ),
+                      backgroundColor: ColorsValue.appColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                          Dimens.twelve,
+                        ),
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'repair_order'.tr,
+                        style: Styles.whiteW70016,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         body: Form(

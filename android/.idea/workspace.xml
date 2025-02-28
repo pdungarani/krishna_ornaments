@@ -10,10 +10,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9793261e-0475-4b67-8bd4-a99542b48c23" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/.cxx/Debug/4h38e223/x86/configure_fingerprint.bin" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/Debug/4h38e223/x86/configure_fingerprint.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/.cxx/RelWithDebInfo/1a2v6j2w/arm64-v8a/configure_fingerprint.bin" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/RelWithDebInfo/1a2v6j2w/arm64-v8a/configure_fingerprint.bin" afterDir="false" />
@@ -21,92 +17,24 @@
       <change beforePath="$PROJECT_DIR$/app/.cxx/RelWithDebInfo/1a2v6j2w/x86/configure_fingerprint.bin" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/RelWithDebInfo/1a2v6j2w/x86/configure_fingerprint.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/.cxx/RelWithDebInfo/1a2v6j2w/x86_64/configure_fingerprint.bin" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/RelWithDebInfo/1a2v6j2w/x86_64/configure_fingerprint.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/release/app-release.aab" beforeDir="false" afterPath="$PROJECT_DIR$/app/release/app-release.aab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-ldpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/project/PROJECT@v11_mod=10db477e59fcd4985fa58cc76c1e72dd_hash=bfdfe7dc352907fc980b868725387e98plugins=1OJSG6M1FOV3XYQCBH7Z29RZ0FPR9XDE1-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=0a222c42dcc2a013a554b61a79f3773f-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=0ade6c0b0841ea79e2e9f2e2f59d2dd0-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=0bc0b85c210eba8a87bfc6c262c8e4dd-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=100749d1ca772b084d61bc2f957c1950-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=149d60f9cddcf318db85c171132f64dd-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=19312fb794951c32f680a4c0ba55d1b8-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=3016e8651d5f825563105c3e16fd7295-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=4074a801644304b2dc8e18aeaa4d3355-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=50c1a51bae36003379616f0d75254505-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=54913dffff24ec9e3f193e89a3ed3a5e-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=5a82370fe363806742337b779687fcf4-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=5b2337b155590ed64ad9d3d3d6812cc1-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=633c733391b72b4684ddf351b2721c2e-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=65967bde060f7071d4033870d4121170-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=67437ec57a14c27d3f7d12477abc5533-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=6903c6ab35c3b7855d5b9d8bf2df97e5-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=698400019545559cb858e72426ded96c-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=7414ef9aa537ffa182b5a19bb258df12-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=759bc2d860194007e1fe562dd3c107af-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=766914a4132da507b6a75405b919c3bd-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=76a8dcd9e3529d72f7356898ed3e083c-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=775c908c3a222c4e92909221b0080fe4-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=7a7b7cbbaee8031f79c3b996bc54109b-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=896faba388e91865bd9a2292537801ec-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=89bd6d5c3fd0cd2bf5871d8ffaf977a4-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=90b63ebc0b1af626fc558649ce230d0e-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=9357a6b630c69cab3ce24b6d48a6543b-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=9797f05b95a2b3c44034a207493fe1d4-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=9b6059f2d0bbe5c8260aba1d318479fc-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=acf4abdf2a04fefbdb0f632af627392c-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=b0dbd3cd3fc87ae73382bc0720446ef2-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=b315f2ee64aeb9e803fa27d2db3131e4-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=b67741a0be23ac928d5853b3e5adbc61-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=bb3cb028290def62bd1c732bf32c7a7a-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=c8b999580fd2fbed677d6d540a530e90-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=d18cc7dd5279002cd45869cfc960e558-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=d9033d570635d059d262d600745b7f56-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=dc49dfe69ceab5f73eca37358ee89a41-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=dfc31293887d01a2e1fe1912b323b77d-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=e672f160c348232a3917ca7cfefced4d-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=eb0212425dfe8ddaa34876d9e5b6a62f-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=ec654149388d0ebea39917ac8041a654-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=ec68d1cfb0615238be3c98dc7256adc7-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=ed1a7cb729d69bc6012e9c981a4e0390-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=ee9a6821610ab5e20c1f344497355643-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=f13474ed18a23ea088a2b6e160d21210-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=f6cb8e12306d94ea99bf83f3a1a076c2-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=fc48f6c25d60a3544ab29dd326e143a8-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=fe08aa55669b89f5e0702cd672fd4280-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=fe984d8c77c8c2e22c082d106f39865d-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/target/TARGET@v11_hash=ff45e0c408427f6ec573225d3fff0c1a-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/svg/build/ios/XCBuildData/PIFCache/workspace/WORKSPACE@v11_hash=(null)_subobjects=2a865880e6cb13757cdf9252e8ad205c-json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Podfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/homeScreen/home_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/homeScreen/home_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/homeScreen/screens/home_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/homeScreen/screens/home_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/app/pages/bottomBarScreen/bottombar_binding.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/bottomBarScreen/bottombar_binding.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/app/pages/bottomBarScreen/bottombar_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/bottomBarScreen/bottombar_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/app/pages/homeScreen/screens/wishlist_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/homeScreen/screens/wishlist_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lib/app/pages/logingScreen/loging_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/logingScreen/loging_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/logingScreen/screens/forget_password.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/logingScreen/screens/forget_password.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/order_screen/order_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/order_screen/order_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/app/pages/logingScreen/screens/signup_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/logingScreen/screens/signup_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lib/app/pages/profileScreen/profile_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/profileScreen/profile_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/app/pages/profileScreen/profile_presenter.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/profileScreen/profile_presenter.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lib/app/pages/profileScreen/profile_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/profileScreen/profile_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lib/app/pages/repair_screen/repair_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/repair_screen/repair_controller.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lib/app/pages/repair_screen/screens/repair_details.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/repair_screen/screens/repair_details.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/app/pages/repair_screen/screens/repair_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/repair_screen/screens/repair_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lib/app/pages/repair_screen/screens/sample_order_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/repair_screen/screens/sample_order_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/shopping_cart_screen.dart/screens/shopping_cart_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/shopping_cart_screen.dart/screens/shopping_cart_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/shopping_cart_screen.dart/screens/view_all_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/shopping_cart_screen.dart/screens/view_all_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lib/app/pages/shopping_cart_screen.dart/shopping_cart_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/shopping_cart_screen.dart/shopping_cart_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/utils/asset_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/utils/asset_constants.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/domain/services/socket_connection.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/domain/services/socket_connection.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/app/theme/dimens.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/theme/dimens.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/domain/models/models.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/domain/models/models.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/domain/repositories/repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/domain/repositories/repository.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/domain/services/firebase_api.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/domain/services/firebase_api.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/domain/usecases/profile_usecases.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/domain/usecases/profile_usecases.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../pubspec.yaml" afterDir="false" />
     </list>
