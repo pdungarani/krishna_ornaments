@@ -66,7 +66,7 @@ class ForgetPasswordView extends StatelessWidget {
                           onTap: () {
                             if (controller.forgotPassFormkey.currentState!
                                 .validate()) {
-                              Utility.showLoader();
+                              
                               controller.forgotPass();
                             }
                           },

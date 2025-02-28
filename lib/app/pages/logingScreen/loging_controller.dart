@@ -38,17 +38,32 @@ class LoginController extends GetxController {
   bool isLoginLoading = false;
 
   Future<void> loginApi() async {
-    var response = await loginPresenter.loginApi(
-      mobile: emailController.text,
-      password: passwordController.text,
-      fcm: facmToken ?? "",
-      isLoading: false,
+    var response = await client.post(
+      Uri.parse("https://api.krishnaornaments.com/user/login"),
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization':
+            'Token ${Get.find<Repository>().getStringValue(LocalKeys.authToken)}',
+      },
+      body: jsonEncode({
+        "username": emailController.text,
+        "password": passwordController.text,
+        "fcm": facmToken ?? "",
+      }),
     );
+    // var response = await loginPresenter.loginApi(
+    //   mobile: emailController.text,
+    //   password: passwordController.text,
+    //   fcm: facmToken ?? "",
+    //   isLoading: false,
+    // );
+    var loginModel = loginModelFromJson(response.body);
+
     loginData = null;
-    if (response?.data != null) {
-      loginData = response;
+    if (loginModel.data != null) {
+      loginData = loginModel;
       Get.find<Repository>()
-          .saveValue(LocalKeys.authToken, response?.data?.accessToken);
+          .saveValue(LocalKeys.authToken, loginModel.data?.accessToken);
       RouteManagement.goToBottomBarView();
       isLoginLoading = false;
     } else {
@@ -106,12 +121,11 @@ class LoginController extends GetxController {
     var registerModel = registerModelFromJson(response.body);
 
     if (registerModel.data != null) {
+      Utility.closeLoader();
       Utility.snacBar(registerModel.message ?? '', ColorsValue.appColor);
       RouteManagement.goToLoginView();
-      Utility.closeLoader();
     } else {
       Utility.closeLoader();
-
       Utility.errorMessage(jsonDecode(registerModel.message ?? ""));
     }
     update();

@@ -841,7 +841,8 @@ class ViewAllProductScreen extends StatelessWidget {
                                                   ),
                                                 ),
                                               ),
-                                              if ((item.quantity ?? 0) < 0) ...[
+                                              if ((item.quantity ?? 0) <=
+                                                  0) ...[
                                                 Container(
                                                   alignment: Alignment.center,
                                                   padding: Dimens

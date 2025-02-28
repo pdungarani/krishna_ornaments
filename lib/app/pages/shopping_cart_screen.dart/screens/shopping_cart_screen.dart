@@ -126,30 +126,36 @@ class ShoppingCartScreen extends StatelessWidget {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Row(
+                                                spacing: Dimens.twenty,
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        item.product?.name ??
-                                                            "",
-                                                        style: Styles
-                                                            .color212121W70012,
-                                                      ),
-                                                      Dimens.boxHeight5,
-                                                      Text(
-                                                        "${'weight'.tr} : ${item.product?.weight}",
-                                                        style: Styles
-                                                            .color9C9C9CW50010,
-                                                      ),
-                                                    ],
+                                                  Flexible(
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          item.product?.name ??
+                                                              "",
+                                                          style: Styles
+                                                              .color212121W70012,
+                                                          maxLines: 1,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                        ),
+                                                        Dimens.boxHeight5,
+                                                        Text(
+                                                          "${'weight'.tr} : ${item.product?.weight} gm",
+                                                          style: Styles
+                                                              .color9C9C9CW50010,
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
                                                   InkWell(
                                                     onTap: () {

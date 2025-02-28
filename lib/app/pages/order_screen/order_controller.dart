@@ -69,6 +69,8 @@ class OrderController extends GetxController {
     );
 
     var getOrderHistoryModel = getOrderHistoryModelFromJson(response.body);
+    orderListModel.clear();
+    getOrderHistoryDoc = null;
     if (getOrderHistoryModel.status == 200) {
       getOrderHistoryDoc = getOrderHistoryModel.data?.docs![0];
       orderListModel
@@ -79,7 +81,6 @@ class OrderController extends GetxController {
           MessageType.error, () => null, '');
       isLoading = false;
     }
-
     update();
   }
 

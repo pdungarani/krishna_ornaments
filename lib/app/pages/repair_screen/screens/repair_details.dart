@@ -55,6 +55,7 @@ class RepairDetailsScreen extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     if (controller.desKey.currentState!.validate()) {
+                      Utility.showLoader();
                       controller.postRepairOrder();
                     }
                   },

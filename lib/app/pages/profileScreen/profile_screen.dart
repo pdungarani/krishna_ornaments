@@ -12,10 +12,11 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProfileController>(
-      // initState: (state) {
-      //   var controller = Get.find<ProfileController>();
-      //   controller.getProfile();
-      // },
+      initState: (state) {
+        var controller = Get.find<ProfileController>();
+        Utility.showLoader();
+        controller.getProfile();
+      },
       builder: (controller) => Scaffold(
         backgroundColor: ColorsValue.primaryColor,
         body: Stack(
@@ -92,13 +93,13 @@ class ProfileScreen extends StatelessWidget {
                                           (controller.imageFile?.path ?? ''),
                                       fit: BoxFit.cover,
                                       placeholder: (context, url) {
-                                        return SvgPicture.asset(
+                                        return Image.asset(
                                           AssetConstants.usera,
                                           fit: BoxFit.cover,
                                         );
                                       },
                                       errorWidget: (context, url, error) {
-                                        return SvgPicture.asset(
+                                        return Image.asset(
                                           AssetConstants.usera,
                                           fit: BoxFit.cover,
                                         );

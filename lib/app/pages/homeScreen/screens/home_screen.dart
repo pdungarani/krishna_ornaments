@@ -71,7 +71,8 @@ class HomeScreen extends StatelessWidget {
                             BlendMode.srcIn,
                           ),
                         ),
-                        if (controller.wishlistCount.isNotEmpty) ...[
+                        if (controller.wishListCount != null &&
+                            controller.wishListCount != 0) ...[
                           Positioned(
                             right: 0,
                             top: 0,
@@ -86,7 +87,7 @@ class HomeScreen extends StatelessWidget {
                                 ),
                               ),
                               child: Text(
-                                controller.wishlistCount.length.toString(),
+                                controller.wishListCount.toString(),
                                 style: GoogleFonts.montserrat(
                                   fontSize: Dimens.eight,
                                   color: ColorsValue.whiteColor,
@@ -282,7 +283,7 @@ class HomeScreen extends StatelessWidget {
                                 padding: Dimens.edgeInsetsRight20,
                                 child: CustomProductView(
                                   inOutStock:
-                                      (item.quantity ?? 0) < 0 ? true : false,
+                                      (item.quantity ?? 0) <= 0 ? true : false,
                                   productName: item.name ?? "",
                                   imageUrl: item.image ?? "",
                                   categoryName: item.category?.name ?? "",
@@ -399,7 +400,7 @@ class HomeScreen extends StatelessWidget {
                                 padding: Dimens.edgeInsetsRight20,
                                 child: CustomProductView(
                                   inOutStock:
-                                      (item.quantity ?? 0) < 0 ? true : false,
+                                      (item.quantity ?? 0) <= 0 ? true : false,
                                   productName: item.name ?? "",
                                   imageUrl: item.image ?? "",
                                   categoryName: item.category?.name ?? "",

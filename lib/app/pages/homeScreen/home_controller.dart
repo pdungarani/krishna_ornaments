@@ -17,6 +17,7 @@ class HomeController extends GetxController {
     getProfile();
     isLoading = true;
     getAllCategories();
+    postWishlist(1);
   }
 
   GetProfileData? getProfileModel;
@@ -342,6 +343,7 @@ class HomeController extends GetxController {
       }),
     );
     var loginModel = wishlistModelFromJson(response.body);
+    wishlistList.clear();
     if (loginModel.data != null) {
       if (pageKey == 1) {
         isWishListLastPage = false;
@@ -397,10 +399,30 @@ class HomeController extends GetxController {
       }),
     );
     if (response.body.isNotEmpty) {
-      if (isRemove) wishlistList.removeAt(index);
+      if (isRemove) {
+        wishlistList.removeAt(index);
+      }
       postAllProduct();
       postWishlist(1);
       postAllTrendingProduct(1);
+      postWishlistCount();
+    }
+    update();
+  }
+
+  int? wishListCount;
+
+  Future<void> postWishlistCount() async {
+    var response = await client.get(
+      Uri.parse("https://api.krishnaornaments.com/user/wishlist/count"),
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization':
+            'Token ${Get.find<Repository>().getStringValue(LocalKeys.authToken)}',
+      },
+    );
+    if (response.body.isNotEmpty) {
+      wishListCount = jsonDecode(response.body)['Data'];
     }
     update();
   }
