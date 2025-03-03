@@ -7,7 +7,7 @@ String loginModelToJson(LoginModel data) => json.encode(data.toJson());
 
 class LoginModel {
   String? message;
-  Data? data;
+  dynamic data; // Can be either Data object or int
   int? status;
   bool? isSuccess;
 
@@ -20,14 +20,18 @@ class LoginModel {
 
   factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
         message: json["Message"],
-        data: json["Data"] == null ? null : Data.fromJson(json["Data"]),
+        data: json["Data"] is int
+            ? json["Data"]
+            : json["Data"] == null
+                ? null
+                : Data.fromJson(json["Data"]),
         status: json["Status"],
         isSuccess: json["IsSuccess"],
       );
 
   Map<String, dynamic> toJson() => {
         "Message": message,
-        "Data": data?.toJson(),
+        "Data": data is Data ? (data as Data).toJson() : data,
         "Status": status,
         "IsSuccess": isSuccess,
       };

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -477,6 +479,42 @@ class ProfileScreen extends StatelessWidget {
                           ),
                         ),
                       ),
+                      if (Platform.isIOS) ...[
+                        Dimens.boxHeight20,
+                        InkWell(
+                          onTap: () {
+                            Get.find<DeviceRepository>().deleteBox();
+                            Get.find<DeviceRepository>()
+                                .deleteAllSecuredValues();
+                            RouteManagement.goToLoginView();
+                          },
+                          child: Container(
+                            height: Dimens.sixty,
+                            decoration: BoxDecoration(
+                              color: ColorsValue.blackEEEAEA,
+                              borderRadius: BorderRadius.circular(
+                                Dimens.sixteen,
+                              ),
+                            ),
+                            child: Center(
+                              child: ListTile(
+                                contentPadding: Dimens.edgeInsets20_00_20_00,
+                                leading: Image.asset(
+                                  AssetConstants.delete_ac,
+                                  height: Dimens.thirty,
+                                  width: Dimens.thirty,
+                                  color: ColorsValue.redColor,
+                                ),
+                                title: Text(
+                                  "Delete Account".tr,
+                                  style: Styles.color21212160014,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                      Dimens.boxHeight20,
                     ],
                   ),
                 )

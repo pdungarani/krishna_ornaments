@@ -17,25 +17,11 @@
       <change beforePath="$PROJECT_DIR$/app/.cxx/RelWithDebInfo/1a2v6j2w/x86/configure_fingerprint.bin" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/RelWithDebInfo/1a2v6j2w/x86/configure_fingerprint.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/.cxx/RelWithDebInfo/1a2v6j2w/x86_64/configure_fingerprint.bin" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/RelWithDebInfo/1a2v6j2w/x86_64/configure_fingerprint.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/release/app-release.aab" beforeDir="false" afterPath="$PROJECT_DIR$/app/release/app-release.aab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/bottomBarScreen/bottombar_binding.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/bottomBarScreen/bottombar_binding.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/bottomBarScreen/bottombar_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/bottomBarScreen/bottombar_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/homeScreen/screens/wishlist_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/homeScreen/screens/wishlist_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lib/app/pages/logingScreen/loging_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/logingScreen/loging_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/app/pages/logingScreen/loging_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/logingScreen/loging_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lib/app/pages/logingScreen/screens/signup_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/logingScreen/screens/signup_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/profileScreen/profile_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/profileScreen/profile_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/profileScreen/profile_presenter.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/profileScreen/profile_presenter.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/profileScreen/profile_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/profileScreen/profile_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/repair_screen/repair_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/repair_screen/repair_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/repair_screen/screens/repair_details.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/repair_screen/screens/repair_details.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/repair_screen/screens/repair_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/repair_screen/screens/repair_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/repair_screen/screens/sample_order_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/repair_screen/screens/sample_order_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/shopping_cart_screen.dart/shopping_cart_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/shopping_cart_screen.dart/shopping_cart_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/theme/dimens.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/theme/dimens.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/domain/models/models.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/domain/models/models.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/domain/repositories/repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/domain/repositories/repository.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/domain/models/login_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/domain/models/login_model.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lib/domain/services/firebase_api.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/domain/services/firebase_api.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/domain/usecases/profile_usecases.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/domain/usecases/profile_usecases.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

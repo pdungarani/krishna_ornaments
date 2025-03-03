@@ -3,8 +3,6 @@ import 'dart:io';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:krishna_ornaments/app/pages/pages.dart';
 
 class FirebaseApi {
   final _firebaseMessaging = FirebaseMessaging.instance;
@@ -70,10 +68,7 @@ class FirebaseApi {
 
   static void handleNavigationOnNotification(RemoteMessage message) {}
 
-  static void handleNavigationOnNotificationBackground(RemoteMessage message) {
-    Get.find<BottomBarController>().selectedIndex = 3;
-    Get.forceAppUpdate();
-  }
+  static void handleNavigationOnNotificationBackground(RemoteMessage message) {}
 
   static Future<void> initilizeNotification() async {
     await AwesomeNotifications().initialize(

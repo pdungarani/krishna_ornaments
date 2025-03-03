@@ -18,11 +18,14 @@ class LoginController extends GetxController {
 
   String? facmToken;
 
+  int genderValue =0;
+
   @override
   onInit() async {
     super.onInit();
     await firebaseMessaging.getToken().then((token) async {
       facmToken = token;
+      print("FCM:-$facmToken");
     });
   }
 
@@ -38,40 +41,41 @@ class LoginController extends GetxController {
   bool isLoginLoading = false;
 
   Future<void> loginApi() async {
-    var response = await client.post(
-      Uri.parse("https://api.krishnaornaments.com/user/login"),
-      headers: {
-        "Content-Type": "application/json",
-        'Authorization':
-            'Token ${Get.find<Repository>().getStringValue(LocalKeys.authToken)}',
-      },
-      body: jsonEncode({
-        "username": emailController.text,
-        "password": passwordController.text,
-        "fcm": facmToken ?? "",
-      }),
-    );
-    // var response = await loginPresenter.loginApi(
-    //   mobile: emailController.text,
-    //   password: passwordController.text,
-    //   fcm: facmToken ?? "",
-    //   isLoading: false,
-    // );
-    var loginModel = loginModelFromJson(response.body);
+    try {
+      var response = await http.post(
+        Uri.parse("https://api.krishnaornaments.com/user/login"),
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization':
+              'Token ${Get.find<Repository>().getStringValue(LocalKeys.authToken)}',
+        },
+        body: jsonEncode({
+          "username": emailController.text,
+          "password": passwordController.text,
+          "fcm": facmToken ?? "",
+        }),
+      );
 
-    loginData = null;
-    if (loginModel.data != null) {
-      loginData = loginModel;
-      print("Fcm:-$facmToken");
-      Get.find<Repository>()
-          .saveValue(LocalKeys.authToken, loginModel.data?.accessToken);
-      RouteManagement.goToBottomBarView();
+      var loginModel = LoginModel.fromJson(jsonDecode(response.body));
+
+      loginData = null;
+      if (response.statusCode == 200 && loginModel.data != null) {
+        loginData = loginModel;
+
+        Get.find<Repository>().saveValue(LocalKeys.authToken,
+            loginModel.data is Data ? loginModel.data?.accessToken : "");
+        RouteManagement.goToBottomBarView();
+      } else {
+        Utility.errorMessage(
+            loginModel.message ?? 'Oops, something went wrong');
+      }
+    } catch (e) {
       isLoginLoading = false;
-    } else {
+      Utility.errorMessage('An error occurred: ${e.toString()}');
+    } finally {
       isLoginLoading = false;
-      Utility.errorMessage('Oops something went wrong');
+      update();
     }
-    update();
   }
 
   ///// =========== >>>>> Signup Screen <<<<< =========== /////
@@ -84,6 +88,7 @@ class LoginController extends GetxController {
   TextEditingController cityController = TextEditingController();
   TextEditingController newPasswordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+  TextEditingController emailReController = TextEditingController();
 
   bool isEditValid = false;
   var dailEditcode = '+91';
@@ -99,7 +104,7 @@ class LoginController extends GetxController {
       },
       body: jsonEncode({
         "name": nameController.text,
-        "email": emailController.text,
+        "email": emailReController.text,
         "companyname": compleyNameController.text,
         "city": cityController.text,
         "countryCode": dailEditcode,

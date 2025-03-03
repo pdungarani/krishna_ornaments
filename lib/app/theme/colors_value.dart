@@ -278,7 +278,7 @@ abstract class ColorsValue {
   /// Tirth kevadiya
   static const lightYellow = Color(0xffE7AC2D);
   static const textfildBorder = Color(0xffE2E8F0);
-  static const redColor = Color(0xffcf000f);
+  static const redColor = Color(0xffFF0000);
   static const color4E4B66 = Color(0xff4E4B66);
   static const color94A3B8 = Color(0xFF94A3B8);
   static const color212121 = Color(0xff212121);

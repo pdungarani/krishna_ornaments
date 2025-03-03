@@ -25,28 +25,10 @@ class _SignupScreenState extends State<SignupScreen> {
               backgroundColor: ColorsValue.primaryColor,
             ),
           ),
-          bottomNavigationBar: Padding(
-            padding: const EdgeInsets.only(bottom: 10),
-            child: Text.rich(
-              textAlign: TextAlign.center,
-              TextSpan(
-                children: [
-                  TextSpan(
-                    text: 'Already Have An Account? ',
-                    style: Styles.black50012,
-                  ),
-                  TextSpan(
-                    text: 'Log In',
-                    style: Styles.lightYellow40012,
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        Get.offAll(const LoginScreen());
-                      },
-                  ),
-                ],
-              ),
-            ),
-          ),
+          // bottomNavigationBar: Padding(
+          //   padding: const EdgeInsets.only(bottom: 10),
+          //   child:
+          // ),
           backgroundColor: ColorsValue.primaryColor,
           body: SafeArea(
             child: Form(
@@ -117,7 +99,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   CustomTextFormField(
                     text: 'email'.tr,
                     hintText: 'enter_your_email'.tr,
-                    controller: controller.emailController,
+                    controller: controller.emailReController,
                     textInputAction: TextInputAction.next,
                     keyboardType: TextInputType.emailAddress,
                     validation: (value) {
@@ -142,6 +124,97 @@ class _SignupScreenState extends State<SignupScreen> {
                       }
                       return null;
                     },
+                  ),
+                  Dimens.boxHeight14,
+                  Text(
+                    "Gender",
+                    style: Styles.color21212150014,
+                  ),
+                  Dimens.boxHeight5,
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Transform.scale(
+                            scale: 1.0,
+                            child: Radio(
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.shrinkWrap,
+                              visualDensity: VisualDensity(
+                                horizontal: Dimens.zero,
+                                vertical: Dimens.zero,
+                              ),
+                              value: 0,
+                              groupValue: controller.genderValue,
+                              onChanged: (val) {
+                                controller.genderValue = val!;
+                                controller.update();
+                              },
+                            ),
+                          ),
+                          Text(
+                            'Male',
+                            style: Styles.color21212150014,
+                          ),
+                        ],
+                      ),
+                      Dimens.boxWidth20,
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Transform.scale(
+                            scale: 1.0,
+                            child: Radio(
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.shrinkWrap,
+                              visualDensity: VisualDensity(
+                                horizontal: Dimens.zero,
+                                vertical: Dimens.zero,
+                              ),
+                              value: 0,
+                              groupValue: controller.genderValue,
+                              onChanged: (val) {
+                                controller.genderValue = val!;
+                                controller.update();
+                              },
+                            ),
+                          ),
+                          Text(
+                            'Female',
+                            style: Styles.color21212150014,
+                          ),
+                        ],
+                      ),
+                      Dimens.boxWidth20,
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Transform.scale(
+                            scale: 1.0,
+                            child: Radio(
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.shrinkWrap,
+                              visualDensity: VisualDensity(
+                                horizontal: Dimens.zero,
+                                vertical: Dimens.zero,
+                              ),
+                              value: 0,
+                              groupValue: controller.genderValue,
+                              onChanged: (val) {
+                                controller.genderValue = val!;
+                                controller.update();
+                              },
+                            ),
+                          ),
+                          Text(
+                            'Other',
+                            style: Styles.color21212150014,
+                          ),
+                        ],
+                      )
+                    ],
                   ),
                   Dimens.boxHeight14,
                   CustomTextFormField(
@@ -183,7 +256,28 @@ class _SignupScreenState extends State<SignupScreen> {
                         controller.registerApi();
                       }
                     },
-                  )
+                  ),
+                  Dimens.boxHeight20,
+                  Text.rich(
+                    textAlign: TextAlign.center,
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Already Have An Account? ',
+                          style: Styles.black50012,
+                        ),
+                        TextSpan(
+                          text: 'Log In',
+                          style: Styles.lightYellow40012,
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Get.offAll(const LoginScreen());
+                            },
+                        ),
+                      ],
+                    ),
+                  ),
+                  Dimens.boxHeight20,
                 ],
               ),
             ),
