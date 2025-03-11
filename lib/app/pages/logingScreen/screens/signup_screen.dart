@@ -146,7 +146,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 horizontal: Dimens.zero,
                                 vertical: Dimens.zero,
                               ),
-                              value: 0,
+                              value: 1,
                               groupValue: controller.genderValue,
                               onChanged: (val) {
                                 controller.genderValue = val!;
@@ -173,7 +173,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 horizontal: Dimens.zero,
                                 vertical: Dimens.zero,
                               ),
-                              value: 0,
+                              value: 2,
                               groupValue: controller.genderValue,
                               onChanged: (val) {
                                 controller.genderValue = val!;
@@ -200,7 +200,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 horizontal: Dimens.zero,
                                 vertical: Dimens.zero,
                               ),
-                              value: 0,
+                              value: 3,
                               groupValue: controller.genderValue,
                               onChanged: (val) {
                                 controller.genderValue = val!;

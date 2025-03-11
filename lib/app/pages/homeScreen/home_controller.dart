@@ -32,8 +32,6 @@ class HomeController extends GetxController {
       Get.find<Repository>()
           .saveValue(LocalKeys.chanelId, getProfileModel?.channelid ?? "");
       update();
-    } else {
-      Utility.errorMessage(response?.message ?? "");
     }
   }
 

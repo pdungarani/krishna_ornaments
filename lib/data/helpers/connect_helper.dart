@@ -280,9 +280,9 @@ class ConnectHelper {
       "countryCode": countryCode,
       "mobile": mobile,
       "country_wise_contact": {
-        "number": mobile.isEmpty ? "" : "0${mobile}",
-        "internationalNumber": "${countryCode} ${mobile}",
-        "nationalNumber": "0${mobile}",
+        "number": mobile.isEmpty ? "" : "0$mobile",
+        "internationalNumber": "$countryCode $mobile",
+        "nationalNumber": "0$mobile",
         "e164Number": countryCode + mobile,
         "countryCode": PhoneNumber.getISO2CodeByPrefix(countryCode),
         "dialCode": countryCode,

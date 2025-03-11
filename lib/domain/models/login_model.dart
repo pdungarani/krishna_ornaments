@@ -7,7 +7,7 @@ String loginModelToJson(LoginModel data) => json.encode(data.toJson());
 
 class LoginModel {
   String? message;
-  dynamic data; // Can be either Data object or int
+  dynamic data; 
   int? status;
   bool? isSuccess;
 
