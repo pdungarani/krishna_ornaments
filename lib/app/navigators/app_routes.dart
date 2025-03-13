@@ -28,6 +28,7 @@ abstract class Routes {
   static const inAppUpdateScreen = _Paths.inAppUpdateScreen;
   static const contactUsScreen = _Paths.contactUsScreen;
   static const shoppingCartScreen = _Paths.shoppingCartScreen;
+  static const landingPage = _Paths.landingPage;
 }
 
 abstract class _Paths {
@@ -55,4 +56,5 @@ abstract class _Paths {
   static const bankDetailScreen = '/bankDetailScreen';
   static const contactUsScreen = '/contactUsScreen';
   static const shoppingCartScreen = '/shoppingCartScreen';
+  static const landingPage = '/landingPage';
 }

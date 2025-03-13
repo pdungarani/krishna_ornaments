@@ -193,5 +193,12 @@ class AppPages {
       binding: SplashBinding(),
       transition: Transition.fadeIn,
     ),
+    GetPage<LandingPage>(
+      name: _Paths.landingPage,
+      transitionDuration: transitionDuration,
+      page: LandingPage.new,
+      binding: SplashBinding(),
+      transition: Transition.fadeIn,
+    ),
   ];
 }

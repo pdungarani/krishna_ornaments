@@ -11,6 +11,7 @@ abstract class RouteManagement {
   static void goToForgotView() => Get.toNamed<void>(Routes.forgotScreen);
   static void goToSignupView() => Get.toNamed<void>(Routes.signUpScreen);
   static void goToHomeView() => Get.toNamed<void>(Routes.homeScreen);
+  static void goToLandingPage() => Get.offAllNamed<void>(Routes.landingPage);
   static void goToBottomBarView() =>
       Get.offAllNamed<void>(Routes.bottomBarScreen);
   static void goToOrderScreen() => Get.toNamed<void>(Routes.orderScreen);

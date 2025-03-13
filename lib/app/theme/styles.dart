@@ -110,6 +110,12 @@ abstract class Styles {
     fontWeight: FontWeight.w600,
   );
 
+  static TextStyle txtBlackColorW60024 = GoogleFonts.outfit(
+    color: ColorsValue.txtBlackColor,
+    fontSize: Dimens.twentyFour,
+    fontWeight: FontWeight.w600,
+  );
+
   static TextStyle txtBlackColorW70014 = GoogleFonts.outfit(
     color: ColorsValue.txtBlackColor,
     fontSize: Dimens.fourteen,
@@ -420,6 +426,12 @@ abstract class Styles {
 
   static TextStyle appColor70014 = GoogleFonts.nunito(
     fontSize: Dimens.fourteen,
+    fontWeight: FontWeight.w700,
+    color: ColorsValue.appColor,
+  );
+
+  static TextStyle appColor70018 = GoogleFonts.nunito(
+    fontSize: Dimens.eighteen,
     fontWeight: FontWeight.w700,
     color: ColorsValue.appColor,
   );

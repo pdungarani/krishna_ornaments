@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,7 +14,7 @@ import 'package:krishna_ornaments/device/device.dart';
 import 'package:krishna_ornaments/domain/domain.dart';
 import 'package:krishna_ornaments/domain/services/firebase_api.dart';
 import 'package:no_screenshot/no_screenshot.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'firebase_options.dart';
 
 final noScreenshot = NoScreenshot.instance;
@@ -90,7 +93,7 @@ class MyApp extends StatelessWidget {
         darkTheme: darkThemeData(context),
         themeMode: ThemeMode.light,
         getPages: AppPages.pages,
-        initialRoute: Routes.splashScreen,
+        initialRoute: Platform.isIOS ? Routes.landingPage : Routes.splashScreen,
         translations: TranslationsFile(),
         enableLog: true,
       ),
