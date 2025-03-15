@@ -54,4 +54,7 @@ abstract class AssetConstants {
   static const String home_banner2 = 'assets/images/home_banner2.jpg';
   static const String home_banner3 = 'assets/images/home_banner3.jpg';
   static const String delete_ac = 'assets/images/delete_ac.png';
+  static const String gold_ring = 'assets/images/gold_ring.png';
+  static const String rose_gold = 'assets/images/rose_gold.png';
+  static const String sliver_ring = 'assets/images/sliver_ring.png';
 }

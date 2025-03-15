@@ -93,7 +93,8 @@ class MyApp extends StatelessWidget {
         darkTheme: darkThemeData(context),
         themeMode: ThemeMode.light,
         getPages: AppPages.pages,
-        initialRoute: Platform.isIOS ? Routes.landingPage : Routes.splashScreen,
+        initialRoute:
+            Platform.isIOS ? Routes.bottomBarScreen : Routes.splashScreen,
         translations: TranslationsFile(),
         enableLog: true,
       ),

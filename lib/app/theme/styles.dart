@@ -104,9 +104,21 @@ abstract class Styles {
     fontWeight: FontWeight.w800,
   );
 
+  static TextStyle whiteColorW50018 = GoogleFonts.outfit(
+    color: ColorsValue.whiteColor,
+    fontSize: Dimens.sixteen,
+    fontWeight: FontWeight.w500,
+  );
+
   static TextStyle txtBlackColorW60016 = GoogleFonts.outfit(
     color: ColorsValue.txtBlackColor,
     fontSize: Dimens.sixteen,
+    fontWeight: FontWeight.w600,
+  );
+
+  static TextStyle txtBlackColorW60018 = GoogleFonts.outfit(
+    color: ColorsValue.txtBlackColor,
+    fontSize: Dimens.eighteen,
     fontWeight: FontWeight.w600,
   );
 
@@ -123,6 +135,12 @@ abstract class Styles {
   );
 
   static TextStyle txtBlackColorW50014 = GoogleFonts.outfit(
+    color: ColorsValue.txtBlackColor,
+    fontSize: Dimens.fourteen,
+    fontWeight: FontWeight.w500,
+  );
+
+  static TextStyle txtBlackColorW40014 = GoogleFonts.outfit(
     color: ColorsValue.txtBlackColor,
     fontSize: Dimens.fourteen,
     fontWeight: FontWeight.w500,
