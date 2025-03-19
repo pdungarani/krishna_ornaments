@@ -67,9 +67,13 @@ class DataRepository extends DomainRepository {
 
   Future<ResponseModel> getAllCategories({
     bool isLoading = false,
+    bool isSubCategories = false,
+    String? categoriesId,
   }) async =>
       await connectHelper.getAllCategories(
         isLoading: isLoading,
+        isSubCategories: isSubCategories,
+        categoriesId: categoriesId,
       );
 
   Future<ResponseModel> postAllProduct({

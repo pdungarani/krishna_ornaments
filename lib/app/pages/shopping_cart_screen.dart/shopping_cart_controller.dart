@@ -417,6 +417,9 @@ class ShoppingCartController extends GetxController {
 
   int radioValue = 0;
   int radioSortValue = -1;
+
+  int radioFilterValue = 0;
+  int radioFilterSortValue = -1;
   bool isFilter = false;
 
   int filterValue = 0;
@@ -438,47 +441,97 @@ class ShoppingCartController extends GetxController {
 
   // user/products
 
+  // Future<void> postArrivalViewAll(int pageKey, String type) async {
+  //   if (pageKey == 1) {
+  //     pageViewAllCount = 1;
+  //   }
+  //   var response = await client.post(
+  //     Uri.parse("https://api.krishnaornaments.com/user/products"),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       'Authorization':
+  //           'Token ${Get.find<Repository>().getStringValue(LocalKeys.authToken)}',
+  //     },
+  //     body: jsonEncode({
+  //       "page": pageKey,
+  //       "limit": 10,
+  //       "search": "",
+  //       "category": category,
+  //       "min": minWeightController.text.isNotEmpty &&
+  //               minWeightController.text.isNotEmpty
+  //           ? minWeightController.text
+  //           : startValue.toString(),
+  //       "max": minWeightController.text.isNotEmpty &&
+  //               minWeightController.text.isNotEmpty
+  //           ? maxWeightController.text
+  //           : endValue.toString(),
+  //       "productType": type.toLowerCase(),
+  //       "sortField": "weight",
+  //       "sortOption": radioSortValue,
+  //     }),
+  //   );
+  //   var loginModel = productsModelFromJson(response.body);
+  //   if (loginModel.data != null) {
+  //     if (pageKey == 1) {
+  //       isViewAllLastPage = false;
+  //       viewAllDocList.clear();
+  //     }
+  //     if ((loginModel.data?.docs?.length ?? 0) < 10) {
+  //       isViewAllLastPage = true;
+  //       viewAllDocList.addAll(loginModel.data?.docs ?? []);
+  //     } else {
+  //       pageViewAllCount++;
+  //       viewAllDocList.addAll(loginModel.data?.docs ?? []);
+  //     }
+  //     if (pageKey == 1) {
+  //       if (scrollViewAllController.positions.isNotEmpty) {
+  //         scrollViewAllController.jumpTo(0);
+  //       }
+  //     }
+  //     isViewAllLoading = false;
+  //   } else {
+  //     isViewAllLoading = false;
+  //   }
+  //   update();
+  // }
+
   Future<void> postArrivalViewAll(int pageKey, String type) async {
     if (pageKey == 1) {
       pageViewAllCount = 1;
     }
-    var response = await client.post(
-      Uri.parse("https://api.krishnaornaments.com/user/products"),
-      headers: {
-        "Content-Type": "application/json",
-        'Authorization':
-            'Token ${Get.find<Repository>().getStringValue(LocalKeys.authToken)}',
-      },
-      body: jsonEncode({
-        "page": pageKey,
-        "limit": 10,
-        "search": "",
-        "category": category,
-        "min": minWeightController.text.isNotEmpty &&
-                minWeightController.text.isNotEmpty
-            ? minWeightController.text
-            : startValue.toString(),
-        "max": minWeightController.text.isNotEmpty &&
-                minWeightController.text.isNotEmpty
-            ? maxWeightController.text
-            : endValue.toString(),
-        "productType": type.toLowerCase(),
-        "sortField": "weight",
-        "sortOption": radioSortValue,
-      }),
+    var response = await shoppingCartPresenter.postAllProduct(
+      page: pageKey,
+      limit: 10,
+      search: "",
+      category: category,
+      min: minWeightController.text.isNotEmpty &&
+              minWeightController.text.isNotEmpty
+          ? minWeightController.text
+          : startValue.toString(),
+      max: minWeightController.text.isNotEmpty &&
+              minWeightController.text.isNotEmpty
+          ? maxWeightController.text
+          : endValue.toString(),
+      productType: type.toLowerCase(),
+      sortField: isFilter
+          ? "quantity"
+          : radioValue == 0 || radioValue == 1
+              ? "name"
+              : "weight",
+      sortOption: isFilter ? radioFilterSortValue : radioSortValue,
+      isLoading: false,
     );
-    var loginModel = productsModelFromJson(response.body);
-    if (loginModel.data != null) {
+    if (response?.data != null) {
       if (pageKey == 1) {
         isViewAllLastPage = false;
         viewAllDocList.clear();
       }
-      if ((loginModel.data?.docs?.length ?? 0) < 10) {
+      if ((response?.data?.docs?.length ?? 0) < 10) {
         isViewAllLastPage = true;
-        viewAllDocList.addAll(loginModel.data?.docs ?? []);
+        viewAllDocList.addAll(response?.data?.docs ?? []);
       } else {
         pageViewAllCount++;
-        viewAllDocList.addAll(loginModel.data?.docs ?? []);
+        viewAllDocList.addAll(response?.data?.docs ?? []);
       }
       if (pageKey == 1) {
         if (scrollViewAllController.positions.isNotEmpty) {
@@ -492,53 +545,6 @@ class ShoppingCartController extends GetxController {
     }
     update();
   }
-
-  // Future<void> postArrivalViewAll(int pageKey, String type) async {
-  //   if (pageKey == 1) {
-  //     pageViewAllCount = 1;
-  //   }
-  //   var response = await shoppingCartPresenter.postAllProduct(
-  //     page: pageKey,
-  //     limit: 10,
-  //     search: "",
-  //     category: category,
-  //     min: minWeightController.text.isNotEmpty &&
-  //             minWeightController.text.isNotEmpty
-  //         ? minWeightController.text
-  //         : startValue.toString(),
-  //     max: minWeightController.text.isNotEmpty &&
-  //             minWeightController.text.isNotEmpty
-  //         ? maxWeightController.text
-  //         : endValue.toString(),
-  //     productType: type.toLowerCase(),
-  //     sortField: "weight",
-  //     sortOption: radioSortValue,
-  //     isLoading: false,
-  //   );
-  //   if (response?.data != null) {
-  //     if (pageKey == 1) {
-  //       isViewAllLastPage = false;
-  //       viewAllDocList.clear();
-  //     }
-  //     if ((response?.data?.docs?.length ?? 0) < 10) {
-  //       isViewAllLastPage = true;
-  //       viewAllDocList.addAll(response?.data?.docs ?? []);
-  //     } else {
-  //       pageViewAllCount++;
-  //       viewAllDocList.addAll(response?.data?.docs ?? []);
-  //     }
-  //     if (pageKey == 1) {
-  //       if (scrollViewAllController.positions.isNotEmpty) {
-  //         scrollViewAllController.jumpTo(0);
-  //       }
-  //     }
-
-  //     isViewAllLoading = false;
-  //   } else {
-  //     isViewAllLoading = false;
-  //   }
-  //   update();
-  // }
 
   Future<void> postAddToCart(
       String productId, int quantity, int index, String productType) async {

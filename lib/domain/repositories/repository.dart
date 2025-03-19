@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:krishna_ornaments/app/utils/utils.dart';
 import 'package:krishna_ornaments/data/data.dart';
@@ -144,10 +143,14 @@ class Repository {
 
   Future<GetCategoriesModel?> getAllCategories({
     bool isLoading = false,
+    bool isSubCategories = false,
+    String? categoriesId,
   }) async {
     try {
       var response = await _dataRepository.getAllCategories(
         isLoading: isLoading,
+        isSubCategories: isSubCategories,
+        categoriesId: categoriesId,
       );
       var loginModel = getCategoriesModelFromJson(response.data);
       if (loginModel.data != null) {

@@ -85,4 +85,15 @@ class ShoppingCartPresenter {
         productId: productId,
         isLoading: isLoading,
       );
+
+  Future<GetCategoriesModel?> getAllCategories({
+    bool isLoading = false,
+    bool isSubCategories = false,
+    String? categoriesId,
+  }) async =>
+      await commonUsecases.getAllCategories(
+        isLoading: isLoading,
+        isSubCategories: isSubCategories,
+        categoriesId: categoriesId,
+      );
 }

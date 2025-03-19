@@ -134,11 +134,75 @@ class ViewAllProductScreen extends StatelessWidget {
                                               activeColor:
                                                   ColorsValue.txtBlackColor,
                                               title: Text(
-                                                "Weight High to Low",
+                                                "Name A - Z",
                                                 style:
                                                     Styles.txtBlackColorW60014,
                                               ),
                                               value: 0,
+                                              groupValue: controller.radioValue,
+                                              onChanged: (value) {
+                                                setState(
+                                                  () {
+                                                    controller.radioValue =
+                                                        value!;
+                                                    controller.radioSortValue =
+                                                        1;
+                                                  },
+                                                );
+                                              },
+                                            ),
+                                            RadioListTile<int>(
+                                              dense: false,
+                                              visualDensity:
+                                                  const VisualDensity(
+                                                      horizontal: VisualDensity
+                                                          .minimumDensity,
+                                                      vertical: VisualDensity
+                                                          .minimumDensity),
+                                              controlAffinity:
+                                                  ListTileControlAffinity
+                                                      .trailing,
+                                              contentPadding: EdgeInsets.zero,
+                                              activeColor:
+                                                  ColorsValue.txtBlackColor,
+                                              title: Text(
+                                                "Name Z - A",
+                                                style:
+                                                    Styles.txtBlackColorW60014,
+                                              ),
+                                              value: 1,
+                                              groupValue: controller.radioValue,
+                                              onChanged: (value) {
+                                                setState(
+                                                  () {
+                                                    controller.radioValue =
+                                                        value!;
+                                                    controller.radioSortValue =
+                                                        -1;
+                                                  },
+                                                );
+                                              },
+                                            ),
+                                            RadioListTile<int>(
+                                              dense: false,
+                                              visualDensity:
+                                                  const VisualDensity(
+                                                      horizontal: VisualDensity
+                                                          .minimumDensity,
+                                                      vertical: VisualDensity
+                                                          .minimumDensity),
+                                              controlAffinity:
+                                                  ListTileControlAffinity
+                                                      .trailing,
+                                              contentPadding: EdgeInsets.zero,
+                                              activeColor:
+                                                  ColorsValue.txtBlackColor,
+                                              title: Text(
+                                                "Weight High to Low",
+                                                style:
+                                                    Styles.txtBlackColorW60014,
+                                              ),
+                                              value: 2,
                                               groupValue: controller.radioValue,
                                               onChanged: (value) {
                                                 setState(
@@ -169,7 +233,7 @@ class ViewAllProductScreen extends StatelessWidget {
                                                 style:
                                                     Styles.txtBlackColorW60014,
                                               ),
-                                              value: 1,
+                                              value: 3,
                                               groupValue: controller.radioValue,
                                               onChanged: (int? value) {
                                                 setState(
@@ -514,17 +578,16 @@ class ViewAllProductScreen extends StatelessWidget {
                                                                   .txtBlackColorW60014,
                                                             ),
                                                             value: 0,
-                                                            groupValue:
-                                                                controller
-                                                                    .radioValue,
+                                                            groupValue: controller
+                                                                .radioFilterValue,
                                                             onChanged: (value) {
                                                               setState(
                                                                 () {
                                                                   controller
-                                                                          .radioValue =
+                                                                          .radioFilterValue =
                                                                       value!;
                                                                   controller
-                                                                      .radioSortValue = -1;
+                                                                      .radioFilterSortValue = -1;
                                                                 },
                                                               );
                                                             },
@@ -551,18 +614,17 @@ class ViewAllProductScreen extends StatelessWidget {
                                                                   .txtBlackColorW60014,
                                                             ),
                                                             value: 1,
-                                                            groupValue:
-                                                                controller
-                                                                    .radioValue,
+                                                            groupValue: controller
+                                                                .radioFilterValue,
                                                             onChanged:
                                                                 (int? value) {
                                                               setState(
                                                                 () {
                                                                   controller
-                                                                          .radioValue =
+                                                                          .radioFilterValue =
                                                                       value!;
                                                                   controller
-                                                                      .radioSortValue = 1;
+                                                                      .radioFilterSortValue = 1;
                                                                 },
                                                               );
                                                             },
@@ -606,6 +668,10 @@ class ViewAllProductScreen extends StatelessWidget {
                                                   controller.maxValue = 1000;
                                                   controller.startValue = 0;
                                                   controller.endValue = 1000;
+                                                  controller.radioFilterValue =
+                                                      0;
+                                                  controller
+                                                      .radioFilterSortValue = -1;
                                                   controller.minWeightController
                                                       .clear();
                                                   controller.maxWeightController
@@ -1079,6 +1145,7 @@ class ViewAllProductScreen extends StatelessWidget {
                                         ? "${controller.categoryName} data not found...!"
                                         : "${controller.productTypeViewAll} data not found...!",
                                     style: Styles.black64748BW50016,
+                                    textAlign: TextAlign.center,
                                   )
                                 ],
                               ),

@@ -538,10 +538,8 @@ class ProfileScreen extends StatelessWidget {
                           Dimens.boxHeight20,
                           InkWell(
                             onTap: () {
-                              Get.find<DeviceRepository>().deleteBox();
-                              Get.find<DeviceRepository>()
-                                  .deleteAllSecuredValues();
-                              RouteManagement.goToLoginView();
+                              Utility.launchLinkURL(
+                                  "https://docs.google.com/forms/d/e/1FAIpQLSe2Psqwa-MxssS1xWREob1UyK1LCS2rMILMkz8IR5mRjNaQMQ/viewform?usp=dialog");
                             },
                             child: Container(
                               height: Dimens.sixty,

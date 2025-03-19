@@ -18,7 +18,7 @@ class LoginController extends GetxController {
 
   String? facmToken;
 
-  int genderValue =0;
+  int genderValue = 0;
 
   @override
   onInit() async {

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io' show Directory, File, FileMode, Platform;
 import 'dart:math';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:email_validator/email_validator.dart';
@@ -14,7 +15,6 @@ import 'package:flutter_in_store_app_version_checker/flutter_in_store_app_versio
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:intl/intl.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/navigators/navigators.dart';
@@ -317,8 +317,16 @@ abstract class Utility {
   }
 
   /// Returns true if the internet connection is available.
-  static Future<bool> isNetworkAvailable() async =>
-      await InternetConnectionChecker.instance.hasConnection;
+  static Future<bool> isNetworkAvailable() async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+
+    if (connectivityResult == ConnectivityResult.none) {
+      Utility.errorMessage("Please turn on your wifi or mobile data");
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   /// Print the details of the [response].
   static void printResponseDetails(Response? response) {

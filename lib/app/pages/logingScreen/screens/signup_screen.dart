@@ -118,103 +118,12 @@ class _SignupScreenState extends State<SignupScreen> {
                     controller: controller.cityController,
                     textInputAction: TextInputAction.next,
                     keyboardType: TextInputType.text,
-                    validation: (value) {
-                      if (value!.isEmpty) {
-                        return 'please_enter_city'.tr;
-                      }
-                      return null;
-                    },
-                  ),
-                  Dimens.boxHeight14,
-                  Text(
-                    "Gender",
-                    style: Styles.color21212150014,
-                  ),
-                  Dimens.boxHeight5,
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Transform.scale(
-                            scale: 1.0,
-                            child: Radio(
-                              materialTapTargetSize:
-                                  MaterialTapTargetSize.shrinkWrap,
-                              visualDensity: VisualDensity(
-                                horizontal: Dimens.zero,
-                                vertical: Dimens.zero,
-                              ),
-                              value: 1,
-                              groupValue: controller.genderValue,
-                              onChanged: (val) {
-                                controller.genderValue = val!;
-                                controller.update();
-                              },
-                            ),
-                          ),
-                          Text(
-                            'Male',
-                            style: Styles.color21212150014,
-                          ),
-                        ],
-                      ),
-                      Dimens.boxWidth20,
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Transform.scale(
-                            scale: 1.0,
-                            child: Radio(
-                              materialTapTargetSize:
-                                  MaterialTapTargetSize.shrinkWrap,
-                              visualDensity: VisualDensity(
-                                horizontal: Dimens.zero,
-                                vertical: Dimens.zero,
-                              ),
-                              value: 2,
-                              groupValue: controller.genderValue,
-                              onChanged: (val) {
-                                controller.genderValue = val!;
-                                controller.update();
-                              },
-                            ),
-                          ),
-                          Text(
-                            'Female',
-                            style: Styles.color21212150014,
-                          ),
-                        ],
-                      ),
-                      Dimens.boxWidth20,
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Transform.scale(
-                            scale: 1.0,
-                            child: Radio(
-                              materialTapTargetSize:
-                                  MaterialTapTargetSize.shrinkWrap,
-                              visualDensity: VisualDensity(
-                                horizontal: Dimens.zero,
-                                vertical: Dimens.zero,
-                              ),
-                              value: 3,
-                              groupValue: controller.genderValue,
-                              onChanged: (val) {
-                                controller.genderValue = val!;
-                                controller.update();
-                              },
-                            ),
-                          ),
-                          Text(
-                            'Other',
-                            style: Styles.color21212150014,
-                          ),
-                        ],
-                      )
-                    ],
+                    // validation: (value) {
+                    //   if (value!.isEmpty) {
+                    //     return 'please_enter_city'.tr;
+                    //   }
+                    //   return null;
+                    // },
                   ),
                   Dimens.boxHeight14,
                   CustomTextFormField(

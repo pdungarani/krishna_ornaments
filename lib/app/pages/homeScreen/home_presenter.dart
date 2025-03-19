@@ -8,9 +8,13 @@ class HomePresenter {
 
   Future<GetCategoriesModel?> getAllCategories({
     bool isLoading = false,
+    bool isSubCategories = false,
+    String? categoriesId,
   }) async =>
       await homeUseCases.getAllCategories(
         isLoading: isLoading,
+        isSubCategories: isSubCategories,
+        categoriesId: categoriesId,
       );
 
   Future<ProductsModel?> postAllProduct({

@@ -1,4 +1,3 @@
-import 'package:krishna_ornaments/data/data.dart';
 import 'package:krishna_ornaments/domain/domain.dart';
 
 class HomeUseCases {
@@ -8,9 +7,13 @@ class HomeUseCases {
 
   Future<GetCategoriesModel?> getAllCategories({
     bool isLoading = false,
+    bool isSubCategories = false,
+    String? categoriesId,
   }) async =>
       await repository.getAllCategories(
         isLoading: isLoading,
+        isSubCategories: isSubCategories,
+        categoriesId: categoriesId,
       );
 
   Future<ResponseModel?> postAddToCart({
