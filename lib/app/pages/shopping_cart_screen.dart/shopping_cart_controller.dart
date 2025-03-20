@@ -359,34 +359,6 @@ class ShoppingCartController extends GetxController {
       isLoader = false;
       Utility.errorMessage(cartItemModel.message.toString());
     }
-
-    // var response = await shoppingCartPresenter.postGetAllCartProduct(
-    //   page: pageKey,
-    //   limit: 10,
-    //   isLoading: true,
-    // );
-    // cartItemModel = null;
-    // if (response?.data != null) {
-    //   cartItemModel = response?.data;
-    //   if (pageKey == 1) {
-    //     isCartLastPage = false;
-    //     cartList.clear();
-    //   }
-    //   if ((response?.data?.products?.length ?? 0) < 10) {
-    //     isCartLastPage = true;
-    //     cartList.addAll(response?.data?.products ?? []);
-    //   } else {
-    //     pageCartCount++;
-    //     cartList.addAll(response?.data?.products ?? []);
-    //   }
-    //   if (pageKey == 1) {
-    //     if (scrollCartController.positions.isNotEmpty) {
-    //       scrollCartController.jumpTo(0);
-    //     }
-    //   }
-    // } else {
-    //   Utility.errorMessage(response?.message ?? "");
-    // }
     update();
   }
 
@@ -428,9 +400,6 @@ class ShoppingCartController extends GetxController {
   double startValue = 0;
   double endValue = 1000;
 
-  final ScrollController scrollViewAllController = ScrollController();
-  List<ProductsDoc> viewAllDocList = [];
-
   int pageViewAllCount = 1;
   bool isViewAllLastPage = false;
   bool isViewAllLoading = false;
@@ -439,80 +408,39 @@ class ShoppingCartController extends GetxController {
   String category = "";
   String categoryName = "";
 
-  // user/products
+  final ScrollController scrollViewAllController = ScrollController();
+  List<ProductsDoc> viewAllDocList = [];
+  int currentPage = 1;
+  bool isLoading = false;
+  bool hasMore = true;
 
-  // Future<void> postArrivalViewAll(int pageKey, String type) async {
-  //   if (pageKey == 1) {
-  //     pageViewAllCount = 1;
-  //   }
-  //   var response = await client.post(
-  //     Uri.parse("https://api.krishnaornaments.com/user/products"),
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       'Authorization':
-  //           'Token ${Get.find<Repository>().getStringValue(LocalKeys.authToken)}',
-  //     },
-  //     body: jsonEncode({
-  //       "page": pageKey,
-  //       "limit": 10,
-  //       "search": "",
-  //       "category": category,
-  //       "min": minWeightController.text.isNotEmpty &&
-  //               minWeightController.text.isNotEmpty
-  //           ? minWeightController.text
-  //           : startValue.toString(),
-  //       "max": minWeightController.text.isNotEmpty &&
-  //               minWeightController.text.isNotEmpty
-  //           ? maxWeightController.text
-  //           : endValue.toString(),
-  //       "productType": type.toLowerCase(),
-  //       "sortField": "weight",
-  //       "sortOption": radioSortValue,
-  //     }),
-  //   );
-  //   var loginModel = productsModelFromJson(response.body);
-  //   if (loginModel.data != null) {
-  //     if (pageKey == 1) {
-  //       isViewAllLastPage = false;
-  //       viewAllDocList.clear();
-  //     }
-  //     if ((loginModel.data?.docs?.length ?? 0) < 10) {
-  //       isViewAllLastPage = true;
-  //       viewAllDocList.addAll(loginModel.data?.docs ?? []);
-  //     } else {
-  //       pageViewAllCount++;
-  //       viewAllDocList.addAll(loginModel.data?.docs ?? []);
-  //     }
-  //     if (pageKey == 1) {
-  //       if (scrollViewAllController.positions.isNotEmpty) {
-  //         scrollViewAllController.jumpTo(0);
-  //       }
-  //     }
-  //     isViewAllLoading = false;
-  //   } else {
-  //     isViewAllLoading = false;
-  //   }
-  //   update();
-  // }
-
-  Future<void> postArrivalViewAll(int pageKey, String type) async {
-    if (pageKey == 1) {
-      pageViewAllCount = 1;
+  void onScroll() {
+    if (scrollViewAllController.position.pixels ==
+            scrollViewAllController.position.maxScrollExtent &&
+        hasMore) {
+      postArrivalViewAll();
     }
+  }
+
+  Future<void> postArrivalViewAll() async {
+    if (isLoading || !hasMore) return;
+    isLoading = true;
+    update();
+    // Fetch data from the API
     var response = await shoppingCartPresenter.postAllProduct(
-      page: pageKey,
+      page: currentPage,
       limit: 10,
       search: "",
       category: category,
       min: minWeightController.text.isNotEmpty &&
               minWeightController.text.isNotEmpty
-          ? minWeightController.text
-          : startValue.toString(),
+          ? double.parse(minWeightController.text)
+          : startValue,
       max: minWeightController.text.isNotEmpty &&
               minWeightController.text.isNotEmpty
-          ? maxWeightController.text
-          : endValue.toString(),
-      productType: type.toLowerCase(),
+          ? double.parse(maxWeightController.text)
+          : endValue,
+      productType: productTypeViewAll.toLowerCase(),
       sortField: isFilter
           ? "quantity"
           : radioValue == 0 || radioValue == 1
@@ -522,28 +450,20 @@ class ShoppingCartController extends GetxController {
       isLoading: false,
     );
     if (response?.data != null) {
-      if (pageKey == 1) {
-        isViewAllLastPage = false;
-        viewAllDocList.clear();
-      }
-      if ((response?.data?.docs?.length ?? 0) < 10) {
-        isViewAllLastPage = true;
-        viewAllDocList.addAll(response?.data?.docs ?? []);
-      } else {
-        pageViewAllCount++;
-        viewAllDocList.addAll(response?.data?.docs ?? []);
-      }
-      if (pageKey == 1) {
-        if (scrollViewAllController.positions.isNotEmpty) {
-          scrollViewAllController.jumpTo(0);
-        }
-      }
+      viewAllDocList.addAll(response?.data?.docs ?? []);
+      currentPage++;
+      isLoading = false;
 
-      isViewAllLoading = false;
+      // Check if there are more items to load
+      if (response?.data?.docs?.isEmpty ?? false) {
+        hasMore = false;
+      }
+      update();
     } else {
-      isViewAllLoading = false;
+      isLoading = false;
+      update();
+      throw Exception('Failed to load data');
     }
-    update();
   }
 
   Future<void> postAddToCart(
@@ -606,38 +526,6 @@ class ShoppingCartController extends GetxController {
     update();
   }
 
-  // Future<void> postOrderCreate() async {
-  //   var response = await client.post(
-  //     Uri.parse("https://api.krishnaornaments.com/user/orders/create"),
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       'Authorization':
-  //           'Token ${Get.find<Repository>().getStringValue(LocalKeys.authToken)}',
-  //     },
-  //     body: jsonEncode({
-  //       "cartid": cartsItemModel?.id ?? '',
-  //       "products": cartList.map(
-  //         (e) {
-  //           return Product(
-  //             productId: e.product?.id ?? "",
-  //             quantity: e.quantity,
-  //             description: e.description,
-  //           );
-  //         },
-  //       ).toList(),
-  //     }),
-  //   );
-  //   if (response.statusCode == 200) {
-  //     Utility.closeLoader();
-  //     RouteManagement.goToBottomBarView();
-  //     postCartList(1);
-  //   } else {
-  //     Utility.closeLoader();
-  //     Utility.errorMessage(jsonDecode(response.toString())['Data']['Message']);
-  //   }
-  //   update();
-  // }
-
   Future<void> postWishlistAddRemove(
       String productsDoc, int index, bool isRemove) async {
     var response = await client.post(
@@ -653,7 +541,7 @@ class ShoppingCartController extends GetxController {
     );
     if (response.body.isNotEmpty) {
       Utility.closeLoader();
-      postArrivalViewAll(1, productTypeViewAll);
+      // postArrivalViewAll(1, productTypeViewAll);
     } else {
       Utility.closeLoader();
     }

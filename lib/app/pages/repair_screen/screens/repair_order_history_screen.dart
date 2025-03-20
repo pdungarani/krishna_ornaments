@@ -33,8 +33,11 @@ class RepairOrderHistoryScreen extends StatelessWidget {
           pagingController: controller.repairOrderPagingController,
           builderDelegate: PagedChildBuilderDelegate<RepairOrderHistoryDoc>(
             noItemsFoundIndicatorBuilder: (context) {
-              return const Center(
-                child: Text('No Data Found'),
+              return Center(
+                child: Text(
+                  "Repair Order history data empty.",
+                  style: Styles.black50014,
+                ),
               );
             },
             itemBuilder: (context, item, index) {

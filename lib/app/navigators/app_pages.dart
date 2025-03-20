@@ -32,6 +32,13 @@ class AppPages {
       binding: LoginBinding(),
       transition: Transition.fadeIn,
     ),
+    GetPage<VerifyIdentityScreen>(
+      name: _Paths.verifyIdentityScreen,
+      transitionDuration: transitionDuration,
+      page: VerifyIdentityScreen.new,
+      binding: LoginBinding(),
+      transition: Transition.fadeIn,
+    ),
     GetPage<ForgetPasswordView>(
       name: _Paths.forgotScreen,
       transitionDuration: transitionDuration,

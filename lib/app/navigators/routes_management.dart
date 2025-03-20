@@ -41,6 +41,8 @@ abstract class RouteManagement {
           arguments: [type, categories, categoriesName]);
   static void goToSearchScreen() =>
       Get.toNamed<void>(Routes.searchProductScreen);
+  static void goToVerifyIdentityScreen() =>
+      Get.toNamed<void>(Routes.verifyIdentityScreen);
   static void goToBankDetailScreen() =>
       Get.toNamed<void>(Routes.bankDetailScreen);
   static void goToContactUsScreen() =>

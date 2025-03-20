@@ -18,23 +18,11 @@ class ViewAllProductScreen extends StatelessWidget {
         controller.productTypeViewAll = Get.arguments[0];
         controller.category = Get.arguments[1];
         controller.categoryName = Get.arguments[2];
-        controller.isViewAllLoading = true;
-        controller.postArrivalViewAll(1, controller.productTypeViewAll);
-        controller.scrollViewAllController.addListener(() async {
-          if (controller.scrollViewAllController.position.pixels ==
-              controller.scrollViewAllController.position.maxScrollExtent) {
-            if (controller.isViewAllLoading == false) {
-              controller.isViewAllLoading = true;
-              controller.update();
-              if (controller.isViewAllLastPage == false) {
-                await controller.postArrivalViewAll(
-                    controller.pageViewAllCount, controller.productTypeViewAll);
-              }
-              controller.isViewAllLoading = false;
-              controller.update();
-            }
-          }
-        });
+        controller.hasMore = true;
+        controller.currentPage = 1;
+        controller.viewAllDocList.clear();
+        controller.postArrivalViewAll();
+        controller.scrollViewAllController.addListener(controller.onScroll);
       },
       builder: (controller) {
         return Scaffold(
@@ -251,11 +239,12 @@ class ViewAllProductScreen extends StatelessWidget {
                                               height: Dimens.fourtyFive,
                                               onTap: () async {
                                                 Get.back();
-                                                controller.postArrivalViewAll(
-                                                    1,
-                                                    controller
-                                                        .productTypeViewAll);
+                                                controller.currentPage = 1;
+                                                controller.viewAllDocList
+                                                    .clear();
+                                                controller.hasMore = true;
                                                 controller.update();
+                                                controller.postArrivalViewAll();
                                               },
                                               text: 'Apply'.tr,
                                               style: Styles.whiteColorW80016,
@@ -677,11 +666,13 @@ class ViewAllProductScreen extends StatelessWidget {
                                                   controller.maxWeightController
                                                       .clear();
                                                   controller.isFilter = false;
+                                                  controller.currentPage = 1;
+                                                  controller.viewAllDocList
+                                                      .clear();
+                                                  controller.hasMore = true;
                                                   controller.update();
-                                                  controller.postArrivalViewAll(
-                                                      1,
-                                                      controller
-                                                          .productTypeViewAll);
+                                                  controller
+                                                      .postArrivalViewAll();
                                                 },
                                                 child: Container(
                                                   alignment: Alignment.center,
@@ -714,10 +705,13 @@ class ViewAllProductScreen extends StatelessWidget {
                                                 onTap: () async {
                                                   Get.back();
                                                   controller.isFilter = true;
-                                                  controller.postArrivalViewAll(
-                                                      1,
-                                                      controller
-                                                          .productTypeViewAll);
+                                                  controller.currentPage = 1;
+                                                  controller.viewAllDocList
+                                                      .clear();
+                                                  controller.update();
+                                                  controller.hasMore = true;
+                                                  controller
+                                                      .postArrivalViewAll();
                                                   controller.update();
                                                 },
                                                 child: Container(
@@ -787,373 +781,342 @@ class ViewAllProductScreen extends StatelessWidget {
                 ),
                 Dimens.boxHeight20,
                 Expanded(
-                  child: !controller.isViewAllLoading
-                      ? controller.viewAllDocList.isNotEmpty
-                          ? RefreshIndicator(
-                              onRefresh: () => Future.sync(
-                                () async {
-                                  controller.isViewAllLoading = true;
-                                  controller.update();
-                                  await controller.postArrivalViewAll(
-                                      1, controller.productTypeViewAll);
-                                },
-                              ),
-                              child: GridView.builder(
-                                controller: controller.scrollViewAllController,
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  mainAxisSpacing: Dimens.fifteen,
-                                  crossAxisSpacing: Dimens.ten,
-                                  mainAxisExtent: Dimens.threeHundred,
+                  child: controller.viewAllDocList.isNotEmpty
+                      ? GridView.builder(
+                          controller: controller.scrollViewAllController,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: Dimens.fifteen,
+                            crossAxisSpacing: Dimens.ten,
+                            mainAxisExtent: Dimens.threeHundred,
+                          ),
+                          itemCount: controller.viewAllDocList.length +
+                              (controller.isLoading ? 1 : 0),
+                          itemBuilder: (context, index) {
+                            if (index < controller.viewAllDocList.length) {
+                              final item = controller.viewAllDocList[index];
+                              return Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                    Dimens.ten,
+                                  ),
+                                  color: ColorsValue.appColorLight,
                                 ),
-                                itemCount: controller.viewAllDocList.length,
-                                itemBuilder: (context, index) {
-                                  var item = controller.viewAllDocList[index];
-                                  return Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(
-                                        Dimens.ten,
-                                      ),
-                                      color: ColorsValue.appColorLight,
-                                    ),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(
-                                        Dimens.ten,
-                                      ),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(
+                                    Dimens.ten,
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Stack(
                                         children: [
-                                          Stack(
-                                            children: [
-                                              GestureDetector(
-                                                onTap: () {
-                                                  RouteManagement
-                                                      .goToShowFullScareenImage(
-                                                          item.image ?? "",
-                                                          "image");
-                                                },
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.only(
-                                                    topLeft: Radius.circular(
-                                                        Dimens.ten),
-                                                    topRight: Radius.circular(
-                                                        Dimens.ten),
-                                                  ),
-                                                  child: CachedNetworkImage(
-                                                    imageUrl: item.image ?? "",
-                                                    fit: BoxFit.cover,
-                                                    height: Dimens.hundredSixty,
-                                                    width: double.maxFinite,
-                                                    placeholder:
-                                                        (context, url) =>
-                                                            Image.asset(
-                                                      AssetConstants
-                                                          .placeholder,
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                    errorWidget:
-                                                        (context, url, error) =>
-                                                            Image.asset(
-                                                      AssetConstants
-                                                          .placeholder,
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ),
+                                          GestureDetector(
+                                            onTap: () {
+                                              RouteManagement
+                                                  .goToShowFullScareenImage(
+                                                      item.image ?? "",
+                                                      "image");
+                                            },
+                                            child: ClipRRect(
+                                              borderRadius: BorderRadius.only(
+                                                topLeft:
+                                                    Radius.circular(Dimens.ten),
+                                                topRight:
+                                                    Radius.circular(Dimens.ten),
+                                              ),
+                                              child: CachedNetworkImage(
+                                                imageUrl: item.image ?? "",
+                                                fit: BoxFit.cover,
+                                                height: Dimens.hundredSixty,
+                                                width: double.maxFinite,
+                                                placeholder: (context, url) =>
+                                                    Image.asset(
+                                                  AssetConstants.placeholder,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        Image.asset(
+                                                  AssetConstants.placeholder,
+                                                  fit: BoxFit.cover,
                                                 ),
                                               ),
-                                              Padding(
-                                                padding: Dimens.edgeInsets8,
-                                                child: Align(
-                                                  alignment: Alignment.topRight,
-                                                  child: Container(
-                                                    height: Dimens.thirty,
-                                                    width: Dimens.thirty,
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                        Dimens.fifty,
-                                                      ),
-                                                      color: ColorsValue
-                                                          .whiteColor,
-                                                      border: Border.all(
-                                                        width: Dimens.one,
-                                                        color: ColorsValue
-                                                            .lightPrimaryColor,
-                                                      ),
-                                                    ),
-                                                    child: Center(
-                                                      child: InkWell(
-                                                        onTap: () {
-                                                          Utility.showLoader();
-                                                          controller
-                                                              .postWishlistAddRemove(
-                                                                  item.id ?? "",
-                                                                  index,
-                                                                  false);
-                                                        },
-                                                        child: SvgPicture.asset(
-                                                          item.wishlistStatus ??
-                                                                  false
-                                                              ? AssetConstants
-                                                                  .ic_fill_like
-                                                              : AssetConstants
-                                                                  .ic_like,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              if ((item.quantity ?? 0) <=
-                                                  0) ...[
-                                                Container(
-                                                  alignment: Alignment.center,
-                                                  padding: Dimens
-                                                      .edgeInsets12_0_12_0,
-                                                  margin:
-                                                      Dimens.edgeInsetsTop10,
-                                                  height: Dimens.twentyFive,
-                                                  width: Dimens.hundred,
-                                                  decoration: BoxDecoration(
-                                                    color: ColorsValue.redColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                      Dimens.four,
-                                                    ),
-                                                  ),
-                                                  child: Text(
-                                                    "out_of_stock".tr,
-                                                    style:
-                                                        Styles.whiteColorW60012,
-                                                  ),
-                                                )
-                                              ]
-                                            ],
-                                          ),
-                                          Dimens.boxHeight10,
-                                          Padding(
-                                            padding: Dimens.edgeInsets10_0_10_0,
-                                            child: Text(
-                                              item.name ?? "",
-                                              maxLines: 2,
-                                              overflow: TextOverflow.ellipsis,
-                                              softWrap: true,
-                                              style: Styles.blackW60014,
                                             ),
                                           ),
-                                          Expanded(
+                                          Padding(
+                                            padding: Dimens.edgeInsets8,
                                             child: Align(
-                                              alignment: Alignment.bottomCenter,
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.min,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.end,
-                                                children: [
-                                                  Padding(
-                                                    padding: Dimens
-                                                        .edgeInsets10_0_10_0,
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
+                                              alignment: Alignment.topRight,
+                                              child: Container(
+                                                height: Dimens.thirty,
+                                                width: Dimens.thirty,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                    Dimens.fifty,
+                                                  ),
+                                                  color: ColorsValue.whiteColor,
+                                                  border: Border.all(
+                                                    width: Dimens.one,
+                                                    color: ColorsValue
+                                                        .lightPrimaryColor,
+                                                  ),
+                                                ),
+                                                child: Center(
+                                                  child: InkWell(
+                                                    onTap: () {
+                                                      Utility.showLoader();
+                                                      controller
+                                                          .postWishlistAddRemove(
+                                                              item.id ?? "",
+                                                              index,
+                                                              false);
+                                                    },
+                                                    child: SvgPicture.asset(
+                                                      item.wishlistStatus ??
+                                                              false
+                                                          ? AssetConstants
+                                                              .ic_fill_like
+                                                          : AssetConstants
+                                                              .ic_like,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          if ((item.quantity ?? 0) <= 0) ...[
+                                            Container(
+                                              alignment: Alignment.center,
+                                              padding:
+                                                  Dimens.edgeInsets12_0_12_0,
+                                              margin: Dimens.edgeInsetsTop10,
+                                              height: Dimens.twentyFive,
+                                              width: Dimens.hundred,
+                                              decoration: BoxDecoration(
+                                                color: ColorsValue.redColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                  Dimens.four,
+                                                ),
+                                              ),
+                                              child: Text(
+                                                "out_of_stock".tr,
+                                                style: Styles.whiteColorW60012,
+                                              ),
+                                            )
+                                          ]
+                                        ],
+                                      ),
+                                      Dimens.boxHeight10,
+                                      Padding(
+                                        padding: Dimens.edgeInsets10_0_10_0,
+                                        child: Text(
+                                          item.name ?? "",
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          softWrap: true,
+                                          style: Styles.blackW60014,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Align(
+                                          alignment: Alignment.bottomCenter,
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    Dimens.edgeInsets10_0_10_0,
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
                                                       children: [
-                                                        Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
-                                                              "Weight",
-                                                              style: Styles
-                                                                  .blackW60014,
-                                                            ),
-                                                            Text(
-                                                              "${item.weight} gm",
-                                                              style: Styles
-                                                                  .black60012,
-                                                            ),
-                                                          ],
+                                                        Text(
+                                                          "Weight",
+                                                          style: Styles
+                                                              .blackW60014,
                                                         ),
-                                                        Row(
-                                                          children: [
-                                                            GestureDetector(
-                                                              onTap:
-                                                                  item.inCart ??
-                                                                          false
-                                                                      ? null
-                                                                      : () {
-                                                                          if (controller.viewAllDocList[index].cartQuantity.toDouble() >
-                                                                              1) {
-                                                                            controller.viewAllDocList[index].cartQuantity--;
-                                                                          }
-                                                                          controller
-                                                                              .update();
-                                                                        },
-                                                              child: Container(
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                    Dimens.ten,
-                                                                  ),
-                                                                  color: ColorsValue
-                                                                      .colorDFDFDF,
-                                                                ),
-                                                                child:
-                                                                    SvgPicture
-                                                                        .asset(
-                                                                  AssetConstants
-                                                                      .minus,
-                                                                  height: Dimens
-                                                                      .twentyFour,
-                                                                  width: Dimens
-                                                                      .twentyFour,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            Dimens.boxWidth10,
-                                                            Text(
-                                                              item.cartQuantity
-                                                                  .toString(),
-                                                            ),
-                                                            Dimens.boxWidth10,
-                                                            GestureDetector(
-                                                              onTap:
-                                                                  item.inCart ??
-                                                                          false
-                                                                      ? null
-                                                                      : () {
-                                                                          controller
-                                                                              .viewAllDocList[index]
-                                                                              .cartQuantity++;
-                                                                          controller
-                                                                              .update();
-                                                                        },
-                                                              child: Container(
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              10),
-                                                                  color: ColorsValue
-                                                                      .colorDFDFDF,
-                                                                ),
-                                                                child:
-                                                                    SvgPicture
-                                                                        .asset(
-                                                                  AssetConstants
-                                                                      .plus,
-                                                                  height: Dimens
-                                                                      .twentyFour,
-                                                                  width: Dimens
-                                                                      .twentyFour,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ],
+                                                        Text(
+                                                          "${item.weight} gm",
+                                                          style:
+                                                              Styles.black60012,
                                                         ),
                                                       ],
                                                     ),
-                                                  ),
-                                                  Dimens.boxHeight5,
-                                                  Padding(
-                                                    padding: Dimens
-                                                        .edgeInsets10_0_10_10,
-                                                    child: InkWell(
-                                                      onTap: () {
-                                                        if (item.inCart ??
-                                                            false) {
-                                                          RouteManagement
-                                                              .goToShoppingCartScreen(
-                                                                  true);
-                                                        } else {
-                                                          if (controller
-                                                                  .viewAllDocList[
-                                                                      index]
-                                                                  .cartQuantity
-                                                                  .toDouble() >
-                                                              0) {
-                                                            controller
-                                                                .postAddToCart(
-                                                              item.id ?? "",
-                                                              item.cartQuantity,
-                                                              index,
-                                                              controller
-                                                                  .productTypeViewAll
-                                                                  .toLowerCase(),
-                                                            );
-                                                          } else {
-                                                            Utility.errorMessage(
-                                                                "Please add one item.");
-                                                          }
-                                                        }
-                                                      },
-                                                      child: Container(
-                                                        alignment:
-                                                            Alignment.center,
-                                                        padding: Dimens
-                                                            .edgeInsets14_0_14_0,
-                                                        height: Dimens.thirty,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: ColorsValue
-                                                              .colorEDC97D,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                            Dimens.four,
+                                                    Row(
+                                                      children: [
+                                                        GestureDetector(
+                                                          onTap:
+                                                              item.inCart ??
+                                                                      false
+                                                                  ? null
+                                                                  : () {
+                                                                      if (controller
+                                                                              .viewAllDocList[index]
+                                                                              .cartQuantity
+                                                                              .toDouble() >
+                                                                          1) {
+                                                                        controller
+                                                                            .viewAllDocList[index]
+                                                                            .cartQuantity--;
+                                                                      }
+                                                                      controller
+                                                                          .update();
+                                                                    },
+                                                          child: Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                Dimens.ten,
+                                                              ),
+                                                              color: ColorsValue
+                                                                  .colorDFDFDF,
+                                                            ),
+                                                            child: SvgPicture
+                                                                .asset(
+                                                              AssetConstants
+                                                                  .minus,
+                                                              height: Dimens
+                                                                  .twentyFour,
+                                                              width: Dimens
+                                                                  .twentyFour,
+                                                            ),
                                                           ),
                                                         ),
-                                                        child: Text(
-                                                          item.inCart ?? false
-                                                              ? 'Item In Cart'
-                                                              : 'Add To Cart',
-                                                          style: Styles
-                                                              .colorFBF7F350010,
+                                                        Dimens.boxWidth10,
+                                                        Text(
+                                                          item.cartQuantity
+                                                              .toString(),
                                                         ),
+                                                        Dimens.boxWidth10,
+                                                        GestureDetector(
+                                                          onTap: item.inCart ??
+                                                                  false
+                                                              ? null
+                                                              : () {
+                                                                  controller
+                                                                      .viewAllDocList[
+                                                                          index]
+                                                                      .cartQuantity++;
+                                                                  controller
+                                                                      .update();
+                                                                },
+                                                          child: Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10),
+                                                              color: ColorsValue
+                                                                  .colorDFDFDF,
+                                                            ),
+                                                            child: SvgPicture
+                                                                .asset(
+                                                              AssetConstants
+                                                                  .plus,
+                                                              height: Dimens
+                                                                  .twentyFour,
+                                                              width: Dimens
+                                                                  .twentyFour,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Dimens.boxHeight5,
+                                              Padding(
+                                                padding:
+                                                    Dimens.edgeInsets10_0_10_10,
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    if (item.inCart ?? false) {
+                                                      RouteManagement
+                                                          .goToShoppingCartScreen(
+                                                              true);
+                                                    } else {
+                                                      if (controller
+                                                              .viewAllDocList[
+                                                                  index]
+                                                              .cartQuantity
+                                                              .toDouble() >
+                                                          0) {
+                                                        controller
+                                                            .postAddToCart(
+                                                          item.id ?? "",
+                                                          item.cartQuantity,
+                                                          index,
+                                                          controller
+                                                              .productTypeViewAll
+                                                              .toLowerCase(),
+                                                        );
+                                                      } else {
+                                                        Utility.errorMessage(
+                                                            "Please add one item.");
+                                                      }
+                                                    }
+                                                  },
+                                                  child: Container(
+                                                    alignment: Alignment.center,
+                                                    padding: Dimens
+                                                        .edgeInsets14_0_14_0,
+                                                    height: Dimens.thirty,
+                                                    decoration: BoxDecoration(
+                                                      color: ColorsValue
+                                                          .colorEDC97D,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                        Dimens.four,
                                                       ),
                                                     ),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                },
-                              ),
-                            )
-                          : Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SvgPicture.asset(
-                                    AssetConstants.ic_filter_empty,
+                                                    child: Text(
+                                                      item.inCart ?? false
+                                                          ? 'Item In Cart'
+                                                          : 'Add To Cart',
+                                                      style: Styles
+                                                          .colorFBF7F350010,
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                  Dimens.boxHeight10,
-                                  Text(
-                                    controller.category.isNotEmpty
-                                        ? "${controller.categoryName} data not found...!"
-                                        : "${controller.productTypeViewAll} data not found...!",
-                                    style: Styles.black64748BW50016,
-                                    textAlign: TextAlign.center,
-                                  )
-                                ],
-                              ),
-                            )
+                                ),
+                              );
+                            } else {
+                              return Center(child: CircularProgressIndicator());
+                            }
+                          },
+                        )
                       : Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                )
+                          child: Text(
+                          "Product data empty.",
+                          style: Styles.black50014,
+                        )),
+                ),
               ],
             ),
           ),
