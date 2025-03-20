@@ -7,8 +7,12 @@ class CategoryPresenter {
 
   Future<GetCategoriesModel?> getAllCategories({
     bool isLoading = false,
+    bool isSubCategories = false,
+    String? categoriesId,
   }) async =>
       await categoryUseCases.getAllCategories(
         isLoading: isLoading,
+        isSubCategories: isSubCategories,
+        categoriesId: categoriesId,
       );
 }

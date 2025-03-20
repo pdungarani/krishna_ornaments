@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
@@ -20,7 +22,9 @@ class BottomBarController extends GetxController
     FirebaseApi().initNotification();
     tabController = TabController(vsync: this, length: 5);
     tabController?.addListener(update);
-    getProfile();
+    if (Utility.isLoginOrNot()) {
+      getProfile();
+    }
   }
 
   GetProfileData? getProfileModel;

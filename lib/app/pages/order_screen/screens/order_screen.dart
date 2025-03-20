@@ -147,8 +147,11 @@ class OrderScreen extends StatelessWidget {
                         ).toList(),
                       ),
                     )
-                  : const Center(
-                      child: Text("No Data Found"),
+                  : Center(
+                      child: Text(
+                        "Order data not found...!",
+                        style: Styles.txtBlackColorW60014,
+                      ),
                     )
               : Center(
                   child: CircularProgressIndicator(),

@@ -104,9 +104,21 @@ abstract class Styles {
     fontWeight: FontWeight.w800,
   );
 
+  static TextStyle whiteColorW50018 = GoogleFonts.outfit(
+    color: ColorsValue.whiteColor,
+    fontSize: Dimens.sixteen,
+    fontWeight: FontWeight.w500,
+  );
+
   static TextStyle txtBlackColorW60016 = GoogleFonts.outfit(
     color: ColorsValue.txtBlackColor,
     fontSize: Dimens.sixteen,
+    fontWeight: FontWeight.w600,
+  );
+
+  static TextStyle txtBlackColorW60018 = GoogleFonts.outfit(
+    color: ColorsValue.txtBlackColor,
+    fontSize: Dimens.eighteen,
     fontWeight: FontWeight.w600,
   );
 
@@ -116,6 +128,12 @@ abstract class Styles {
     fontWeight: FontWeight.w600,
   );
 
+  static TextStyle txtBlackColorW70030 = GoogleFonts.outfit(
+    color: ColorsValue.txtBlackColor,
+    fontSize: Dimens.thirty,
+    fontWeight: FontWeight.w700,
+  );
+
   static TextStyle txtBlackColorW70014 = GoogleFonts.outfit(
     color: ColorsValue.txtBlackColor,
     fontSize: Dimens.fourteen,
@@ -123,6 +141,12 @@ abstract class Styles {
   );
 
   static TextStyle txtBlackColorW50014 = GoogleFonts.outfit(
+    color: ColorsValue.txtBlackColor,
+    fontSize: Dimens.fourteen,
+    fontWeight: FontWeight.w500,
+  );
+
+  static TextStyle txtBlackColorW40014 = GoogleFonts.outfit(
     color: ColorsValue.txtBlackColor,
     fontSize: Dimens.fourteen,
     fontWeight: FontWeight.w500,
@@ -218,6 +242,12 @@ abstract class Styles {
   static TextStyle blackw60012 = GoogleFonts.montserrat(
     color: ColorsValue.blackColor,
     fontWeight: FontWeight.w600,
+    fontSize: Dimens.twelve,
+  );
+
+  static TextStyle blackw50012 = GoogleFonts.montserrat(
+    color: ColorsValue.blackColor,
+    fontWeight: FontWeight.w500,
     fontSize: Dimens.twelve,
   );
 
@@ -438,6 +468,12 @@ abstract class Styles {
 
   static TextStyle appColor70020 = GoogleFonts.nunito(
     fontSize: Dimens.twenty,
+    fontWeight: FontWeight.w700,
+    color: ColorsValue.appColor,
+  );
+
+  static TextStyle appColor70030 = GoogleFonts.nunito(
+    fontSize: Dimens.thirty,
     fontWeight: FontWeight.w700,
     color: ColorsValue.appColor,
   );

@@ -14,10 +14,12 @@ class HomeController extends GetxController {
   @override
   onInit() {
     super.onInit();
-    getProfile();
-    isLoading = true;
-    getAllCategories();
-    postWishlist(1);
+    if (Utility.isLoginOrNot()) {
+      getProfile();
+      isLoading = true;
+      getAllCategories();
+      postWishlist(1);
+    }
   }
 
   GetProfileData? getProfileModel;
@@ -91,6 +93,26 @@ class HomeController extends GetxController {
 
   final ScrollController scrollArrivalProductController = ScrollController();
   List<ProductsDoc> productArrivalDocList = [];
+  List<ProductsDoc> offlineArrivalDataList = [
+    ProductsDoc(
+      name: "Gold Ring",
+      weight: 3.9,
+      image: AssetConstants.gold_ring,
+    ),
+    ProductsDoc(
+      name: "Rose Gold Ring",
+      weight: 4.0,
+      image: AssetConstants.rose_gold,
+    )
+  ];
+
+  List<ProductsDoc> offlineTrendingDataList = [
+    ProductsDoc(
+      name: "Sliver Ring",
+      weight: 3.5,
+      image: AssetConstants.sliver_ring,
+    ),
+  ];
 
   int pageArrivalProductCount = 1;
   bool isProductArrivalLastPage = false;
@@ -210,8 +232,8 @@ class HomeController extends GetxController {
       limit: 10,
       search: search,
       category: "",
-      min: "",
-      max: "",
+      min: 0,
+      max: 0,
       productType: "",
       sortField: '_id',
       sortOption: 1,

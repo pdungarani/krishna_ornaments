@@ -82,9 +82,13 @@ class ConnectHelper {
 
   Future<ResponseModel> getAllCategories({
     bool isLoading = false,
+    bool isSubCategories = false,
+    String? categoriesId,
   }) async {
     var response = await apiWrapper.makeRequest(
-      EndPoints.getAllCategories,
+      isSubCategories
+          ? "user/categories?parentId=$categoriesId"
+          : "user/categories",
       Request.get,
       null,
       isLoading,
@@ -98,8 +102,8 @@ class ConnectHelper {
     required int page,
     required int limit,
     required String search,
-    required String min,
-    required String max,
+    required double min,
+    required double max,
     required String productType,
     required String category,
     required String sortField,

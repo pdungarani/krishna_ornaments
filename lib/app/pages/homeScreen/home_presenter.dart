@@ -8,9 +8,13 @@ class HomePresenter {
 
   Future<GetCategoriesModel?> getAllCategories({
     bool isLoading = false,
+    bool isSubCategories = false,
+    String? categoriesId,
   }) async =>
       await homeUseCases.getAllCategories(
         isLoading: isLoading,
+        isSubCategories: isSubCategories,
+        categoriesId: categoriesId,
       );
 
   Future<ProductsModel?> postAllProduct({
@@ -19,8 +23,8 @@ class HomePresenter {
     required int limit,
     required String search,
     required String category,
-    required String min,
-    required String max,
+    required double min,
+    required double max,
     required String productType,
     required String sortField,
     required var sortOption,

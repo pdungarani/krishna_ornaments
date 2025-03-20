@@ -32,6 +32,13 @@ class AppPages {
       binding: LoginBinding(),
       transition: Transition.fadeIn,
     ),
+    GetPage<VerifyIdentityScreen>(
+      name: _Paths.verifyIdentityScreen,
+      transitionDuration: transitionDuration,
+      page: VerifyIdentityScreen.new,
+      binding: LoginBinding(),
+      transition: Transition.fadeIn,
+    ),
     GetPage<ForgetPasswordView>(
       name: _Paths.forgotScreen,
       transitionDuration: transitionDuration,
@@ -198,6 +205,13 @@ class AppPages {
       transitionDuration: transitionDuration,
       page: LandingPage.new,
       binding: SplashBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage<SubCategoriesListScreen>(
+      name: _Paths.subCategoriesListScreen,
+      transitionDuration: transitionDuration,
+      page: SubCategoriesListScreen.new,
+      binding: ShoppingCartBinding(),
       transition: Transition.fadeIn,
     ),
   ];

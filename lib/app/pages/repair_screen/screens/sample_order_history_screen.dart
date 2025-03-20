@@ -33,7 +33,7 @@ class SampleOrderHistoryScreen extends StatelessWidget {
               noItemsFoundIndicatorBuilder: (context) {
                 return Center(
                   child: Text(
-                    "Sample Order history data empty.",
+                    "SampleOrder history data not found...!",
                     style: Styles.black50014,
                   ),
                 );

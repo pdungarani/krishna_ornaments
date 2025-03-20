@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io' show Directory, File, FileMode, Platform;
 import 'dart:math';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:email_validator/email_validator.dart';
@@ -11,11 +12,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_in_store_app_version_checker/flutter_in_store_app_version_checker.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:intl/intl.dart';
 import 'package:krishna_ornaments/app/app.dart';
+import 'package:krishna_ornaments/app/navigators/navigators.dart';
 import 'package:krishna_ornaments/domain/domain.dart';
 import 'package:logger/logger.dart';
 import 'package:lottie/lottie.dart';
@@ -315,8 +317,16 @@ abstract class Utility {
   }
 
   /// Returns true if the internet connection is available.
-  static Future<bool> isNetworkAvailable() async =>
-      await InternetConnectionChecker.instance.hasConnection;
+  static Future<bool> isNetworkAvailable() async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+
+    if (connectivityResult == ConnectivityResult.none) {
+      Utility.errorMessage("Please turn on your wifi or mobile data");
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   /// Print the details of the [response].
   static void printResponseDetails(Response? response) {
@@ -1412,6 +1422,68 @@ abstract class Utility {
       return "${diff.inMinutes} ${diff.inMinutes == 1 ? "minute" : "minutes"} ago";
     }
     return "just now";
+  }
+
+  static bool isLoginOrNot() {
+    if (Get.find<Repository>().getStringValue(LocalKeys.authToken).isNotEmpty) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  // ignore: non_constant_identifier_names
+  static Widget LoginNotWidget(String message) {
+    return SingleChildScrollView(
+      physics: const ClampingScrollPhysics(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Dimens.boxHeight30,
+          Center(
+            child: SvgPicture.asset(
+              AssetConstants.loginMainView,
+              fit: BoxFit.cover,
+            ),
+          ),
+          Center(
+            child: Text(
+              'you_are_missing'.tr,
+              style: Styles.txtBlackColorW60016,
+            ),
+          ),
+          Dimens.boxHeight10,
+          Center(
+            child: Text(
+              "${'sign_to_view'.tr}\n$message",
+              style: Styles.txtBlackColorW50014,
+              textAlign: TextAlign.center,
+            ),
+          ),
+          Dimens.boxHeight10,
+          InkWell(
+            onTap: () {
+              RouteManagement.goToLoginView();
+            },
+            child: Container(
+              alignment: Alignment.center,
+              height: Dimens.fourty,
+              width: Dimens.hundred,
+              decoration: BoxDecoration(
+                color: ColorsValue.appColor,
+                borderRadius: BorderRadius.circular(
+                  Dimens.sixteen,
+                ),
+              ),
+              child: Text(
+                'sign_in'.tr,
+                style: Styles.whiteColorW80016,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 

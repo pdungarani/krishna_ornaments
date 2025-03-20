@@ -43,7 +43,7 @@ abstract class AssetConstants {
   static const String dwsadsa = '';
 
   static const String copyIcon = 'assets/icons/copy.svg';
-  static const String app_logo = 'assets/images/app_logo.jpg';
+  static const String app_logo = 'assets/images/app_logo.png';
   static const String ring = 'assets/images/ring.png';
   static const String app_update_lottie =
       'assets/images/app_update_lottie.json';
@@ -54,4 +54,8 @@ abstract class AssetConstants {
   static const String home_banner2 = 'assets/images/home_banner2.jpg';
   static const String home_banner3 = 'assets/images/home_banner3.jpg';
   static const String delete_ac = 'assets/images/delete_ac.png';
+  static const String gold_ring = 'assets/images/gold_ring.png';
+  static const String rose_gold = 'assets/images/rose_gold.png';
+  static const String sliver_ring = 'assets/images/sliver_ring.png';
+  static const String verify_user = 'assets/svg/verify_user.svg';
 }

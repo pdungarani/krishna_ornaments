@@ -11,8 +11,8 @@ class CommonUsecases {
     required int limit,
     required String search,
     required String category,
-    required String min,
-    required String max,
+     required double min,
+    required double max,
     required String productType,
     required String sortField,
     required var sortOption,
@@ -41,5 +41,16 @@ class CommonUsecases {
         quantity: quantity,
         description: description,
         isLoading: isLoading,
+      );
+
+  Future<GetCategoriesModel?> getAllCategories({
+    bool isLoading = false,
+    bool isSubCategories = false,
+    String? categoriesId,
+  }) async =>
+      await repository.getAllCategories(
+        isLoading: isLoading,
+        isSubCategories: isSubCategories,
+        categoriesId: categoriesId,
       );
 }

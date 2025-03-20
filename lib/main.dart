@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -93,7 +91,7 @@ class MyApp extends StatelessWidget {
         darkTheme: darkThemeData(context),
         themeMode: ThemeMode.light,
         getPages: AppPages.pages,
-        initialRoute: Platform.isIOS ? Routes.landingPage : Routes.splashScreen,
+        initialRoute: Routes.splashScreen,
         translations: TranslationsFile(),
         enableLog: true,
       ),

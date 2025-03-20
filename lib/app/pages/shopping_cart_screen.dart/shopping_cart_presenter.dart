@@ -32,8 +32,8 @@ class ShoppingCartPresenter {
     required int limit,
     required String search,
     required String category,
-    required String min,
-    required String max,
+    required double min,
+    required double max,
     required String productType,
     required String sortField,
     required var sortOption,
@@ -84,5 +84,16 @@ class ShoppingCartPresenter {
       await shoppingCartUsecases.postWishlistAddRemove(
         productId: productId,
         isLoading: isLoading,
+      );
+
+  Future<GetCategoriesModel?> getAllCategories({
+    bool isLoading = false,
+    bool isSubCategories = false,
+    String? categoriesId,
+  }) async =>
+      await commonUsecases.getAllCategories(
+        isLoading: isLoading,
+        isSubCategories: isSubCategories,
+        categoriesId: categoriesId,
       );
 }
