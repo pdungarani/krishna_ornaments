@@ -1113,9 +1113,10 @@ class ViewAllProductScreen extends StatelessWidget {
                         )
                       : Center(
                           child: Text(
-                          "Product data empty.",
-                          style: Styles.black50014,
-                        )),
+                            "Product data not found...!",
+                            style: Styles.txtBlackColorW60014,
+                          ),
+                        ),
                 ),
               ],
             ),

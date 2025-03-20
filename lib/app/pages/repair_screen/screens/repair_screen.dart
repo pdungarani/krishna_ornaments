@@ -14,7 +14,7 @@ class RepairScreen extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           backgroundColor: ColorsValue.appBg,
-          body: Utility.isLoginOrNot() && Platform.isIOS
+          body: Utility.isLoginOrNot()
               ? Stack(
                   children: [
                     Column(

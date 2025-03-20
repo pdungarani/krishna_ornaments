@@ -207,5 +207,12 @@ class AppPages {
       binding: SplashBinding(),
       transition: Transition.fadeIn,
     ),
+    GetPage<SubCategoriesListScreen>(
+      name: _Paths.subCategoriesListScreen,
+      transitionDuration: transitionDuration,
+      page: SubCategoriesListScreen.new,
+      binding: ShoppingCartBinding(),
+      transition: Transition.fadeIn,
+    ),
   ];
 }

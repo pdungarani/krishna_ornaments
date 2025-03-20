@@ -16,7 +16,7 @@ class ProfileScreen extends StatelessWidget {
     return GetBuilder<ProfileController>(
       initState: (state) {
         var controller = Get.find<ProfileController>();
-        if (Utility.isLoginOrNot() && Platform.isIOS) {
+        if (Utility.isLoginOrNot()) {
           Utility.showLoader();
           controller.getProfile();
         }
@@ -28,7 +28,7 @@ class ProfileScreen extends StatelessWidget {
             ListView(
               physics: const ClampingScrollPhysics(),
               children: [
-                if (Utility.isLoginOrNot() && Platform.isIOS) ...[
+                if (Utility.isLoginOrNot()) ...[
                   Padding(
                     padding: Dimens.edgeInsets20,
                     child: Stack(
@@ -189,7 +189,7 @@ class ProfileScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (Utility.isLoginOrNot() && Platform.isIOS) ...[
+                      if (Utility.isLoginOrNot()) ...[
                         Container(
                           height: Dimens.sixty,
                           decoration: BoxDecoration(
@@ -344,7 +344,7 @@ class ProfileScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      if (Utility.isLoginOrNot() && Platform.isIOS) ...[
+                      if (Utility.isLoginOrNot()) ...[
                         Dimens.boxHeight20,
                         InkWell(
                           onTap: () {
@@ -574,7 +574,7 @@ class ProfileScreen extends StatelessWidget {
                 )
               ],
             ),
-            if (Utility.isLoginOrNot() && Platform.isIOS) ...[
+            if (Utility.isLoginOrNot()) ...[
               if (controller.isProfileLoading) ...[
                 Container(
                   height: Get.height,

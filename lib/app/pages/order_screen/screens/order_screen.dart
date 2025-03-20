@@ -149,8 +149,8 @@ class OrderScreen extends StatelessWidget {
                     )
                   : Center(
                       child: Text(
-                        "Order history data empty.",
-                        style: Styles.black50014,
+                        "Order data not found...!",
+                        style: Styles.txtBlackColorW60014,
                       ),
                     )
               : Center(

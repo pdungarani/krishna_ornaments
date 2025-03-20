@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -16,7 +14,7 @@ class ShoppingCartScreen extends StatelessWidget {
     return GetBuilder<ShoppingCartController>(
       initState: (state) async {
         var controller = Get.find<ShoppingCartController>();
-        if (Utility.isLoginOrNot() && Platform.isIOS) {
+        if (Utility.isLoginOrNot()) {
           controller.postCartList(1);
           controller.scrollCartController.addListener(() async {
             if (controller.scrollCartController.position.pixels ==
@@ -64,7 +62,7 @@ class ShoppingCartScreen extends StatelessWidget {
                   ),
                 )
               : const SizedBox.shrink(),
-          body: Utility.isLoginOrNot() && Platform.isIOS
+          body: Utility.isLoginOrNot()
               ? !controller.isLoader
                   ? controller.cartList.isNotEmpty
                       ? SingleChildScrollView(

@@ -57,33 +57,35 @@ class InAppUpdateScreen extends StatelessWidget {
                 Dimens.boxHeight20,
               ],
             ),
-            body: Column(
-              children: [
-                Lottie.asset(
-                  AssetConstants.app_update_lottie,
-                  fit: BoxFit.cover,
-                  repeat: true,
-                  width: double.maxFinite,
-                  reverse: true,
-                ),
-                Dimens.boxHeight30,
-                Padding(
-                  padding: Dimens.edgeInsets20_0_20_0,
-                  child: Text(
-                    "New update is available",
-                    style: Styles.txtBlackColorW70018,
+            body: SafeArea(
+              child: Column(
+                children: [
+                  Lottie.asset(
+                    AssetConstants.app_update_lottie,
+                    fit: BoxFit.cover,
+                    repeat: true,
+                    width: double.maxFinite,
+                    reverse: true,
                   ),
-                ),
-                Dimens.boxHeight30,
-                Padding(
-                  padding: Dimens.edgeInsets20_0_20_0,
-                  child: Text(
-                    "The current version of this application is no longer supported. A new version of the app is available. Please update to continue.",
-                    textAlign: TextAlign.center,
-                    style: Styles.txtBlackColorW50014,
+                  Dimens.boxHeight30,
+                  Padding(
+                    padding: Dimens.edgeInsets20_0_20_0,
+                    child: Text(
+                      "New update is available",
+                      style: Styles.txtBlackColorW70018,
+                    ),
                   ),
-                ),
-              ],
+                  Dimens.boxHeight30,
+                  Padding(
+                    padding: Dimens.edgeInsets20_0_20_0,
+                    child: Text(
+                      "The current version of this application is no longer supported. A new version of the app is available. Please update to continue.",
+                      textAlign: TextAlign.center,
+                      style: Styles.txtBlackColorW50014,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         );

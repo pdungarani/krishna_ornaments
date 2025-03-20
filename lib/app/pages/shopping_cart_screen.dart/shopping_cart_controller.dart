@@ -425,7 +425,6 @@ class ShoppingCartController extends GetxController {
   Future<void> postArrivalViewAll() async {
     if (isLoading || !hasMore) return;
     isLoading = true;
-    update();
     // Fetch data from the API
     var response = await shoppingCartPresenter.postAllProduct(
       page: currentPage,
@@ -439,7 +438,7 @@ class ShoppingCartController extends GetxController {
       max: minWeightController.text.isNotEmpty &&
               minWeightController.text.isNotEmpty
           ? double.parse(maxWeightController.text)
-          : endValue,
+          : double.parse(endValue.toStringAsFixed(2)),
       productType: productTypeViewAll.toLowerCase(),
       sortField: isFilter
           ? "quantity"
@@ -544,6 +543,30 @@ class ShoppingCartController extends GetxController {
       // postArrivalViewAll(1, productTypeViewAll);
     } else {
       Utility.closeLoader();
+    }
+    update();
+  }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  String subCategoryId = "";
+  String subCategoryName = "";
+
+  List<GetCategoriesData> categoriesList = [];
+
+  Future<void> getAllCategories() async {
+    var response = await shoppingCartPresenter.getAllCategories(
+      categoriesId: subCategoryId,
+      isSubCategories: true,
+      isLoading: true,
+    );
+    categoriesList.clear();
+    if (response?.data != null) {
+      categoriesList.addAll(response?.data ?? []);
     }
     update();
   }

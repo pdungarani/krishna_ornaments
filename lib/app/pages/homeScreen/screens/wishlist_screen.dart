@@ -14,7 +14,7 @@ class WishlistScreen extends StatelessWidget {
     return GetBuilder<HomeController>(
       initState: (state) async {
         var controller = Get.find<HomeController>();
-        if (Utility.isLoginOrNot() && Platform.isIOS) {
+        if (Utility.isLoginOrNot()) {
           controller.postWishlist(1);
           controller.scrollWishListController.addListener(() async {
             if (controller.scrollWishListController.position.pixels ==
@@ -41,7 +41,7 @@ class WishlistScreen extends StatelessWidget {
             },
             title: "wishlist".tr,
           ),
-          body: Utility.isLoginOrNot() && Platform.isIOS
+          body: Utility.isLoginOrNot()
               ? RefreshIndicator(
                   onRefresh: () => Future.sync(
                     () async {

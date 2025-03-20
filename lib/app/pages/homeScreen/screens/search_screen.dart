@@ -23,7 +23,7 @@ class _SearchScreenState extends State<SearchScreen> {
     return GetBuilder<HomeController>(
       initState: (state) async {
         var controller = Get.find<HomeController>();
-        if (Utility.isLoginOrNot() && Platform.isIOS) {
+        if (Utility.isLoginOrNot()) {
           controller.isSearchLoading = true;
           controller.postGetAllProduct(1, '');
         }
@@ -38,7 +38,7 @@ class _SearchScreenState extends State<SearchScreen> {
             title: 'Search Screen',
             isVisible: true,
           ),
-          body: Utility.isLoginOrNot() && Platform.isIOS
+          body: Utility.isLoginOrNot()
               ? Padding(
                   padding: Dimens.edgeInsets20_0_20_20,
                   child: Column(

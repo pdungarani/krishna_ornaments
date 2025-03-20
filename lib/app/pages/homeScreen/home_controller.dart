@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -15,7 +14,7 @@ class HomeController extends GetxController {
   @override
   onInit() {
     super.onInit();
-    if (Utility.isLoginOrNot() && Platform.isIOS) {
+    if (Utility.isLoginOrNot()) {
       getProfile();
       isLoading = true;
       getAllCategories();

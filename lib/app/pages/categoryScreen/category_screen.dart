@@ -15,7 +15,7 @@ class CategoryScreen extends StatelessWidget {
     return GetBuilder<CategoryController>(
       initState: (state) async {
         var controller = Get.find<CategoryController>();
-        if (Utility.isLoginOrNot() && Platform.isIOS) {
+        if (Utility.isLoginOrNot()) {
           controller.getAllCategories();
         }
       },
@@ -30,7 +30,7 @@ class CategoryScreen extends StatelessWidget {
             style: Styles.color01010170020,
           ),
         ),
-        body: Utility.isLoginOrNot() && Platform.isIOS
+        body: Utility.isLoginOrNot()
             ? !controller.isLoading
                 ? controller.getCategoriesList.isNotEmpty
                     ? ListView.builder(

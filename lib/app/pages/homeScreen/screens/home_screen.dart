@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -17,7 +15,7 @@ class HomeScreen extends StatelessWidget {
     return GetBuilder<HomeController>(
       initState: (state) async {
         var controller = Get.find<HomeController>();
-        if (Utility.isLoginOrNot() && Platform.isIOS) {
+        if (Utility.isLoginOrNot()) {
           controller.postAllProduct();
           controller.postAllTrendingProduct(1);
         }
@@ -182,13 +180,13 @@ class HomeScreen extends StatelessWidget {
                                   .last;
                               return GestureDetector(
                                 onTap: () {
-                                  RouteManagement.goToViewAllProductScreen(
-                                      "", item.id ?? "", item.name ?? "");
+                                  RouteManagement.goToSubCategoriesListScreen(
+                                      item.id ?? "", item.name ?? "");
                                 },
                                 child: Padding(
                                   padding: Dimens.edgeInsetsRight20,
                                   child: SizedBox(
-                                    width: Dimens.hundredTen,
+                                    width: Dimens.hundred,
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
@@ -236,7 +234,7 @@ class HomeScreen extends StatelessWidget {
                                         Dimens.boxHeight10,
                                         Text(
                                           item.name ?? "",
-                                          style: Styles.blackw60012,
+                                          style: Styles.blackw50012,
                                           maxLines: 2,
                                           textAlign: TextAlign.center,
                                           overflow: TextOverflow.ellipsis,
@@ -250,7 +248,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                       ],
-                      if (Utility.isLoginOrNot() && Platform.isIOS) ...[
+                      if (Utility.isLoginOrNot()) ...[
                         if (controller.productArrivalDocList.isNotEmpty) ...[
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -369,84 +367,92 @@ class HomeScreen extends StatelessWidget {
                             itemBuilder: (context, index) {
                               var item =
                                   controller.offlineArrivalDataList[index];
-                              return Padding(
-                                padding: Dimens.edgeInsetsRight20,
-                                child: Container(
-                                  padding: Dimens.edgeInsets10,
-                                  width: Dimens.twoHundredTen,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                      Dimens.ten,
+                              return GestureDetector(
+                                onTap: () {
+                                  Get.find<BottomBarController>()
+                                      .tabController
+                                      ?.index = 4;
+                                  Get.find<BottomBarController>().update();
+                                },
+                                child: Padding(
+                                  padding: Dimens.edgeInsetsRight20,
+                                  child: Container(
+                                    padding: Dimens.edgeInsets10,
+                                    width: Dimens.twoHundredTen,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(
+                                        Dimens.ten,
+                                      ),
+                                      color: ColorsValue.whiteColor,
                                     ),
-                                    color: ColorsValue.whiteColor,
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Stack(
-                                        children: [
-                                          GestureDetector(
-                                            onTap: () {},
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  Dimens.ten,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Stack(
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {},
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                    Dimens.ten,
+                                                  ),
+                                                  color: ColorsValue.appBg,
                                                 ),
-                                                color: ColorsValue.appBg,
-                                              ),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  Dimens.ten,
-                                                ),
-                                                child: Image.asset(
-                                                  item.image ?? "",
-                                                  fit: BoxFit.cover,
-                                                  height: Dimens.hundredFifty,
-                                                  width: Dimens.twoHundredTen,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                    Dimens.ten,
+                                                  ),
+                                                  child: Image.asset(
+                                                    item.image ?? "",
+                                                    fit: BoxFit.cover,
+                                                    height: Dimens.hundredFifty,
+                                                    width: Dimens.twoHundredTen,
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                      Dimens.boxHeight10,
-                                      Text(
-                                        item.name ?? "",
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        softWrap: true,
-                                        style: Styles.blackW60014,
-                                      ),
-                                      Dimens.boxHeight10,
-                                      Expanded(
-                                        child: Align(
-                                          alignment: Alignment.bottomCenter,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    "Weigth : ",
-                                                    style: Styles.blackW60014,
-                                                  ),
-                                                  Text(
-                                                    "${item.weight} gm",
-                                                    style: Styles.black60012,
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
+                                          ],
                                         ),
-                                      )
-                                    ],
+                                        Dimens.boxHeight10,
+                                        Text(
+                                          item.name ?? "",
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          softWrap: true,
+                                          style: Styles.blackW60014,
+                                        ),
+                                        Dimens.boxHeight10,
+                                        Expanded(
+                                          child: Align(
+                                            alignment: Alignment.bottomCenter,
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "Weigth : ",
+                                                      style: Styles.blackW60014,
+                                                    ),
+                                                    Text(
+                                                      "${item.weight} gm",
+                                                      style: Styles.black60012,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               );
@@ -472,7 +478,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      if (Utility.isLoginOrNot() && Platform.isIOS) ...[
+                      if (Utility.isLoginOrNot()) ...[
                         if (controller.productTrendingDocList.isNotEmpty) ...[
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -591,84 +597,92 @@ class HomeScreen extends StatelessWidget {
                             itemBuilder: (context, index) {
                               var item =
                                   controller.offlineTrendingDataList[index];
-                              return Padding(
-                                padding: Dimens.edgeInsetsRight20,
-                                child: Container(
-                                  padding: Dimens.edgeInsets10,
-                                  width: Dimens.twoHundredTen,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                      Dimens.ten,
+                              return GestureDetector(
+                                onTap: () {
+                                  Get.find<BottomBarController>()
+                                      .tabController
+                                      ?.index = 4;
+                                  Get.find<BottomBarController>().update();
+                                },
+                                child: Padding(
+                                  padding: Dimens.edgeInsetsRight20,
+                                  child: Container(
+                                    padding: Dimens.edgeInsets10,
+                                    width: Dimens.twoHundredTen,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(
+                                        Dimens.ten,
+                                      ),
+                                      color: ColorsValue.whiteColor,
                                     ),
-                                    color: ColorsValue.whiteColor,
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Stack(
-                                        children: [
-                                          GestureDetector(
-                                            onTap: () {},
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  Dimens.ten,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Stack(
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {},
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                    Dimens.ten,
+                                                  ),
+                                                  color: ColorsValue.appBg,
                                                 ),
-                                                color: ColorsValue.appBg,
-                                              ),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  Dimens.ten,
-                                                ),
-                                                child: Image.asset(
-                                                  item.image ?? "",
-                                                  fit: BoxFit.cover,
-                                                  height: Dimens.hundredFifty,
-                                                  width: Dimens.twoHundredTen,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                    Dimens.ten,
+                                                  ),
+                                                  child: Image.asset(
+                                                    item.image ?? "",
+                                                    fit: BoxFit.cover,
+                                                    height: Dimens.hundredFifty,
+                                                    width: Dimens.twoHundredTen,
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                      Dimens.boxHeight10,
-                                      Text(
-                                        item.name ?? "",
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        softWrap: true,
-                                        style: Styles.blackW60014,
-                                      ),
-                                      Dimens.boxHeight10,
-                                      Expanded(
-                                        child: Align(
-                                          alignment: Alignment.bottomCenter,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    "Weigth : ",
-                                                    style: Styles.blackW60014,
-                                                  ),
-                                                  Text(
-                                                    "${item.weight} gm",
-                                                    style: Styles.black60012,
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
+                                          ],
                                         ),
-                                      )
-                                    ],
+                                        Dimens.boxHeight10,
+                                        Text(
+                                          item.name ?? "",
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          softWrap: true,
+                                          style: Styles.blackW60014,
+                                        ),
+                                        Dimens.boxHeight10,
+                                        Expanded(
+                                          child: Align(
+                                            alignment: Alignment.bottomCenter,
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "Weigth : ",
+                                                      style: Styles.blackW60014,
+                                                    ),
+                                                    Text(
+                                                      "${item.weight} gm",
+                                                      style: Styles.black60012,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               );
