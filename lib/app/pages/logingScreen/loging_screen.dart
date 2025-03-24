@@ -60,6 +60,8 @@ class LoginScreen extends StatelessWidget {
                             hintText: "Enter Your Password",
                             fillColor: ColorsValue.colorEEEAEA,
                             controller: controller.passwordController,
+                            textInputAction: TextInputAction.done,
+                            maxLines: 1,
                             validation: (value) {
                               if (value!.isEmpty) {
                                 return "Please enter valid password";
