@@ -134,7 +134,7 @@ class HomeController extends GetxController {
         "min": "",
         "max": "",
         "productType": "arrival",
-        "sortField": "_id",
+        "sortField": "name",
         "sortOption": -1
       }),
     );
@@ -171,7 +171,7 @@ class HomeController extends GetxController {
         "min": "",
         "max": "",
         "productType": "trending",
-        "sortField": "_id",
+        "sortField": "name",
         "sortOption": -1
       }),
     );

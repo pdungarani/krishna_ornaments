@@ -17,7 +17,7 @@ class ProfileScreen extends StatelessWidget {
       initState: (state) {
         var controller = Get.find<ProfileController>();
         if (Utility.isLoginOrNot()) {
-          Utility.showLoader();
+          controller.isProfileLoading = true;
           controller.getProfile();
         }
       },

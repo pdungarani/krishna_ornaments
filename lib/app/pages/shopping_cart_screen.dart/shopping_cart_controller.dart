@@ -387,7 +387,7 @@ class ShoppingCartController extends GetxController {
   TextEditingController minWeightController = TextEditingController();
   TextEditingController maxWeightController = TextEditingController();
 
-  int radioValue = 0;
+  int radioValue = 1;
   int radioSortValue = -1;
 
   int radioFilterValue = 0;

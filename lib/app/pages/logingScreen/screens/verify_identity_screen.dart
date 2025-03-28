@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/widgets/custom_button.dart';
+import 'package:krishna_ornaments/domain/domain.dart';
 
 class VerifyIdentityScreen extends StatelessWidget {
   const VerifyIdentityScreen({super.key});
@@ -20,7 +21,11 @@ class VerifyIdentityScreen extends StatelessWidget {
                 padding: Dimens.edgeInsets20,
                 child: CustomButton(
                   height: Dimens.fourtyFive,
-                  backgroundColor: ColorsValue.appColor,
+                  backgroundColor: Get.find<Repository>()
+                          .getStringValue(LocalKeys.authToken)
+                          .isNotEmpty
+                      ? ColorsValue.lightYellow
+                      : ColorsValue.appColor.withValues(alpha: 0.5),
                   text: 'Get Start',
                   onTap: () {},
                 ),

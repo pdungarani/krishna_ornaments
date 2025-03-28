@@ -61,13 +61,15 @@ class LoginController extends GetxController {
       loginData = null;
       if (response.statusCode == 200 && loginModel.data != null) {
         loginData = loginModel;
-
-        Get.find<Repository>().saveValue(LocalKeys.authToken,
-            loginModel.data is Data ? loginModel.data?.accessToken : "");
-        RouteManagement.goToBottomBarView();
+        if (loginData?.data?.isapproved ?? false) {
+          Get.find<Repository>().saveValue(
+              LocalKeys.authToken, loginModel.data?.accessToken ?? "");
+          RouteManagement.goToBottomBarView();
+        } else {
+          RouteManagement.goToVerifyIdentityScreen();
+        }
       } else {
-        Utility.errorMessage(
-            loginModel.message ?? 'Oops, something went wrong');
+        Utility.errorMessage(loginModel.message ?? "");
       }
     } catch (e) {
       isLoginLoading = false;
