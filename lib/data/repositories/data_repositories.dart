@@ -86,6 +86,7 @@ class DataRepository extends DomainRepository {
     required double max,
     required String productType,
     required String sortField,
+    required bool isStock,
     required var sortOption,
   }) async =>
       await connectHelper.postAllProduct(
@@ -98,6 +99,7 @@ class DataRepository extends DomainRepository {
         productType: productType,
         sortField: sortField,
         sortOption: sortOption,
+        isStock: isStock,
         isLoading: isLoading,
       );
 

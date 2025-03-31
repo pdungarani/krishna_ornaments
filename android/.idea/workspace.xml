@@ -10,37 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9793261e-0475-4b67-8bd4-a99542b48c23" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2cd5de1af442824551ccd677f8d8ae01/.filecache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2cd5de1af442824551ccd677f8d8ae01/App.framework.dSYM/Contents/Resources/DWARF/App" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2cd5de1af442824551ccd677f8d8ae01/App.framework/App" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2cd5de1af442824551ccd677f8d8ae01/aot_assembly_release.stamp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2cd5de1af442824551ccd677f8d8ae01/app.dill" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2cd5de1af442824551ccd677f8d8ae01/arm64/App.framework.dSYM/Contents/Info.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2cd5de1af442824551ccd677f8d8ae01/arm64/App.framework.dSYM/Contents/Resources/DWARF/App" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2cd5de1af442824551ccd677f8d8ae01/arm64/App.framework.dSYM/Contents/Resources/Relocations/aarch64/App.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2cd5de1af442824551ccd677f8d8ae01/arm64/App.framework/App" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2cd5de1af442824551ccd677f8d8ae01/arm64/snapshot_assembly.S" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2cd5de1af442824551ccd677f8d8ae01/arm64/snapshot_assembly.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2cd5de1af442824551ccd677f8d8ae01/dart_build.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2cd5de1af442824551ccd677f8d8ae01/dart_build.stamp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2cd5de1af442824551ccd677f8d8ae01/dart_build_result.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2cd5de1af442824551ccd677f8d8ae01/flutter_assets.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2cd5de1af442824551ccd677f8d8ae01/gen_dart_plugin_registrant.stamp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2cd5de1af442824551ccd677f8d8ae01/gen_localizations.stamp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2cd5de1af442824551ccd677f8d8ae01/install_code_assets.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2cd5de1af442824551ccd677f8d8ae01/install_code_assets.stamp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2cd5de1af442824551ccd677f8d8ae01/kernel_snapshot_program.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2cd5de1af442824551ccd677f8d8ae01/kernel_snapshot_program.stamp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2cd5de1af442824551ccd677f8d8ae01/native_assets.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2cd5de1af442824551ccd677f8d8ae01/outputs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2cd5de1af442824551ccd677f8d8ae01/release_ios_bundle_flutter_assets.stamp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2cd5de1af442824551ccd677f8d8ae01/release_unpack_ios.stamp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/dart_plugin_registrant.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/../.dart_tool/package_config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/../.dart_tool/package_config_subset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/../.flutter-plugins" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/../.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/caches/deviceStreaming.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Dart_Packages.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/.cxx/Debug/4h38e223/x86/configure_fingerprint.bin" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/Debug/4h38e223/x86/configure_fingerprint.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/.cxx/RelWithDebInfo/1a2v6j2w/arm64-v8a/configure_fingerprint.bin" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/RelWithDebInfo/1a2v6j2w/arm64-v8a/configure_fingerprint.bin" afterDir="false" />
@@ -48,14 +21,18 @@
       <change beforePath="$PROJECT_DIR$/app/.cxx/RelWithDebInfo/1a2v6j2w/x86/configure_fingerprint.bin" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/RelWithDebInfo/1a2v6j2w/x86/configure_fingerprint.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/.cxx/RelWithDebInfo/1a2v6j2w/x86_64/configure_fingerprint.bin" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/RelWithDebInfo/1a2v6j2w/x86_64/configure_fingerprint.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/release/app-release.aab" beforeDir="false" afterPath="$PROJECT_DIR$/app/release/app-release.aab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/app/pages/categoryScreen/category_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/categoryScreen/category_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lib/app/pages/homeScreen/home_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/homeScreen/home_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/logingScreen/loging_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/logingScreen/loging_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/logingScreen/screens/verify_identity_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/logingScreen/screens/verify_identity_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/app/pages/profileScreen/profile_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/profileScreen/profile_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/app/pages/homeScreen/home_presenter.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/homeScreen/home_presenter.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/app/pages/shopping_cart_screen.dart/screens/view_all_product_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/shopping_cart_screen.dart/screens/view_all_product_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lib/app/pages/shopping_cart_screen.dart/shopping_cart_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/shopping_cart_screen.dart/shopping_cart_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/domain/models/login_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/domain/models/login_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/app/pages/shopping_cart_screen.dart/shopping_cart_presenter.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/pages/shopping_cart_screen.dart/shopping_cart_presenter.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/app/theme/colors_value.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/theme/colors_value.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/app/widgets/custom_product.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/app/widgets/custom_product.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/data/helpers/connect_helper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/data/helpers/connect_helper.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/data/repositories/data_repositories.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/data/repositories/data_repositories.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/domain/repositories/repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/domain/repositories/repository.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/domain/usecases/common_usecases.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/domain/usecases/common_usecases.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

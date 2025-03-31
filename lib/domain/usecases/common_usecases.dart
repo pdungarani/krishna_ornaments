@@ -11,10 +11,11 @@ class CommonUsecases {
     required int limit,
     required String search,
     required String category,
-     required double min,
+    required double min,
     required double max,
     required String productType,
     required String sortField,
+    required bool isStock,
     required var sortOption,
   }) async =>
       await repository.postAllProduct(
@@ -27,6 +28,7 @@ class CommonUsecases {
         productType: productType,
         sortField: sortField,
         sortOption: sortOption,
+        isStock: isStock,
         isLoading: isLoading,
       );
 

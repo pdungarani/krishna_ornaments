@@ -176,6 +176,7 @@ class Repository {
     required double max,
     required String productType,
     required String sortField,
+    required bool isStock,
     required var sortOption,
   }) async {
     try {
@@ -189,6 +190,7 @@ class Repository {
         productType: productType,
         sortField: sortField,
         sortOption: sortOption,
+        isStock: isStock,
         isLoading: isLoading,
       );
       var loginModel = productsModelFromJson(response.data);

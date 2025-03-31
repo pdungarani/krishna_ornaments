@@ -384,6 +384,7 @@ class ShoppingCartController extends GetxController {
     update();
   }
 
+  TextEditingController searchController = TextEditingController();
   TextEditingController minWeightController = TextEditingController();
   TextEditingController maxWeightController = TextEditingController();
 
@@ -429,7 +430,7 @@ class ShoppingCartController extends GetxController {
     var response = await shoppingCartPresenter.postAllProduct(
       page: currentPage,
       limit: 10,
-      search: "",
+      search: searchController.text,
       category: category,
       min: minWeightController.text.isNotEmpty &&
               minWeightController.text.isNotEmpty
@@ -446,6 +447,7 @@ class ShoppingCartController extends GetxController {
               ? "name"
               : "weight",
       sortOption: isFilter ? radioFilterSortValue : radioSortValue,
+      isStock: radioFilterValue == 0 ? true : false,
       isLoading: false,
     );
     if (response?.data != null) {

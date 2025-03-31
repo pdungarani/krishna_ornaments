@@ -281,6 +281,7 @@ abstract class ColorsValue {
   static const redColor = Color(0xffFF0000);
   static const color4E4B66 = Color(0xff4E4B66);
   static const color94A3B8 = Color(0xFF94A3B8);
+  static const green = Color.fromARGB(255, 56, 138, 61);
   static const color212121 = Color(0xff212121);
   static const colorEEEAEA = Color(0xffEEEAEA);
   static const color9C9C9C = Color(0xff9C9C9C);

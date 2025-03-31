@@ -135,7 +135,8 @@ class HomeController extends GetxController {
         "max": "",
         "productType": "arrival",
         "sortField": "name",
-        "sortOption": -1
+        "sortOption": -1,
+        "stock": true,
       }),
     );
     var loginModel = productsModelFromJson(response.body);
@@ -172,7 +173,8 @@ class HomeController extends GetxController {
         "max": "",
         "productType": "trending",
         "sortField": "name",
-        "sortOption": -1
+        "sortOption": -1,
+        "stock": true,
       }),
     );
     var loginModel = productsModelFromJson(response.body);
@@ -233,10 +235,11 @@ class HomeController extends GetxController {
       search: search,
       category: "",
       min: 0,
-      max: 0,
+      max: 1000,
       productType: "",
-      sortField: '_id',
+      sortField: 'quantity',
       sortOption: 1,
+      isStock: true,
       isLoading: false,
     );
     if (response?.data != null) {

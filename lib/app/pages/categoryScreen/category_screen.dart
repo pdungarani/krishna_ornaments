@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -43,8 +41,8 @@ class CategoryScreen extends StatelessWidget {
                               .last;
                           return GestureDetector(
                             onTap: () {
-                              RouteManagement.goToViewAllProductScreen(
-                                  "", item.id ?? "", item.name ?? "");
+                              RouteManagement.goToSubCategoriesListScreen(
+                                  item.id ?? "", item.name ?? "");
                             },
                             child: Padding(
                               padding: Dimens.edgeInsetsTop10,

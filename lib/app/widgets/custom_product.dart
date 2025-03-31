@@ -136,6 +136,24 @@ class CustomProductView extends StatelessWidget {
                     style: Styles.whiteColorW60012,
                   ),
                 )
+              ] else ...[
+                Container(
+                  alignment: Alignment.center,
+                  padding: Dimens.edgeInsets12_0_12_0,
+                  margin: Dimens.edgeInsetsTop10,
+                  height: Dimens.twentyFive,
+                  width: Dimens.hundred,
+                  decoration: BoxDecoration(
+                    color: ColorsValue.green,
+                    borderRadius: BorderRadius.circular(
+                      Dimens.four,
+                    ),
+                  ),
+                  child: Text(
+                    "In Stock".tr,
+                    style: Styles.whiteColorW60012,
+                  ),
+                )
               ],
             ],
           ),

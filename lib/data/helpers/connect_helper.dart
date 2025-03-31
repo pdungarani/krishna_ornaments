@@ -107,6 +107,7 @@ class ConnectHelper {
     required String productType,
     required String category,
     required String sortField,
+    required bool isStock,
     required var sortOption,
   }) async {
     var data = {
@@ -118,7 +119,8 @@ class ConnectHelper {
       "max": max,
       "productType": productType,
       "sortField": sortField,
-      "sortOption": sortOption
+      "sortOption": sortOption,
+      'stock': isStock,
     };
     var response = await apiWrapper.makeRequest(
       EndPoints.postAllProduct,

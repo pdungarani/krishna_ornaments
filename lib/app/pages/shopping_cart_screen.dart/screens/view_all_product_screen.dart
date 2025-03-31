@@ -6,12 +6,15 @@ import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/navigators/navigators.dart';
 import 'package:krishna_ornaments/app/widgets/appbar_widgets.dart';
 import 'package:krishna_ornaments/app/widgets/custom_button.dart';
+import 'package:krishna_ornaments/domain/entities/debouncer.dart';
 
 class ViewAllProductScreen extends StatelessWidget {
   const ViewAllProductScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final _debouncer = Debouncer(milliseconds: 500);
+
     return GetBuilder<ShoppingCartController>(
       initState: (state) async {
         var controller = Get.find<ShoppingCartController>();
@@ -575,8 +578,6 @@ class ViewAllProductScreen extends StatelessWidget {
                                                                   controller
                                                                           .radioFilterValue =
                                                                       value!;
-                                                                  controller
-                                                                      .radioFilterSortValue = -1;
                                                                 },
                                                               );
                                                             },
@@ -612,8 +613,6 @@ class ViewAllProductScreen extends StatelessWidget {
                                                                   controller
                                                                           .radioFilterValue =
                                                                       value!;
-                                                                  controller
-                                                                      .radioFilterSortValue = 1;
                                                                 },
                                                               );
                                                             },
@@ -905,6 +904,26 @@ class ViewAllProductScreen extends StatelessWidget {
                                               ),
                                               child: Text(
                                                 "out_of_stock".tr,
+                                                style: Styles.whiteColorW60012,
+                                              ),
+                                            )
+                                          ] else ...[
+                                            Container(
+                                              alignment: Alignment.center,
+                                              padding:
+                                                  Dimens.edgeInsets12_0_12_0,
+                                              margin: Dimens.edgeInsetsTop10,
+                                              height: Dimens.twentyFive,
+                                              width: Dimens.hundred,
+                                              decoration: BoxDecoration(
+                                                color: ColorsValue.green,
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                  Dimens.four,
+                                                ),
+                                              ),
+                                              child: Text(
+                                                "In Stock".tr,
                                                 style: Styles.whiteColorW60012,
                                               ),
                                             )
