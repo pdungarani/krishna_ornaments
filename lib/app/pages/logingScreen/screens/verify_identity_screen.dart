@@ -14,23 +14,25 @@ class VerifyIdentityScreen extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           backgroundColor: ColorsValue.appBg,
-          bottomNavigationBar: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(
-                padding: Dimens.edgeInsets20,
-                child: CustomButton(
-                  height: Dimens.fourtyFive,
-                  backgroundColor: Get.find<Repository>()
-                          .getStringValue(LocalKeys.authToken)
-                          .isNotEmpty
-                      ? ColorsValue.lightYellow
-                      : ColorsValue.appColor.withValues(alpha: 0.5),
-                  text: 'Get Start',
-                  onTap: () {},
+          bottomNavigationBar: SafeArea(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: Dimens.edgeInsets20,
+                  child: CustomButton(
+                    height: Dimens.fourtyFive,
+                    backgroundColor: Get.find<Repository>()
+                            .getStringValue(LocalKeys.authToken)
+                            .isNotEmpty
+                        ? ColorsValue.lightYellow
+                        : ColorsValue.appColor.withValues(alpha: 0.5),
+                    text: 'Get Start',
+                    onTap: () {},
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           body: SafeArea(
             child: ListView(

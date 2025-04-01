@@ -61,7 +61,7 @@ class LoginController extends GetxController {
       loginData = null;
       if (response.statusCode == 200 && loginModel.data != null) {
         loginData = loginModel;
-        if (loginData?.data?.isapproved ?? false) {
+        if (loginData?.data?.accessToken?.isNotEmpty ?? false) {
           Get.find<Repository>().saveValue(
               LocalKeys.authToken, loginModel.data?.accessToken ?? "");
           RouteManagement.goToBottomBarView();
