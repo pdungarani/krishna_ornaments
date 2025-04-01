@@ -42,7 +42,7 @@ class CategoryScreen extends StatelessWidget {
                           return GestureDetector(
                             onTap: () {
                               RouteManagement.goToSubCategoriesListScreen(
-                                  item.id ?? "", item.name ?? "");
+                                  item.id ?? "", item.name ?? "", item);
                             },
                             child: Padding(
                               padding: Dimens.edgeInsetsTop10,

@@ -14,8 +14,10 @@ class SubCategoriesListScreen extends StatelessWidget {
     return GetBuilder<ShoppingCartController>(
       initState: (state) async {
         var controller = Get.find<ShoppingCartController>();
+        controller.getCategoriesData = null;
         controller.subCategoryId = Get.arguments[0];
         controller.subCategoryName = Get.arguments[1];
+        controller.getCategoriesData = Get.arguments[2];
         controller.getAllCategories();
       },
       builder: (controller) {
@@ -80,10 +82,56 @@ class SubCategoriesListScreen extends StatelessWidget {
                     );
                   },
                 )
-              : Center(
-                  child: Text(
-                    "Sub Categories data not found...!",
-                    style: Styles.txtBlackColorW60014,
+              : Padding(
+                  padding: Dimens.edgeInsets20,
+                  child: GestureDetector(
+                    onTap: () {
+                      RouteManagement.goToViewAllProductScreen(
+                          "",
+                          controller.getCategoriesData?.id ?? "",
+                          controller.getCategoriesData?.name ?? "");
+                    },
+                    child: Padding(
+                      padding: Dimens.edgeInsetsTop10,
+                      child: Container(
+                        width: double.maxFinite,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            Dimens.ten,
+                          ),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(
+                            Dimens.ten,
+                          ),
+                          child: controller.getCategoriesData?.image
+                                      ?.split(".")
+                                      .last !=
+                                  "svg"
+                              ? CachedNetworkImage(
+                                  imageUrl:
+                                      (controller.getCategoriesData?.image ??
+                                          ""),
+                                  fit: BoxFit.cover,
+                                  placeholder: (context, url) {
+                                    return Image.asset(
+                                      AssetConstants.placeholder,
+                                      fit: BoxFit.cover,
+                                    );
+                                  },
+                                  errorWidget: (context, url, error) {
+                                    return Image.asset(
+                                      AssetConstants.placeholder,
+                                      fit: BoxFit.cover,
+                                    );
+                                  },
+                                )
+                              : SvgPicture.network(
+                                  controller.getCategoriesData?.image ?? "",
+                                ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
         );

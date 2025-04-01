@@ -2,6 +2,7 @@
 
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/navigators/navigators.dart';
+import 'package:krishna_ornaments/domain/domain.dart';
 
 /// A chunk of routes taken in the application.
 ///
@@ -51,6 +52,8 @@ abstract class RouteManagement {
       Get.toNamed<void>(Routes.shoppingCartScreen, arguments: isBack);
   static void goToInAppUpdateScreen(String appUrl) =>
       Get.offAllNamed<void>(Routes.inAppUpdateScreen, arguments: appUrl);
-  static void goToSubCategoriesListScreen(String id, String name) =>
-      Get.toNamed<void>(Routes.subCategoriesListScreen, arguments: [id, name]);
+  static void goToSubCategoriesListScreen(
+          String id, String name, GetCategoriesData? getCategoriesData) =>
+      Get.toNamed<void>(Routes.subCategoriesListScreen,
+          arguments: [id, name, getCategoriesData]);
 }

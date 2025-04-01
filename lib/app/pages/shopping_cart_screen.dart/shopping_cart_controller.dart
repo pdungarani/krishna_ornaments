@@ -391,7 +391,7 @@ class ShoppingCartController extends GetxController {
   int radioValue = 1;
   int radioSortValue = -1;
 
-  int radioFilterValue = 0;
+  int radioFilterValue = -1;
   int radioFilterSortValue = -1;
   bool isFilter = false;
 
@@ -557,6 +557,7 @@ class ShoppingCartController extends GetxController {
 
   String subCategoryId = "";
   String subCategoryName = "";
+  GetCategoriesData? getCategoriesData = GetCategoriesData();
 
   List<GetCategoriesData> categoriesList = [];
 

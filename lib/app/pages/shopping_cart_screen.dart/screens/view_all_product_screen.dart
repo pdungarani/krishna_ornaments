@@ -6,15 +6,12 @@ import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/navigators/navigators.dart';
 import 'package:krishna_ornaments/app/widgets/appbar_widgets.dart';
 import 'package:krishna_ornaments/app/widgets/custom_button.dart';
-import 'package:krishna_ornaments/domain/entities/debouncer.dart';
 
 class ViewAllProductScreen extends StatelessWidget {
   const ViewAllProductScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final _debouncer = Debouncer(milliseconds: 500);
-
     return GetBuilder<ShoppingCartController>(
       initState: (state) async {
         var controller = Get.find<ShoppingCartController>();
@@ -657,7 +654,7 @@ class ViewAllProductScreen extends StatelessWidget {
                                                   controller.startValue = 0;
                                                   controller.endValue = 1000;
                                                   controller.radioFilterValue =
-                                                      0;
+                                                      -1;
                                                   controller
                                                       .radioFilterSortValue = -1;
                                                   controller.minWeightController
