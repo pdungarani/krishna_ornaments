@@ -176,7 +176,7 @@ class Repository {
     required double max,
     required String productType,
     required String sortField,
-    required bool isStock,
+    required bool? isStock,
     required var sortOption,
   }) async {
     try {

@@ -107,7 +107,7 @@ class ConnectHelper {
     required String productType,
     required String category,
     required String sortField,
-    required bool isStock,
+    required bool? isStock,
     required var sortOption,
   }) async {
     var data = {

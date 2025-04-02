@@ -35,7 +35,7 @@ class ShoppingCartPresenter {
     required double min,
     required double max,
     required String productType,
-    required bool isStock,
+    required bool? isStock,
     required String sortField,
     required var sortOption,
   }) async =>

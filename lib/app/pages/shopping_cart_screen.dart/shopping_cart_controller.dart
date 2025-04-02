@@ -447,7 +447,11 @@ class ShoppingCartController extends GetxController {
               ? "name"
               : "weight",
       sortOption: isFilter ? radioFilterSortValue : radioSortValue,
-      isStock: radioFilterValue == 0 ? true : false,
+      isStock: radioFilterValue == 0
+          ? true
+          : radioFilterValue == 1
+              ? false
+              : null,
       isLoading: false,
     );
     if (response?.data != null) {
