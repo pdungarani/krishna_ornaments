@@ -655,8 +655,6 @@ class ViewAllProductScreen extends StatelessWidget {
                                                   controller.endValue = 1000;
                                                   controller.radioFilterValue =
                                                       -1;
-                                                  controller
-                                                      .radioFilterSortValue = -1;
                                                   controller.minWeightController
                                                       .clear();
                                                   controller.maxWeightController

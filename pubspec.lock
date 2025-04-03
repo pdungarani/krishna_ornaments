@@ -1049,10 +1049,10 @@ packages:
     dependency: transitive
     description:
       name: socket_io_common
-      sha256: "1544131e3fa557b3f6b7897e1d2aab245cd5006189bda127997cb391a37591b9"
+      sha256: "162fbaecbf4bf9a9372a62a341b3550b51dcef2f02f3e5830a297fd48203d45b"
       url: "https://pub.dev"
     source: hosted
-    version: "3.1.0"
+    version: "3.1.1"
   source_span:
     dependency: transitive
     description:

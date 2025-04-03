@@ -442,7 +442,7 @@ class ShoppingCartController extends GetxController {
           : double.parse(endValue.toStringAsFixed(2)),
       productType: productTypeViewAll.toLowerCase(),
       sortField: radioValue == 0 || radioValue == 1 ? "name" : "weight",
-      sortOption: isFilter ? radioFilterSortValue : radioSortValue,
+      sortOption: radioSortValue,
       isStock: radioFilterValue == 0
           ? true
           : radioFilterValue == 1
