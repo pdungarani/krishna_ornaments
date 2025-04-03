@@ -18,6 +18,7 @@ class HomeController extends GetxController {
       getProfile();
       isLoading = true;
       getAllCategories();
+      postWishlistCount();
       postWishlist(1);
     }
   }
@@ -134,9 +135,9 @@ class HomeController extends GetxController {
         "min": "",
         "max": "",
         "productType": "arrival",
-        "sortField": "name",
+        "sortField": "_id",
         "sortOption": -1,
-        "stock": true,
+        "stock": null,
       }),
     );
     var loginModel = productsModelFromJson(response.body);
@@ -172,9 +173,9 @@ class HomeController extends GetxController {
         "min": "",
         "max": "",
         "productType": "trending",
-        "sortField": "name",
+        "sortField": "_id",
         "sortOption": -1,
-        "stock": true,
+        "stock": null,
       }),
     );
     var loginModel = productsModelFromJson(response.body);

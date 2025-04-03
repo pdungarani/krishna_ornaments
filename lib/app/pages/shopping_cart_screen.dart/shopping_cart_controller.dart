@@ -441,11 +441,7 @@ class ShoppingCartController extends GetxController {
           ? double.parse(maxWeightController.text)
           : double.parse(endValue.toStringAsFixed(2)),
       productType: productTypeViewAll.toLowerCase(),
-      sortField: isFilter
-          ? "quantity"
-          : radioValue == 0 || radioValue == 1
-              ? "name"
-              : "weight",
+      sortField: radioValue == 0 || radioValue == 1 ? "name" : "weight",
       sortOption: isFilter ? radioFilterSortValue : radioSortValue,
       isStock: radioFilterValue == 0
           ? true
@@ -546,11 +542,15 @@ class ShoppingCartController extends GetxController {
     );
     if (response.body.isNotEmpty) {
       Utility.closeLoader();
-      // postArrivalViewAll(1, productTypeViewAll);
+      if (viewAllDocList[index].wishlistStatus ?? false) {
+        viewAllDocList[index].wishlistStatus = false;
+      } else {
+        viewAllDocList[index].wishlistStatus = true;
+      }
+      update();
     } else {
       Utility.closeLoader();
     }
-    update();
   }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -239,10 +239,10 @@ class ViewAllProductScreen extends StatelessWidget {
                                               height: Dimens.fourtyFive,
                                               onTap: () async {
                                                 Get.back();
+                                                controller.hasMore = true;
                                                 controller.currentPage = 1;
                                                 controller.viewAllDocList
                                                     .clear();
-                                                controller.hasMore = true;
                                                 controller.update();
                                                 controller.postArrivalViewAll();
                                               },
@@ -704,11 +704,11 @@ class ViewAllProductScreen extends StatelessWidget {
                                                   controller.currentPage = 1;
                                                   controller.viewAllDocList
                                                       .clear();
-                                                  controller.update();
                                                   controller.hasMore = true;
+                                                  controller.update();
+
                                                   controller
                                                       .postArrivalViewAll();
-                                                  controller.update();
                                                 },
                                                 child: Container(
                                                   alignment: Alignment.center,
@@ -884,6 +884,48 @@ class ViewAllProductScreen extends StatelessWidget {
                                               ),
                                             ),
                                           ),
+                                          // Padding(
+                                          //   padding: Dimens.edgeInsets8,
+                                          //   child: Align(
+                                          //     alignment: Alignment.topRight,
+                                          //     child: Container(
+                                          //       height: Dimens.thirty,
+                                          //       width: Dimens.thirty,
+                                          //       decoration: BoxDecoration(
+                                          //         borderRadius:
+                                          //             BorderRadius.circular(
+                                          //           Dimens.fifty,
+                                          //         ),
+                                          //         color: ColorsValue.whiteColor,
+                                          //         border: Border.all(
+                                          //           width: Dimens.one,
+                                          //           color: ColorsValue
+                                          //               .lightPrimaryColor,
+                                          //         ),
+                                          //       ),
+                                          //       child: Center(
+                                          //         child: InkWell(
+                                          //           onTap: () {
+                                          //             Utility.showLoader();
+                                          //             controller
+                                          //                 .postWishlistAddRemove(
+                                          //                     item.id ?? "",
+                                          //                     index,
+                                          //                     false);
+                                          //           },
+                                          //           child: SvgPicture.asset(
+                                          //             item.wishlistStatus ??
+                                          //                     false
+                                          //                 ? AssetConstants
+                                          //                     .ic_fill_like
+                                          //                 : AssetConstants
+                                          //                     .ic_like,
+                                          //           ),
+                                          //         ),
+                                          //       ),
+                                          //     ),
+                                          //   ),
+                                          // ),
                                           if ((item.quantity ?? 0) <= 0) ...[
                                             Container(
                                               alignment: Alignment.center,
