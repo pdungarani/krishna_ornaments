@@ -23,6 +23,7 @@
     <application
         android:label="Krishna Ornaments"
         android:name="${applicationName}"
+        android:requestLegacyExternalStorage="true"
         android:icon="@mipmap/ic_launcher_round">
         <activity
             android:name=".MainActivity"

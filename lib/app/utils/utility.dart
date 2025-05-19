@@ -6,6 +6,7 @@ import 'dart:math';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:dio/dio.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -23,6 +24,7 @@ import 'package:logger/logger.dart';
 import 'package:lottie/lottie.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:saver_gallery/saver_gallery.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 abstract class Utility {
@@ -329,23 +331,23 @@ abstract class Utility {
   }
 
   /// Print the details of the [response].
-  static void printResponseDetails(Response? response) {
-    if (response != null) {
-      var isOkay = response.isOk;
-      var statusCode = response.statusCode;
-      var statusText = response.statusText;
-      var method = response.request?.method ?? '';
-      var path = response.request?.url.path ?? '';
-      var query = response.request?.url.queryParameters ?? '';
-      if (isOkay) {
-        printILog(
-            'Path: $path, Method: $method, Status Text: $statusText, Status Code: $statusCode, Query $query');
-      } else {
-        printELog(
-            'Path: $path, Method: $method, Status Text: $statusText, Status Code: $statusCode, Query $query');
-      }
-    }
-  }
+  // static void printResponseDetails(Response? response) {
+  //   if (response != null) {
+  //     var isOkay = response.isOk;
+  //     var statusCode = response.statusCode;
+  //     var statusText = response.statusText;
+  //     var method = response.request?.method ?? '';
+  //     var path = response.request?.url.path ?? '';
+  //     var query = response.request?.url.queryParameters ?? '';
+  //     if (isOkay) {
+  //       printILog(
+  //           'Path: $path, Method: $method, Status Text: $statusText, Status Code: $statusCode, Query $query');
+  //     } else {
+  //       printELog(
+  //           'Path: $path, Method: $method, Status Text: $statusText, Status Code: $statusCode, Query $query');
+  //     }
+  //   }
+  // }
 
   /// returns the date time in particular given formate
   static String getWeekDayMonthNumYear(DateTime dateTime) =>
@@ -1484,6 +1486,27 @@ abstract class Utility {
         ],
       ),
     );
+  }
+
+  static Future<void> downloadImage(String imageUrl) async {
+    try {
+      final response = await Dio().get(
+        imageUrl,
+        options: Options(responseType: ResponseType.bytes),
+      );
+
+      final result = await SaverGallery.saveImage(
+        Uint8List.fromList(response.data),
+        quality: 80,
+        fileName: imageUrl.split('/').last,
+        androidRelativePath: "Pictures/appName/images",
+        skipIfExists: false,
+      );
+
+      Utility.snacBar("Image download sucessfully.", ColorsValue.appColor);
+    } catch (e) {
+      print("Error downloading image: $e");
+    }
   }
 }
 

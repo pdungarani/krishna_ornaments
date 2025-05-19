@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/widgets/appbar_widgets.dart';
@@ -19,6 +20,23 @@ class ShowFullScareenImage extends StatelessWidget {
             Get.back();
           },
           title: 'Gallery'.tr,
+          actions: [
+            GestureDetector(
+              onTap: () async {
+                if (await Utility.imagePermissionCheack(context)) {
+                  Utility.downloadImage(Get.arguments[0]);
+                }
+              },
+              child: Padding(
+                padding: Dimens.edgeInsetsRight16,
+                child: SvgPicture.asset(
+                  AssetConstants.ic_download,
+                  height: Dimens.thirtyFive,
+                  width: Dimens.thirtyFive,
+                ),
+              ),
+            )
+          ],
         ),
         body: SafeArea(
           child: Container(

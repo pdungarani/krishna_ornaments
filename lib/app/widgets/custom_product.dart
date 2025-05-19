@@ -126,13 +126,13 @@ class CustomProductView extends StatelessWidget {
                   height: Dimens.twentyFive,
                   width: Dimens.hundred,
                   decoration: BoxDecoration(
-                    color: ColorsValue.redColor,
+                    color: ColorsValue.appColor,
                     borderRadius: BorderRadius.circular(
                       Dimens.four,
                     ),
                   ),
                   child: Text(
-                    "out_of_stock".tr,
+                    "Order Only".tr,
                     style: Styles.whiteColorW60012,
                   ),
                 )

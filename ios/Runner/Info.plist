@@ -34,6 +34,8 @@
 	<string>App uses a camera to take and upload pictures to set profile picture.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>App use photos to upload pictures to create events and offers.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>App use photos to upload pictures to create events and offers.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>We use your location to enhance app functionality and provide better services.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

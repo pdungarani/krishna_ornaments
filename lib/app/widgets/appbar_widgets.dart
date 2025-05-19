@@ -10,12 +10,14 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
     required this.title,
     this.isTitle = true,
     this.isVisible = true,
+    this.actions,
   });
 
   void Function()? onTapBack;
   String title;
   bool isTitle;
   bool isVisible;
+  List<Widget>? actions;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +44,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
           style: Styles.color212121W80018,
         ),
       ),
+      actions: actions,
     );
   }
 

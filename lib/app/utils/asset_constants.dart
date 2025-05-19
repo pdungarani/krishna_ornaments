@@ -40,6 +40,7 @@ abstract class AssetConstants {
   static const String location = 'assets/images/location.png';
   static const String phone = 'assets/images/phone.png';
   static const String whatsapp = 'assets/images/whatsapp.png';
+  static const String ic_download = 'assets/svg/ic_download.svg';
   static const String dwsadsa = '';
 
   static const String copyIcon = 'assets/icons/copy.svg';
