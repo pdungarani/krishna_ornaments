@@ -181,7 +181,7 @@ class HomeScreen extends StatelessWidget {
                               return GestureDetector(
                                 onTap: () {
                                   RouteManagement.goToSubCategoriesListScreen(
-                                      item.id ?? "", item.name ?? "",item);
+                                      item.id ?? "", item.name ?? "", item);
                                 },
                                 child: Padding(
                                   padding: Dimens.edgeInsetsRight20,
@@ -286,6 +286,8 @@ class HomeScreen extends StatelessWidget {
                                 return Padding(
                                   padding: Dimens.edgeInsetsRight20,
                                   child: CustomProductView(
+                                    productList:
+                                        controller.productArrivalDocList,
                                     inOutStock: (item.quantity ?? 0) <= 0
                                         ? true
                                         : false,
@@ -515,6 +517,8 @@ class HomeScreen extends StatelessWidget {
                                 return Padding(
                                   padding: Dimens.edgeInsetsRight20,
                                   child: CustomProductView(
+                                    productList:
+                                        controller.productTrendingDocList,
                                     inOutStock: (item.quantity ?? 0) <= 0
                                         ? true
                                         : false,

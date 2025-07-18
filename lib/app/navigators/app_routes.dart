@@ -31,6 +31,7 @@ abstract class Routes {
   static const landingPage = _Paths.landingPage;
   static const verifyIdentityScreen = _Paths.verifyIdentityScreen;
   static const subCategoriesListScreen = _Paths.subCategoriesListScreen;
+  static const showImageDetailScreen = _Paths.showImageDetailScreen;
 }
 
 abstract class _Paths {
@@ -61,4 +62,5 @@ abstract class _Paths {
   static const landingPage = '/landingPage';
   static const verifyIdentityScreen = '/verifyIdentityScreen';
   static const subCategoriesListScreen = '/subCategoriesListScreen';
+  static const showImageDetailScreen = '/showImageDetail';
 }

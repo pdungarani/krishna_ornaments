@@ -115,4 +115,57 @@ class ProfileController extends GetxController {
     }
     update();
   }
+
+  @override
+  void onInit() {
+    super.onInit();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      pageController.jumpToPage(0);
+    });
+  }
+
+  PageController pageController = PageController();
+  int currentPage = 0;
+  List<ProductsDoc> productList = [];
+
+  // goToNextPage({required myItems}) {
+  //   if (currentPage < myItems.length - 1) {
+  //     pageController.nextPage(
+  //       duration: Duration(milliseconds: 300),
+  //       curve: Curves.easeInOut,
+  //     );
+  //   }
+  // }
+
+  goToNextPage({required List myItems}) {
+    if (pageController.hasClients && currentPage < myItems.length - 1) {
+      currentPage++;
+      pageController.nextPage(
+        duration: Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+      update();
+    }
+  }
+
+  // void goToPreviousPage() {
+  //   if (currentPage > 0) {
+  //     pageController.previousPage(
+  //       duration: Duration(milliseconds: 300),
+  //       curve: Curves.easeInOut,
+  //     );
+  //   }
+  // }
+
+  void goToPreviousPage() {
+    if (pageController.hasClients && currentPage > 0) {
+      currentPage--;
+      pageController.previousPage(
+        duration: Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+      update();
+    }
+  }
 }
