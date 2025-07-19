@@ -23,6 +23,8 @@ class CustomProductView extends StatelessWidget {
     required this.dincrement,
     required this.inCart,
     this.height,
+    required this.trype,
+required    this.index,
     this.inOutStock = false,
     required this.productList,
   });
@@ -36,6 +38,8 @@ class CustomProductView extends StatelessWidget {
   bool isHorizontal;
   bool inCart;
   bool inOutStock;
+  String trype;
+  int index;
   List<ProductsDoc> productList;
   void Function()? onAddToCard;
   void Function()? addFavorite;
@@ -61,7 +65,7 @@ class CustomProductView extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  RouteManagement.goToShowImageDetailScreen(productList);
+                  RouteManagement.goToShowImageDetailScreen(product:productList,index: index,type: trype);
                   // RouteManagement.goToShowFullScareenImage(imageUrl, "image");
                 },
                 child: Container(
