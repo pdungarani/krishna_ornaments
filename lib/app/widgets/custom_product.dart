@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/navigators/navigators.dart';
+import 'package:krishna_ornaments/domain/models/products_model.dart';
 
 // ignore: must_be_immutable
 class CustomProductView extends StatelessWidget {
@@ -22,7 +23,10 @@ class CustomProductView extends StatelessWidget {
     required this.dincrement,
     required this.inCart,
     this.height,
+    required this.trype,
+required    this.index,
     this.inOutStock = false,
+    required this.productList,
   });
   String productName;
   double? height;
@@ -34,6 +38,9 @@ class CustomProductView extends StatelessWidget {
   bool isHorizontal;
   bool inCart;
   bool inOutStock;
+  String trype;
+  int index;
+  List<ProductsDoc> productList;
   void Function()? onAddToCard;
   void Function()? addFavorite;
   void Function()? increment;
@@ -58,7 +65,8 @@ class CustomProductView extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  RouteManagement.goToShowFullScareenImage(imageUrl, "image");
+                  RouteManagement.goToShowImageDetailScreen(product:productList,index: index,type: trype);
+                  // RouteManagement.goToShowFullScareenImage(imageUrl, "image");
                 },
                 child: Container(
                   decoration: BoxDecoration(

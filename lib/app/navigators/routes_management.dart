@@ -56,4 +56,9 @@ abstract class RouteManagement {
           String id, String name, GetCategoriesData? getCategoriesData) =>
       Get.toNamed<void>(Routes.subCategoriesListScreen,
           arguments: [id, name, getCategoriesData]);
+
+  static void goToShowImageDetailScreen(
+          {required List product, required int index, required String type}) =>
+      Get.toNamed<void>(Routes.showImageDetailScreen,
+          arguments: [product, index, type]);
 }

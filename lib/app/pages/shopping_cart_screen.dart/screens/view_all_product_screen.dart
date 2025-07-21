@@ -809,10 +809,17 @@ class ViewAllProductScreen extends StatelessWidget {
                                         children: [
                                           GestureDetector(
                                             onTap: () {
+                                              // RouteManagement
+                                              //     .goToShowFullScareenImage(
+                                              //         item.image ?? "",
+                                              //         "image");
+
                                               RouteManagement
-                                                  .goToShowFullScareenImage(
-                                                      item.image ?? "",
-                                                      "image");
+                                                  .goToShowImageDetailScreen(
+                                                      product: controller
+                                                          .viewAllDocList,
+                                                      index: index,
+                                                      type: '');
                                             },
                                             child: ClipRRect(
                                               borderRadius: BorderRadius.only(

@@ -3,6 +3,7 @@
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
 import 'package:krishna_ornaments/app/pages/profileScreen/screen/contact_us.dart';
+import 'package:krishna_ornaments/app/widgets/show_detail_images.dart';
 
 part 'app_routes.dart';
 
@@ -212,6 +213,13 @@ class AppPages {
       transitionDuration: transitionDuration,
       page: SubCategoriesListScreen.new,
       binding: ShoppingCartBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage<ShowImageDetail>(
+      name: _Paths.showImageDetailScreen,
+      transitionDuration: transitionDuration,
+      page: ShowImageDetail.new,
+      binding: RepairBinding(),
       transition: Transition.fadeIn,
     ),
   ];

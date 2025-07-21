@@ -181,7 +181,7 @@ class HomeScreen extends StatelessWidget {
                               return GestureDetector(
                                 onTap: () {
                                   RouteManagement.goToSubCategoriesListScreen(
-                                      item.id ?? "", item.name ?? "",item);
+                                      item.id ?? "", item.name ?? "", item);
                                 },
                                 child: Padding(
                                   padding: Dimens.edgeInsetsRight20,
@@ -286,13 +286,17 @@ class HomeScreen extends StatelessWidget {
                                 return Padding(
                                   padding: Dimens.edgeInsetsRight20,
                                   child: CustomProductView(
+                                    index: index,
+                                    trype: 'arrival',
+                                    productList:
+                                        controller.productArrivalDocList,
                                     inOutStock: (item.quantity ?? 0) <= 0
                                         ? true
                                         : false,
                                     productName: item.name ?? "",
                                     imageUrl: item.image ?? "",
                                     categoryName: item.category?.name ?? "",
-                                    quantity: item.cartQuantity ?? 0,
+                                    quantity: item.cartQuantity,
                                     weigth: item.weight.toString(),
                                     inWishList: item.wishlistStatus ?? false,
                                     inCart: item.inCart ?? false,
@@ -515,6 +519,10 @@ class HomeScreen extends StatelessWidget {
                                 return Padding(
                                   padding: Dimens.edgeInsetsRight20,
                                   child: CustomProductView(
+                                    index: index,
+                                    trype: 'trending',
+                                    productList:
+                                        controller.productTrendingDocList,
                                     inOutStock: (item.quantity ?? 0) <= 0
                                         ? true
                                         : false,
