@@ -6,11 +6,13 @@ list(APPEND FLUTTER_PLUGIN_LIST
   awesome_notifications
   file_selector_linux
   flutter_secure_storage_linux
+  no_screenshot
   open_file_linux
   url_launcher_linux
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
+  jni
 )
 
 set(PLUGIN_BUNDLED_LIBRARIES)

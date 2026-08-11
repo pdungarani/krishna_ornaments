@@ -18,7 +18,6 @@ class SplashController extends GetxController {
   String? appUrl;
 
   void startTimer() async {
-    final result = await Utility.checker.checkUpdate();
     Future.delayed(const Duration(seconds: 3)).then((value) {
       // if (Platform.isAndroid) {
       //   if (result.currentVersion != result.newVersion) {

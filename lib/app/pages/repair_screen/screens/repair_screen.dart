@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:krishna_ornaments/app/app.dart';
-import 'dart:io';
 
 class RepairScreen extends StatelessWidget {
   const RepairScreen({super.key});
@@ -36,8 +35,9 @@ class RepairScreen extends StatelessWidget {
                                     decoration: BoxDecoration(
                                       color: controller.selectedValue == 0
                                           ? ColorsValue.appColor
-                                          : ColorsValue.black343434
-                                              .withOpacity(0.8),
+                                          : ColorsValue.black343434.withOpacity(
+                                              0.8,
+                                            ),
                                       borderRadius: BorderRadius.circular(
                                         Dimens.twentyFive,
                                       ),
@@ -62,8 +62,9 @@ class RepairScreen extends StatelessWidget {
                                     decoration: BoxDecoration(
                                       color: controller.selectedValue == 1
                                           ? ColorsValue.appColor
-                                          : ColorsValue.black343434
-                                              .withOpacity(0.8),
+                                          : ColorsValue.black343434.withOpacity(
+                                              0.8,
+                                            ),
                                       borderRadius: BorderRadius.circular(
                                         Dimens.twentyFive,
                                       ),
@@ -74,7 +75,7 @@ class RepairScreen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -88,14 +89,16 @@ class RepairScreen extends StatelessWidget {
                               height: 394,
                               width: 284,
                               child: DottedBorder(
-                                borderType: BorderType.RRect,
-                                radius: Radius.circular(Dimens.twenty),
-                                color: ColorsValue.appColor,
-                                dashPattern: [8, 8],
-                                strokeWidth: 2,
+                                options: RoundedRectDottedBorderOptions(
+                                  radius: Radius.circular(Dimens.twenty),
+                                  color: ColorsValue.appColor,
+                                  dashPattern: [8, 8],
+                                  strokeWidth: 2,
+                                ),
                                 child: ClipRRect(
                                   borderRadius: const BorderRadius.all(
-                                      Radius.circular(12)),
+                                    Radius.circular(12),
+                                  ),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -124,7 +127,7 @@ class RepairScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                          )
+                          ),
                         ] else ...[
                           InkWell(
                             onTap: () {
@@ -134,14 +137,16 @@ class RepairScreen extends StatelessWidget {
                               height: 394,
                               width: 284,
                               child: DottedBorder(
-                                borderType: BorderType.RRect,
-                                radius: Radius.circular(Dimens.twenty),
-                                color: ColorsValue.appColor,
-                                dashPattern: [8, 8],
-                                strokeWidth: 2,
+                                options: RoundedRectDottedBorderOptions(
+                                  radius: Radius.circular(Dimens.twenty),
+                                  color: ColorsValue.appColor,
+                                  dashPattern: [8, 8],
+                                  strokeWidth: 2,
+                                ),
                                 child: ClipRRect(
                                   borderRadius: const BorderRadius.all(
-                                      Radius.circular(12)),
+                                    Radius.circular(12),
+                                  ),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -170,8 +175,8 @@ class RepairScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                          )
-                        ]
+                          ),
+                        ],
                       ],
                     ),
                     if (controller.isLoading) ...[
@@ -180,8 +185,8 @@ class RepairScreen extends StatelessWidget {
                         height: Get.height,
                         color: ColorsValue.blackColor.withValues(alpha: 0.5),
                         child: CircularProgressIndicator(),
-                      )
-                    ]
+                      ),
+                    ],
                   ],
                 )
               : Center(
